@@ -1,4 +1,6 @@
 Mfm::Application.routes.draw do
+  root :to => 'stores#index'
+
   devise_for :users
 
   get "home/index"
@@ -6,11 +8,10 @@ Mfm::Application.routes.draw do
   get "home/plans"
   get "home/coupons"
 
-  root :to => 'stores#index'
-
   resources :tags
   resources :payments
   resources :hours
+  resources :roles
   resources :stores
 
   # The priority is based upon order of creation:

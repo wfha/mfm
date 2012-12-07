@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207060924) do
+ActiveRecord::Schema.define(:version => 20121207152734) do
 
   create_table "hours", :force => true do |t|
     t.string   "name"
@@ -35,8 +35,24 @@ ActiveRecord::Schema.define(:version => 20121207060924) do
     t.integer "store_id"
   end
 
+  add_index "payments_stores", ["payment_id", "store_id"], :name => "index_payments_stores_on_payment_id_and_store_id"
   add_index "payments_stores", ["payment_id"], :name => "index_payments_stores_on_payment_id"
   add_index "payments_stores", ["store_id"], :name => "index_payments_stores_on_store_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  add_index "roles_users", ["role_id", "user_id"], :name => "index_roles_users_on_role_id_and_user_id"
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "stores", :force => true do |t|
     t.string   "name"
@@ -56,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20121207060924) do
     t.integer "tag_id"
   end
 
+  add_index "stores_tags", ["store_id", "tag_id"], :name => "index_stores_tags_on_store_id_and_tag_id"
   add_index "stores_tags", ["store_id"], :name => "index_stores_tags_on_store_id"
   add_index "stores_tags", ["tag_id"], :name => "index_stores_tags_on_tag_id"
 
