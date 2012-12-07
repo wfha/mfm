@@ -1,10 +1,9 @@
 Mfm::Application.routes.draw do
+  devise_for :users
+
   get "home/index"
-
   get "home/stores"
-
   get "home/plans"
-
   get "home/coupons"
 
   root :to => 'stores#index'

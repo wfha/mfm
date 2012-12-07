@@ -26,6 +26,13 @@
           <li class="active"><%= link_to 'Plans', home_plans_path %></li>
           <li class=""><%= link_to 'Contact Us', home_index_path %></li>
           <li class=""><%= link_to 'FAQ', home_index_path %></li>
+          <% if user_signed_in? %>
+              <li class=""><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+              <li class=""><%= link_to current_user.email, edit_user_registration_path %></li>
+          <% else %>
+              <li class=""><%= link_to 'Sign in', new_user_session_path %></li>
+              <li class=""><%= link_to 'Sign up', new_user_registration_path %></li>
+          <% end %>
         </ul>
       </div>
     </div>
