@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @hour.name %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @hour.desc %>
+</p>
+
+<p>
+  <b>Open at:</b>
+  <%= @hour.open_at %>
+</p>
+
+<p>
+  <b>Close at:</b>
+  <%= @hour.close_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_hour_path(@hour) %> |
+<%= link_to 'Back', hours_path %>

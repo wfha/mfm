@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  desc: MyString
+  open_at: MyString
+  close_at: MyString
+
+two:
+  name: MyString
+  desc: MyString
+  open_at: MyString
+  close_at: MyString

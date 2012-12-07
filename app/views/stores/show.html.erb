@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @store.name %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @store.desc %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= @store.image %>
+</p>
+
+<p>
+  <b>Phone:</b>
+  <%= @store.phone %>
+</p>
+
+<p>
+  <b>Fax:</b>
+  <%= @store.fax %>
+</p>
+
+<p>
+  <b>Delivery minimum:</b>
+  <%= @store.delivery_minimum %>
+</p>
+
+<p>
+  <b>Delivery fee:</b>
+  <%= @store.delivery_fee %>
+</p>
+
+<p>
+  <b>Delivery radius:</b>
+  <%= @store.delivery_radius %>
+</p>
+
+
+<%= link_to 'Edit', edit_store_path(@store) %> |
+<%= link_to 'Back', stores_path %>
