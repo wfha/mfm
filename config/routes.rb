@@ -1,4 +1,12 @@
 Mfm::Application.routes.draw do
+  get "home/index"
+
+  get "home/stores"
+
+  get "home/plans"
+
+  get "home/coupons"
+
   root :to => 'stores#index'
 
   resources :tags
