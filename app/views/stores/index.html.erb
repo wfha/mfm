@@ -10,7 +10,7 @@
     <th>Delivery minimum</th>
     <th>Delivery fee</th>
     <th>Delivery radius</th>
-    <th colspan="6">Action</th>
+    <th colspan="8">Action</th>
   </tr>
 
 <% @stores.each do |store| %>
@@ -27,8 +27,10 @@
     <td><%= link_to 'Features', store_dish_features_path(store) %></td>
     <td><%= link_to 'Choices', store_dish_choices_path(store) %></td>
     <td><%= link_to 'Hours', store_hours_path(store) %></td>
+    <td><%= link_to 'Coupons', store_coupons_path(store) %></td>
+    <td><%= link_to 'Plans', store_plans_path(store) %></td>
     <td><%= link_to 'Edit', edit_store_path(store) %></td>
-    <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'X', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

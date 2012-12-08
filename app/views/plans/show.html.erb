@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @plan.name %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @plan.desc %>
+</p>
+
+<p>
+  <b>Store:</b>
+  <%= @plan.store.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_store_plan_path(@store, @plan) %> |
+<%= link_to 'Back', store_plans_path(@store) %>

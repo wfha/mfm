@@ -12,7 +12,7 @@ Mfm::Application.routes.draw do
   resources :roles
 
   resources :stores do
-    resources :dish_choices, :dish_features, :hours, :menus
+    resources :coupons, :dish_choices, :dish_features, :hours, :menus, :plans
   end
 
   resources :menus do

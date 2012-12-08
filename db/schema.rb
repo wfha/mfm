@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208033106) do
+ActiveRecord::Schema.define(:version => 20121208045428) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,18 @@ ActiveRecord::Schema.define(:version => 20121208033106) do
   end
 
   add_index "categories", ["menu_id"], :name => "index_categories_on_menu_id"
+
+  create_table "coupons", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.integer  "store_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "coupons", ["store_id"], :name => "index_coupons_on_store_id"
 
   create_table "dish_choices", :force => true do |t|
     t.string   "name"
@@ -113,6 +125,16 @@ ActiveRecord::Schema.define(:version => 20121208033106) do
   add_index "payments_stores", ["payment_id", "store_id"], :name => "index_payments_stores_on_payment_id_and_store_id"
   add_index "payments_stores", ["payment_id"], :name => "index_payments_stores_on_payment_id"
   add_index "payments_stores", ["store_id"], :name => "index_payments_stores_on_store_id"
+
+  create_table "plans", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "plans", ["store_id"], :name => "index_plans_on_store_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
