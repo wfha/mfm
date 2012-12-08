@@ -4,6 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Desc</th>
+    <th>Image</th>
     <th>Store</th>
     <th>Start at</th>
     <th>End at</th>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= coupon.name %></td>
         <td><%= coupon.desc %></td>
+        <td><%= image_tag coupon.image_url(:small).to_s if coupon.image? %></td>
         <td><%= coupon.store.name %></td>
         <td><%= coupon.start_at %></td>
         <td><%= coupon.end_at %></td>

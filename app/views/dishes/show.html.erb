@@ -12,7 +12,13 @@
 
 <p>
   <b>Price:</b>
-  <%= @dish.price %>
+  <%= number_to_currency(@dish.price) %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <br/>
+  <%= image_tag @dish.image_url(:small).to_s if @dish.image? %>
 </p>
 
 <p>
@@ -23,7 +29,14 @@
 <p>
   <b>Dish Features:</b>
   <% @dish.dish_features.each do |df| %>
-      <br/><b><%=df.name %>:</b><%= df.desc %>
+      <br/><%=df.name %> - <%= df.desc %>
+  <% end %>
+</p>
+
+<p>
+  <b>Dish Choices:</b>
+  <% @dish.dish_choices.each do |dc| %>
+      <br/><%=dc.name %> - <%= dc.desc %>
   <% end %>
 </p>
 

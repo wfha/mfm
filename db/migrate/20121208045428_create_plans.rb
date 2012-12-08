@@ -3,6 +3,7 @@ class CreatePlans < ActiveRecord::Migration
     create_table :plans do |t|
       t.string :name
       t.string :desc
+      t.string :image
       t.references :store
 
       t.timestamps

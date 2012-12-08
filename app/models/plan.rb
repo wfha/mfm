@@ -1,4 +1,7 @@
 class Plan < ActiveRecord::Base
+  attr_accessible :desc, :name, :image
+
   belongs_to :store
-  attr_accessible :desc, :name
+
+  mount_uploader :image, ImageUploader
 end

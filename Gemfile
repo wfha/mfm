@@ -20,6 +20,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 
   gem 'bootstrap-sass', '~> 2.2.1.1'
+  gem "rmagick"
+  gem 'carrierwave'
 end
 
 gem 'jquery-rails'
@@ -38,3 +40,4 @@ gem 'capistrano'
 
 gem 'devise'
 gem 'cancan'
+

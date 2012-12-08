@@ -3,6 +3,7 @@ class CreateCoupons < ActiveRecord::Migration
     create_table :coupons do |t|
       t.string :name
       t.string :desc
+      t.string :image
       t.references :store
       t.datetime :start_at
       t.datetime :end_at

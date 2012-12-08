@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20121208045428) do
   create_table "coupons", :force => true do |t|
     t.string   "name"
     t.string   "desc"
+    t.string   "image"
     t.integer  "store_id"
     t.datetime "start_at"
     t.datetime "end_at"
@@ -129,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20121208045428) do
   create_table "plans", :force => true do |t|
     t.string   "name"
     t.string   "desc"
+    t.string   "image"
     t.integer  "store_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

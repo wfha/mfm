@@ -17,7 +17,7 @@
   <tr>
     <td><%= store.name %></td>
     <td><%= store.desc %></td>
-    <td><%= store.image %></td>
+    <td><%= image_tag store.image_url(:small).to_s if store.image? %></td>
     <td><%= store.phone %></td>
     <td><%= store.fax %></td>
     <td><%= store.delivery_minimum %></td>

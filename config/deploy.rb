@@ -1,11 +1,10 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
 
-set :rvm_ruby_string, "1.9.3"
-set :rvm_type, :user  # Don't use system-wide RVM
-
 server "107.22.220.9", :web, :app, :db, primary: true
+ssh_options[:forward_agent] = true
 ssh_options[:keys] = ["#{ENV['HOME']}/.ec2/gsg-keypair"]
+default_run_options[:pty] = true
 
 set :application, "mfm"
 set :user, "ubuntu"
@@ -17,8 +16,12 @@ set :scm, "git"
 set :repository, "git@github.com:wfha/#{application}.git"
 set :branch, "master"
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
+# Fix sh bundle not found problem
+set :rvm_ruby_string, "1.9.3"
+set :rvm_type, :user  # Don't use system-wide RVM
+
+# Create symbolic links for capistrano
+set :shared_children, shared_children + %w{public/uploads}
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 

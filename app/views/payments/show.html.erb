@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Name:</b>
   <%= @payment.name %>
@@ -12,7 +10,7 @@
 
 <p>
   <b>Image:</b>
-  <%= @payment.image %>
+  <%= image_tag @payment.image_url(:micro).to_s if @payment.image? %>
 </p>
 
 
