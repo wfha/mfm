@@ -16,15 +16,16 @@
 </p>
 
 <p>
-  <b>Image:</b>
-  <%= @dish.image %>
+  <b>Category:</b>
+  <%= @dish.category.name %>
 </p>
 
 <p>
-  <b>Category:</b>
-  <%= @dish.category %>
+  <b>Dish Features:</b>
+  <% @dish.dish_features.each do |df| %>
+      <br/><b><%=df.name %>:</b><%= df.desc %>
+  <% end %>
 </p>
 
-
-<%= link_to 'Edit', edit_dish_path(@dish) %> |
-<%= link_to 'Back', dishes_path %>
+<%= link_to 'Edit', edit_category_dish_path(@category, @dish) %> |
+<%= link_to 'Back', store_menus_path(@category.menu.store) %>

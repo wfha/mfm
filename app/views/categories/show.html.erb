@@ -12,9 +12,9 @@
 
 <p>
   <b>Menu:</b>
-  <%= @category.menu %>
+  <%= @category.menu.name %>
 </p>
 
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= link_to 'Edit', edit_menu_category_path(@menu, @category) %> |
+<%= link_to 'Back', store_menus_path(@menu.store) %>

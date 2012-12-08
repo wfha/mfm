@@ -1,29 +1,25 @@
-<%= form_for(@dish_feature) do |f| %>
-  <% if @dish_feature.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@dish_feature.errors.count, "error") %> prohibited this dish_feature from being saved:</h2>
+<%= form_for([@store, @dish_feature]) do |f| %>
+    <% if @dish_feature.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@dish_feature.errors.count, "error") %> prohibited this dish_feature from being saved:</h2>
 
-      <ul>
-      <% @dish_feature.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @dish_feature.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :desc %><br />
-    <%= f.text_field :desc %>
-  </div>
-  <div class="field">
-    <%= f.label :store %><br />
-    <%= f.text_field :store %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :desc %><br />
+      <%= f.text_field :desc %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

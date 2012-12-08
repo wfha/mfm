@@ -2,7 +2,8 @@ class DishFeaturesController < ApplicationController
   # GET /dish_features
   # GET /dish_features.json
   def index
-    @dish_features = DishFeature.all
+    @store = Store.find(params[:store_id])
+    @dish_features = @store.dish_features
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,8 @@ class DishFeaturesController < ApplicationController
   # GET /dish_features/1
   # GET /dish_features/1.json
   def show
-    @dish_feature = DishFeature.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @dish_feature = @store.dish_features.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,8 @@ class DishFeaturesController < ApplicationController
   # GET /dish_features/new
   # GET /dish_features/new.json
   def new
-    @dish_feature = DishFeature.new
+    @store = Store.find(params[:store_id])
+    @dish_feature = @store.dish_features.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,17 +37,19 @@ class DishFeaturesController < ApplicationController
 
   # GET /dish_features/1/edit
   def edit
-    @dish_feature = DishFeature.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @dish_feature = @store.dish_features.find(params[:id])
   end
 
   # POST /dish_features
   # POST /dish_features.json
   def create
-    @dish_feature = DishFeature.new(params[:dish_feature])
+    @store = Store.find(params[:store_id])
+    @dish_feature = @store.dish_features.create(params[:dish_feature])
 
     respond_to do |format|
       if @dish_feature.save
-        format.html { redirect_to @dish_feature, notice: 'Dish feature was successfully created.' }
+        format.html { redirect_to store_dish_features_url(@store), notice: 'Dish feature was successfully created.' }
         format.json { render json: @dish_feature, status: :created, location: @dish_feature }
       else
         format.html { render action: "new" }
@@ -56,11 +61,12 @@ class DishFeaturesController < ApplicationController
   # PUT /dish_features/1
   # PUT /dish_features/1.json
   def update
-    @dish_feature = DishFeature.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @dish_feature = @store.dish_features.find(params[:id])
 
     respond_to do |format|
       if @dish_feature.update_attributes(params[:dish_feature])
-        format.html { redirect_to @dish_feature, notice: 'Dish feature was successfully updated.' }
+        format.html { redirect_to store_dish_features_url(@store), notice: 'Dish feature was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,11 +78,12 @@ class DishFeaturesController < ApplicationController
   # DELETE /dish_features/1
   # DELETE /dish_features/1.json
   def destroy
-    @dish_feature = DishFeature.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @dish_feature = @store.dish_features.find(params[:id])
     @dish_feature.destroy
 
     respond_to do |format|
-      format.html { redirect_to dish_features_url }
+      format.html { redirect_to store_dish_features_url(@store) }
       format.json { head :no_content }
     end
   end

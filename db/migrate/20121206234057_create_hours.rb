@@ -5,6 +5,7 @@ class CreateHours < ActiveRecord::Migration
       t.string :desc
       t.string :open_at
       t.string :close_at
+      t.references :store
 
       t.timestamps
     end

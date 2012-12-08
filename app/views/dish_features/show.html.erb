@@ -12,9 +12,9 @@
 
 <p>
   <b>Store:</b>
-  <%= @dish_feature.store %>
+  <%= @dish_feature.store.name %>
 </p>
 
 
-<%= link_to 'Edit', edit_dish_feature_path(@dish_feature) %> |
-<%= link_to 'Back', dish_features_path %>
+<%= link_to 'Edit', edit_store_dish_feature_path(@store, @dish_feature) %> |
+<%= link_to 'Back', store_dish_features_path(@store) %>

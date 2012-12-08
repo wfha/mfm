@@ -1,20 +1,4 @@
 Mfm::Application.routes.draw do
-  resources :dish_choices
-
-
-  resources :dish_features
-
-
-  resources :dishes
-
-
-  resources :categories
-
-
-  resources :menus
-
-
-  root :to => 'stores#index'
 
   devise_for :users
 
@@ -25,9 +9,21 @@ Mfm::Application.routes.draw do
 
   resources :tags
   resources :payments
-  resources :hours
   resources :roles
-  resources :stores
+
+  resources :stores do
+    resources :dish_choices, :dish_features, :hours, :menus
+  end
+
+  resources :menus do
+    resources :categories
+  end
+
+  resources :categories do
+    resources :dishes
+  end
+
+  root :to => 'stores#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

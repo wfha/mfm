@@ -11,16 +11,91 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207152734) do
+ActiveRecord::Schema.define(:version => 20121208033106) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.integer  "menu_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "categories", ["menu_id"], :name => "index_categories_on_menu_id"
+
+  create_table "dish_choices", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.integer  "store_id"
+    t.boolean  "must",       :default => false
+    t.integer  "checked",    :default => 0
+    t.string   "input_type", :default => "radio"
+    t.string   "content",    :default => "abc:0,def:1"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
+  add_index "dish_choices", ["store_id"], :name => "index_dish_choices_on_store_id"
+
+  create_table "dish_choices_dishes", :id => false, :force => true do |t|
+    t.integer "dish_choice_id"
+    t.integer "dish_id"
+  end
+
+  add_index "dish_choices_dishes", ["dish_choice_id"], :name => "index_dish_choices_dishes_on_dish_choice_id"
+  add_index "dish_choices_dishes", ["dish_id", "dish_choice_id"], :name => "index_dish_choices_dishes_on_dish_id_and_dish_choice_id"
+  add_index "dish_choices_dishes", ["dish_id"], :name => "index_dish_choices_dishes_on_dish_id"
+
+  create_table "dish_features", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "dish_features", ["store_id"], :name => "index_dish_features_on_store_id"
+
+  create_table "dish_features_dishes", :id => false, :force => true do |t|
+    t.integer "dish_feature_id"
+    t.integer "dish_id"
+  end
+
+  add_index "dish_features_dishes", ["dish_feature_id"], :name => "index_dish_features_dishes_on_dish_feature_id"
+  add_index "dish_features_dishes", ["dish_id", "dish_feature_id"], :name => "index_dish_features_dishes_on_dish_id_and_dish_feature_id"
+  add_index "dish_features_dishes", ["dish_id"], :name => "index_dish_features_dishes_on_dish_id"
+
+  create_table "dishes", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.decimal  "price",       :precision => 8, :scale => 2
+    t.string   "image"
+    t.integer  "category_id"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+  end
+
+  add_index "dishes", ["category_id"], :name => "index_dishes_on_category_id"
 
   create_table "hours", :force => true do |t|
     t.string   "name"
     t.string   "desc"
     t.string   "open_at"
     t.string   "close_at"
+    t.integer  "store_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "menus", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "menus", ["store_id"], :name => "index_menus_on_store_id"
 
   create_table "payments", :force => true do |t|
     t.string   "name"

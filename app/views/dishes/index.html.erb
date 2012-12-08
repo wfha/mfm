@@ -5,27 +5,25 @@
     <th>Name</th>
     <th>Desc</th>
     <th>Price</th>
-    <th>Image</th>
     <th>Category</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @dishes.each do |dish| %>
-  <tr>
-    <td><%= dish.name %></td>
-    <td><%= dish.desc %></td>
-    <td><%= dish.price %></td>
-    <td><%= dish.image %></td>
-    <td><%= dish.category %></td>
-    <td><%= link_to 'Show', dish %></td>
-    <td><%= link_to 'Edit', edit_dish_path(dish) %></td>
-    <td><%= link_to 'Destroy', dish, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% @dishes.each do |dish| %>
+      <tr>
+        <td><%= dish.name %></td>
+        <td><%= dish.desc %></td>
+        <td><%= dish.price %></td>
+        <td><%= dish.category.name %></td>
+        <td><%= link_to 'Show', [@category, dish] %></td>
+        <td><%= link_to 'Edit', edit_category_dish_path(@category, dish) %></td>
+        <td><%= link_to 'Destroy', [@category, dish], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Dish', new_dish_path %>
+<%= link_to 'New Dish', new_category_dish_path(@category) %>

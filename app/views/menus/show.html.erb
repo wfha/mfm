@@ -12,9 +12,9 @@
 
 <p>
   <b>Store:</b>
-  <%= @menu.store %>
+  <%= @menu.store.name %>
 </p>
 
 
-<%= link_to 'Edit', edit_menu_path(@menu) %> |
-<%= link_to 'Back', menus_path %>
+<%= link_to 'Edit', edit_store_menu_path(@store, @menu) %> |
+<%= link_to 'Back', store_menus_path(@store) %>

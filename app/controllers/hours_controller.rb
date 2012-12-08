@@ -2,7 +2,8 @@ class HoursController < ApplicationController
   # GET /hours
   # GET /hours.json
   def index
-    @hours = Hour.all
+    @store = Store.find(params[:store_id])
+    @hours = @store.hours
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,8 @@ class HoursController < ApplicationController
   # GET /hours/1
   # GET /hours/1.json
   def show
-    @hour = Hour.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @hour = @store.hours.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,8 @@ class HoursController < ApplicationController
   # GET /hours/new
   # GET /hours/new.json
   def new
-    @hour = Hour.new
+    @store = Store.find(params[:store_id])
+    @hour = @store.hours.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,17 +37,19 @@ class HoursController < ApplicationController
 
   # GET /hours/1/edit
   def edit
-    @hour = Hour.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @hour = @store.hours.find(params[:id])
   end
 
   # POST /hours
   # POST /hours.json
   def create
-    @hour = Hour.new(params[:hour])
+    @store = Store.find(params[:store_id])
+    @hour = @store.hours.create(params[:hour])
 
     respond_to do |format|
       if @hour.save
-        format.html { redirect_to @hour, notice: 'Hour was successfully created.' }
+        format.html { redirect_to store_hours_url(@store), notice: 'Hour was successfully created.' }
         format.json { render json: @hour, status: :created, location: @hour }
       else
         format.html { render action: "new" }
@@ -56,11 +61,12 @@ class HoursController < ApplicationController
   # PUT /hours/1
   # PUT /hours/1.json
   def update
-    @hour = Hour.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @hour = @store.hours.find(params[:id])
 
     respond_to do |format|
       if @hour.update_attributes(params[:hour])
-        format.html { redirect_to @hour, notice: 'Hour was successfully updated.' }
+        format.html { redirect_to store_hours_url(@store), notice: 'Hour was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,11 +78,12 @@ class HoursController < ApplicationController
   # DELETE /hours/1
   # DELETE /hours/1.json
   def destroy
-    @hour = Hour.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @hour = @store.hours.find(params[:id])
     @hour.destroy
 
     respond_to do |format|
-      format.html { redirect_to hours_url }
+      format.html { redirect_to store_hours_url(@store) }
       format.json { head :no_content }
     end
   end

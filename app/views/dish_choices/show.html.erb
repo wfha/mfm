@@ -11,30 +11,15 @@
 </p>
 
 <p>
-  <b>Store:</b>
-  <%= @dish_choice.store %>
-</p>
-
-<p>
-  <b>Must:</b>
-  <%= @dish_choice.must %>
-</p>
-
-<p>
-  <b>Checked:</b>
-  <%= @dish_choice.checked %>
-</p>
-
-<p>
-  <b>Input type:</b>
-  <%= @dish_choice.input_type %>
-</p>
-
-<p>
   <b>Content:</b>
   <%= @dish_choice.content %>
 </p>
 
+<p>
+  <b>Store:</b>
+  <%= @dish_choice.store.name %>
+</p>
 
-<%= link_to 'Edit', edit_dish_choice_path(@dish_choice) %> |
-<%= link_to 'Back', dish_choices_path %>
+
+<%= link_to 'Edit', edit_store_dish_choice_path(@store, @dish_choice) %> |
+<%= link_to 'Back', store_dish_choices_path(@store) %>

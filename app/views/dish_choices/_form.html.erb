@@ -1,45 +1,41 @@
-<%= form_for(@dish_choice) do |f| %>
-  <% if @dish_choice.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@dish_choice.errors.count, "error") %> prohibited this dish_choice from being saved:</h2>
+<%= form_for([@store, @dish_choice]) do |f| %>
+    <% if @dish_choice.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@dish_choice.errors.count, "error") %> prohibited this dish_choice from being saved:</h2>
 
-      <ul>
-      <% @dish_choice.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @dish_choice.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :desc %><br />
-    <%= f.text_field :desc %>
-  </div>
-  <div class="field">
-    <%= f.label :store %><br />
-    <%= f.text_field :store %>
-  </div>
-  <div class="field">
-    <%= f.label :must %><br />
-    <%= f.check_box :must %>
-  </div>
-  <div class="field">
-    <%= f.label :checked %><br />
-    <%= f.number_field :checked %>
-  </div>
-  <div class="field">
-    <%= f.label :input_type %><br />
-    <%= f.text_field :input_type %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :desc %><br />
+      <%= f.text_field :desc %>
+    </div>
+    <div class="field">
+      <%= f.label :must %><br />
+      <%= f.check_box :must %>
+    </div>
+    <div class="field">
+      <%= f.label :input_type %><br />
+      <%= f.text_field :input_type %>
+    </div>
+    <div class="field">
+      <%= f.label :checked %><br />
+      <%= f.number_field :checked %>
+    </div>
+    <div class="field">
+      <%= f.label :content %><br />
+      <%= f.text_field :content %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

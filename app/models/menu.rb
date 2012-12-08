@@ -1,4 +1,7 @@
 class Menu < ActiveRecord::Base
-  belongs_to :store
   attr_accessible :desc, :name
+
+  belongs_to :store
+
+  has_many :categories, :dependent => :destroy
 end

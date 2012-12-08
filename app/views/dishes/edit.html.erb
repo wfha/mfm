@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @dish %> |
-<%= link_to 'Back', dishes_path %>
+<%= link_to 'Show', [@category, @dish] %> |
+<%= link_to 'Back', store_menus_path(@category.menu.store) %>

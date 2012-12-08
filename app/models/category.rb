@@ -1,4 +1,7 @@
 class Category < ActiveRecord::Base
-  belongs_to :menu
   attr_accessible :desc, :name
+
+  belongs_to :menu
+
+  has_many :dishes, :dependent => :destroy
 end

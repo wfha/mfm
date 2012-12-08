@@ -2,7 +2,8 @@ class MenusController < ApplicationController
   # GET /menus
   # GET /menus.json
   def index
-    @menus = Menu.all
+    @store = Store.find(params[:store_id])
+    @menus = @store.menus
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,8 @@ class MenusController < ApplicationController
   # GET /menus/1
   # GET /menus/1.json
   def show
-    @menu = Menu.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @menu = @store.menus.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,8 @@ class MenusController < ApplicationController
   # GET /menus/new
   # GET /menus/new.json
   def new
-    @menu = Menu.new
+    @store = Store.find(params[:store_id])
+    @menu = @store.menus.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,17 +37,19 @@ class MenusController < ApplicationController
 
   # GET /menus/1/edit
   def edit
-    @menu = Menu.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @menu = @store.menus.find(params[:id])
   end
 
   # POST /menus
   # POST /menus.json
   def create
-    @menu = Menu.new(params[:menu])
+    @store = Store.find(params[:store_id])
+    @menu = @store.menus.create(params[:menu])
 
     respond_to do |format|
       if @menu.save
-        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
+        format.html { redirect_to store_menus_url(@store), notice: 'Menu was successfully created.' }
         format.json { render json: @menu, status: :created, location: @menu }
       else
         format.html { render action: "new" }
@@ -56,11 +61,12 @@ class MenusController < ApplicationController
   # PUT /menus/1
   # PUT /menus/1.json
   def update
-    @menu = Menu.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @menu = @store.menus.find(params[:id])
 
     respond_to do |format|
       if @menu.update_attributes(params[:menu])
-        format.html { redirect_to @menu, notice: 'Menu was successfully updated.' }
+        format.html { redirect_to store_menus_url(@store), notice: 'Menu was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,11 +78,12 @@ class MenusController < ApplicationController
   # DELETE /menus/1
   # DELETE /menus/1.json
   def destroy
-    @menu = Menu.find(params[:id])
+    @store = Store.find(params[:store_id])
+    @menu = @store.menus.find(params[:id])
     @menu.destroy
 
     respond_to do |format|
-      format.html { redirect_to menus_url }
+      format.html { redirect_to store_menus_url(@store) }
       format.json { head :no_content }
     end
   end

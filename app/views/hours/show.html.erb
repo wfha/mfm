@@ -6,11 +6,6 @@
 </p>
 
 <p>
-  <b>Desc:</b>
-  <%= @hour.desc %>
-</p>
-
-<p>
   <b>Open at:</b>
   <%= @hour.open_at %>
 </p>
@@ -20,6 +15,11 @@
   <%= @hour.close_at %>
 </p>
 
+<p>
+  <b>Store:</b>
+  <%= @hour.store.name %>
+</p>
 
-<%= link_to 'Edit', edit_hour_path(@hour) %> |
-<%= link_to 'Back', hours_path %>
+
+<%= link_to 'Edit', edit_store_hour_path(@store, @hour) %> |
+<%= link_to 'Back', store_hours_path(@store) %>

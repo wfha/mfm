@@ -1,37 +1,50 @@
-<%= form_for(@dish) do |f| %>
-  <% if @dish.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@dish.errors.count, "error") %> prohibited this dish from being saved:</h2>
+<%= form_for([@category, @dish], :html => { :multipart => true }) do |f| %>
+    <% if @dish.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@dish.errors.count, "error") %> prohibited this dish from being saved:</h2>
 
-      <ul>
-      <% @dish.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @dish.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :desc %><br />
-    <%= f.text_field :desc %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.text_field :image %>
-  </div>
-  <div class="field">
-    <%= f.label :category %><br />
-    <%= f.text_field :category %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :desc %><br />
+      <%= f.text_field :desc %>
+    </div>
+    <div class="field">
+      <%= f.label :dish_features %><br />
+      <% @category.menu.store.dish_features.each do |df| %>
+          <%= check_box_tag "dish[dish_feature_ids][]", df.id, @dish.dish_features.include?(df) %><%= df.name %>
+      <% end %>
+      <br/><br/>
+    </div>
+    <div class="field">
+      <%= f.label :dish_choices %><br />
+      <% @category.menu.store.dish_choices.each do |df| %>
+          <%= check_box_tag "dish[dish_choice_ids][]", df.id, @dish.dish_choices.include?(df) %><%= df.name %>
+      <% end %>
+      <br/><br/>
+    </div>
+    <div class="field">
+      <%= f.label :price %><br />
+      <%= f.text_field :price %>
+    </div>
+    <div class="field">
+      <%= f.label :image %><br />
+      <%= image_tag @dish.image_url(:thumb).to_s if @dish.image? %>
+      <br/>
+      <%= f.file_field :image %>
+    </div>
+    <br/>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

@@ -2,7 +2,8 @@ class DishesController < ApplicationController
   # GET /dishes
   # GET /dishes.json
   def index
-    @dishes = Dish.all
+    @category = Category.find(params[:category_id])
+    @dishes = @category.dishes
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +14,8 @@ class DishesController < ApplicationController
   # GET /dishes/1
   # GET /dishes/1.json
   def show
-    @dish = Dish.find(params[:id])
+    @category = Category.find(params[:category_id])
+    @dish = @category.dishes.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +26,8 @@ class DishesController < ApplicationController
   # GET /dishes/new
   # GET /dishes/new.json
   def new
-    @dish = Dish.new
+    @category = Category.find(params[:category_id])
+    @dish = @category.dishes.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,17 +37,19 @@ class DishesController < ApplicationController
 
   # GET /dishes/1/edit
   def edit
-    @dish = Dish.find(params[:id])
+    @category = Category.find(params[:category_id])
+    @dish = @category.dishes.find(params[:id])
   end
 
   # POST /dishes
   # POST /dishes.json
   def create
-    @dish = Dish.new(params[:dish])
+    @category = Category.find(params[:category_id])
+    @dish = @category.dishes.create(params[:dish])
 
     respond_to do |format|
       if @dish.save
-        format.html { redirect_to @dish, notice: 'Dish was successfully created.' }
+        format.html { redirect_to store_menus_url(@category.menu.store), notice: 'Dish was successfully created.' }
         format.json { render json: @dish, status: :created, location: @dish }
       else
         format.html { render action: "new" }
@@ -56,11 +61,14 @@ class DishesController < ApplicationController
   # PUT /dishes/1
   # PUT /dishes/1.json
   def update
-    @dish = Dish.find(params[:id])
+    params[:dish][:dish_feature_ids] ||= []
+    params[:dish][:dish_choice_ids] ||= []
+    @category = Category.find(params[:category_id])
+    @dish = @category.dishes.find(params[:id])
 
     respond_to do |format|
       if @dish.update_attributes(params[:dish])
-        format.html { redirect_to @dish, notice: 'Dish was successfully updated.' }
+        format.html { redirect_to store_menus_url(@category.menu.store), notice: 'Dish was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,11 +80,12 @@ class DishesController < ApplicationController
   # DELETE /dishes/1
   # DELETE /dishes/1.json
   def destroy
-    @dish = Dish.find(params[:id])
+    @category = Category.find(params[:category_id])
+    @dish = @category.dishes.find(params[:id])
     @dish.destroy
 
     respond_to do |format|
-      format.html { redirect_to dishes_url }
+      format.html { redirect_to store_menus_url(@category.menu.store) }
       format.json { head :no_content }
     end
   end
