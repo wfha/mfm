@@ -1,4 +1,19 @@
 Mfm::Application.routes.draw do
+  resources :dish_choices
+
+
+  resources :dish_features
+
+
+  resources :dishes
+
+
+  resources :categories
+
+
+  resources :menus
+
+
   root :to => 'stores#index'
 
   devise_for :users

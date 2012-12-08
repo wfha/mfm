@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  desc: MyString
+  store: 
+  must: false
+  checked: 1
+  input_type: MyString
+  content: MyString
+
+two:
+  name: MyString
+  desc: MyString
+  store: 
+  must: false
+  checked: 1
+  input_type: MyString
+  content: MyString

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @dish.name %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @dish.desc %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @dish.price %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= @dish.image %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @dish.category %>
+</p>
+
+
+<%= link_to 'Edit', edit_dish_path(@dish) %> |
+<%= link_to 'Back', dishes_path %>
