@@ -1,12 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '~> 3.2.9'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'pg'
-
+gem 'pg', '~> 0.14.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -14,30 +10,20 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '>= 1.0.3'
 
   gem 'bootstrap-sass', '~> 2.2.1.1'
-  gem "rmagick"
-  gem 'carrierwave'
+  gem 'rmagick', '~> 2.13.1'
+  gem 'carrierwave', '~> 0.7.1'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.1.4'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'unicorn', '~> 4.4.0'
+gem 'capistrano', '~> 2.13.5'
+gem 'rvm-capistrano', '~> 1.2.7'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'devise', '~> 2.1.2'
+gem 'cancan', '~> 1.6.8'
 
-gem 'unicorn'
-gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
-
-gem 'devise'
-gem 'cancan'
 
