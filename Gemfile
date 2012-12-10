@@ -16,6 +16,10 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.2.1.1'
   gem 'rmagick', '~> 2.13.1'
   gem 'carrierwave', '~> 0.7.1'
+
+  # Geo Info
+  gem 'geocoder', '~> 1.1.5'
+  gem 'gmaps4rails', '~> 1.5.6'
 end
 
 gem 'jquery-rails', '~> 2.1.4'
@@ -29,9 +33,5 @@ gem 'rvm-capistrano', '~> 1.2.7'
 # User system
 gem 'devise', '~> 2.1.2'
 gem 'cancan', '~> 1.6.8'
-
-# Geo Info
-gem 'geocoder', '~> 1.1.5'
-gem 'gmaps4rails', '~> 1.5.6'
 
 gem "yelp", '0.0.0', :git => 'git://github.com/wfha/yelp.git'

@@ -1,5 +1,7 @@
+require 'geocoder'
+extend Geocoder::Model::ActiveRecord
+
 class Address < ActiveRecord::Base
-  extend Geocoder::Model::ActiveRecord
 
   attr_accessible :address1, :address2, :city, :state, :country, :zip,
                   :gmaps, :latitude, :longitude
