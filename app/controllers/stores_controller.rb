@@ -1,12 +1,11 @@
 class StoresController < ApplicationController
 
+  # Authenticate and load @store for the whole controller
   load_and_authorize_resource
 
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @stores }
@@ -16,8 +15,6 @@ class StoresController < ApplicationController
   # GET /stores/1
   # GET /stores/1.json
   def show
-    @store = Store.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @store }
@@ -27,7 +24,7 @@ class StoresController < ApplicationController
   # GET /stores/new
   # GET /stores/new.json
   def new
-    @store = Store.new
+    @store.build_address
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,14 +34,11 @@ class StoresController < ApplicationController
 
   # GET /stores/1/edit
   def edit
-    @store = Store.find(params[:id])
   end
 
   # POST /stores
   # POST /stores.json
   def create
-    @store = Store.new(params[:store])
-
     respond_to do |format|
       if @store.save
         format.html { redirect_to @store, notice: 'Store was successfully created.' }
@@ -59,8 +53,6 @@ class StoresController < ApplicationController
   # PUT /stores/1
   # PUT /stores/1.json
   def update
-    @store = Store.find(params[:id])
-
     respond_to do |format|
       if @store.update_attributes(params[:store])
         format.html { redirect_to @store, notice: 'Store was successfully updated.' }
@@ -75,7 +67,6 @@ class StoresController < ApplicationController
   # DELETE /stores/1
   # DELETE /stores/1.json
   def destroy
-    @store = Store.find(params[:id])
     @store.destroy
 
     respond_to do |format|

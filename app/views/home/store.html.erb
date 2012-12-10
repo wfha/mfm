@@ -1,0 +1,186 @@
+<% content_for :north do %>
+    <div class="row-fluid">
+      <div class="span3">
+        <%= image_tag @store.image_url(:small).to_s %>
+      </div>
+      <div class="span9">
+        <h1><%= @store.name %></h1>
+        <p><%= @store.address.address1 %></p>
+        <p><%= @store.phone %> | <%= @store.fax %> | <%= link_to 'Back to Restaurant List', home_stores_path %></p>
+        <br/>
+        <ul class="nav nav-tabs first_child_active">
+          <li><a href="#whats_good">What's Good</a></li>
+          <li><a href="#full_menu">Full Menu</a></li>
+          <li><a href="#store_info">Store Info</a></li>
+          <li><a href="#store_reviews">Store Reviews</a></li>
+        </ul>
+      </div>
+    </div>
+    <br/>
+<% end %>
+
+<div class="tab-content first_child_active">
+  <div class="tab-pane" id="whats_good">
+    <ul class="thumbnails">
+      <% @store.menus.each do |menu| %>
+          <% menu.categories.each do |category| %>
+              <% category.dishes.each do |dish| %>
+                  <li class="span4">
+                    <div class="thumbnail">
+                      <%= image_tag dish.image_url.to_s  %>
+                      <div class="caption">
+                        <%= dish.name %><i class="pull-right"><%= number_to_currency(dish.price) %></i>
+                        <p><%= sanitize(dish.desc) %></p>
+                        <button class="pre_order btn btn-primary btn-mini">Order</button>
+                        <div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h3 id="myModalLabel">Make your choice for the dish</h3>
+                          </div>
+                          <div class="modal-body">
+                            <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
+                                <% dish.dish_choices.each do |df| %>
+                                    <br/>
+                                    <b><%= df.name %>:</b>(<%= df.desc %>)<br/>
+                                    <% df.content.split(',').each do |x| %>
+                                        <input type="<%= df.input_type %>" name="<%= df.name %>"
+                                               value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
+                                    <% end %>
+                                    <br/>
+                                <% end %>
+                                <input type="hidden" name="note" />
+                                <input type="hidden" name="price_adjustment" value="2" />
+                                <input type="hidden" name="store_id" value="<%= @store.id %>" />
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn" data-dismiss="modal">Close</button>
+                                  <%= submit_tag "Order", :class => 'btn btn-primary' %>
+                            <% end %>
+                            </div>
+                            </div>
+                      </div>
+                    </div>
+                  </li>
+              <% end %>
+          <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <div class="tab-pane" id="full_menu">
+    <ul class="nav nav-tabs first_child_active">
+      <% @store.menus.each do |menu| %>
+          <li>
+            <a href="#menu_<%= menu.id %>">
+              <%= menu.name %>
+              <br/>
+              <%= menu.desc %>
+            </a>
+          </li>
+      <% end %>
+    </ul>
+
+    <div class="tab-content first_child_active">
+      <% @store.menus.each do |menu| %>
+          <div class="tab-pane" id="menu_<%= menu.id %>">
+            <% menu.categories.each do |category| %>
+                <section id="<%= category.name %>">
+                  <h4><%= category.name %> | <%= category.desc %></h4>
+                  <ul class="thumbnails">
+                    <% category.dishes.each do |dish| %>
+                        <li class="span6">
+                          <div class="thumbnail pre_order" rel="popover" title="<%= dish.name %>" data-content="<%= sanitize(dish.desc) %>">
+                            <%= dish.name %> -
+                            <% dish.dish_features.each do |df| %>
+                                <%= df.name %>
+                            <% end %>
+                            <i class="pull-right"><%= number_to_currency(dish.price) %></i>
+                          </div>
+
+                          <div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                              <h3 id="myModalLabel">Make your choice for the dish</h3>
+                            </div>
+                            <div class="modal-body">
+                              <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
+                                  <% dish.dish_choices.each do |df| %>
+                                      <br/>
+                                      <b><%= df.name %>:</b>(<%= df.desc %>)<br/>
+                                      <% df.content.split(',').each do |x| %>
+                                          <input type="<%= df.input_type %>" name="<%= df.name %>"
+                                                 value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
+                                      <% end %>
+                                      <br/>
+                                  <% end %>
+                                  <input type="hidden" name="note" />
+                                  <input type="hidden" name="price_adjustment" value="2" />
+                                  <input type="hidden" name="store_id" value="<%= @store.id %>" />
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn" data-dismiss="modal">Close</button>
+                                    <%= submit_tag "Order", :class => 'btn btn-primary' %>
+                              <% end %>
+                              </div>
+                              </div>
+                        </li>
+                    <% end %>
+                  </ul>
+                </section>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="tab-pane" id="store_info">
+    <div class="hero-unit">
+      <h2><%= @store.name %></h2>
+      <p><%= @store.address.address1 %></p>
+      <p>Phone: <%= @store.phone %> | Fax: <%= @store.fax %></p>
+      <br/>
+      <p>Hours:</p>
+      <ul>
+        <% @store.hours.each do |h| %>
+            <li><%= h.name %>: <%= h.open_at %> - <%= h.close_at %></li>
+        <% end %>
+      </ul>
+      <p>Tags:</p>
+      <span>
+        <% @store.tags.each do |t| %>
+            <%= t.name %>
+        <% end %>
+      </span>
+      <p>Payments:</p>
+       <span>
+        <% @store.payments.each do |p| %>
+             <%= p.name %>
+             <%= image_tag p.image_url(:micro).to_s if p.image? %>
+        <% end %>
+      </span>
+      <p><%= link_to 'View Menu', home_store_path(@store), :class => 'btn btn-primary btn-large' %></p>
+    </div>
+  </div>
+  <div class="tab-pane" id="store_reviews">
+    <%= image_tag "/assets/yelp_logo.png" %>
+    <h5><%= @reviews[0]['name'] %></h5>
+    <%= image_tag @reviews[0]['rating_img_url'] %> <%= @reviews[0]['review_count'] %> reviews
+    <hr/>
+    <% @reviews[0]['reviews'].each do |review| %>
+        <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %>
+        <%= review['user_name'] %>
+        <%= image_tag review['rating_img_url'] %>
+        <br/>
+        <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
+        <hr/>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :east do %>
+    <div class="well sidebar-nav" id="cart">
+      <% if @cart %>
+          <%= render @cart %>
+      <% else %>
+          The Cart Is Empty!
+      <% end %>
+    </div><!--/.well -->
+<% end %>

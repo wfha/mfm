@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_directory .
+//= require_directory ./gmaps4rails

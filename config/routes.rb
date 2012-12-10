@@ -2,10 +2,11 @@ Mfm::Application.routes.draw do
 
   devise_for :users
 
-  get "home/index"
-  get "home/stores"
-  get "home/plans"
-  get "home/coupons"
+  match 'home/index' => 'home#index', :as => :home_index
+  match 'home/stores' => 'home#stores', :as => :home_stores
+  match 'home/store/:id' => 'home#store', :as => :home_store
+  match 'home/coupons' => 'home#coupons', :as => :home_coupons
+  match 'home/plans' => 'home#plans', :as => :home_plans
 
   resources :tags
   resources :payments
@@ -23,7 +24,7 @@ Mfm::Application.routes.draw do
     resources :dishes
   end
 
-  root :to => 'stores#index'
+  root :to => 'home#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
