@@ -1,0 +1,103 @@
+<h1><%= @order.store.name %></h1>
+<%= @order.store.address.address1 %> | Phone: <%= @order.store.phone %> | Fax: <%= @order.store.fax %><br/>
+<%= link_to 'Back to store', home_store_path(@order.store) %><br/>
+<br/>
+
+<ul class="thumbnails">
+  <li class="span6">
+    <div class="thumbnail">
+      <%= form_for(@order) do |f| %>
+          <% if @order.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+                <ul>
+                  <% @order.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <legend>
+            <% if user_signed_in? %>
+                Welcome, our user!
+            <% else %>
+                No Account?
+            <% end %>
+          </legend>
+          <fieldset>
+            <div class="field">
+              <%= f.label :note %><br />
+              <%= f.text_field :note %>
+            </div>
+            <div class="field">
+              <%= f.label :payment_type %><br />
+              <%= f.select :payment_type, Order::PAYMENT_TYPES, prompt: 'Select a payment method' %>
+            </div>
+            <div class="field">
+              <%= f.fields_for :user do |builder| %>
+                  <%= builder.label :firstname %><br/>
+                  <%= builder.text_field :firstname %><br/>
+                  <%= builder.label :lastname %><br/>
+                  <%= builder.text_field :lastname %><br/>
+                  <%= builder.label :phone  %><br/>
+                  <%= builder.text_field :phone %><br/>
+                  <%= builder.fields_for :address do |addr| %>
+                      <%= addr.label :address1 %>
+                      <%= addr.text_field :address1 %>
+                      <%= addr.label :address2 %>
+                      <%= addr.text_field :address2 %>
+                  <% end %>
+                  <% unless user_signed_in? %>
+                      <legend>Get An Account (Optional)</legend>
+                      <%= builder.label :email, "Email"  %><br/>
+                      <%= builder.text_field :email %><br/>
+                      <%= builder.label :password, "Password"  %><br/>
+                      <%= builder.password_field :password %><br/>
+                      <%= builder.label :password_confirmation, "Confirmation"  %><br/>
+                      <%= builder.password_field :password_confirmation %><br/>
+                  <% end %>
+              <% end %>
+            </div>
+            <div class="actions">
+              <%= f.hidden_field :store_id %>
+              <%= f.hidden_field :cart_id %>
+              <%= f.submit %>
+            </div>
+          </fieldset>
+      <% end %>
+    </div>
+  </li>
+  <li class="span6">
+    <% unless user_signed_in? %>
+        <div class="thumbnail">
+          <%= form_for("user", :url => user_session_path) do |f| %>
+              <legend>
+                Already Has An Account?
+              </legend>
+              <fieldset>
+                <%= f.label :email %>
+                <%= f.text_field :email %>
+                <%= f.label :password %>
+                <%= f.password_field :password %>
+                <%= f.label :remember_me %>
+                <%= f.check_box :remember_me %>
+                <br/>
+                <%= f.submit 'Sign in' %>
+                <%= link_to "Forgot your password?", new_password_path('user') %>
+              </fieldset>
+          <% end %>
+        </div>
+    <% end %>
+  </li>
+</ul>
+
+<% content_for :east do %>
+    <div class="well sidebar-nav" id="cart">
+      <% if @cart %>
+          <%= render @cart %>
+      <% else %>
+          The Cart Is Empty!
+      <% end %>
+    </div><!--/.well -->
+<% end %>

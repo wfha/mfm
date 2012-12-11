@@ -11,6 +11,7 @@ class Store < ActiveRecord::Base
   has_many :hours, :dependent => :destroy
   has_many :menus, :dependent => :destroy
   has_many :plans, :dependent => :destroy
+  has_many :orders
 
   has_and_belongs_to_many :payments
   has_and_belongs_to_many :tags

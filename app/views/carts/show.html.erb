@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Delivery type:</b>
+  <%= @cart.delivery_type %>
+</p>
+
+<p>
+  <b>Store:</b>
+  <%= @cart.store.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_cart_path(@cart) %> |
+<%= link_to 'Back', carts_path %>

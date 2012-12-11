@@ -38,8 +38,26 @@
                             <h3 id="myModalLabel">Make your choice for the dish</h3>
                           </div>
                           <div class="modal-body">
-                          </div>
-                        </div>
+                            <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
+                                <% dish.dish_choices.each do |df| %>
+                                    <br/>
+                                    <b><%= df.name %>:</b>(<%= df.desc %>)<br/>
+                                    <% df.content.split(',').each do |x| %>
+                                        <input type="<%= df.input_type %>" name="<%= df.name %>"
+                                               value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
+                                    <% end %>
+                                    <br/>
+                                <% end %>
+                                <input type="hidden" name="note" />
+                                <input type="hidden" name="price_adjustment" value="2" />
+                                <input type="hidden" name="store_id" value="<%= @store.id %>" />
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn" data-dismiss="modal">Close</button>
+                                  <%= submit_tag "Order", :class => 'btn btn-primary' %>
+                            <% end %>
+                            </div>
+                            </div>
                       </div>
                     </div>
                   </li>
@@ -84,6 +102,24 @@
                               <h3 id="myModalLabel">Make your choice for the dish</h3>
                             </div>
                             <div class="modal-body">
+                              <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
+                                  <% dish.dish_choices.each do |df| %>
+                                      <br/>
+                                      <b><%= df.name %>:</b>(<%= df.desc %>)<br/>
+                                      <% df.content.split(',').each do |x| %>
+                                          <input type="<%= df.input_type %>" name="<%= df.name %>"
+                                                 value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
+                                      <% end %>
+                                      <br/>
+                                  <% end %>
+                                  <input type="hidden" name="note" />
+                                  <input type="hidden" name="price_adjustment" value="2" />
+                                  <input type="hidden" name="store_id" value="<%= @store.id %>" />
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn" data-dismiss="modal">Close</button>
+                                    <%= submit_tag "Order", :class => 'btn btn-primary' %>
+                              <% end %>
                               </div>
                               </div>
                         </li>

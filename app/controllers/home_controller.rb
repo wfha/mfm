@@ -16,6 +16,7 @@ class HomeController < ApplicationController
 
   def store
     @store = Store.find(params[:id])
+    @cart = current_cart
 
     request = Yelp::Phone::Request::Number.new(
         :phone_number => @store.phone,

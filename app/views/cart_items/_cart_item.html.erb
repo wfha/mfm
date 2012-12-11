@@ -1,0 +1,22 @@
+<% if cart_item == @current_item %>
+    <li id="current_item">
+<% else %>
+    <li>
+<% end %>
+<a>
+  <%= cart_item.dish.name %>
+
+  <span class="pull-right">
+      &times; <%= cart_item.quantity %>
+    &nbsp;&nbsp;&nbsp;
+    <%= number_to_currency(cart_item.total_price) %>
+    </span>
+
+  <br/>
+  <%= cart_item.note %>
+
+  <i class="icon-remove pull-right"></i>
+  <i class="icon-minus pull-right"></i>
+  <i class="icon-plus pull-right"></i>
+</a>
+</li>

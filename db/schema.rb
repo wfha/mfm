@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209164935) do
+ActiveRecord::Schema.define(:version => 20121211155102) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -30,6 +30,29 @@ ActiveRecord::Schema.define(:version => 20121209164935) do
   end
 
   add_index "addresses", ["addressable_id", "addressable_type"], :name => "index_addresses_on_addressable_id_and_addressable_type"
+
+  create_table "cart_items", :force => true do |t|
+    t.string   "name"
+    t.decimal  "price",      :precision => 8, :scale => 2
+    t.integer  "quantity",                                 :default => 1
+    t.string   "note"
+    t.integer  "dish_id"
+    t.integer  "cart_id"
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
+  end
+
+  add_index "cart_items", ["cart_id"], :name => "index_cart_items_on_cart_id"
+  add_index "cart_items", ["dish_id"], :name => "index_cart_items_on_dish_id"
+
+  create_table "carts", :force => true do |t|
+    t.string   "delivery_type", :default => "Delivery", :null => false
+    t.integer  "store_id"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
+  add_index "carts", ["store_id"], :name => "index_carts_on_store_id"
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -128,6 +151,24 @@ ActiveRecord::Schema.define(:version => 20121209164935) do
 
   add_index "menus", ["store_id"], :name => "index_menus_on_store_id"
 
+  create_table "orders", :force => true do |t|
+    t.string   "invoice"
+    t.string   "transaction_id"
+    t.string   "payment_type",                                 :default => "Cash", :null => false
+    t.string   "note"
+    t.decimal  "delivery_fee",   :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "tip",            :precision => 8, :scale => 2, :default => 0.0
+    t.integer  "store_id"
+    t.integer  "cart_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
+  end
+
+  add_index "orders", ["cart_id"], :name => "index_orders_on_cart_id"
+  add_index "orders", ["store_id"], :name => "index_orders_on_store_id"
+  add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
+
   create_table "payments", :force => true do |t|
     t.string   "name"
     t.string   "desc"
@@ -213,6 +254,9 @@ ActiveRecord::Schema.define(:version => 20121209164935) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "phone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

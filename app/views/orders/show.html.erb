@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Invoice:</b>
+  <%= @order.invoice %>
+</p>
+
+<p>
+  <b>Transaction:</b>
+  <%= @order.transaction_id %>
+</p>
+
+<p>
+  <b>Payment type:</b>
+  <%= @order.payment_type %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @order.note %>
+</p>
+
+<p>
+  <b>Delivery fee:</b>
+  <%= @order.delivery_fee %>
+</p>
+
+<p>
+  <b>Tip:</b>
+  <%= @order.tip %>
+</p>
+
+<p>
+  <b>Store:</b>
+  <%= @order.store %>
+</p>
+
+<p>
+  <b>Cart:</b>
+  <%= @order.cart %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @order.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

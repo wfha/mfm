@@ -1,7 +1,6 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 $ ->
 
   # home/stores page
@@ -41,17 +40,17 @@ $ ->
     $(this).siblings('.modal')
       .modal()
       .find('input').change ->
-      note = $(this).siblings('input[name=note]')
-      note_val = ''
+        note = $(this).siblings('input[name=note]')
+        note_val = ''
 
-      $(this).siblings('input:checked, input:text').each ->
-        if $(this).val()
-          note_val += ($(this).val() + ',')
+        $(this).siblings('input:checked, input:text').each ->
+          if $(this).val()
+            note_val += ($(this).val() + ',')
 
-      if $(this).attr('checked') || $(this).attr('type') =='text'
-        note_val += $(this).val()
+        if $(this).attr('checked') || $(this).attr('type') =='text'
+          note_val += $(this).val()
 
-      if note_val.charAt(note_val.length-1) == ','
-        note_val = note_val.substring(0, note_val.length-1)
+        if note_val.charAt(note_val.length-1) == ','
+          note_val = note_val.substring(0, note_val.length-1)
 
-      note.val note_val
+        note.val note_val

@@ -8,9 +8,12 @@ Mfm::Application.routes.draw do
   match 'home/coupons' => 'home#coupons', :as => :home_coupons
   match 'home/plans' => 'home#plans', :as => :home_plans
 
-  resources :tags
+  resources :carts
+  resources :cart_items
+  resources :orders
   resources :payments
   resources :roles
+  resources :tags
 
   resources :stores do
     resources :coupons, :dish_choices, :dish_features, :hours, :menus, :plans
