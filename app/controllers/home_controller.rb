@@ -8,8 +8,10 @@ class HomeController < ApplicationController
   def stores
     @stores = Store.all
 
-    @addresses = Address.find([1,2,3,4,5])
+    @addresses = Address.all
     @json = @addresses.to_gmaps4rails
+
+
   end
 
   def store
@@ -28,6 +30,14 @@ class HomeController < ApplicationController
 
   def coupons
     @coupons = Coupon.all
+  end
+
+  def load_store_info
+    @store = Store.find(params[:store_id])
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

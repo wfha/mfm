@@ -1,26 +1,101 @@
-<% content_for :north do %>
-    <div data-role="header">
-      <%= link_to 'Home', home_index_path, :rel => "external", :data => { :icon => 'arrow-l' } %>
-      <h1>Store List Page Header</h1>
-      <%= link_to 'Other', home_stores_path, :rel => "external", :data => { :icon => 'arrow-r'} %>
-    </div><!-- /header -->
-<% end %>
+<div data-role="page" id="page1" data-theme="e">
+  <%= render 'header' %>
 
-<div data-role="content">
-  <ul data-role="listview" data-inset="true" data-filter="true">
-    <li><a href="#page1">Acura</a></li>
-    <li><a href="#page2">Audi</a></li>
-    <li><a href="#page3">BMW</a></li>
-  </ul>
+  <div data-role="content">
+    <%= render 'store_header' %>
 
-  <form>
-    <label for="slider-0">Input slider:</label>
-    <input type="range" name="slider" id="slider-2" value="25" min="0" max="100"  />
-  </form>
+    <ul data-role="listview" data-inset="true" data-filter="true" data-dividertheme="c">
+      <% @store.menus.each do |menu| %>
+          <% menu.categories.each do |category| %>
+              <li data-role="list-divider"><%= category.name %></li>
+              <% category.dishes.each do |dish| %>
+                  <li><a href="#page1"><%= dish.name %><span class="ui-li-count">11</span></a></li>
+              <% end %>
+          <% end %>
+      <% end %>
+    </ul>
+  </div><!-- /content -->
 
-  <a href="#" data-role="button" data-icon="star" data-theme="a">Star button</a>
-  <a href="#" data-role="button" data-icon="star" data-theme="b">Star button</a>
-  <a href="#" data-role="button" data-icon="star" data-theme="c">Star button</a>
-  <a href="#" data-role="button" data-icon="star" data-theme="d">Star button</a>
-  <a href="#" data-role="button" data-icon="star" data-theme="e">Star button</a>
-</div><!-- /content -->
+  <%= render 'footer' %>
+</div>
+
+<div data-role="page" id="page2" data-theme="e">
+  <%= render 'header' %>
+
+  <div data-role="content">
+    <%= render 'store_header' %>
+
+    <ul data-role="listview" data-inset="true" data-filter="true" data-dividertheme="c">
+      <% @store.menus.each do |menu| %>
+          <% menu.categories.each do |category| %>
+              <li data-role="list-divider"><%= category.name %></li>
+              <% category.dishes.each do |dish| %>
+                  <li><a href="#page1"><%= dish.name %><span class="ui-li-count">11</span></a></li>
+              <% end %>
+          <% end %>
+      <% end %>
+    </ul>
+  </div><!-- /content -->
+
+  <%= render 'footer' %>
+</div><!-- /page -->
+
+<div data-role="page" id="page3" data-theme="e">
+  <%= render 'header' %>
+
+  <div data-role="content">
+    <%= render 'store_header' %>
+
+    <h2><%= @store.name %></h2>
+    <p><%= @store.address.address1 %></p>
+    <p>Phone: <%= @store.phone %> | Fax: <%= @store.fax %></p>
+    <br/>
+    <p>Hours:</p>
+    <ul>
+      <% @store.hours.each do |h| %>
+          <li><%= h.name %>: <%= h.open_at %> - <%= h.close_at %></li>
+      <% end %>
+    </ul>
+    <p>Tags:</p>
+      <span>
+        <% @store.tags.each do |t| %>
+            <%= t.name %>
+        <% end %>
+      </span>
+    <p>Payments:</p>
+       <span>
+        <% @store.payments.each do |p| %>
+             <%= p.name %>
+             <%= image_tag p.image_url(:tiny).to_s if p.image? %>
+        <% end %>
+      </span>
+    <p><%= link_to 'View Menu', home_store_path(@store), :class => 'btn btn-primary btn-large' %></p>
+  </div><!-- /content -->
+
+  <%= render 'footer' %>
+</div><!-- /page -->
+
+<div data-role="page" id="page4" data-theme="e">
+  <%= render 'header' %>
+
+  <div data-role="content">
+    <%= render 'store_header' %>
+
+    <% unless @reviews.empty? %>
+        <%= image_tag "/assets/yelp_logo.png" %>
+        <h5><%= @reviews[0]['name'] %></h5>
+        <%= image_tag @reviews[0]['rating_img_url'] %> <%= @reviews[0]['review_count'] %> reviews
+        <hr/>
+        <% @reviews[0]['reviews'].each do |review| %>
+            <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %>
+            <%= review['user_name'] %>
+            <%= image_tag review['rating_img_url'] %>
+            <br/>
+            <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
+            <hr/>
+        <% end %>
+    <% end %>
+  </div><!-- /content -->
+
+  <%= render 'footer' %>
+</div><!-- /page -->

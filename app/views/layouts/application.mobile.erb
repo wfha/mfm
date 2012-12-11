@@ -2,39 +2,17 @@
 <html>
 <head>
   <title>Mfm</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <%= stylesheet_link_tag    "mobile/application", :media => "all" %>
   <%= javascript_include_tag "mobile/application" %>
   <%= csrf_meta_tags %>
+  <link rel="apple-touch-icon" href="images/launch_icon_57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="images/launch_icon_72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="images/launch_icon_114.png" />
 </head>
 <body>
 
-<div data-role="page" data-theme="e">
-
-  <%= yield :north %>
-
-  <%= yield %>
-
-  <div data-role="footer">
-    <h4>
-      Store List Page Footer
-
-      <% if mobile_device? %>
-          <%= link_to 'Full site', :mobile => 0 %>
-      <% else %>
-          <%= link_to 'Mobile site', :mobile => 1 %>
-      <% end %>
-    </h4>
-
-    <div  data-role="navbar">
-      <ul>
-        <li><%= link_to 'Home', home_index_path, :data => { :icon => 'home' } %></li>
-        <li><a href="#page2" data-icon="grid">Audi</a></li>
-        <li><%= link_to 'Plans', home_plans_path, :data => { :icon => 'info' } %></li>
-      </ul>
-    </div>
-  </div><!-- /footer -->
-
-</div><!-- /page -->
+<%= yield %>
 
 </body>
 </html>

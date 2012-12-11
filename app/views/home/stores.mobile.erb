@@ -1,18 +1,16 @@
-<% content_for :north do %>
-    <div data-role="header">
-      <%= link_to 'Home', home_index_path, :rel => "external", :data => { :icon => 'arrow-l' } %>
-      <h1>Store List Page Header</h1>
-      <%= link_to 'Other', home_stores_path, :rel => "external", :data => { :icon => 'arrow-r'} %>
-    </div><!-- /header -->
-<% end %>
+<div data-role="page" id="page1" data-theme="e">
+  <%= render 'header' %>
 
-<div data-role="content">
-  <ul data-role="listview" data-inset="true" data-filter="true">
-    <% @stores.each do |store| %>
-        <li>
-          <%= image_tag store.image_url(:micro).to_s %>
-          <%= link_to store.name, home_store_path(store), :rel => "external" %>
-        </li>
-    <% end %>
-  </ul>
-</div><!-- /content -->
+  <div data-role="content">
+    <ul data-role="listview" data-inset="true" data-filter="true">
+      <% @stores.each do |store| %>
+          <li>
+            <%= link_to (image_tag store.image_url(:small).to_s) + store.name, home_store_path(store),
+                        :rel => "external", :data => { :transition => 'slidedown'}  %>
+          </li>
+      <% end %>
+    </ul>
+  </div><!-- /content -->
+
+  <%= render 'footer' %>
+</div><!-- /page -->

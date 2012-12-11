@@ -38,26 +38,8 @@
                             <h3 id="myModalLabel">Make your choice for the dish</h3>
                           </div>
                           <div class="modal-body">
-                            <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
-                                <% dish.dish_choices.each do |df| %>
-                                    <br/>
-                                    <b><%= df.name %>:</b>(<%= df.desc %>)<br/>
-                                    <% df.content.split(',').each do |x| %>
-                                        <input type="<%= df.input_type %>" name="<%= df.name %>"
-                                               value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
-                                    <% end %>
-                                    <br/>
-                                <% end %>
-                                <input type="hidden" name="note" />
-                                <input type="hidden" name="price_adjustment" value="2" />
-                                <input type="hidden" name="store_id" value="<%= @store.id %>" />
-                                </div>
-                                <div class="modal-footer">
-                                  <button class="btn" data-dismiss="modal">Close</button>
-                                  <%= submit_tag "Order", :class => 'btn btn-primary' %>
-                            <% end %>
-                            </div>
-                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </li>
@@ -102,24 +84,6 @@
                               <h3 id="myModalLabel">Make your choice for the dish</h3>
                             </div>
                             <div class="modal-body">
-                              <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
-                                  <% dish.dish_choices.each do |df| %>
-                                      <br/>
-                                      <b><%= df.name %>:</b>(<%= df.desc %>)<br/>
-                                      <% df.content.split(',').each do |x| %>
-                                          <input type="<%= df.input_type %>" name="<%= df.name %>"
-                                                 value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
-                                      <% end %>
-                                      <br/>
-                                  <% end %>
-                                  <input type="hidden" name="note" />
-                                  <input type="hidden" name="price_adjustment" value="2" />
-                                  <input type="hidden" name="store_id" value="<%= @store.id %>" />
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button class="btn" data-dismiss="modal">Close</button>
-                                    <%= submit_tag "Order", :class => 'btn btn-primary' %>
-                              <% end %>
                               </div>
                               </div>
                         </li>
@@ -153,7 +117,7 @@
        <span>
         <% @store.payments.each do |p| %>
              <%= p.name %>
-             <%= image_tag p.image_url(:micro).to_s if p.image? %>
+             <%= image_tag p.image_url(:tiny).to_s if p.image? %>
         <% end %>
       </span>
       <p><%= link_to 'View Menu', home_store_path(@store), :class => 'btn btn-primary btn-large' %></p>
@@ -161,16 +125,18 @@
   </div>
   <div class="tab-pane" id="store_reviews">
     <%= image_tag "/assets/yelp_logo.png" %>
-    <h5><%= @reviews[0]['name'] %></h5>
-    <%= image_tag @reviews[0]['rating_img_url'] %> <%= @reviews[0]['review_count'] %> reviews
-    <hr/>
-    <% @reviews[0]['reviews'].each do |review| %>
-        <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %>
-        <%= review['user_name'] %>
-        <%= image_tag review['rating_img_url'] %>
-        <br/>
-        <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
+    <% unless @reviews.empty? %>
+        <h5><%= @reviews[0]['name'] %></h5>
+        <%= image_tag @reviews[0]['rating_img_url'] %> <%= @reviews[0]['review_count'] %> reviews
         <hr/>
+        <% @reviews[0]['reviews'].each do |review| %>
+            <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %>
+            <%= review['user_name'] %>
+            <%= image_tag review['rating_img_url'] %>
+            <br/>
+            <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
+            <hr/>
+        <% end %>
     <% end %>
   </div>
 </div>
