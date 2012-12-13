@@ -1,5 +1,25 @@
 <div data-role="header" data-position="fixed">
   <%= link_to 'Home', home_index_path, :rel => "external", :data => { :icon => 'arrow-l' } %>
-  <h1>Store List Page Header</h1>
-  <%= link_to 'Other', home_stores_path, :rel => "external", :data => { :icon => 'arrow-r'} %>
+  <h1>Meals4.Me</h1>
+  <%= link_to 'Stores', home_stores_path, :rel => "external", :data => { :icon => 'arrow-r'} %>
+
+  <div id="cart_wrap" data-role="collapsible" data-theme="e" data-content-theme="d" data-mini="true">
+    <h2 id="cart">Cart - Total: $100.99</h2>
+    <ul data-role="listview">
+      <li data-icon="delete"><a href="#">Canary</a></li>
+      <li data-icon="delete"><a href="#">Cat</a></li>
+      <li style="text-align: right;">
+        Subtotal: $100.99<br/>
+        Tax: $10.99<br/>
+        Delivery: $10.99<br/>
+        Total: $100.99
+      </li>
+      <li>
+        <div class="ui-grid-a">
+          <div class="ui-block-a"><a href="#" data-role="button" data-mini="true">Proceed</a></div>
+          <div class="ui-block-b"><a href="#" data-role="button" data-mini="true">Clear</a></div>
+        </div>
+      </li>
+    </ul>
+  </div><!-- /collapsible -->
 </div><!-- /header -->

@@ -1,0 +1,2 @@
+$('#cart').trigger('click')
+

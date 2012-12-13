@@ -32,10 +32,10 @@
                         <%= dish.name %><i class="pull-right"><%= number_to_currency(dish.price) %></i>
                         <p><%= sanitize(dish.desc) %></p>
                         <button class="pre_order btn btn-primary btn-mini">Order</button>
-                        <div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal hide fade">
                           <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h3 id="myModalLabel">Make your choice for the dish</h3>
+                            <button class="close" data-dismiss="modal" >&times;</button>
+                            <h3>Make your choice for the dish</h3>
                           </div>
                           <div class="modal-body">
                             <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
@@ -51,13 +51,13 @@
                                 <input type="hidden" name="note" />
                                 <input type="hidden" name="price_adjustment" value="2" />
                                 <input type="hidden" name="store_id" value="<%= @store.id %>" />
-                                </div>
-                                <div class="modal-footer">
-                                  <button class="btn" data-dismiss="modal">Close</button>
-                                  <%= submit_tag "Order", :class => 'btn btn-primary' %>
+                          </div>
+                          <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal">Close</button>
+                                <%= submit_tag "Order", :class => 'btn btn-primary' %>
                             <% end %>
-                            </div>
-                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </li>
@@ -96,10 +96,10 @@
                             <i class="pull-right"><%= number_to_currency(dish.price) %></i>
                           </div>
 
-                          <div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal hide fade">
                             <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                              <h3 id="myModalLabel">Make your choice for the dish</h3>
+                              <button class="close" data-dismiss="modal">&times;</button>
+                              <h3>Make your choice for the dish</h3>
                             </div>
                             <div class="modal-body">
                               <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
@@ -115,13 +115,13 @@
                                   <input type="hidden" name="note" />
                                   <input type="hidden" name="price_adjustment" value="2" />
                                   <input type="hidden" name="store_id" value="<%= @store.id %>" />
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button class="btn" data-dismiss="modal">Close</button>
-                                    <%= submit_tag "Order", :class => 'btn btn-primary' %>
+                            </div>
+                            <div class="modal-footer">
+                                  <button class="btn" data-dismiss="modal">Close</button>
+                                  <%= submit_tag "Order", :class => 'btn btn-primary' %>
                               <% end %>
-                              </div>
-                              </div>
+                            </div>
+                          </div>
                         </li>
                     <% end %>
                   </ul>
@@ -153,7 +153,7 @@
        <span>
         <% @store.payments.each do |p| %>
              <%= p.name %>
-             <%= image_tag p.image_url(:tiny).to_s if p.image? %>
+             <%= image_tag p.image_url(:micro).to_s if p.image? %>
         <% end %>
       </span>
       <p><%= link_to 'View Menu', home_store_path(@store), :class => 'btn btn-primary btn-large' %></p>

@@ -1,13 +1,14 @@
+<h3><%= @store.name %> - <%= @store.name %></h3>
+
 <div class="ui-grid-a" id="restau_infos">
   <div class="ui-block-a">
-    <h3><%= @store.name %></h3>
-    <a href="#page1" data-role="button">What's Good</a>
-    <a href="#page2" data-role="button">Full Menu</a>
-    <a href="#page3" data-role="button">Store Info</a>
-    <a href="#page4" rel="external" data-role="button">Store Reviews</a>
+    <p><%= image_tag @store.image_url(:small).to_s, :width => '100%' %></p>
   </div>
   <div class="ui-block-b">
-    <p><%= image_tag @store.image_url(:small).to_s %></p>
+    <a href="#page1" data-role="button" data-mini="true">What's Good</a>
+    <a href="#page2" data-role="button" data-mini="true">Full Menu</a>
+    <a href="#page3" data-role="button" data-mini="true">Store Info</a>
+    <a href="#page4" data-role="button" data-mini="true">Store Reviews</a>
   </div>
 </div><!-- /grid-a -->
 

@@ -18,7 +18,13 @@ class ApplicationController < ActionController::Base
   private
   def prepare_for_mobile
     session[:mobile_param] = params[:mobile] if params[:mobile]
-    request.format = :mobile if mobile_device?
+    if mobile_device?
+      if request.format == :js
+        request.format = :mjs
+      else
+        request.format = :mobile
+      end
+    end
   end
 
   # ========== Shopping Cart ==========

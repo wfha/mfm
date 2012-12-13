@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   def stores
     @stores = Store.all
 
-    @addresses = Address.all
+    @addresses = Address.find_by_addressable_type('Store')
     @json = @addresses.to_gmaps4rails
 
 
