@@ -1,4 +1,4 @@
-<div data-role="page" id="page1" data-theme="e">
+<div data-role="page" id="page1" data-theme="e" data-url="/home/store/<%= @store.id %>">
   <%= render 'header' %>
 
   <div data-role="content" data-inset="false">
@@ -8,14 +8,14 @@
       <% @store.menus.each do |menu| %>
           <% menu.categories.each do |category| %>
               <% category.dishes.each do |dish| %>
-                  <li><a href="#purchase1" data-rel="popup" data-position-to="window" data-transition="pop">
+                  <li><a href="#modal_whatsgood_<%= dish.id %>" data-rel="popup" data-position-to="window" data-transition="pop">
                     <%= image_tag dish.image_url(:small).to_s, :width => 100, :height => 100 %>
                     <h3><%= dish.name %> - <%= number_to_currency dish.price %></h3>
                     <p><%= dish.desc %></p>
                     <span class="ui-li-count">13</span>
                   </a></li>
 
-                  <div data-role="popup" id="purchase1" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
+                  <div data-role="popup" id="modal_whatsgood_<%= dish.id %>" data-theme="d" data-overlay-theme="b" class="ui-content modal" style="max-width:340px;">
                     <h3>Make your choice for the dish</h3>
                     <%= form_tag(cart_items_path(dish_id: dish.id), :method => 'post', :remote => true, :data =>{ "ajax" => false}) do |f| %>
                         <% dish.dish_choices.each do |df| %>
@@ -48,7 +48,7 @@
                         <input type="hidden" name="store_id" value="<%= @store.id %>" />
 
                         <%= submit_tag "Order", :data => { :inline => true, :icon => 'check', :theme => 'b', :mini => true } %>
-                        <%= link_to 'Cancel', 'index.html', :data => { :role => "button", :rel => 'back', :inline => true, :mini => true, :icon => 'delete' } %>
+                        <%= link_to 'Cancel', 'javascript:;', :data => { :role => "button", :rel => 'back', :inline => true, :mini => true, :icon => 'delete' } %>
                     <% end %>
                   </div>
               <% end %>

@@ -3,10 +3,12 @@ class HomeController < ApplicationController
   before_filter :yelp_client, :only => [:stores, :store]
 
   def index
+    @cart = current_cart
   end
 
   def stores
     @stores = Store.all
+    @cart = current_cart
 
     @addresses = Address.find_by_addressable_type('Store')
     @json = @addresses.to_gmaps4rails

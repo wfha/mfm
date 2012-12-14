@@ -78,10 +78,12 @@ class CartsController < ApplicationController
   # DELETE /carts/1.json
   def destroy
     @cart = Cart.find(params[:id])
+    @store = @cart.store
     @cart.destroy
 
     respond_to do |format|
-      format.html { redirect_to carts_url }
+      format.html { redirect_to home_store_url(@store) }
+      format.mobile { redirect_to home_store_url(@store) }
       format.json { head :no_content }
     end
   end

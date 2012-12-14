@@ -5,7 +5,7 @@
     <ul data-role="listview" data-split-icon="gear" data-split-theme="d" data-filter="true">
       <% @stores.each do |store| %>
           <li>
-            <a href="/home/store/<%= store.id %>">
+            <a href="/home/store/<%= store.id %>" rel="external">
               <img src="<%= store.image_url(:small).to_s %>" width="100" height="100" />
               <h3><%= store.name %></h3>
               <p><%= store.desc %></p>
