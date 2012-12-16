@@ -19,6 +19,8 @@
     <br/>
 <% end %>
 
+<div id="modal_wrap"></div>
+
 <div class="tab-content first_child_active">
   <div class="tab-pane" id="whats_good">
     <ul class="thumbnails">
@@ -31,33 +33,7 @@
                       <div class="caption">
                         <%= dish.name %><i class="pull-right"><%= number_to_currency(dish.price) %></i>
                         <p><%= sanitize(dish.desc) %></p>
-                        <button class="pre_order btn btn-primary btn-mini">Order</button>
-                        <div class="modal hide fade">
-                          <div class="modal-header">
-                            <button class="close" data-dismiss="modal" >&times;</button>
-                            <h3>Make your choice for the dish</h3>
-                          </div>
-                          <div class="modal-body">
-                            <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
-                                <% dish.dish_choices.each do |df| %>
-                                    <br/>
-                                    <b><%= df.name %>:</b>(<%= df.desc %>)<br/>
-                                    <% df.content.split(',').each do |x| %>
-                                        <input type="<%= df.input_type %>" name="<%= df.name %>"
-                                               value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
-                                    <% end %>
-                                    <br/>
-                                <% end %>
-                                <input type="hidden" name="note" />
-                                <input type="hidden" name="price_adjustment" value="2" />
-                                <input type="hidden" name="store_id" value="<%= @store.id %>" />
-                          </div>
-                          <div class="modal-footer">
-                                <button class="btn" data-dismiss="modal">Close</button>
-                                <%= submit_tag "Order", :class => 'btn btn-primary' %>
-                            <% end %>
-                          </div>
-                        </div>
+                        <%= button_to 'Order', home_dish_modal_path(dish), :remote => true, :class => 'pre_order btn btn-primary btn-mini' %>
                       </div>
                     </div>
                   </li>
@@ -88,40 +64,15 @@
                   <ul class="thumbnails">
                     <% category.dishes.each do |dish| %>
                         <li class="span6">
-                          <div class="thumbnail pre_order" rel="popover" title="<%= dish.name %>" data-content="<%= sanitize(dish.desc) %>">
-                            <%= dish.name %> -
-                            <% dish.dish_features.each do |df| %>
-                                <%= df.name %>
-                            <% end %>
-                            <i class="pull-right"><%= number_to_currency(dish.price) %></i>
-                          </div>
-
-                          <div class="modal hide fade">
-                            <div class="modal-header">
-                              <button class="close" data-dismiss="modal">&times;</button>
-                              <h3>Make your choice for the dish</h3>
-                            </div>
-                            <div class="modal-body">
-                              <%= form_tag(cart_items_path(dish_id: dish), :method => 'post', :remote => true) do |f| %>
-                                  <% dish.dish_choices.each do |df| %>
-                                      <br/>
-                                      <b><%= df.name %>:</b>(<%= df.desc %>)<br/>
-                                      <% df.content.split(',').each do |x| %>
-                                          <input type="<%= df.input_type %>" name="<%= df.name %>"
-                                                 value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
-                                      <% end %>
-                                      <br/>
-                                  <% end %>
-                                  <input type="hidden" name="note" />
-                                  <input type="hidden" name="price_adjustment" value="2" />
-                                  <input type="hidden" name="store_id" value="<%= @store.id %>" />
-                            </div>
-                            <div class="modal-footer">
-                                  <button class="btn" data-dismiss="modal">Close</button>
-                                  <%= submit_tag "Order", :class => 'btn btn-primary' %>
-                              <% end %>
-                            </div>
-                          </div>
+                          <%= link_to home_dish_modal_path(dish), :remote => true do %>
+                              <div class="thumbnail" rel="popover" title="<%= dish.name %>" data-content="<%= sanitize(dish.desc) %>">
+                                <%= dish.name %> -
+                                <% dish.dish_features.each do |df| %>
+                                    <%= df.name %>
+                                <% end %>
+                                <i class="pull-right"><%= number_to_currency(dish.price) %></i>
+                              </div>
+                          <% end %>
                         </li>
                     <% end %>
                   </ul>

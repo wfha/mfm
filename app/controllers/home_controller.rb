@@ -3,17 +3,13 @@ class HomeController < ApplicationController
   before_filter :yelp_client, :only => [:stores, :store]
 
   def index
-    @cart = current_cart
   end
 
   def stores
     @stores = Store.all
-    @cart = current_cart
 
     @addresses = Address.find_by_addressable_type('Store')
     @json = @addresses.to_gmaps4rails
-
-
   end
 
   def store
@@ -43,8 +39,19 @@ class HomeController < ApplicationController
     end
   end
 
+  def dish_modal
+    @dish = Dish.find(params[:id])
+    @page = params[:page]
+
+    respond_to do |format|
+      format.mjs
+      format.js
+    end
+  end
+
   private
   def yelp_client
     @client = Yelp::Client.new
   end
+
 end

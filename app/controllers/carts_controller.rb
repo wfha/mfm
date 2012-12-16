@@ -82,8 +82,8 @@ class CartsController < ApplicationController
     @cart.destroy
 
     respond_to do |format|
-      format.html { redirect_to home_store_url(@store) }
-      format.mobile { redirect_to home_store_url(@store) }
+      format.mjs
+      format.js
       format.json { head :no_content }
     end
   end

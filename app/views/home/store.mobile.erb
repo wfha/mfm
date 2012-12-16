@@ -8,53 +8,20 @@
       <% @store.menus.each do |menu| %>
           <% menu.categories.each do |category| %>
               <% category.dishes.each do |dish| %>
-                  <li><a href="#modal_whatsgood_<%= dish.id %>" data-rel="popup" data-position-to="window" data-transition="pop">
-                    <%= image_tag dish.image_url(:small).to_s, :width => 100, :height => 100 %>
-                    <h3><%= dish.name %> - <%= number_to_currency dish.price %></h3>
-                    <p><%= dish.desc %></p>
-                    <span class="ui-li-count">13</span>
-                  </a></li>
-
-                  <div data-role="popup" id="modal_whatsgood_<%= dish.id %>" data-theme="d" data-overlay-theme="b" class="ui-content modal" style="max-width:340px;">
-                    <h3>Make your choice for the dish</h3>
-                    <%= form_tag(cart_items_path(dish_id: dish.id), :method => 'post', :remote => true, :data =>{ "ajax" => false}) do |f| %>
-                        <% dish.dish_choices.each do |df| %>
-                            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-                              <legend><%= df.name %>: (<%= df.desc %>)</legend>
-                                <% df.content.split(',').each_with_index do |x, i| %>
-                                  <input type="<%= df.input_type %>" name="<%= df.name %>" id="dc_<%= i %>"
-                                         value="<%= x.split(':')[0] %>" add="<%= x.split(':')[1] %> /><%= x.split(':')[0] %>">
-                                  <label for="dc_<%= i %>"><%= x.split(':')[0] %></label>
-                                <% end %>
-                            </fieldset>
-                            <br/>
-                        <% end %>
-
-                        <label for="textarea">Note:</label>
-                        <textarea cols="40" rows="8" ></textarea>
-                        <br/>
-
-                        <label for="select-choice-a" class="select">Quantity:</label>
-                        <select name="select-choice-a" id="select-choice-a" data-mini="true">
-                          <option value="standard">1</option>
-                          <option value="rush">2</option>
-                          <option value="express">3</option>
-                          <option value="overnight">4</option>
-                        </select>
-                        <br/>
-
-                        <input type="hidden" name="note" />
-                        <input type="hidden" name="price_adjustment" value="2" />
-                        <input type="hidden" name="store_id" value="<%= @store.id %>" />
-
-                        <%= submit_tag "Order", :data => { :inline => true, :icon => 'check', :theme => 'b', :mini => true } %>
-                        <%= link_to 'Cancel', 'javascript:;', :data => { :role => "button", :rel => 'back', :inline => true, :mini => true, :icon => 'delete' } %>
+                  <li>
+                    <%= link_to home_dish_modal_path(dish, :page => 'page1'), :remote => true do %>
+                      <%= image_tag dish.image_url(:small).to_s, :width => 100, :height => 100 %>
+                      <h3><%= dish.name %> - <%= number_to_currency dish.price %></h3>
+                      <p><%= dish.desc %></p>
+                      <span class="ui-li-count">13</span>
                     <% end %>
-                  </div>
+                  </li>
               <% end %>
           <% end %>
       <% end %>
     </ul>
+
+    <div id="modal_wrap_page1"></div>
   </div><!-- /content -->
 
   <%= render 'footer' %>
@@ -74,24 +41,19 @@
                 <ul data-role="listview" data-split-icon="gear" data-inset="false" data-filter-theme="c" data-divider-theme="d">
                   <% category.dishes.each do |dish| %>
                       <li>
-                        <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">
-                          <%= dish.name %> - <%= number_to_currency dish.price %>
-                          <span class="ui-li-count">11</span>
-                        </a>
+                        <%= link_to home_dish_modal_path(dish, :page => 'page2'), :remote => true do %>
+                            <%= dish.name %> - <%= number_to_currency dish.price %>
+                            <span class="ui-li-count">11</span>
+                        <% end %>
                       </li>
                   <% end %>
                 </ul>
-
-                <div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
-                  <h3>Purchase Album?</h3>
-                  <p>Your download will begin immediately on your mobile device when you purchase.</p>
-                  <a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
-                  <a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
-                </div>
               </div>
           <% end %>
       <% end %>
     </div>
+
+    <div id="modal_wrap_page2"></div>
   </div><!-- /content -->
 
   <%= render 'footer' %>
@@ -105,13 +67,9 @@
 
     <ul data-role="listview" data-theme="e" data-divider-theme="e">
       <li data-role="list-divider">Address:</li>
-      <li>
-        <%= @store.address.address1 %>
-      </li>
+      <li><%= @store.address.address1 %></li>
       <li data-role="list-divider">Phone:</li>
-      <li>
-        <%= @store.phone %>
-      </li>
+      <li><%= @store.phone %></li>
       <li data-role="list-divider">Tags:</li>
       <li>
         <% @store.tags.each do |t| %>
@@ -153,12 +111,10 @@
               <span class="ui-li-count"><%= @reviews[0]['review_count'] %></span>
             </h3>
           </li>
-
           <% @reviews[0]['reviews'].each do |review| %>
               <li>
                 <h3>
-                  <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %>
-                  <%= review['user_name'] %>
+                  <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %> <%= review['user_name'] %>
                 </h3>
                 <p><%= review['text_excerpt'] %></p>
                 <p><%= link_to 'Read more', review['url'] %></p>

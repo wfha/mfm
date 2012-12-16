@@ -3,7 +3,9 @@
   <h1>Meals4.Me</h1>
   <%= link_to 'Stores', home_stores_path, :rel => "external", :data => { :icon => 'arrow-r'} %>
 
-  <div id="cart">
-    <%= render @cart %>
+  <div class="cart">
+    <% if @cart %>
+        <%= render @cart %>
+    <% end %>
   </div>
 </div><!-- /header -->

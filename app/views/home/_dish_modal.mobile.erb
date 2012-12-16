@@ -1,0 +1,21 @@
+<div data-role="popup" data-theme="d" data-overlay-theme="b" class="ui-content modal" style="max-width:340px;">
+  <h3>Make your choice for the dish</h3>
+  <%= form_tag(cart_items_path(dish_id: @dish.id), :method => 'post', :remote => true, :data =>{ "ajax" => false}) do |f| %>
+      <% @dish.dish_choices.each do |dc| %>
+          <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+            <legend><%= dc.name %>: (<%= dc.desc %>)</legend>
+            <% dc.content.split(',').each_with_index do |x, i| %>
+                <input type="<%= dc.input_type %>" name="<%= dc.name %>" id="dc_<%= i %>"
+                       value="<%= x.split(':')[0] %>" add="<%= x.split(':')[1] %>" />
+                <label for="dc_<%= i %>"><%= x.split(':')[0] %></label>
+            <% end %>
+          </fieldset>
+          <br/>
+      <% end %>
+      <input type="hidden" name="note" />
+      <input type="hidden" name="price_adjustment" value="2" />
+      <input type="hidden" name="store_id" value="<%= @dish.category.menu.store.id %>" />
+      <%= submit_tag "Order", :data => { :inline => true, :icon => 'check', :theme => 'b', :mini => true } %>
+      <%= link_to 'Cancel', 'javascript:;', :data => { :role => "button", :rel => 'back', :inline => true, :mini => true, :icon => 'delete' } %>
+  <% end %>
+</div>

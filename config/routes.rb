@@ -7,6 +7,7 @@ Mfm::Application.routes.draw do
   match 'home/store/:id' => 'home#store', :as => :home_store
   match 'home/coupons' => 'home#coupons', :as => :home_coupons
   match 'home/plans' => 'home#plans', :as => :home_plans
+  match 'home/dish_modal/:id' => 'home#dish_modal', :as => :home_dish_modal
 
   resources :carts
   resources :cart_items

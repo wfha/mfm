@@ -17,6 +17,6 @@
     <li><hr/></li>
     <li>
       <%= button_to 'Proceed', new_order_path, method: :get, :class => 'btn btn-large btn-block btn-primary' %>
-      <%= button_to 'Empty cart', cart, :class => 'btn btn-large btn-block', method: :delete, confirm: 'Are you sure?' %>
+      <%= button_to 'Empty cart', cart, :class => 'btn btn-large btn-block', :remote => true, method: :delete, confirm: 'Are you sure?' %>
     </li>
 <% end %>

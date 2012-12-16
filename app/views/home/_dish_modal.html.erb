@@ -1,0 +1,26 @@
+<div class="modal hide fade">
+  <div class="modal-header">
+    <button class="close" data-dismiss="modal">&times;</button>
+    <h3>Make your choice for the dish</h3>
+  </div>
+  <div class="modal-body">
+    <%= form_tag(cart_items_path(dish_id: @dish), :method => 'post', :remote => true) do |f| %>
+        <% @dish.dish_choices.each do |dc| %>
+            <br/>
+            <b><%= dc.name %>:</b>(<%= dc.desc %>)<br/>
+            <% dc.content.split(',').each do |x| %>
+                <input type="<%= dc.input_type %>" name="<%= dc.name %>"
+                       value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
+            <% end %>
+            <br/>
+        <% end %>
+        <input type="hidden" name="note" />
+        <input type="hidden" name="price_adjustment" value="2" />
+        <input type="hidden" name="store_id" value="<%= @dish.category.menu.store.id %>" />
+  </div>
+  <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">Close</button>
+        <%= submit_tag "Order", :class => 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
