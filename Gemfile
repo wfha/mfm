@@ -9,7 +9,6 @@ gem 'pg', '~> 0.14.1'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
 
   gem 'uglifier', '>= 1.0.3'
 
@@ -35,3 +34,6 @@ gem 'devise', '~> 2.1.2'
 gem 'cancan', '~> 1.6.8'
 
 gem "yelp", '0.0.0', :git => 'git://github.com/wfha/yelp.git'
+
+# Must be out of assets group
+gem 'coffee-rails', '~> 3.2.1'
