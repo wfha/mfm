@@ -10,8 +10,6 @@ gem 'pg', '~> 0.14.1'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
 
-  gem 'uglifier', '>= 1.0.3'
-
   gem 'bootstrap-sass', '~> 2.2.1.1'
   gem 'rmagick', '~> 2.13.1'
   gem 'carrierwave', '~> 0.7.1'
@@ -35,6 +33,6 @@ gem 'cancan', '~> 1.6.8'
 
 gem "yelp", '0.0.0', :git => 'git://github.com/wfha/yelp.git'
 
-# Must be out of assets group
+# Must be outside of assets
 gem 'coffee-rails', '~> 3.2.1'
-gem 'coffeebeans', '~> 1.0.1'
+gem 'uglifier', '>= 1.0.3'
