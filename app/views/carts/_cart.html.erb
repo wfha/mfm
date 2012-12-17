@@ -1,5 +1,5 @@
-<%= hidden_ul_if(@cart.cart_items.empty?, class: 'nav nav-list') do %>
-    <li class="nav-header">Your Cart from <%= @cart.store.name %></li>
+<%= hidden_ul_if(cart.cart_items.empty?, class: 'nav nav-list') do %>
+    <li class="nav-header">Your Cart from <%= cart.store.name %></li>
     <%= render(cart.cart_items) %>
     <li><hr/></li>
     <li>

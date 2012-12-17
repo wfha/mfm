@@ -3,7 +3,7 @@
 <% else %>
     <li data-icon="delete">
 <% end %>
-<a href="#">
+<%= link_to cart_item_path(cart_item), method: :delete, data: { confirm: 'Are you sure?' }, remote: true  do %>
   <%= cart_item.dish.name %>
 
   <span class="pull-right">&times; <%= cart_item.quantity %>&nbsp;&nbsp;&nbsp;<%= number_to_currency(cart_item.total_price) %></span>
@@ -12,5 +12,5 @@
   <i class="icon-remove pull-right"></i>
   <i class="icon-minus pull-right"></i>
   <i class="icon-plus pull-right"></i>
-</a>
+<% end %>
 </li>

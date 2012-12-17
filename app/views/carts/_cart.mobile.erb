@@ -1,7 +1,7 @@
 <div data-role="collapsible" data-theme="e" data-content-theme="d" data-mini="true">
-  <h2 id="cart_toggle">Your Cart from <%= @cart.store.name %> - Total: <%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></h2>
+  <h2 id="cart_toggle">Your Cart from <%= cart.store.name %> - Total: <%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></h2>
 
-  <%= hidden_ul_if(@cart.cart_items.empty?, :data => { :role => "listview"} ) do %>
+  <%= hidden_ul_if(cart.cart_items.empty?, :data => { :role => "listview"} ) do %>
       <%= render(cart.cart_items) %>
       <li style="text-align: right;font-size: 14px;">
         Subtotal: <span class="pull-right"><%= number_to_currency(cart.total_price) %></span><br/>

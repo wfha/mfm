@@ -1,0 +1,89 @@
+<div data-role="page" data-theme="e">
+  <%= render 'home/header' %>
+
+  <div data-role="content" >
+    <div data-role="collapsible-set" data-theme="e" data-content-theme="e" data-inset="false">
+      <div data-role="collapsible">
+        <h3>Has Account?</h3>
+        <% unless user_signed_in? %>
+            <%= form_for("user", :url => user_session_path) do |f| %>
+                <%= f.text_field :email, :placeholder => 'Email' %>
+                <div class="ui-grid-a">
+                  <div class="ui-block-a">
+                    <%= f.password_field :password, :placeholder => 'Password' %>
+                  </div>
+                  <div class="ui-block-b">
+                    <%= f.submit 'Sign in' %>
+                  </div>
+                </div>
+            <% end %>
+        <% end %>
+      </div>
+      <div data-role="collapsible" data-collapsed="false">
+        <% if user_signed_in? %>
+            <h3>Welcome, our user!</h3>
+        <% else %>
+            <h3>No Account?</h3>
+        <% end %>
+        <%= form_for(@order) do |f| %>
+            <% if @order.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+                  <ul>
+                    <% @order.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+            <div class="ui-grid-a">
+              <div class="ui-block-a">
+                <%= f.text_field :note, :placeholder => 'Note' %>
+              </div>
+              <div class="ui-block-b">
+                <%= f.select :payment_type, Order::PAYMENT_TYPES, prompt: 'Select a payment method' %>
+              </div>
+            </div>
+            <div class="field">
+              <%= f.fields_for :user do |builder| %>
+                  <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                      <%= builder.text_field :firstname, :placeholder => 'Firstname' %>
+                    </div>
+                    <div class="ui-block-b">
+                      <%= builder.text_field :lastname, :placeholder => 'Lastname' %>
+                    </div>
+                  </div>
+
+                  <%= builder.text_field :phone, :placeholder => 'Phone' %>
+                  <%= builder.fields_for :address do |addr| %>
+                      <%= addr.text_field :address1, :placeholder => 'Address' %>
+                      <%= addr.text_field :address2, :placeholder => 'Apt / Building / Suite' %>
+                  <% end %>
+                  <% unless user_signed_in? %>
+                      <br/>
+                      <legend>Create Account (Optional)</legend>
+                      <%= builder.text_field :email, :placeholder => 'Email' %>
+                      <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                          <%= builder.password_field :password, :placeholder => 'Password' %>
+                        </div>
+                        <div class="ui-block-b">
+                          <%= builder.password_field :password_confirmation, :placeholder => 'Confirmation' %>
+                        </div>
+                      </div>
+                  <% end %>
+              <% end %>
+            </div>
+            <div class="actions">
+              <%= f.hidden_field :store_id %>
+              <%= f.hidden_field :cart_id %>
+              <%= f.submit 'Submit Order' %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div><!-- /content -->
+
+  <%= render 'home/footer' %>
+</div>
