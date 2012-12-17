@@ -56,6 +56,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    coffeebeans (1.0.1)
+      actionpack (>= 3.0.0)
+      coffee-script
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -157,6 +160,7 @@ DEPENDENCIES
   capistrano (~> 2.13.5)
   carrierwave (~> 0.7.1)
   coffee-rails (~> 3.2.1)
+  coffeebeans (~> 1.0.1)
   devise (~> 2.1.2)
   geocoder (~> 1.1.5)
   gmaps4rails (~> 1.5.6)

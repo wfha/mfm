@@ -37,3 +37,4 @@ gem "yelp", '0.0.0', :git => 'git://github.com/wfha/yelp.git'
 
 # Must be out of assets group
 gem 'coffee-rails', '~> 3.2.1'
+gem 'coffeebeans', '~> 1.0.1'
