@@ -1,0 +1,28 @@
+<% @title = 'Sign Up' %>
+
+<div data-role="page" data-theme="e" >
+  <%= render 'home/header' %>
+
+  <div data-role="content" data-inset="false">
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+        <%= f.email_field :email, :placeholder => 'Email' %>
+        <div class="ui-grid-a">
+          <div class="ui-block-a">
+            <%= f.password_field :password, :placeholder => 'Password' %>
+          </div>
+          <div class="ui-block-b">
+            <%= f.password_field :password_confirmation, :placeholder => 'Confirmation' %>
+          </div>
+        </div>
+        <div><%= f.submit "Sign up" %></div>
+    <% end %>
+
+    <br/>
+    <hr/>
+    <br/>
+    <%= render "devise/shared/links" %>
+  </div><!-- /content -->
+
+  <%= render 'home/footer' %>
+</div>

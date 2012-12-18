@@ -1,7 +1,14 @@
 <div data-role="header" data-position="fixed">
-  <%= link_to 'Home', home_index_path, :rel => "external", :data => { :icon => 'arrow-l' } %>
-  <h1>Meals4.Me</h1>
-  <%= link_to 'Stores', home_stores_path, :rel => "external", :data => { :icon => 'arrow-r'} %>
+  <!--<%= link_to 'Home', home_index_path, :rel => "external", :data => { :icon => 'arrow-l' } %>-->
+  <!--<h1>Meals4.Me</h1>-->
+  <!--<%= link_to 'Stores', home_stores_path, :rel => "external", :data => { :icon => 'arrow-r'} %>-->
+
+  <h1><%= @title || 'Mobile App' %></h1>
+  <% unless user_signed_in? %>
+      <%= link_to 'Sign In', new_user_session_path, "class" => "ui-btn-right" %>
+  <% else %>
+      <%= link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: "ui-btn-right" %>
+  <% end %>
 
   <div class="cart">
     <% if @cart %>

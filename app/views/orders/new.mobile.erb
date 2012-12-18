@@ -3,9 +3,10 @@
 
   <div data-role="content" >
     <div data-role="collapsible-set" data-theme="e" data-content-theme="e" data-inset="false">
-      <div data-role="collapsible">
-        <h3>Has Account?</h3>
-        <% unless user_signed_in? %>
+
+      <% unless user_signed_in? %>
+          <div data-role="collapsible">
+            <h3>Has Account?</h3>
             <%= form_for("user", :url => user_session_path) do |f| %>
                 <%= f.text_field :email, :placeholder => 'Email' %>
                 <div class="ui-grid-a">
@@ -17,8 +18,9 @@
                   </div>
                 </div>
             <% end %>
-        <% end %>
-      </div>
+          </div>
+      <% end %>
+
       <div data-role="collapsible" data-collapsed="false">
         <% if user_signed_in? %>
             <h3>Welcome, our user!</h3>
