@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   before_filter :yelp_client, :only => [:stores, :store]
 
   def index
+    @cart = current_cart
   end
 
   def stores
