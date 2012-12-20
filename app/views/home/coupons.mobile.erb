@@ -1,16 +1,10 @@
-<div data-role="page" id="page1" data-theme="e">
-  <%= render 'header' %>
-
-  <div data-role="content">
-    <ul data-role="listview" data-inset="true" data-filter="true">
-      <% @coupons.each do |coupon| %>
-          <li>
-            <%= image_tag coupon.image_url(:micro).to_s %>
-            <%= link_to coupon.name %>
-          </li>
-      <% end %>
-    </ul>
-  </div><!-- /content -->
-
-  <%= render 'footer' %>
-</div><!-- /page -->
+<div data-role="content">
+  <ul data-role="listview" data-inset="true" data-filter="true">
+    <% @coupons.each do |coupon| %>
+        <li>
+          <%= image_tag coupon.image_url(:micro).to_s %>
+          <%= link_to coupon.name %>
+        </li>
+    <% end %>
+  </ul>
+</div><!-- /content -->

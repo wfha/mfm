@@ -1,17 +1,9 @@
-<% @title = 'Resend confirmation instructions' %>
+<div data-role="content" data-inset="false">
+  <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.email_field :email, :placeholder => 'Email' %>
+      <%= f.submit "Resend confirmation instructions" %>
+  <% end %>
 
-<div data-role="page" data-theme="e" >
-  <%= render 'home/header' %>
-
-  <div data-role="content" data-inset="false">
-    <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
-        <%= devise_error_messages! %>
-        <%= f.email_field :email, :placeholder => 'Email' %>
-        <%= f.submit "Resend confirmation instructions" %>
-    <% end %>
-
-    <%= render "devise/shared/links" %>
-  </div><!-- /content -->
-
-  <%= render 'home/footer' %>
-</div>
+  <%= render "devise/shared/links" %>
+</div><!-- /content -->

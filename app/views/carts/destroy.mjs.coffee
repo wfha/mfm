@@ -1,1 +1,3 @@
-$('.cart').html('<% self.formats = [:mobile] %><%=j render @cart %>').trigger('create');
+$('#cart_wrap').html ->
+  '<% self.formats = [:mobile] %><%=j render @cart %>'
+.trigger('create')

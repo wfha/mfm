@@ -1,24 +1,35 @@
-<div data-role="collapsible" data-theme="e" data-content-theme="d" data-mini="true">
-  <h2 id="cart_toggle">Your Cart from <%= cart.store.name %> - Total: <%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></h2>
-
-  <%= hidden_ul_if(cart.cart_items.empty?, :data => { :role => "listview"} ) do %>
-      <%= render(cart.cart_items) %>
-      <li style="text-align: right;font-size: 14px;">
-        Subtotal: <span class="pull-right"><%= number_to_currency(cart.total_price) %></span><br/>
-        Tax: <span class="pull-right"><%= number_to_currency(cart.total_price*0.0825) %></span><br/>
-        Delivery Fee: <span class="pull-right"><%= number_to_currency(cart.store.delivery_fee) %></span><br/>
-        Total: <span class="pull-right"><%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></span>
-      </li>
-      <li>
-        <div class="ui-grid-a">
-          <div class="ui-block-a">
-            <%= link_to 'Proceed', new_order_path, method: :get, :data => { :role => "button", :mini => true } %>
-          </div>
-          <div class="ui-block-b">
-            <%= link_to 'Empty cart', cart, :data => { :role => "button", :mini => true },
-                        :remote => true, method: :delete, confirm: 'Are you sure?' %>
-          </div>
+<%= hidden_ul_if(cart.cart_items.empty?, :data => { :role => "listview"} ) do %>
+    <li>
+      <div class="ui-grid-a">
+        <div class="ui-block-a" style="width: 40%;">
+          <h1 style="text-align: right;padding: 3px 15px 0px 0px;">Order Type:</h1>
         </div>
-      </li>
-  <% end %>
-</div><!-- /collapsible -->
+        <div class="ui-block-b" style="width: 60%;">
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <input name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked" type="radio">
+            <label for="radio-choice-h-2a">Delivery</label>
+            <input name="radio-choice-h-2" id="radio-choice-h-2b" value="off" type="radio">
+            <label for="radio-choice-h-2b">Pick Up</label>
+          </fieldset>
+        </div>
+      </div>
+    </li>
+    <%= render(cart.cart_items) %>
+    <li style="text-align: right;font-size: 13px;">
+      Subtotal: <span class="pull-right"><%= number_to_currency(cart.total_price) %></span><br/>
+      Tax: <span class="pull-right"><%= number_to_currency(cart.total_price*0.0825) %></span><br/>
+      Delivery Fee: <span class="pull-right"><%= number_to_currency(cart.store.delivery_fee) %></span><br/>
+      Total: <span class="pull-right"><%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></span>
+    </li>
+    <li>
+      <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <%= link_to 'Proceed', new_order_path, method: :get, :data => { :role => "button", :mini => true } %>
+        </div>
+        <div class="ui-block-b">
+          <%= link_to 'Empty cart', cart, :data => { :role => "button", :mini => true },
+                      :remote => true, method: :delete, confirm: 'Are you sure?' %>
+        </div>
+      </div>
+    </li>
+<% end %>

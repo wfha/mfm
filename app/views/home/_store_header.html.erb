@@ -1,0 +1,32 @@
+<% content_for :north do %>
+    <div class="row-fluid">
+      <div class="span3">
+        <%= image_tag @store.image_url(:small).to_s %>
+      </div>
+      <div class="span9">
+        <h1><%= @store.name %></h1>
+        <p><%= @store.address.address1 %></p>
+        <p><%= @store.phone %> | <%= @store.fax %> | <%= link_to 'Back to Restaurant List', home_stores_path %></p>
+        <br/>
+        <ul>
+          <li><%= link_to 'What\'s Good', home_store_good_path %></li>
+          <li><%= link_to 'Full Menu', home_store_menu_path %></li>
+          <li><%= link_to 'Store Info', home_store_info_path %></li>
+          <li><%= link_to 'Store Reviews', home_store_reviews_path %></li>
+        </ul>
+      </div>
+    </div>
+    <br/>
+<% end %>
+
+<% content_for :east do %>
+    <div class="well sidebar-nav" id="cart">
+      <% if @cart %>
+          <%= render @cart %>
+      <% else %>
+          The Cart Is Empty!
+      <% end %>
+    </div><!--/.well -->
+<% end %>
+
+<div id="modal_wrap"></div>

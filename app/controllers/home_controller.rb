@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_filter :yelp_client, :only => [:stores, :store]
+  before_filter :yelp_client, :only => [:stores, :store_reviews]
 
   def index
     @cart = current_cart
@@ -13,7 +13,22 @@ class HomeController < ApplicationController
     @json = @addresses.to_gmaps4rails
   end
 
-  def store
+  def store_good
+    @store = Store.find(params[:id])
+    @cart = current_cart
+  end
+
+  def store_menu
+    @store = Store.find(params[:id])
+    @cart = current_cart
+  end
+
+  def store_info
+    @store = Store.find(params[:id])
+    @cart = current_cart
+  end
+
+  def store_reviews
     @store = Store.find(params[:id])
     @cart = current_cart
 
@@ -42,7 +57,6 @@ class HomeController < ApplicationController
 
   def dish_modal
     @dish = Dish.find(params[:id])
-    @page = params[:page]
 
     respond_to do |format|
       format.mjs

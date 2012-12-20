@@ -1,4 +1,3 @@
-# Has problem below, not solved yet
-$('.cart').html ->
+$('#cart_wrap').html ->
   '<% self.formats = [:mobile] %><%=j render @cart %>'
 .trigger('create')

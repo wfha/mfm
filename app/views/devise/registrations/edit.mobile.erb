@@ -1,50 +1,42 @@
-<% @title = 'Edit User' %>
+<div data-role="content" data-inset="false">
+  <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<div data-role="page" data-theme="e" >
-  <%= render 'home/header' %>
-
-  <div data-role="content" data-inset="false">
-    <h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-        <%= devise_error_messages! %>
-        <%= f.email_field :email, :placeholder => 'Email' %>
-        <div class="ui-grid-a">
-          <div class="ui-block-a">
-            <%= f.text_field :firstname, :placeholder => 'Firstname' %>
-          </div>
-          <div class="ui-block-b">
-            <%= f.text_field :lastname, :placeholder => 'Lastname' %>
-          </div>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.email_field :email, :placeholder => 'Email' %>
+      <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <%= f.text_field :firstname, :placeholder => 'Firstname' %>
         </div>
-        <%= f.text_field :phone, :placeholder => 'Phone' %>
-        <%= f.fields_for :address do |addr| %>
-            <%= addr.text_field :address1, :placeholder => 'Address' %>
-            <%= addr.text_field :address2, :placeholder => 'Apt / Building / Suite' %>
-        <% end %>
-
-        <br/>
-        <i>Leave blank if you don't want to change password.</i>
-        <br />
-        <div class="ui-grid-a">
-          <div class="ui-block-a">
-            <%= f.password_field :password, :autocomplete => "off", :placeholder => 'Password' %>
-          </div>
-          <div class="ui-block-b">
-            <%= f.password_field :password_confirmation, :placeholder => 'Confirmation' %>
-          </div>
+        <div class="ui-block-b">
+          <%= f.text_field :lastname, :placeholder => 'Lastname' %>
         </div>
-        <%= f.password_field :current_password, :placeholder => 'Current Password' %>
+      </div>
+      <%= f.text_field :phone, :placeholder => 'Phone' %>
+      <%= f.fields_for :address do |addr| %>
+          <%= addr.text_field :address1, :placeholder => 'Address' %>
+          <%= addr.text_field :address2, :placeholder => 'Apt / Building / Suite' %>
+      <% end %>
 
-        <%= f.submit "Update" %>
-    <% end %>
+      <br/>
+      <i>Leave blank if you don't want to change password.</i>
+      <br />
+      <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <%= f.password_field :password, :autocomplete => "off", :placeholder => 'Password' %>
+        </div>
+        <div class="ui-block-b">
+          <%= f.password_field :password_confirmation, :placeholder => 'Confirmation' %>
+        </div>
+      </div>
+      <%= f.password_field :current_password, :placeholder => 'Current Password' %>
 
-    <h3>Cancel my account</h3>
+      <%= f.submit "Update" %>
+  <% end %>
 
-    <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+  <h3>Cancel my account</h3>
 
-    <%= link_to "Back", :back %>
-  </div><!-- /content -->
+  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
 
-  <%= render 'home/footer' %>
-</div>
+  <%= link_to "Back", :back %>
+</div><!-- /content -->

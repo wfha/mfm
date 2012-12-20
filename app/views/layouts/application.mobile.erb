@@ -9,10 +9,60 @@
   <link rel="apple-touch-icon" href="images/launch_icon_57.png" />
   <link rel="apple-touch-icon" sizes="72x72" href="images/launch_icon_72.png" />
   <link rel="apple-touch-icon" sizes="114x114" href="images/launch_icon_114.png" />
+  <style>
+      .nav-glyphish .ui-btn .ui-btn-inner {padding-top: 40px !important;}
+      .nav-glyphish .ui-btn .ui-icon {
+          width: 30px!important;
+          height: 30px!important;
+          margin-left: -15px !important;
+          box-shadow: none!important;
+          -moz-box-shadow: none!important;
+          -webkit-box-shadow: none!important;
+          -webkit-border-radius: 0 !important;
+          border-radius: 0 !important;
+      }
+      #chat .ui-icon {background:  url(/assets/glyphish-icons/09-chat-2.png) 50% 50% no-repeat;}
+      #user .ui-icon {background:  url(/assets/glyphish-icons/111-user.png) 50% 50% no-repeat;}
+      #skull .ui-icon {background:  url(/assets/glyphish-icons/80-shopping-cart.png) 50% 50% no-repeat;}
+  </style>
 </head>
 <body>
 
-<%= yield %>
+<div data-role="page" id="page1" data-theme="e">
+  <div data-role="header" data-position="fixed">
+    <div data-role="navbar" class="nav-glyphish" data-grid="c">
+      <ul>
+        <li style="width:40%"><%= link_to home_index_path, style: 'color: lightblue;' do %><i>Meals4.Me</i><% end %></li>
+        <li style="width:20%"><%= link_to 'Chat', home_index_path, data: {icon: 'custom'}, id: 'chat' %></li>
+        <li style="width:20%">
+          <% unless user_signed_in? %>
+              <%= link_to 'User', new_user_session_path, data: {icon: 'custom'}, id: 'user' %>
+          <% else %>
+              <%= link_to 'User', destroy_user_session_path, data: {icon: 'custom'}, id: 'user', method: 'delete' %>
+          <% end %>
+        </li>
+        <li style="width:20%"><%= link_to_function 'Cart', '$("#cart_wrap").slideToggle();', data: {icon: 'custom'}, id: 'skull' %></li>
+      </ul>
+    </div>
+
+    <div id="cart_wrap" style = 'display: none;'><%= render @cart if @cart %></div>
+  </div><!-- /header -->
+
+  <%= yield %>
+
+  <div data-role="footer">
+    <div  data-role="navbar">
+      <ul>
+        <li><%= link_to 'Home', home_index_path, :data => { :icon => 'home' } %></li>
+        <li><%= link_to 'Stores', home_stores_path, :data => { :icon => 'info' } %></li>
+        <li><%= link_to 'Coupons', home_coupons_path, :data => { :icon => 'info' } %></li>
+        <li><%= link_to 'Plans', home_plans_path, :data => { :icon => 'info' } %></li>
+        <li><%= link_to 'Desktop', { :mobile => 0 }, :data => { :icon => 'grid' }, :rel => "external" %></li>
+      </ul>
+    </div>
+    <div style="text-align: center;">@Meals4.Me</div>
+  </div><!-- /footer -->
+</div>
 
 </body>
 </html>

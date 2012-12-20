@@ -5,10 +5,10 @@
     <p><%= image_tag @store.image_url(:small).to_s, :width => '100%' %></p>
   </div>
   <div class="ui-block-b">
-    <a href="#page1" data-role="button" data-mini="true">What's Good</a>
-    <a href="#page2" data-role="button" data-mini="true">Full Menu</a>
-    <a href="#page3" data-role="button" data-mini="true">Store Info</a>
-    <a href="#page4" data-role="button" data-mini="true">Store Reviews</a>
+    <%= link_to 'What\'s Good', home_store_good_path, data: {role: 'button', mini: true} %>
+    <%= link_to 'Full Menu', home_store_menu_path, data: {role: 'button', mini: true} %>
+    <%= link_to 'Store Info', home_store_info_path, data: {role: 'button', mini: true} %>
+    <%= link_to 'Store Reviews', home_store_reviews_path, data: {role: 'button', mini: true} %>
   </div>
 </div><!-- /grid-a -->
 

@@ -1,13 +1,7 @@
-<div data-role="page" id="page1" data-theme="e">
-  <%= render 'header' %>
-
-  <div data-role="content">
-    <ul data-role="listview" data-inset="true" data-filter="true">
-      <% @plans.each do |plan| %>
-          <li><a href="#page3"><%= plan.name %></a></li>
-      <% end %>
-    </ul>
-  </div><!-- /content -->
-
-  <%= render 'footer' %>
-</div><!-- /page -->
+<div data-role="content">
+  <ul data-role="listview" data-inset="true" data-filter="true">
+    <% @plans.each do |plan| %>
+        <li><a href="#page3"><%= plan.name %></a></li>
+    <% end %>
+  </ul>
+</div><!-- /content -->

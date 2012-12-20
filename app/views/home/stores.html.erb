@@ -9,7 +9,7 @@
             <h4><%= store.name %></h4>
             <p><%= store.address.address1 %></p>
             <p><%= store.phone %> | <%= store.fax %></p>
-            <%= link_to 'View Menu', home_store_path(store), :class => 'btn btn-primary btn-large' %>
+            <%= link_to 'View Menu', home_store_good_path(store), :class => 'btn btn-primary btn-large' %>
           </div>
         </td>
         <td>
@@ -28,7 +28,7 @@
                 Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
                 Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
                 Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
-                <%= link_to 'Find more', home_store_path(store), :class => 'pull-right' %>
+                <%= link_to 'Find more', home_store_good_path(store), :class => 'pull-right' %>
               </blockquote>
             </div>
             <div class="store_info">

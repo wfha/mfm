@@ -1,6 +1,6 @@
 $('.modal').remove();
 
-$('#modal_wrap_<%= @page %>').html('<% self.formats = [:mobile] %><%=j render "dish_modal" %>').trigger('create');
+$('#modal_wrap').html('<% self.formats = [:mobile] %><%=j render "dish_modal" %>').trigger('create');
 
 modal = $('.modal')
 

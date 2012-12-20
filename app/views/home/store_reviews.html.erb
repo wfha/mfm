@@ -1,0 +1,16 @@
+<%= render 'store_header' %>
+
+<%= image_tag "/assets/yelp_logo.png" %>
+<% unless @reviews.empty? %>
+    <h5><%= @reviews[0]['name'] %></h5>
+    <%= image_tag @reviews[0]['rating_img_url'] %> <%= @reviews[0]['review_count'] %> reviews
+    <hr/>
+    <% @reviews[0]['reviews'].each do |review| %>
+        <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %>
+        <%= review['user_name'] %>
+        <%= image_tag review['rating_img_url'] %>
+        <br/>
+        <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
+        <hr/>
+    <% end %>
+<% end %>

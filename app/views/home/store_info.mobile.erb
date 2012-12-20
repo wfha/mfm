@@ -1,0 +1,29 @@
+<div data-role="content">
+  <%= render 'store_header' %>
+
+  <ul data-role="listview" data-theme="e" data-divider-theme="e">
+    <li data-role="list-divider">Address:</li>
+    <li><%= @store.address.address1 %></li>
+    <li data-role="list-divider">Phone:</li>
+    <li><%= @store.phone %></li>
+    <li data-role="list-divider">Tags:</li>
+    <li>
+      <% @store.tags.each do |t| %>
+          <%= t.name %>
+      <% end %>
+    </li>
+    <li data-role="list-divider">Payments:</li>
+    <li>
+      <% @store.payments.each do |p| %>
+          <p><%= image_tag p.image_url(:micro).to_s if p.image? %></p>
+      <% end %>
+    </li>
+    <li data-role="list-divider">Hours:</li>
+    <li>
+      <% @store.hours.each do |h| %>
+          <%= h.name %>: <br/>
+          <p style="font-size:14px;margin-top: 3px;;"><%= h.open_at %> - <%= h.close_at %></p>
+      <% end %>
+    </li>
+  </ul>
+</div><!-- /content -->

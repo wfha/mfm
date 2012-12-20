@@ -1,0 +1,26 @@
+<div data-role="content">
+  <%= render 'store_header' %>
+
+  <% unless @reviews.empty? %>
+      <ul data-role="listview" data-theme="e" data-divider-theme="e">
+        <li data-role="list-divider">
+          <h3>
+            <%= image_tag "/assets/yelp_logo.png" %>
+            <%= @reviews[0]['name'] %>
+            <p class="ui-li-aside"><%= image_tag @reviews[0]['rating_img_url'] %></p>
+            <span class="ui-li-count"><%= @reviews[0]['review_count'] %></span>
+          </h3>
+        </li>
+        <% @reviews[0]['reviews'].each do |review| %>
+            <li>
+              <h3>
+                <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %> <%= review['user_name'] %>
+              </h3>
+              <p><%= review['text_excerpt'] %></p>
+              <p><%= link_to 'Read more', review['url'] %></p>
+              <p class="ui-li-aside"><%= image_tag review['rating_img_url'] %></p>
+            </li>
+        <% end %>
+      </ul>
+  <% end %>
+</div><!-- /content -->

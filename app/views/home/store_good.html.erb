@@ -1,0 +1,20 @@
+<%= render 'store_header' %>
+
+<ul class="thumbnails">
+  <% @store.menus.each do |menu| %>
+      <% menu.categories.each do |category| %>
+          <% category.dishes.each do |dish| %>
+              <li class="span4">
+                <div class="thumbnail">
+                  <%= image_tag dish.image_url.to_s  %>
+                  <div class="caption">
+                    <%= dish.name %><i class="pull-right"><%= number_to_currency(dish.price) %></i>
+                    <p><%= sanitize(dish.desc) %></p>
+                    <%= button_to 'Order', home_dish_modal_path(dish), :remote => true, :class => 'pre_order btn btn-primary btn-mini' %>
+                  </div>
+                </div>
+              </li>
+          <% end %>
+      <% end %>
+  <% end %>
+</ul>

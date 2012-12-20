@@ -1,0 +1,25 @@
+<div data-role="content">
+  <%= render 'store_header' %>
+
+  <div data-role="collapsible-set" data-inset="false" data-content-theme="d">
+    <% @store.menus.each do |menu| %>
+        <% menu.categories.each do |category| %>
+            <div data-role="collapsible">
+              <h2><%= category.name %></h2>
+              <ul data-role="listview" data-split-icon="gear" data-inset="false" data-filter-theme="c" data-divider-theme="d">
+                <% category.dishes.each do |dish| %>
+                    <li>
+                      <%= link_to home_dish_modal_path(dish), :remote => true do %>
+                          <%= dish.name %> - <%= number_to_currency dish.price %>
+                          <span class="ui-li-count">11</span>
+                      <% end %>
+                    </li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+
+  <div id="modal_wrap"></div>
+</div><!-- /content -->
