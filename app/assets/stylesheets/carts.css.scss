@@ -1,3 +1,14 @@
 // Place all the styles related to the Carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+a.delivery_type_active {
+  float: left;
+  width: 50%;
+  background: #ff0000;
+}
+
+a.delivery_type_not_active {
+  float: left;
+  width: 50%;
+}

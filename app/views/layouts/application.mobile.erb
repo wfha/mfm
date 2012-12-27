@@ -5,12 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <%= stylesheet_link_tag    "mobile/application", :media => "all" %>
   <%= javascript_include_tag "mobile/application" %>
+  <script type="text/javascript">
+      $.mobile.pushStateEnabled = false;
+  </script>
   <%= csrf_meta_tags %>
   <link rel="apple-touch-icon" href="images/launch_icon_57.png" />
   <link rel="apple-touch-icon" sizes="72x72" href="images/launch_icon_72.png" />
   <link rel="apple-touch-icon" sizes="114x114" href="images/launch_icon_114.png" />
   <style>
-      .nav-glyphish .ui-btn .ui-btn-inner {padding-top: 40px !important;}
+      /* the text in nav */
+      .nav-glyphish .ui-btn .ui-btn-inner {
+          padding-top: 40px !important;
+      }
+      /* the image in nav */
       .nav-glyphish .ui-btn .ui-icon {
           width: 30px!important;
           height: 30px!important;
@@ -24,11 +31,29 @@
       #chat .ui-icon {background:  url(/assets/glyphish-icons/09-chat-2.png) 50% 50% no-repeat;}
       #user .ui-icon {background:  url(/assets/glyphish-icons/111-user.png) 50% 50% no-repeat;}
       #skull .ui-icon {background:  url(/assets/glyphish-icons/80-shopping-cart.png) 50% 50% no-repeat;}
+
+      /* the text in button for delivery_type */
+      .button-glyphish .ui-btn .ui-btn-inner {
+          width: 60px;
+          padding-top: 10px !important;
+      }
+      /* the image in button for delivery_type */
+      .button-glyphish .ui-btn .ui-icon {
+          width: 30px!important;
+          height: 20px!important;
+          box-shadow: none!important;
+          -moz-box-shadow: none!important;
+          -webkit-box-shadow: none!important;
+          -webkit-border-radius: 0 !important;
+          border-radius: 0 !important;
+      }
+      #delivery_type_delivery .ui-icon {background:  url(/assets/glyphish-icons/136-tractor.png) 50% 50% no-repeat;}
+      #delivery_type_pick_up .ui-icon {background:  url(/assets/glyphish-icons/236-shoppingbag.png) 50% 50% no-repeat;}
   </style>
 </head>
 <body>
 
-<div data-role="page" id="page1" data-theme="e">
+<div data-role="page" data-theme="e">
   <div data-role="header" data-position="fixed">
     <div data-role="navbar" class="nav-glyphish" data-grid="c">
       <ul>
@@ -41,7 +66,7 @@
               <%= link_to 'User', destroy_user_session_path, data: {icon: 'custom'}, id: 'user', method: 'delete' %>
           <% end %>
         </li>
-        <li style="width:20%"><%= link_to_function 'Cart', '$("#cart_wrap").slideToggle();', data: {icon: 'custom'}, id: 'skull' %></li>
+        <li style="width:20%"><%= link_to 'Cart', 'javascript:;', data: {icon: 'custom'}, id: 'skull' %></li>
       </ul>
     </div>
 

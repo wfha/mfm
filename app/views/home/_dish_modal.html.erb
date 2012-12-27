@@ -17,10 +17,10 @@
         <input type="hidden" name="note" />
         <input type="hidden" name="price_adjustment" value="2" />
         <input type="hidden" name="store_id" value="<%= @dish.category.menu.store.id %>" />
+    <% end %>
   </div>
   <div class="modal-footer">
-        <button class="btn" data-dismiss="modal">Close</button>
-        <%= submit_tag "Order", :class => 'btn btn-primary' %>
-    <% end %>
+    <button class="btn" data-dismiss="modal">Close</button>
+    <button class='btn btn-primary confirm_to_order'>Order</button>
   </div>
 </div>

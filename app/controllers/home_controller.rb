@@ -64,6 +64,17 @@ class HomeController < ApplicationController
     end
   end
 
+  def change_cart_delivery_type
+    @cart = current_cart
+    @cart.delivery_type = params[:delivery_type]
+    @cart.save
+
+    respond_to do |format|
+      format.mjs
+      format.js
+    end
+  end
+
   private
   def yelp_client
     @client = Yelp::Client.new

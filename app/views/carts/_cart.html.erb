@@ -1,5 +1,14 @@
 <%= hidden_ul_if(cart.cart_items.empty?, class: 'nav nav-list') do %>
     <li class="nav-header">Your Cart from <%= cart.store.name %></li>
+    <li>
+      <% if cart.delivery_type == 'Delivery' %>
+          <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), class: 'delivery_type_active', remote: true %>
+          <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), class: 'delivery_type_not_active', remote: true %>
+      <% else %>
+          <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), class: 'delivery_type_not_active', remote: true %>
+          <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), class: 'delivery_type_active', remote: true %>
+      <% end %>
+    </li>
     <%= render(cart.cart_items) %>
     <li><hr/></li>
     <li>

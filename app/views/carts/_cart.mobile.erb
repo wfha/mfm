@@ -1,16 +1,23 @@
 <%= hidden_ul_if(cart.cart_items.empty?, :data => { :role => "listview"} ) do %>
     <li>
       <div class="ui-grid-a">
-        <div class="ui-block-a" style="width: 40%;">
+        <div class="ui-block-a" style="width: 35%;">
           <h1 style="text-align: right;padding: 3px 15px 0px 0px;">Order Type:</h1>
         </div>
-        <div class="ui-block-b" style="width: 60%;">
-          <fieldset data-role="controlgroup" data-type="horizontal">
-            <input name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked" type="radio">
-            <label for="radio-choice-h-2a">Delivery</label>
-            <input name="radio-choice-h-2" id="radio-choice-h-2b" value="off" type="radio">
-            <label for="radio-choice-h-2b">Pick Up</label>
-          </fieldset>
+        <div class="ui-block-b" style="width: 65%;">
+          <div data-role="controlgroup" data-type="horizontal" data-mini="true" class="button-glyphish">
+            <% if cart.delivery_type == 'Delivery' %>
+                <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), id: 'delivery_type_delivery',
+                            data: {role: 'button', icon: 'custom', theme: 'b'}, remote: true %>
+                <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), id: 'delivery_type_pick_up',
+                            data: {role: 'button', icon: 'custom', theme: 'a'}, remote: true %>
+            <% else %>
+                <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), id: 'delivery_type_delivery',
+                            data: {role: 'button', icon: 'custom', theme: 'a'}, remote: true %>
+                <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), id: 'delivery_type_pick_up',
+                            data: {role: 'button', icon: 'custom', theme: 'b'}, remote: true %>
+            <% end %>
+          </div>
         </div>
       </div>
     </li>
@@ -24,7 +31,7 @@
     <li>
       <div class="ui-grid-a">
         <div class="ui-block-a">
-          <%= link_to 'Proceed', new_order_path, method: :get, :data => { :role => "button", :mini => true } %>
+          <%= link_to 'Proceed', new_order_path, data: { role: "button", mini: true }, rel: 'external' %>
         </div>
         <div class="ui-block-b">
           <%= link_to 'Empty cart', cart, :data => { :role => "button", :mini => true },

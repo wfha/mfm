@@ -17,4 +17,8 @@ modal.find('input').change ->
 
   note.val note_val
 
+# Click Order Button In The Modal To Submit The Dish Order
+modal.find('button.confirm_to_order').click ->
+  modal.find('form').submit()
+
 modal.modal('show');
