@@ -1,29 +1,30 @@
 <%= render 'store_header' %>
 
-<div class="hero-unit">
-  <h2><%= @store.name %></h2>
-  <p><%= @store.address.address1 %></p>
-  <p>Phone: <%= @store.phone %> | Fax: <%= @store.fax %></p>
-  <br/>
-  <p>Hours:</p>
-  <ul>
-    <% @store.hours.each do |h| %>
-        <li><%= h.name %>: <%= h.open_at %> - <%= h.close_at %></li>
+<div class="row-fluid">
+  <div class="span8 well">
+    <h2><%= @store.name %></h2>
+    <p><%= @store.address.address1 %></p>
+    <p>Phone: <%= @store.phone %> | Fax: <%= @store.fax %></p>
+    <br/>
+    <p>Hours:</p>
+    <ul>
+      <% @store.hours.each do |h| %>
+          <li><%= h.name %>: <%= h.open_at %> - <%= h.close_at %></li>
+      <% end %>
+    </ul>
+    <p>Tags:</p>
+    <% @store.tags.each do |t| %>
+        <%= t.name %>
     <% end %>
-  </ul>
-  <p>Tags:</p>
-      <span>
-        <% @store.tags.each do |t| %>
-            <%= t.name %>
-        <% end %>
-      </span>
-  <p>Payments:</p>
-       <span>
-        <% @store.payments.each do |p| %>
-             <%= p.name %>
-             <%= image_tag p.image_url(:micro).to_s if p.image? %>
-        <% end %>
-      </span>
-  <p><%= link_to 'View Menu', home_store_path(@store), :class => 'btn btn-primary btn-large' %></p>
-</div>
+    <p>Payments:</p>
+    <% @store.payments.each do |p| %>
+        <%= p.name %>
+        <%= image_tag p.image_url(:micro).to_s if p.image? %>
+    <% end %>
+    <p><br/><%= link_to 'View Menu', home_store_good_path(@store), :class => 'btn btn-primary' %></p>
+  </div>
 
+  <div class="span4 well">
+    <%= render 'store_cart' %>
+  </div>
+</div><!--/row-->

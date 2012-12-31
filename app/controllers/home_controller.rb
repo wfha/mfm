@@ -39,6 +39,11 @@ class HomeController < ApplicationController
     @reviews = response["businesses"]
   end
 
+  def grocery
+    @store = Store.first
+    @cart = current_cart
+  end
+
   def plans
     @plans = Plan.all
   end

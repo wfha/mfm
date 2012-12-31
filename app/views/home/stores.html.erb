@@ -1,84 +1,87 @@
-<table class="table table-hover">
-  <% @stores.each do |store| %>
-      <tr>
-        <td>
-          <%= image_tag store.image_url(:small).to_s %>
-        </td>
-        <td>
-          <div>
-            <h4><%= store.name %></h4>
-            <p><%= store.address.address1 %></p>
-            <p><%= store.phone %> | <%= store.fax %></p>
-            <%= link_to 'View Menu', home_store_good_path(store), :class => 'btn btn-primary btn-large' %>
-          </div>
-        </td>
-        <td>
-          <div class="store_info_wrap">
-            <br/>
-            <button class='store_info btn btn-info btn-block'>What's Good</button>
-            <button class='store_info btn btn-info btn-block'>Yelp Review</button>
-            <button class='store_info btn btn-info btn-block'>Information</button>
+<div class="row-fluid">
+  <div class="span8 well">
+    <table class="table table-hover">
+      <% @stores.each do |store| %>
+          <tr>
+            <td>
+              <%= image_tag store.image_url(:small).to_s %>
+            </td>
+            <td>
+              <div>
+                <h4><%= store.name %></h4>
+                <p><%= store.address.address1 %></p>
+                <p><%= store.phone %> | <%= store.fax %></p>
+                <%= link_to 'View Menu', home_store_good_path(store), :class => 'btn btn-primary btn-large' %>
+              </div>
+            </td>
+            <td>
+              <div class="store_info_wrap">
+                <br/>
+                <button class='store_info btn btn-info btn-block'>What's Good</button>
+                <button class='store_info btn btn-info btn-block'>Yelp Review</button>
+                <button class='store_info btn btn-info btn-block'>Information</button>
 
-            <div class="store_info">
-              <a class="close" href="javascript:;">x&nbsp;</a>
-              <blockquote>
-                <h2>Store Info</h2>
-                Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
-                Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
-                Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
-                Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
-                Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
-                <%= link_to 'Find more', home_store_good_path(store), :class => 'pull-right' %>
-              </blockquote>
-            </div>
-            <div class="store_info">
-              <a class="close" href="javascript:;">x&nbsp;</a>
-              <blockquote>
-                <h2>Yelp Review</h2>
-                <%
-                   request = Yelp::Phone::Request::Number.new(
-                           :phone_number => store.phone,
-                           :yws_id => '00CRzCP7C-1GMSGy3su_Ig')
-                   response = @client.search(request)
-                   @reviews = response["businesses"]
-                %>
-                <%= image_tag "/assets/yelp_logo.png" %>
-                <% unless @reviews.empty? %>
-                    <h5><%= @reviews[0]['name'] %></h5>
-                    <%= image_tag @reviews[0]['rating_img_url'] %> <%= @reviews[0]['review_count'] %> reviews
-                    <hr/>
-                    <% @reviews[0]['reviews'].each do |review| %>
-                        <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %>
-                        <%= review['user_name'] %>
-                        <%= image_tag review['rating_img_url'] %>
-                        <br/>
-                        <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
+                <div class="store_info">
+                  <a class="close" href="javascript:;">x&nbsp;</a>
+                  <blockquote>
+                    <h2>Store Info</h2>
+                    Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
+                    Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
+                    Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
+                    Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
+                    Kungpao Chicken<i class="pull-right">$5.99</i><hr/>
+                    <%= link_to 'Find more', home_store_good_path(store), :class => 'pull-right' %>
+                  </blockquote>
+                </div>
+                <div class="store_info">
+                  <a class="close" href="javascript:;">x&nbsp;</a>
+                  <blockquote>
+                    <h2>Yelp Review</h2>
+                    <%
+                       request = Yelp::Phone::Request::Number.new(
+                               :phone_number => store.phone,
+                               :yws_id => '00CRzCP7C-1GMSGy3su_Ig')
+                       response = @client.search(request)
+                       @reviews = response["businesses"]
+                    %>
+                    <%= image_tag "/assets/yelp_logo.png" %>
+                    <% unless @reviews.empty? %>
+                        <h5><%= @reviews[0]['name'] %></h5>
+                        <%= image_tag @reviews[0]['rating_img_url'] %> <%= @reviews[0]['review_count'] %> reviews
                         <hr/>
+                        <% @reviews[0]['reviews'].each do |review| %>
+                            <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %>
+                            <%= review['user_name'] %>
+                            <%= image_tag review['rating_img_url'] %>
+                            <br/>
+                            <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
+                            <hr/>
+                        <% end %>
                     <% end %>
-                <% end %>
-              </blockquote>
-            </div>
-            <div class="store_info">
-              <a class="close" href="javascript:;">x&nbsp;</a>
-              <blockquote>
-                <h2>Store Information</h2>
-                <b>Address:</b><br/>
-                <span><%= store.address.address1 %></span><br/><hr/>
-                <b>Estimated Delivery Time:</b><br/>
-                <span>60 minutes</span><br/><hr/>
-                <b>Open Hours:</b><br/>
-                <span>Sat - Sun: 10:30am - 10:30pm</span><br/><hr/>
-                <b>Payments:</b><br/>
-                <span>Visa, Master, Discover, American Express</span><br/><hr/>
-              </blockquote>
-            </div>
-          </div>
-        </td>
-      </tr>
-  <% end %>
-</table>
+                  </blockquote>
+                </div>
+                <div class="store_info">
+                  <a class="close" href="javascript:;">x&nbsp;</a>
+                  <blockquote>
+                    <h2>Store Information</h2>
+                    <b>Address:</b><br/>
+                    <span><%= store.address.address1 %></span><br/><hr/>
+                    <b>Estimated Delivery Time:</b><br/>
+                    <span>60 minutes</span><br/><hr/>
+                    <b>Open Hours:</b><br/>
+                    <span>Sat - Sun: 10:30am - 10:30pm</span><br/><hr/>
+                    <b>Payments:</b><br/>
+                    <span>Visa, Master, Discover, American Express</span><br/><hr/>
+                  </blockquote>
+                </div>
+              </div>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
 
-<% content_for :east do %>
+  <div class="span4 well">
     <%= gmaps(
                 :map_options => { :auto_adjust => true },
                 :markers => { :data => @json, :options => { :list_container => "markers_list" }}
@@ -86,4 +89,5 @@
     %>
     <br/>
     <ul id="markers_list"></ul>
-<% end %>
+  </div>
+</div><!--/row-->

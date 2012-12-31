@@ -1,5 +1,5 @@
-<%= hidden_ul_if(cart.cart_items.empty?, class: 'nav nav-list') do %>
-    <li class="nav-header">Your Cart from <%= cart.store.name %></li>
+<%= hidden_ul_if(cart.cart_items.empty?) do %>
+    <li>Your Cart from <%= cart.store.name %></li>
     <li>
       <% if cart.delivery_type == 'Delivery' %>
           <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), class: 'delivery_type_active', remote: true %>
@@ -9,23 +9,16 @@
           <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), class: 'delivery_type_active', remote: true %>
       <% end %>
     </li>
+    <hr/>
     <%= render(cart.cart_items) %>
-    <li><hr/></li>
+    <hr/>
+    <li>Subtotal: <span class="pull-right"><%= number_to_currency(cart.total_price) %></span></li>
+    <li>Tax: <span class="pull-right"><%= number_to_currency(cart.total_price*0.0825) %></span></li>
+    <li>Delivery Fee: <span class="pull-right"><%= number_to_currency(cart.store.delivery_fee) %></span></li>
+    <li>Total: <span class="pull-right"><%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></span></li>
+    <hr/>
     <li>
-      <a>Subtotal: <span class="pull-right"><%= number_to_currency(cart.total_price) %></span></a>
-    </li>
-    <li>
-      <a>Tax: <span class="pull-right"><%= number_to_currency(cart.total_price*0.0825) %></span></a>
-    </li>
-    <li>
-      <a>Delivery Fee: <span class="pull-right"><%= number_to_currency(cart.store.delivery_fee) %></span></a>
-    </li>
-    <li>
-      <a>Total: <span class="pull-right"><%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></span></a>
-    </li>
-    <li><hr/></li>
-    <li>
-      <%= button_to 'Proceed', new_order_path, method: :get, :class => 'btn btn-large btn-block btn-primary' %>
-      <%= button_to 'Empty cart', cart, :class => 'btn btn-large btn-block', :remote => true, method: :delete, confirm: 'Are you sure?' %>
+      <%= button_to 'Proceed', new_order_path, method: :get, :class => 'btn btn-primary pull-right' %>
+      <%= button_to 'Empty cart', cart, :class => 'btn', :remote => true, method: :delete, confirm: 'Are you sure?' %>
     </li>
 <% end %>

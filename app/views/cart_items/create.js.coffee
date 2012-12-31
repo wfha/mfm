@@ -1,5 +1,5 @@
-$('#cart').html("<%=j render @cart %>");
+$('#cart').html("<%=j render @cart %>")
 
-$('#current_item').css({'background-color':'#88ff88'}).animate({'background-color':'#114411'}, 1000);
+$('#current_item a').css({'background-color':'#F0812B', 'color':'#ffffff'})
 
-$('.modal').modal('hide');
+$('.modal').modal('hide')

@@ -2,13 +2,56 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-a.delivery_type_active {
-  float: left;
-  width: 50%;
-  background: #ff0000;
-}
+#cart {
+  ul {
+    margin: 0px;
 
-a.delivery_type_not_active {
-  float: left;
-  width: 50%;
+    li {
+      list-style: none;
+
+      a {
+        display: block;
+      }
+
+      a:hover {
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #F0812B;
+      }
+
+      a.delivery_type_active {
+        text-align: center;
+        display: inline-block;
+        width: 40%;
+        padding: 5px;
+        color: white;
+        font-weight: bold;
+        background: #F0812B;
+        box-shadow: inset 0px 1px 2px #BC5619, 0px 1px 0px white;
+
+        -webkit-border-radius: 4px 4px 4px 4px;
+        -moz-border-radius: 4px 4px 4px 4px;
+        -ms-border-radius: 4px 4px 4px 4px;
+        -o-border-radius: 4px 4px 4px 4px;
+        border-radius: 4px 4px 4px 4px;
+      }
+
+      a.delivery_type_not_active {
+        text-align: center;
+        display: inline-block;
+        width: 40%;
+        padding: 5px;
+        color: #333333;
+        font-weight: bold;
+        background: #ffffff;
+        box-shadow: inset 0px 1px 2px #DFCEB1, 0px 1px 0px white;
+
+        -webkit-border-radius: 4px 4px 4px 4px;
+        -moz-border-radius: 4px 4px 4px 4px;
+        -ms-border-radius: 4px 4px 4px 4px;
+        -o-border-radius: 4px 4px 4px 4px;
+        border-radius: 4px 4px 4px 4px;
+      }
+    }
+  }
 }

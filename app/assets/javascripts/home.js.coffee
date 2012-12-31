@@ -34,5 +34,14 @@ $ ->
 
   $("div[rel=popover]")
     .popover({trigger: 'hover', placement: 'top'})
-    .css({'cursor': 'pointer', 'background-color': 'lightblue'})
+
+  # home/store page - highlight the icon based on the url
+  # =================================================================
+  id_array = ['store_good', 'store_menu', 'store_info', 'store_reviews', 'grocery', 'store', 'sign_in', 'sign_up']
+  for i in id_array
+    if window.location.href.indexOf(i) > 0
+      $('#' + i).attr('class', 'active')
+
+
+
 

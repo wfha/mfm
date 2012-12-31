@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mfm</title>
+  <title>Meals4.Me</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -10,7 +10,7 @@
 
 <!-- Navbar
 ================================================== -->
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container-fluid">
       <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -18,21 +18,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'meals4.me', home_index_path, :class => 'brand' %>
+      <%= link_to 'Meals4.Me', home_index_path, :class => 'brand' %>
       <div class="nav-collapse collapse">
         <ul class="nav">
-          <li class=""><%= link_to 'Index', home_index_path %></li>
-          <li class="active"><%= link_to 'Stores', home_stores_path %></li>
-          <li class=""><%= link_to 'Coupons', home_coupons_path %></li>
-          <li class="active"><%= link_to 'Plans', home_plans_path %></li>
-          <li class=""><%= link_to 'Contact Us', home_index_path %></li>
-          <li class=""><%= link_to 'FAQ', home_index_path %></li>
+          <li id="store"><%= link_to 'Restaurant Delivery', home_stores_path %></li>
+          <li id="grocery"><%= link_to 'Grocery Delivery', home_grocery_path %></li>
+          <li><%= link_to 'Customer Service', home_index_path %></li>
           <% if user_signed_in? %>
               <li class=""><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
               <li class=""><%= link_to current_user.email, edit_user_registration_path %></li>
           <% else %>
-              <li class=""><%= link_to 'Sign in', new_user_session_path %></li>
-              <li class=""><%= link_to 'Sign up', new_user_registration_path %></li>
+              <li id="sign_in"><%= link_to 'Sign in', new_user_session_path %></li>
+              <li id="sign_up"><%= link_to 'Sign up', new_user_registration_path %></li>
           <% end %>
         </ul>
       </div>
@@ -40,19 +37,9 @@
   </div>
 </div>
 
-<!-- Header
-================================================== -->
-<header class="jumbotron subhead">
-  <div class="container-fluid">
-    <h1>meals4.me</h1>
-    <p class="lead">Bring Bootstrap's components to life&mdash;now with 13 custom jQuery plugins.
-  </div>
-</header>
-
 <!-- Body
 ================================================== -->
 <div class="container-fluid">
-  <br/>
   <% flash.each do |type, message| %>
       <div class="alert <%= twitterized_type(type) %>">
         <a class="close" data-dismiss="alert">x</a>
@@ -60,51 +47,36 @@
       </div>
   <% end %>
 
-  <%= yield :north %>
+  <%= yield %>
 
-  <div class="row-fluid" id="west">
-    <div class="span8">
-      <%= yield %>
-    </div><!--/span-->
+  <!-- Footer
+  ================================================== -->
+  <div class="footer well">
+    <div class="container-fluid">
+      <p>&copy; Meals4.Me Company 2012</p>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+      <p><%= link_to '@Admin', stores_path %> licensed under <%= link_to '@Admin', stores_path %>.</p>
 
-    <div class="span4" id="east">
-      <%= yield :east %>
-    </div><!--/span-->
-  </div><!--/row-->
+      <ul class="footer-links">
+        <li>
+          <% if mobile_device? %>
+              <%= link_to 'Full site', :mobile => 0 %>
+          <% else %>
+              <%= link_to 'Mobile site', :mobile => 1 %>
+          <% end %>
+        </li>
+        <li class="muted">&middot;</li>
+        <li><%= link_to 'Restaurant Delivery', home_stores_path %></li>
+        <li class="muted">&middot;</li>
+        <li><%= link_to 'Grocery Delivery', home_stores_path %></li>
+        <li class="muted">&middot;</li>
+        <li><%= link_to 'Customer Service', home_stores_path %></li>
+      </ul>
+    </div>
+  </div>
 </div><!--/.fluid-container-->
 
-<!-- Footer
-================================================== -->
-<footer class="footer">
-  <div class="container-fluid">
-    <p>&copy; Company 2012</p>
-    <p class="pull-right"><a href="#">Back to top</a></p>
-    <p>Designed and built with all the love in the world by <%= link_to '@Admin', stores_path %> and <%= link_to '@Admin', stores_path %>.</p>
-    <p><%= link_to '@Admin', stores_path %> licensed under <%= link_to '@Admin', stores_path %>.</p>
-    <blockquote class="pull-right">
-      <p>This is the test for the background. Hello World Test!</p>
-      <p><small>Feng Wan</small></p>
-    </blockquote>
-
-    <ul class="footer-links">
-      <li>
-        <% if mobile_device? %>
-            <%= link_to 'Full site', :mobile => 0 %>
-        <% else %>
-            <%= link_to 'Mobile site', :mobile => 1 %>
-        <% end %>
-      </li>
-      <li class="muted">&middot;</li>
-      <li><a href="http://blog.getbootstrap.com">Blog</a></li>
-      <li class="muted">&middot;</li>
-      <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Issues</a></li>
-      <li class="muted">&middot;</li>
-      <li><a href="https://github.com/twitter/bootstrap/wiki">Roadmap and changelog</a></li>
-    </ul>
-  </div>
-
-  <%= yield :scripts %>
-</footer>
+<%= yield :scripts %>
 
 </body>
 </html>

@@ -4,19 +4,14 @@
     <li>
 <% end %>
 <%= link_to cart_item_path(cart_item), method: :delete, data: { confirm: 'Are you sure?' }, remote: true  do %>
-  <%= cart_item.dish.name %>
-
-  <span class="pull-right">
+    <%= cart_item.dish.name %>
+    <span class="pull-right">
       &times; <%= cart_item.quantity %>
-    &nbsp;&nbsp;&nbsp;
-    <%= number_to_currency(cart_item.total_price) %>
+      &nbsp;&nbsp;&nbsp;
+      <%= number_to_currency(cart_item.total_price) %>
+      <i class="icon-remove"></i>
     </span>
-
-  <br/>
-  <%= cart_item.note %>
-
-  <i class="icon-remove pull-right"></i>
-  <i class="icon-minus pull-right"></i>
-  <i class="icon-plus pull-right"></i>
+    <br/>
+    <%= cart_item.note %>
 <% end %>
 </li>

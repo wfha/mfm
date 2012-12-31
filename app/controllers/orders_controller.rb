@@ -72,7 +72,8 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         new_cart
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { render 'result', notice: 'Order was successfully created.' }
+        format.mobile { render 'result', notice: 'Order was successfully created.' }
         format.json { render json: @order, status: :created, location: @order }
       else
         format.html { render action: "new" }

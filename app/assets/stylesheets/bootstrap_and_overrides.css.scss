@@ -1,14 +1,47 @@
 //set customized values
-$bodyBackground: #ffffff;
+//$bodyBackground: #ffffff;
+$wellBackground:  #F7EED6;
+//$btnPrimaryBackground: #F0812B;
+//$navbarLinkColorActive: #ffffff;
+//$navbarLinkBackgroundActive: #F0812B;
 
 @import "bootstrap";
 
-////make space for nav bar
-//body {
-//  padding-top: 60px;
-//}
+/* Body
+-------------------------------------------------- */
+body {
+  padding-top: 70px;
+  background: #000000 url(/assets/food_bg_v2.jpg) no-repeat;
+}
 
-//fix row-fluid thumbnails issue
+hr {
+  border:1px solid #ff0000;
+}
+
+/* Footer
+-------------------------------------------------- */
+.footer {
+  padding: 50px 0;
+  border-top: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
+}
+.footer p {
+  margin-bottom: 0;
+  color: #777;
+}
+.footer-links {
+  margin: 10px 0;
+}
+.footer-links li {
+  display: inline;
+  padding: 0 2px;
+}
+.footer-links li:first-child {
+  padding-left: 0;
+}
+
+/* Fix row-fluid thumbnails issue
+-------------------------------------------------- */
 .row-fluid {
   ul.thumbnails {
     li.span12 + li { margin-left : 0px; }
