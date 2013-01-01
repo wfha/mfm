@@ -1,17 +1,18 @@
 <% if cart_item == @current_item %>
-    <li id="current_item">
+    <li class="cart_body" id="current_item">
 <% else %>
-    <li>
+    <li class="cart_body">
 <% end %>
-<%= link_to cart_item_path(cart_item), method: :delete, data: { confirm: 'Are you sure?' }, remote: true  do %>
-    <%= cart_item.dish.name %>
-    <span class="pull-right">
-      &times; <%= cart_item.quantity %>
-      &nbsp;&nbsp;&nbsp;
+<%= link_to cart_item_path(cart_item), method: :delete, data: { confirm: 'Sure to delete?' }, remote: true do %>
+    <span class="left75">
+      <%= cart_item.dish.name %>
+      <i class="pull-right">&times; <%= cart_item.quantity %></i>
+    </span>
+    <span class="right20">
       <%= number_to_currency(cart_item.total_price) %>
-      <i class="icon-remove"></i>
+      <i class="icon-remove pull-right"></i>
     </span>
     <br/>
-    <%= cart_item.note %>
+    <span class="cart_item_special"><%= cart_item.note %></span>
 <% end %>
 </li>

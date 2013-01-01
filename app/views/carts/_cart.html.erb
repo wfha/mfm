@@ -1,24 +1,35 @@
 <%= hidden_ul_if(cart.cart_items.empty?) do %>
     <li>Your Cart from <%= cart.store.name %></li>
-    <li>
+    <li class="cart_header" style="margin-bottom: 10px;">
       <% if cart.delivery_type == 'Delivery' %>
-          <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), class: 'delivery_type_active', remote: true %>
-          <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), class: 'delivery_type_not_active', remote: true %>
+          <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), class: 'active', remote: true %>
+          <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), remote: true %>
       <% else %>
-          <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), class: 'delivery_type_not_active', remote: true %>
-          <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), class: 'delivery_type_active', remote: true %>
+          <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), remote: true %>
+          <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), class: 'active', remote: true %>
       <% end %>
     </li>
-    <hr/>
+
     <%= render(cart.cart_items) %>
-    <hr/>
-    <li>Subtotal: <span class="pull-right"><%= number_to_currency(cart.total_price) %></span></li>
-    <li>Tax: <span class="pull-right"><%= number_to_currency(cart.total_price*0.0825) %></span></li>
-    <li>Delivery Fee: <span class="pull-right"><%= number_to_currency(cart.store.delivery_fee) %></span></li>
-    <li>Total: <span class="pull-right"><%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></span></li>
-    <hr/>
-    <li>
-      <%= button_to 'Proceed', new_order_path, method: :get, :class => 'btn btn-primary pull-right' %>
+
+    <li class="cart_footer" style="margin-top: 10px;">
+      <span class="left75">Subtotal:</span>
+      <span class="right20"><%= number_to_currency(cart.total_price) %></span>
+    </li>
+    <li class="cart_footer">
+      <span class="left75">Tax:</span>
+      <span class="right20"><%= number_to_currency(cart.total_price*0.0825) %></span>
+    </li>
+    <li class="cart_footer">
+      <span class="left75">Delivery Fee:</span>
+      <span class="right20"><%= number_to_currency(cart.store.delivery_fee) %></span>
+    </li>
+    <li class="cart_footer">
+      <span class="left75">Total:</span>
+      <span class="right20"><%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></span>
+    </li>
+    <li class="cart_footer">
+      <%= button_to 'Proceed', new_order_path, method: :get, :class => 'btn btn-warning pull-right' %>
       <%= button_to 'Empty cart', cart, :class => 'btn', :remote => true, method: :delete, confirm: 'Are you sure?' %>
     </li>
 <% end %>

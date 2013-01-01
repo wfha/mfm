@@ -8,9 +8,10 @@
                     <div class="thumbnail" style="background-color: #ffffff;">
                       <%= image_tag dish.image_url.to_s  %>
                       <div class="caption">
-                        <%= dish.name %><i class="pull-right"><%= number_to_currency(dish.price) %></i>
-                        <p><%= sanitize(dish.desc) %></p>
-                        <%= button_to 'Order', home_dish_modal_path(dish), :remote => true, :class => 'pre_order btn btn-primary pull-right' %>
+                        <b><%= dish.name %></b>
+                        <%= button_to number_to_currency(dish.price), home_dish_modal_path(dish),
+                                      :remote => true, :class => 'pre_order btn btn-primary pull-right' %>
+                        <i><%= sanitize(dish.desc) %></i>
                       </div>
                     </div>
                   </li>
