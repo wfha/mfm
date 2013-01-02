@@ -1,7 +1,7 @@
 <div data-role="content" data-inset="false">
   <%= render 'store_header' %>
 
-  <ul data-role="listview" data-inset="false">
+  <ul data-role="listview" data-inset="true">
     <% @store.menus.each do |menu| %>
         <% menu.categories.each do |category| %>
             <% category.dishes.each do |dish| %>

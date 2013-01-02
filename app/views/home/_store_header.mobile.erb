@@ -1,15 +1,15 @@
-<h3><%= @store.name %> - <%= @store.name %></h3>
+<div class="ui-body ui-body-e">
+  <h3><%= @store.name %></h3>
 
-<div class="ui-grid-a" id="restau_infos">
-  <div class="ui-block-a">
-    <p><%= image_tag @store.image_url(:small).to_s, :width => '100%' %></p>
-  </div>
-  <div class="ui-block-b">
-    <%= link_to 'What\'s Good', home_store_good_path, data: {role: 'button', mini: true}, rel: 'external' %>
-    <%= link_to 'Full Menu', home_store_menu_path, data: {role: 'button', mini: true}, rel: 'external' %>
-    <%= link_to 'Store Info', home_store_info_path, data: {role: 'button', mini: true}, rel: 'external' %>
-    <%= link_to 'Store Reviews', home_store_reviews_path, data: {role: 'button', mini: true}, rel: 'external' %>
-  </div>
-</div><!-- /grid-a -->
-
-<br/>
+  <div class="ui-grid-a" id="restau_infos">
+    <div class="ui-block-a">
+      <p><%= image_tag @store.image_url(:small).to_s, :width => '100%' %></p>
+    </div>
+    <div class="ui-block-b">
+      <%= link_to 'What\'s Good', home_store_good_path, data: {role: 'button', mini: true}, rel: 'external' %>
+      <%= link_to 'Full Menu', home_store_menu_path, data: {role: 'button', mini: true}, rel: 'external' %>
+      <%= link_to 'Store Info', home_store_info_path, data: {role: 'button', mini: true}, rel: 'external' %>
+      <%= link_to 'Store Reviews', home_store_reviews_path, data: {role: 'button', mini: true}, rel: 'external' %>
+    </div>
+  </div><!-- /grid-a -->
+</div>

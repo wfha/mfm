@@ -12,44 +12,6 @@
   <link rel="apple-touch-icon" href="images/launch_icon_57.png" />
   <link rel="apple-touch-icon" sizes="72x72" href="images/launch_icon_72.png" />
   <link rel="apple-touch-icon" sizes="114x114" href="images/launch_icon_114.png" />
-  <style>
-      /* the text in nav */
-      .nav-glyphish .ui-btn .ui-btn-inner {
-          padding-top: 40px !important;
-      }
-      /* the image in nav */
-      .nav-glyphish .ui-btn .ui-icon {
-          width: 30px!important;
-          height: 30px!important;
-          margin-left: -15px !important;
-          box-shadow: none!important;
-          -moz-box-shadow: none!important;
-          -webkit-box-shadow: none!important;
-          -webkit-border-radius: 0 !important;
-          border-radius: 0 !important;
-      }
-      #chat .ui-icon {background:  url(/assets/glyphish-icons/09-chat-2.png) 50% 50% no-repeat;}
-      #user .ui-icon {background:  url(/assets/glyphish-icons/111-user.png) 50% 50% no-repeat;}
-      #skull .ui-icon {background:  url(/assets/glyphish-icons/80-shopping-cart.png) 50% 50% no-repeat;}
-
-      /* the text in button for delivery_type */
-      .button-glyphish .ui-btn .ui-btn-inner {
-          width: 60px;
-          padding-top: 10px !important;
-      }
-      /* the image in button for delivery_type */
-      .button-glyphish .ui-btn .ui-icon {
-          width: 30px!important;
-          height: 20px!important;
-          box-shadow: none!important;
-          -moz-box-shadow: none!important;
-          -webkit-box-shadow: none!important;
-          -webkit-border-radius: 0 !important;
-          border-radius: 0 !important;
-      }
-      #delivery_type_delivery .ui-icon {background:  url(/assets/glyphish-icons/136-tractor.png) 50% 50% no-repeat;}
-      #delivery_type_pick_up .ui-icon {background:  url(/assets/glyphish-icons/236-shoppingbag.png) 50% 50% no-repeat;}
-  </style>
 </head>
 <body>
 
@@ -79,9 +41,8 @@
     <div  data-role="navbar">
       <ul>
         <li><%= link_to 'Home', home_index_path, :data => { :icon => 'home' } %></li>
-        <li><%= link_to 'Stores', home_stores_path, :data => { :icon => 'info' } %></li>
-        <li><%= link_to 'Coupons', home_coupons_path, :data => { :icon => 'info' } %></li>
-        <li><%= link_to 'Plans', home_plans_path, :data => { :icon => 'info' } %></li>
+        <li><%= link_to 'Restaurant', home_stores_path, :data => { :icon => 'info' } %></li>
+        <li><%= link_to 'Grocery', home_grocery_path, :data => { :icon => 'info' } %></li>
         <li><%= link_to 'Desktop', { :mobile => 0 }, :data => { :icon => 'grid' }, :rel => "external" %></li>
       </ul>
     </div>

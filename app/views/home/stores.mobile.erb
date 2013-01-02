@@ -1,5 +1,5 @@
 <div data-role="content">
-  <ul data-role="listview" data-split-icon="gear" data-split-theme="d" data-filter="true">
+  <ul data-role="listview" data-inset="true" data-filter="false">
     <% @stores.each do |store| %>
         <li>
           <%= link_to home_store_good_path(store), rel: 'external' do %>

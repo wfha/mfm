@@ -7,7 +7,7 @@
           <% menu.categories.each do |category| %>
               <% category.dishes.each do |dish| %>
                   <li class="span4">
-                    <div class="thumbnail" style="background-color: #ffffff;">
+                    <div class="thumbnail">
                       <%= image_tag dish.image_url.to_s  %>
                       <div class="caption">
                         <b><%= dish.name %></b>

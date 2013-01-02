@@ -1,7 +1,7 @@
 <div data-role="content">
   <%= render 'store_header' %>
 
-  <div data-role="collapsible-set" data-inset="false" data-content-theme="d">
+  <div data-role="collapsible-set" data-inset="true" data-content-theme="d">
     <% @store.menus.each do |menu| %>
         <% menu.categories.each do |category| %>
             <div data-role="collapsible">

@@ -1,5 +1,7 @@
 <%= hidden_ul_if(cart.cart_items.empty?) do %>
-    <li>Your Cart from <%= cart.store.name %></li>
+    <li>
+      <h4>Cart @ <%= cart.store.name %></h4>
+    </li>
     <li class="cart_header" style="margin-bottom: 10px;">
       <% if cart.delivery_type == 'Delivery' %>
           <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), class: 'active', remote: true %>

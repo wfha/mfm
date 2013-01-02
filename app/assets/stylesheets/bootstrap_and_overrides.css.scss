@@ -1,6 +1,6 @@
 //set customized values
 //$bodyBackground: #ffffff;
-$wellBackground:  #F7EED6;
+$wellBackground:  #ffe87f;
 //$btnPrimaryBackground: #F0812B;
 //$navbarLinkColorActive: #ffffff;
 //$navbarLinkBackgroundActive: #F0812B;
@@ -11,7 +11,8 @@ $wellBackground:  #F7EED6;
 -------------------------------------------------- */
 body {
   padding-top: 70px;
-  background: #000000 url(/assets/food_bg_v2.jpg) no-repeat;
+  background: #000000 url(/assets/bg_v1_d.jpg) repeat;
+  background-attachment:fixed;
 }
 
 hr {
@@ -20,6 +21,11 @@ hr {
 
 .thumbnail {
   border: 1px solid #f89406;
+  background-color: #ffffff;
+}
+
+h4 {
+  color: #0088cc;
 }
 
 /* Footer
