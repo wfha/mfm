@@ -53,10 +53,6 @@
   ================================================== -->
   <div class="footer well">
     <div class="container-fluid">
-      <p>&copy; Meals4.Me Company 2012</p>
-      <p class="pull-right"><a href="#">Back to top</a></p>
-      <p><%= link_to '@Admin', stores_path %> licensed under <%= link_to '@Admin', stores_path %>.</p>
-
       <ul class="footer-links">
         <li>
           <% if mobile_device? %>
@@ -72,6 +68,12 @@
         <li class="muted">&middot;</li>
         <li><%= link_to 'Customer Service', home_stores_path %></li>
       </ul>
+
+      <p>
+        &copy; Meals4.Me Company 2012.
+        <%= link_to '@Admin', stores_path %> licensed under <%= link_to '@Admin', stores_path %>.
+        <a href="#" class="pull-right">Back to top</a>
+      </p>
     </div>
   </div>
 </div><!--/.fluid-container-->

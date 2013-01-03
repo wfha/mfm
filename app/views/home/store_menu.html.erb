@@ -1,7 +1,7 @@
 <%= render 'store_header' %>
 
 <div class="row-fluid">
-  <div class="span8 well">
+  <div class="span8 well" id="main">
     <ul class="nav nav-tabs first_child_active" style="margin-bottom: 0px;">
       <% @store.menus.each do |menu| %>
           <li>
@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  <div class="span4 well">
+  <div class="span4 well" id="side">
     <%= render 'store_cart' %>
   </div>
 </div><!--/row-->

@@ -1,7 +1,7 @@
 <%= render 'store_header' %>
 
 <div class="row-fluid">
-  <div class="span8 well">
+  <div class="span8 well" id="main">
     <h2><%= @store.name %></h2>
     <p><%= @store.address.address1 %></p>
     <p>Phone: <%= @store.phone %> | Fax: <%= @store.fax %></p>
@@ -24,7 +24,7 @@
     <p><br/><%= link_to 'View Menu', home_store_good_path(@store), :class => 'btn btn-primary' %></p>
   </div>
 
-  <div class="span4 well">
+  <div class="span4 well" id="side">
     <%= render 'store_cart' %>
   </div>
 </div><!--/row-->

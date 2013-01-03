@@ -1,7 +1,7 @@
 <%= render 'store_header' %>
 
 <div class="row-fluid">
-  <div class="span8 well">
+  <div class="span8 well" id="main">
     <%= image_tag "/assets/yelp_logo.png" %>
     <% unless @reviews.empty? %>
         <h5><%= @reviews[0]['name'] %></h5>
@@ -18,7 +18,7 @@
     <% end %>
   </div>
 
-  <div class="span4 well">
+  <div class="span4 well" id="side">
     <%= render 'store_cart' %>
   </div>
 </div><!--/row-->
