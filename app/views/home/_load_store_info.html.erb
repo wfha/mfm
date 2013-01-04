@@ -1,0 +1,20 @@
+<h4>Store Information</h4>
+<br/>
+<b>Address: </b><%= @store.address.address1 %><br/><br/>
+<b>Phone: </b><%= @store.phone %> | <b>Fax: </b><%= @store.fax %><br/><br/>
+<b>Hours:</b>
+<ul>
+  <% @store.hours.each do |h| %>
+      <li><%= h.name %>: <%= h.open_at %> - <%= h.close_at %></li>
+  <% end %>
+</ul>
+<br/>
+<b>Tags:</b>
+<% @store.tags.each do |t| %>
+    <%= t.name %>
+<% end %>
+<br/><br/>
+<b>Payments:</b>
+<% @store.payments.each do |p| %>
+    <%= image_tag p.image_url(:micro).to_s if p.image? %>
+<% end %>

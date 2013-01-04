@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_filter :yelp_client, :only => [:stores, :store_reviews]
+  before_filter :yelp_client, :only => [:store_reviews, :load_store_reviews]
 
   def index
     @cart = current_cart
@@ -32,11 +32,37 @@ class HomeController < ApplicationController
     @store = Store.find(params[:id])
     @cart = current_cart
 
-    request = Yelp::Phone::Request::Number.new(
-        :phone_number => @store.phone,
-        :yws_id => '00CRzCP7C-1GMSGy3su_Ig')
+    request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: '00CRzCP7C-1GMSGy3su_Ig')
     response = @client.search(request)
     @reviews = response["businesses"]
+  end
+
+  def load_store_good
+    @store = Store.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def load_store_info
+    @store = Store.find(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def load_store_reviews
+    @store = Store.find(params[:id])
+
+    request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: '00CRzCP7C-1GMSGy3su_Ig')
+    response = @client.search(request)
+    @reviews = response["businesses"]
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def grocery
@@ -50,14 +76,6 @@ class HomeController < ApplicationController
 
   def coupons
     @coupons = Coupon.all
-  end
-
-  def load_store_info
-    @store = Store.find(params[:store_id])
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   def dish_modal

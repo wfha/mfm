@@ -3,11 +3,16 @@ Mfm::Application.routes.draw do
   devise_for :users
 
   match 'home/index' => 'home#index', :as => :home_index
+
   match 'home/stores' => 'home#stores', :as => :home_stores
   match 'home/store_good/:id' => 'home#store_good', :as => :home_store_good
   match 'home/store_menu/:id' => 'home#store_menu', :as => :home_store_menu
   match 'home/store_info/:id' => 'home#store_info', :as => :home_store_info
   match 'home/store_reviews/:id' => 'home#store_reviews', :as => :home_store_reviews
+  match 'home/load_store_good/:id' => 'home#load_store_good', :as => :home_load_store_good
+  match 'home/load_store_info/:id' => 'home#load_store_info', :as => :home_load_store_info
+  match 'home/load_store_reviews/:id' => 'home#load_store_reviews', :as => :home_load_store_reviews
+
   match 'home/grocery' => 'home#grocery', :as => :home_grocery
   match 'home/coupons' => 'home#coupons', :as => :home_coupons
   match 'home/plans' => 'home#plans', :as => :home_plans

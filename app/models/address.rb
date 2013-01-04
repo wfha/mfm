@@ -37,7 +37,7 @@ class Address < ActiveRecord::Base
         "width" => 50,
         "height" => 64,
         "marker_anchor" => [ 5, 10],
-        "shadow_picture" => "/assets/rails.png" ,
+        "shadow_picture" => "/assets/yelp_logo.png" ,
         "shadow_width" => "110",
         "shadow_height" => "110",
         "shadow_anchor" => [5, 10],

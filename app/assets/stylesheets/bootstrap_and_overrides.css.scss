@@ -1,54 +1,31 @@
 //set customized values
 //$bodyBackground: #ffffff;
-$wellBackground:  #ffe87f;
+$wellBackground: #ffe87f;
 //$btnPrimaryBackground: #F0812B;
 //$navbarLinkColorActive: #ffffff;
 //$navbarLinkBackgroundActive: #F0812B;
+$tableBackground: #ffffff;
+$tableBackgroundHover: #ffe87f;
+$tableBorder: #f89406;
 
 @import "bootstrap";
 
 /* Body
 -------------------------------------------------- */
-body {
-  padding-top: 70px;
-  background: #000000 url(/assets/bg_v1_d.jpg) repeat;
-  background-attachment:fixed;
-}
+body {padding-top: 70px;background: #000000 url(/assets/bg_v1_d.jpg) repeat;background-attachment:fixed;}
+hr {border:1px solid #f89406;}
+h4 {color: #0088cc;}
 
-hr {
-  border:1px solid #f89406;
-}
-
-.thumbnail {
-  border: 1px solid #f89406;
-  background-color: #ffffff;
-}
-
-h4 {
-  color: #0088cc;
-}
+.thumbnail {border: 1px solid #f89406;background-color: #ffffff;}
+#main {min-height: 800px;}
 
 /* Footer
 -------------------------------------------------- */
-.footer {
-  padding: 50px 0px;
-  border-top: 1px solid #e5e5e5;
-  background-color: #f5f5f5;
-}
-.footer p {
-  margin-bottom: 0;
-  color: #777;
-}
-.footer-links {
-  margin: 10px 0;
-}
-.footer-links li {
-  display: inline;
-  padding: 0 2px;
-}
-.footer-links li:first-child {
-  padding-left: 0;
-}
+.footer {padding: 50px 0px;border-top: 1px solid #e5e5e5;background-color: #f5f5f5;}
+.footer p {margin-bottom: 0;color: #777;}
+.footer-links {margin: 10px 0;}
+.footer-links li {display: inline;padding: 0 2px;}
+.footer-links li:first-child {padding-left: 0;}
 
 /* Fix row-fluid thumbnails issue
 -------------------------------------------------- */
@@ -65,28 +42,13 @@ h4 {
 
 /* Affix
 -------------------------------------------------- */
-.affix-top {
-  position: absolute;
-  right: 1.6%;
-}
-.affix {
-  top: 60px;
-  right: 1.6%;
-  width: 200px;
-}
-.affix-bottom {
-  position: absolute;
-  top: auto;
-  bottom: 100px;
-}
+.affix-top {position: absolute;right: 1.6%;}
+.affix {top: 60px;right: 1.6%;width: 200px;}
+.affix-bottom {position: absolute;top: auto;bottom: 100px;}
 
 /* Google Maps
 -------------------------------------------------- */
-#map img {
-  max-width: none;
-}
-#map label {
-  width: auto; display:inline;
-}
+#map img {max-width: none;}
+#map label {width: auto; display:inline;}
 
 @import "bootstrap-responsive";

@@ -29,7 +29,7 @@
 #  $('#side').smart_float()
 
 $ ->
-  $('#side').affix
-    offset:
-      top: $('#side').position().top - 60,
-      bottom: 0
+  if $('#side').size() > 0
+    $('#side').affix
+      offset:
+        top: $('#side').position().top - 60,

@@ -5,15 +5,12 @@ $ ->
 
   # home/stores page
   # =================================================================
-  $('button.store_info').each ->
-    $(this).click ->
-      pos = $(this).position()
-      $('div.store_info').eq($(this).index('button.store_info'))
-        .css({position: "absolute", left: pos.left + 140, top: pos.top }).toggle()
-        .siblings('div.store_info').hide()
-        .parents('tr').siblings('tr').find('div.store_info').hide()
+  $('.load_trigger').bind 'ajax:before', ->
+    pos = $(this).position()
+    $('#load_box_wrap').css({position: "absolute", left: pos.left + 110, top: pos.top }).show()
+    $('#load_box').html('<img src="/assets/loading_1.gif" alt="Loading ...... " style="margin: 150px 150px;"/>')
 
-  $('.store_info .close').click ->
+  $('#load_box_wrap .close').click ->
     $(this).parent().hide()
 
   $('table tr').hover(
