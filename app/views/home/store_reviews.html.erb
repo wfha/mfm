@@ -1,12 +1,6 @@
 <%= render 'store_header' %>
 
 <div class="row">
-  <div class="span4">
-    <div class="well" id="side">
-      <%= render 'store_cart' %>
-    </div>
-  </div>
-
   <div class="span8" id="main">
     <div class="well">
       <%= image_tag "/assets/yelp_logo.png" %>
@@ -20,9 +14,16 @@
               <%= image_tag review['rating_img_url'] %>
               <br/>
               <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
-              <hr/>
+              <br/><br/><br/>
           <% end %>
       <% end %>
+    </div>
+  </div>
+
+  <div class="span4">
+    <div class="well" id="side">
+      <div id="cart"><%= render @cart %></div>
+      <div id="modal_wrap"></div>
     </div>
   </div>
 </div><!--/row-->

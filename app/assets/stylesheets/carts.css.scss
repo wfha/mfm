@@ -1,5 +1,5 @@
 // Place all the styles related to the Carts controller here.
-// They will automatically be included in application.css.
+// They will automatically be included in application.css.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #cart {
@@ -9,31 +9,16 @@
     li {
       list-style: none;
 
-      span.left75 {
-        float: left;width: 75%;
-      }
-
-      span.right20 {
-        float:right;width: 20%;
-      }
-
-      a {
-        display: inline-block;
-        text-decoration: none;
-
-        -webkit-border-radius: 4px 4px 4px 4px;
-        -moz-border-radius: 4px 4px 4px 4px;
-        -ms-border-radius: 4px 4px 4px 4px;
-        -o-border-radius: 4px 4px 4px 4px;
-        border-radius: 4px 4px 4px 4px;
-      }
+      span.left75 {float: left;width: 75%;}
+      span.right20 {float:right;width: 20%;}
+      a {display: inline-block;text-decoration: none;@include rounded-corners(4px);}
     }
 
     li.cart_header {
       a {
-        color: #777777;
-        background: #ffffff;
-        box-shadow: inset 0px 1px 2px #DFCEB1, 0px 1px 0px white;
+        color: $gray;
+        background: $white;
+        box-shadow: inset 0px 1px 2px $grayLight, 0px 1px 0px $white;
 
         width: 30%;
         height: 30px;
@@ -44,36 +29,36 @@
 
       a.active {
         color: #ffffff;
-        background: #f89406;
-        box-shadow: inset 0px 1px 2px #BC5619, 0px 1px 0px white;
+        background: $orange;
+        box-shadow: inset 0px 1px 2px $purple, 0px 1px 0px $white;
       }
     }
 
     li.cart_body {
       span.cart_item_special {
-        color: #0088cc;
+        color: $blue_mfm;
         font-style: italic;
       }
 
       a {
-        color: #333333;
-        background: #ffffff;
+        color: $grayDark;
+        background: $white;
 
         width: 97%;
         height: 40px;
         margin: 5px 0px;
         padding: 5px;
-        border: 1px solid #f89406;
+        border: 1px solid $orange;
       }
 
       a:hover {
-        color: #ffffff;
-        background-color: #f89406;
+        color: $white;
+        background-color: $orange;
       }
     }
 
     li.cart_footer {
-      color: #0088cc;
+      color: $blue_mfm;
       line-height: 20px;
       height: 20px;
 

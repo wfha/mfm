@@ -1,12 +1,6 @@
 <%= render 'store_header' %>
 
 <div class="row">
-  <div class="span4">
-    <div class="well" id="side">
-      <%= render 'store_cart' %>
-    </div>
-  </div>
-
   <div class="span8" id="main">
     <div class="row-fluid">
       <ul class="thumbnails">
@@ -28,6 +22,13 @@
             <% end %>
         <% end %>
       </ul>
+    </div>
+  </div>
+
+  <div class="span4">
+    <div class="well" id="side">
+      <div id="cart"><%= render @cart %></div>
+      <div id="modal_wrap"></div>
     </div>
   </div>
 </div><!--/row-->

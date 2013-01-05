@@ -1,34 +1,36 @@
 <%= render 'store_header' %>
 
 <div class="row">
-  <div class="span4">
-    <div class="well" id="side">
-      <%= render 'store_cart' %>
-    </div>
-  </div>
-
   <div class="span8" id="main">
     <div class="well">
-      <h2><%= @store.name %></h2>
-      <p><%= @store.address.address1 %></p>
-      <p>Phone: <%= @store.phone %> | Fax: <%= @store.fax %></p>
-      <br/>
-      <p>Hours:</p>
+      <h4>Hours:</h4>
       <ul>
         <% @store.hours.each do |h| %>
             <li><%= h.name %>: <%= h.open_at %> - <%= h.close_at %></li>
         <% end %>
       </ul>
-      <p>Tags:</p>
+      <br/>
+
+      <h4>Tags:</h4>
       <% @store.tags.each do |t| %>
           <%= t.name %>
       <% end %>
-      <p>Payments:</p>
+      <br/><br/>
+
+      <h4>Payments:</h4>
       <% @store.payments.each do |p| %>
-          <%= p.name %>
           <%= image_tag p.image_url(:micro).to_s if p.image? %>
       <% end %>
+      <br/><br/>
+
       <p><br/><%= link_to 'View Menu', home_store_good_path(@store), :class => 'btn btn-primary' %></p>
+    </div>
+  </div>
+
+  <div class="span4">
+    <div class="well" id="side">
+      <div id="cart"><%= render @cart %></div>
+      <div id="modal_wrap"></div>
     </div>
   </div>
 </div><!--/row-->

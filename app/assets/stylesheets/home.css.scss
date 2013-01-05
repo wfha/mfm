@@ -1,12 +1,12 @@
 // Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
+// They will automatically be included in application.css.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #load_box_wrap {
-  width: 400px;
-  border: 1px solid #f89406;
+  width: 380px;
+  border: 1px solid $orange;
   display: none;
-  background: #ffffff;
+  background: $white;
   z-index: 9;
 
   #load_box {
@@ -15,15 +15,10 @@
   }
 }
 
-.map_container, .gmaps4rails_map {
-  width: 100%;
-  height: 500px;
-}
-
 .store_menu_dish_wrap {
-  background: #f89406;
+  background: $orange;
 
-  a {display: block;color: #ffffff;text-decoration: none;}
+  a {display: block;color: $white;text-decoration: none;}
 }
 
 .index_img_wrap {
@@ -33,16 +28,12 @@
     width: 100%;
     padding: 10px;
     margin-left: -10px;
-    color: white;
+    color: $white;
+    background: $orange;
     font-weight: bold;
-    background: #f89406;
-    box-shadow: inset 0px 1px 2px #BC5619, 0px 1px 0px white;
+    box-shadow: inset 0px 1px 2px $purple, 0px 1px 0px $white;
 
-    -webkit-border-radius: 4px 4px 4px 4px;
-    -moz-border-radius: 4px 4px 4px 4px;
-    -ms-border-radius: 4px 4px 4px 4px;
-    -o-border-radius: 4px 4px 4px 4px;
-    border-radius: 4px 4px 4px 4px;
+    @include rounded-corners(4px);
   }
 }
 

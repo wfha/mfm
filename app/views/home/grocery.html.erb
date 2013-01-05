@@ -1,23 +1,15 @@
 <div class="well">
   <div class="row-fluid">
-    <div class="span3">
-      <%= image_tag @store.image_url(:small).to_s, :width => '100%' %>
+    <div class="span6">
+      <h1>This is Grocery Delivery!</h1>
     </div>
-    <div class="span9">
-      <h1>This is Grocery Delivery!</h1>
-      <h1>This is Grocery Delivery!</h1>
-      <h1>This is Grocery Delivery!</h1>
+    <div class="span6">
+      <h1>Serve TAMU!</h1>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="span4">
-    <div class="well" id="side">
-      <%= render 'store_cart' %>
-    </div>
-  </div>
-
   <div class="span8" id="main">
     <div class="well">
       <div class="row-fluid">
@@ -80,6 +72,13 @@
           <% end %>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="span4">
+    <div class="well" id="side">
+      <div id="cart"><%= render @cart %></div>
+      <div id="modal_wrap"></div>
     </div>
   </div>
 </div><!--/row-->

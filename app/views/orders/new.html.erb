@@ -3,7 +3,10 @@
     <%= render 'form' %>
   </div>
 
-  <div class="span4 well">
-    <%= render 'home/store_cart' %>
+  <div class="span4">
+    <div class="well">
+      <div id="cart"><%= render @cart %></div>
+      <div id="modal_wrap"></div>
+    </div>
   </div>
 </div><!--/row-->
