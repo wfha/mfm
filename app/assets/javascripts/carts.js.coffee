@@ -33,3 +33,10 @@ $ ->
     $('#side').affix
       offset:
         top: $('#side').position().top - 60,
+        bottom: 0
+
+  if $('#side_map').size() > 0
+    $('#side_map').affix
+      offset:
+        top: $('#side_map').position().top - 60,
+        bottom: 0
