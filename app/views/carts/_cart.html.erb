@@ -34,7 +34,7 @@
         <span class="right20"><%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></span>
       </li>
       <li class="cart_footer">
-        <%= button_to 'Proceed', new_order_path, method: :get, :class => 'btn btn-warning pull-right' %>
+        <%= button_to 'Proceed', new_order_path, method: :get, :class => 'btn btn-primary pull-right' %>
         <%= button_to 'Empty cart', cart, :class => 'btn', :remote => true, method: :delete, confirm: 'Are you sure?' %>
       </li>
     </ul>

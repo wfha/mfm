@@ -22,3 +22,6 @@
 
 # Ignore uploaded files
 /public/uploads
+
+# Ignore braintree config
+/config/initializers/braintree.rb

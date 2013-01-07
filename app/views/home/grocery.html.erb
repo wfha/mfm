@@ -23,7 +23,7 @@
                           <div class="caption">
                             <b><%= dish.name %></b>
                             <%= button_to number_to_currency(dish.price), home_dish_modal_path(dish),
-                                          :remote => true, :class => 'pre_order btn btn-warning pull-right' %>
+                                          :remote => true, :class => 'pre_order btn btn-primary pull-right' %>
                             <i><%= sanitize(dish.desc) %></i>
                           </div>
                         </div>

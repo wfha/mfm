@@ -39,6 +39,3 @@ $ ->
     if window.location.href.indexOf(i) > 0
       $('#' + i).attr('class', 'active')
 
-
-
-

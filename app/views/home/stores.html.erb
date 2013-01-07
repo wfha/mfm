@@ -12,14 +12,14 @@
                   <h4><%= store.name %></h4>
                   <p><%= store.address.address1 %></p>
                   <p><%= store.phone %> | <%= store.fax %></p>
-                  <%= link_to 'View Menu', home_store_good_path(store), :class => 'btn btn-success' %>
+                  <%= link_to 'View Menu', home_store_good_path(store), :class => 'btn btn-primary' %>
                 </div>
               </td>
               <td width="20%">
                 <br/>
-                <%= link_to 'What\'s Good', home_load_store_good_path(store), remote: true, class: 'load_trigger btn btn-warning btn-block' %>
-                <%= link_to 'Yelp Review', home_load_store_reviews_path(store), remote: true, class: 'load_trigger btn btn-warning btn-block' %>
-                <%= link_to 'Information', home_load_store_info_path(store), remote: true, class: 'load_trigger btn btn-warning btn-block' %>
+                <%= link_to 'What\'s Good', home_load_store_good_path(store), remote: true, class: 'load_trigger btn btn-info btn-block' %>
+                <%= link_to 'Yelp Review', home_load_store_reviews_path(store), remote: true, class: 'load_trigger btn btn-info btn-block' %>
+                <%= link_to 'Information', home_load_store_info_path(store), remote: true, class: 'load_trigger btn btn-info btn-block' %>
               </td>
             </tr>
         <% end %>
