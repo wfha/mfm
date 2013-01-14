@@ -14,22 +14,22 @@ class HomeController < ApplicationController
 
   def store_good
     @store = Store.find(params[:id])
-    @cart = current_cart
+    @cart = current_cart(@store.id)
   end
 
   def store_menu
     @store = Store.find(params[:id])
-    @cart = current_cart
+    @cart = current_cart(@store.id)
   end
 
   def store_info
     @store = Store.find(params[:id])
-    @cart = current_cart
+    @cart = current_cart(@store.id)
   end
 
   def store_reviews
     @store = Store.find(params[:id])
-    @cart = current_cart
+    @cart = current_cart(@store.id)
 
     request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: '00CRzCP7C-1GMSGy3su_Ig')
     response = @client.search(request)
@@ -65,8 +65,8 @@ class HomeController < ApplicationController
   end
 
   def grocery
-    @store = Store.first
-    @cart = current_cart
+    @store = Store.find(2)
+    @cart = current_cart(@store.id)
   end
 
   def plans
@@ -79,17 +79,6 @@ class HomeController < ApplicationController
 
   def dish_modal
     @dish = Dish.find(params[:id])
-
-    respond_to do |format|
-      format.mjs
-      format.js
-    end
-  end
-
-  def change_cart_delivery_type
-    @cart = current_cart
-    @cart.delivery_type = params[:delivery_type]
-    @cart.save
 
     respond_to do |format|
       format.mjs

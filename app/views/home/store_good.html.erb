@@ -2,26 +2,28 @@
 
 <div class="row">
   <div class="span8" id="main">
-    <div class="row-fluid">
-      <ul class="thumbnails">
-        <% @store.menus.each do |menu| %>
-            <% menu.categories.each do |category| %>
-                <% category.dishes.each do |dish| %>
-                    <li class="span4">
-                      <div class="thumbnail">
-                        <%= image_tag dish.image_url.to_s  %>
-                        <div class="caption">
-                          <b><%= dish.name %></b>
-                          <%= button_to number_to_currency(dish.price), home_dish_modal_path(dish),
-                                        :remote => true, :class => 'pre_order btn btn-primary pull-right' %>
-                          <i><%= sanitize(dish.desc) %></i>
+    <div class="well">
+      <div class="row-fluid">
+        <ul class="thumbnails">
+          <% @store.menus.each do |menu| %>
+              <% menu.categories.each do |category| %>
+                  <% category.dishes.each do |dish| %>
+                      <li class="span4">
+                        <div class="thumbnail">
+                          <%= image_tag dish.image_url.to_s  %>
+                          <div class="caption">
+                            <b><%= dish.name %></b>
+                            <%= button_to number_to_currency(dish.price), home_dish_modal_path(dish),
+                                          :remote => true, :class => 'pre_order btn btn-primary pull-right' %>
+                            <i><%= sanitize(dish.desc) %></i>
+                          </div>
                         </div>
-                      </div>
-                    </li>
-                <% end %>
-            <% end %>
-        <% end %>
-      </ul>
+                      </li>
+                  <% end %>
+              <% end %>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 

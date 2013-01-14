@@ -1,3 +1,18 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.sf_2_in_1 {
+    display: inline-block;
+
+   .controls {
+
+     input {
+      width: 95px;
+     }
+
+     select {
+      width: 108px;
+     }
+   }
+}

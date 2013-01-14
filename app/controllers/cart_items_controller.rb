@@ -45,11 +45,7 @@ class CartItemsController < ApplicationController
     price_adjustment = params[:price_adjustment]
     store_id = params[:store_id].to_i
 
-    @cart = current_cart
-    unless @cart.store_id == store_id
-      @cart.cart_items.delete_all
-      @cart.update_attributes(:store_id => store_id)
-    end
+    @cart = current_cart(store_id)
     @cart_item = @cart.add_dish(dish.id, dish.name, dish.price + price_adjustment.to_d, note)
 
     respond_to do |format|
@@ -84,9 +80,9 @@ class CartItemsController < ApplicationController
   # DELETE /cart_items/1
   # DELETE /cart_items/1.json
   def destroy
-    @cart = current_cart
-    @cart_item = @cart.cart_items.find(params[:id])
+    @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
+    @cart = @cart_item.cart
 
     respond_to do |format|
       format.html { redirect_to cart_items_url }

@@ -18,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to image_tag('/assets/mfm_brand.png'), home_index_path, :class => 'brand', :style => 'padding: 5px 20px 5px 40px;' %>
+      <%= link_to 'Meals4.Me', home_index_path, :class => 'brand' %>
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li id="store"><%= link_to 'Restaurant Delivery', home_stores_path %></li>
@@ -69,6 +69,21 @@
         </li>
         <li><p class="pull-right">&copy; Meals4.Me Company 2012.</p></li>
       </ul>
+    </div>
+  </div>
+
+  <!-- Corner
+ ================================================== -->
+  <div id="corner">
+    <div class="navbar navbar-inverse navbar-fixed-bottom"  style="left: auto;">
+      <div class="navbar-inner">
+        <a class="brand">&nbsp;&nbsp;&nbsp;Talk to us: </a>
+        <ul class="nav">
+          <li><%= link_to image_tag('/assets/icons-glyphish/white/09-chat-2.png'), 'https://twitter.com/777burps', target: '_blank' %></li>
+          <li><%= link_to image_tag('/assets/icons-glyphish/white/210-twitterbird.png'), 'https://twitter.com/777burps', target: '_blank' %></li>
+          <li><%= link_to image_tag('/assets/icons-glyphish/white/208-facebook.png'), 'https://www.facebook.com/pages/777burps/118070065016234', target: '_blank' %></li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

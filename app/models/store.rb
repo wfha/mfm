@@ -23,5 +23,9 @@ class Store < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   validates :name, presence: true
-
+  validates :phone, presence: true
+  validates :fax, presence: true
+  validates :delivery_fee, presence: true
+  validates :delivery_minimum, presence: true
+  validates :delivery_radius, presence: true
 end

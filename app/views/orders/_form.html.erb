@@ -1,97 +1,57 @@
-<ul class="thumbnails">
-  <li class="span6">
-    <div class="thumbnail">
-      <%= form_for(@order) do |f| %>
-          <% if @order.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
-                <ul>
-                  <% @order.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                  <% end %>
-                </ul>
+<ul class="thumbnails" style="margin: 0px;">
+  <li class="span6" style="margin: 0px;">
+    <div class="thumbnail" style="padding: 10px 0px 0px 20px;">
+      <%= simple_form_for(@order) do |f| %>
+          <%= f.error_notification %>
+          <h4>Finish the order</h4>
+          <%= f.input :note, :as => :text, :input_html => {:cols => 50, :rows => 2}, :placeholder => 'Special instructions', :label => false %>
+          <%= f.fields_for :user do |builder| %>
+              <%= builder.input :firstname, :placeholder => 'Firstname', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
+              <%= builder.input :lastname, :placeholder => 'Lastname', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
+              <%= builder.input :phone, :placeholder => 'Phone', :label => false %>
+              <%= builder.fields_for :address do |addr| %>
+                  <%= addr.input :address1, :placeholder => 'Address', :label => false %>
+                  <%= addr.input :address2, :placeholder => 'Apt / Building / Suite', :label => false %>
+              <% end %>
+              <%= f.input :payment_type, collection: Order::PAYMENT_TYPES, as: :radio, item_wrapper_class: 'inline', checked: Order::PAYMENT_TYPES[0] %>
+
+              <div id="card_wrap" style="display: none;margin-top: 20px;">
+                <%= f.input :card_type, collection: Order::CREDIT_CARD_TYPES, prompt: nil, label: "Card Type", selected: Order::CREDIT_CARD_TYPES[0], :wrapper_html => { :class => "sf_2_in_1" } %>
+                <%= f.input :tip_rate, collection: Order::TIP_RATES, prompt: nil, label: 'Tip Rate', selected: Order::TIP_RATES[0], :wrapper_html => { :class => "sf_2_in_1" } %>
+                <%= f.input :card_number, label: false, placeholder: "Credit Card Number" %>
+                <%= f.input :card_verification, label: false, placeholder: "CVV Code" %>
+                <%= f.input :card_expires_on, :as => :date, :wrapper_html => { :class => "sf_2_in_1" },
+                            :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :order => [:month, :year] %>
               </div>
+
+              <% unless user_signed_in? %>
+                  <br/>
+                  <h4>Get an account (Optional)</h4>
+                  <%= builder.input :email, :placeholder => 'Email', :label => false %>
+                  <%= builder.input :password, :placeholder => 'Password', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
+                  <%= builder.input :password_confirmation, :placeholder => 'Confirmation', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
+              <% end %>
           <% end %>
 
-          <table style="margin-left: 20px;">
-            <tr>
-              <td colspan="2">
-                <h4><br/><% if user_signed_in? %>Welcome, our user!<% else %>No Account?<% end %></h4>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2"><label><%= f.text_field :note, :placeholder => 'Special instructions' %></label></td>
-            </tr>
-            <tr>
-              <td colspan="2"><%= f.select :payment_type, Order::PAYMENT_TYPES, prompt: 'Select a payment method' %></td>
-            </tr>
-            <%= f.fields_for :user do |builder| %>
-                <tr>
-                  <td><label><%= builder.text_field :firstname, style: 'width: 96px', :placeholder => 'Firstname' %></label></td>
-                  <td><label><%= builder.text_field :lastname, style: 'width: 96px', :placeholder => 'Lastname' %></label></td>
-                </tr>
-                <tr>
-                  <td colspan="2"><label><%= builder.text_field :phone, :placeholder => 'Phone' %></label></td>
-                </tr>
-
-                <%= builder.fields_for :address do |addr| %>
-                    <tr>
-                      <td colspan="2"><label><%= addr.text_field :address1, :placeholder => 'Address' %></label></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><label><%= addr.text_field :address2, :placeholder => 'Apt / Building / Suite' %></label></td>
-                    </tr>
-                <% end %>
-                <% unless user_signed_in? %>
-                    <tr>
-                      <td colspan="2"><h4><br/>Get An Account (Optional)</h4></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><label><%= builder.text_field :email, :placeholder => 'Email'  %></label></td>
-                    </tr>
-                    <tr>
-                      <td><label><%= builder.password_field :password, style: 'width: 96px', :placeholder => 'Password'  %></label></td>
-                      <td><label><%= builder.password_field :password_confirmation, style: 'width: 96px', :placeholder => 'Confirmation'  %></label></td>
-                    </tr>
-                <% end %>
-            <% end %>
-            <tr>
-              <td colspan="2">
-                <br/>
-                <%= f.hidden_field :store_id %>
-                <%= f.hidden_field :cart_id %>
-                <%= f.submit %>
-              </td>
-            </tr>
-          </table>
+          <br/>
+          <%= f.input :store_id, :as => :hidden %>
+          <%= f.input :cart_id, :as => :hidden %>
+          <%= f.button :submit, :class => 'btn btn-primary' %>
       <% end %>
     </div>
   </li>
   <li class="span6">
     <% unless user_signed_in? %>
-        <div class="thumbnail">
-          <%= form_for("user", :url => user_session_path) do |f| %>
-              <table style="margin-left: 20px;">
-                <tr>
-                  <td colspan="2"><h4><br/>Already Has An Account?</h4></td>
-                </tr>
-                <tr>
-                  <td colspan="2"><label><%= f.text_field :email, :placeholder => 'Email'  %></label></td>
-                </tr>
-                <tr>
-                  <td colspan="2"><label><%= f.password_field :password, :placeholder => 'Password'  %></label></td>
-                </tr>
-                <tr>
-                  <td><%= f.check_box :remember_me %></td>
-                  <td><%= f.label :remember_me %></td>
-                </tr>
-                <tr>
-                  <td colspan="2"><br/><%= f.submit 'Sign in' %></td>
-                </tr>
-                <tr>
-                  <td colspan="2"><br/><%= link_to "Forgot your password?", new_password_path('user') %></td>
-                </tr>
-              </table>
+        <div class="thumbnail" style="padding: 10px 0px 0px 20px;">
+          <%= simple_form_for("user", :url => user_session_path) do |f| %>
+              <h4>Already has an account?</h4>
+              <%= f.input :email, :placeholder => 'Email', :label => false %>
+              <%= f.input :password, :placeholder => 'Password', :label => false %>
+              <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => 'Remember me' %>
+              <%= f.button :submit, 'Sign in', :class => 'btn btn-primary' %>
+
+              <br/><br/>
+              <%= link_to "Forgot your password?", new_password_path('user') %>
           <% end %>
         </div>
     <% end %>

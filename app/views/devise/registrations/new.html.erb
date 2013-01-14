@@ -2,16 +2,12 @@
   <div class="span4 well">
     <h2>Sign up</h2>
 
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
-
-        <%= f.label :email %><%= f.email_field :email %>
-        <br/><br/>
-        <%= f.label :password %><%= f.password_field :password %>
-        <br/><br/>
-        <%= f.label :password_confirmation %><%= f.password_field :password_confirmation %>
-        <br/><br/>
-        <%= f.submit "Sign up" %>
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :email %>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+        <%= f.button :submit, 'Sign up' %>
     <% end %>
 
     <%= render "devise/shared/links" %>

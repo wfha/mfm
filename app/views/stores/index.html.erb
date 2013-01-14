@@ -1,40 +1,43 @@
-<h1>Listing stores</h1>
+<div class="well">
+  <h1>Listing stores</h1>
 
-<table class='table table-hover table-bordered'>
-  <tr>
-    <th>Name</th>
-    <th>Desc</th>
-    <th>Image</th>
-    <th>Phone</th>
-    <th>Fax</th>
-    <th>Delivery minimum</th>
-    <th>Delivery fee</th>
-    <th>Delivery radius</th>
-    <th colspan="8">Action</th>
-  </tr>
+  <table class='table table-hover table-bordered'>
+    <tr>
+      <th>Name</th>
+      <th>Desc</th>
+      <th>Image</th>
+      <th>Phone</th>
+      <th>Fax</th>
+      <th>Delivery minimum</th>
+      <th>Delivery fee</th>
+      <th>Delivery radius</th>
+      <th colspan="8">Action</th>
+    </tr>
 
-<% @stores.each do |store| %>
-  <tr>
-    <td><%= store.name %></td>
-    <td><%= store.desc %></td>
-    <td><%= image_tag store.image_url(:small).to_s if store.image? %></td>
-    <td><%= store.phone %></td>
-    <td><%= store.fax %></td>
-    <td><%= store.delivery_minimum %></td>
-    <td><%= store.delivery_fee %></td>
-    <td><%= store.delivery_radius %></td>
-    <td><%= link_to 'Menus', store_menus_path(store) %></td>
-    <td><%= link_to 'Features', store_dish_features_path(store) %></td>
-    <td><%= link_to 'Choices', store_dish_choices_path(store) %></td>
-    <td><%= link_to 'Hours', store_hours_path(store) %></td>
-    <td><%= link_to 'Coupons', store_coupons_path(store) %></td>
-    <td><%= link_to 'Plans', store_plans_path(store) %></td>
-    <td><%= link_to 'Edit', edit_store_path(store) %></td>
-    <td><%= link_to 'X', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    <% @stores.each do |store| %>
+        <tr>
+          <td><%= store.name %></td>
+          <td><%= store.desc %></td>
+          <td><%= image_tag store.image_url(:small).to_s if store.image? %></td>
+          <td><%= store.phone %></td>
+          <td><%= store.fax %></td>
+          <td><%= store.delivery_minimum %></td>
+          <td><%= store.delivery_fee %></td>
+          <td><%= store.delivery_radius %></td>
+          <td><%= link_to 'Menus', store_menus_path(store) %></td>
+          <td><%= link_to 'Features', store_dish_features_path(store) %></td>
+          <td><%= link_to 'Choices', store_dish_choices_path(store) %></td>
+          <td><%= link_to 'Hours', store_hours_path(store) %></td>
+          <td><%= link_to 'Coupons', store_coupons_path(store) %></td>
+          <td><%= link_to 'Plans', store_plans_path(store) %></td>
+          <td><%= link_to 'Edit', edit_store_path(store) %></td>
+          <td><%= link_to 'X', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </table>
 
-<br />
+  <br />
 
-<%= link_to 'New Store', new_store_path %>
+  <%= link_to 'New Store', new_store_path %>
+</div>
+

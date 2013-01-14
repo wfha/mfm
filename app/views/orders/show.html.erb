@@ -1,50 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="span8">
+    <div class="well">
+      <h4>Your order has been taken. Thank you for ordering with us.</h4>
+      <h4>The estimated delivery time is 60 minutes. </h4>
+      <br/>
+      <%= link_to 'Back to restaurant list', home_stores_path, :class => 'btn btn-primary'  %>
+      <%= link_to 'I want some grocery', home_grocery_path, :class => 'btn btn-info'  %>
+    </div>
+  </div>
 
-<p>
-  <b>Invoice:</b>
-  <%= @order.invoice %>
-</p>
+  <div class="span4">
+    <div class="well">
+      <h4>Your order has been taken. Thank you for ordering with us.</h4>
+      <h4>The estimated delivery time is 60 minutes. </h4>
+      <br/>
+      <%= link_to 'Back to restaurant list', home_stores_path, :class => 'btn btn-primary'  %>
+      <%= link_to 'I want some grocery', home_grocery_path, :class => 'btn btn-info'  %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <b>Transaction:</b>
-  <%= @order.transaction_id %>
-</p>
-
-<p>
-  <b>Payment type:</b>
-  <%= @order.payment_type %>
-</p>
-
-<p>
-  <b>Note:</b>
-  <%= @order.note %>
-</p>
-
-<p>
-  <b>Delivery fee:</b>
-  <%= @order.delivery_fee %>
-</p>
-
-<p>
-  <b>Tip:</b>
-  <%= @order.tip %>
-</p>
-
-<p>
-  <b>Store:</b>
-  <%= @order.store %>
-</p>
-
-<p>
-  <b>Cart:</b>
-  <%= @order.cart %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @order.user %>
-</p>
-
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>

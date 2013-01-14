@@ -1,7 +1,7 @@
 class CreateCarts < ActiveRecord::Migration
   def change
     create_table :carts do |t|
-      t.string :delivery_type, :default => 'Delivery', :null => false
+      t.string :delivery_type, :default => 'delivery', :null => false
       t.references :store
 
       t.timestamps

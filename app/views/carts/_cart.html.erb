@@ -7,11 +7,11 @@
       </li>
       <li class="cart_header" style="margin-bottom: 10px;">
         <% if cart.delivery_type == 'Delivery' %>
-            <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), class: 'active', remote: true %>
-            <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), remote: true %>
+            <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), class: 'active', remote: true %>
+            <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), remote: true %>
         <% else %>
-            <%= link_to 'Delivery', home_change_cart_delivery_type_path(delivery_type: :Delivery), remote: true %>
-            <%= link_to 'Pick Up', home_change_cart_delivery_type_path(delivery_type: :PickUp), class: 'active', remote: true %>
+            <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), remote: true %>
+            <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), class: 'active', remote: true %>
         <% end %>
       </li>
 
@@ -25,17 +25,25 @@
         <span class="left75">Tax:</span>
         <span class="right20"><%= number_to_currency(cart.total_price*0.0825) %></span>
       </li>
-      <li class="cart_footer">
-        <span class="left75">Delivery Fee:</span>
-        <span class="right20"><%= number_to_currency(cart.store.delivery_fee) %></span>
-      </li>
+
+      <% if cart.store.delivery_fee > 0 %>
+          <li class="cart_footer">
+            <span class="left75">Delivery Fee:</span>
+            <span class="right20"><%= number_to_currency(cart.store.delivery_fee) %></span>
+          </li>
+      <% end %>
+
       <li class="cart_footer">
         <span class="left75">Total:</span>
         <span class="right20"><%= number_to_currency(cart.total_price*1.0825 + cart.store.delivery_fee) %></span>
       </li>
-      <li class="cart_footer">
-        <%= button_to 'Proceed', new_order_path, method: :get, :class => 'btn btn-primary pull-right' %>
-        <%= button_to 'Empty cart', cart, :class => 'btn', :remote => true, method: :delete, confirm: 'Are you sure?' %>
+      <li class="cart_footer" style="margin-top: 20px;">
+        <% if (cart.total_price*1.0825 + cart.store.delivery_fee) > cart.store.delivery_minimum || cart.delivery_type == "pick_up" %>
+            <%= link_to 'Proceed', new_order_path(store_id: cart.store_id), method: :get, :class => 'btn btn-primary pull-right' %>
+        <% else %>
+            <%= link_to "Min.  #{number_to_currency(cart.store.delivery_minimum)}", 'javascript:;', :class => 'btn pull-right' %>
+        <% end %>
+        <%= link_to 'Empty cart', cart, :class => 'btn', :remote => true, method: :delete, confirm: 'Are you sure?' %>
       </li>
     </ul>
 <% end %>

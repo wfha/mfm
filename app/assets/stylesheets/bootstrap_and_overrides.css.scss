@@ -300,9 +300,10 @@ $fluidGridGutterWidth768:      percentage($gridGutterWidth768/$gridRowWidth768);
 // --------------------------------------------------
 
 $yellow_mfm: #ffe87f;
+$yellow_mfm_transparent: rgba(255, 232, 127, 0.25);
 $blue_mfm: #0088cc;
 
-$wellBackground:                    $yellow_mfm;
+$wellBackground:                    $yellow_mfm_transparent;
 $tableBorder:                       $orange; // table and cell border
 
 // Customized Functions

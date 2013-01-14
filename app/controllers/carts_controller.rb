@@ -87,4 +87,16 @@ class CartsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # Change cart type: delivery or pick-up
+  def type
+    @cart = Cart.find(params[:id])
+    @cart.delivery_type = params[:delivery_type]
+    @cart.save
+
+    respond_to do |format|
+      format.mjs
+      format.js
+    end
+  end
 end

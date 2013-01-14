@@ -17,9 +17,12 @@ Mfm::Application.routes.draw do
   match 'home/coupons' => 'home#coupons', :as => :home_coupons
   match 'home/plans' => 'home#plans', :as => :home_plans
   match 'home/dish_modal/:id' => 'home#dish_modal', :as => :home_dish_modal
-  match 'home/change_cart_delivery_type' => 'home#change_cart_delivery_type', :as => :home_change_cart_delivery_type
 
-  resources :carts
+  resources :carts do
+    member do
+      get :type
+    end
+  end
   resources :cart_items
   resources :orders
   resources :payments
