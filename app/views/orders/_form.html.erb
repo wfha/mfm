@@ -9,9 +9,11 @@
               <%= builder.input :firstname, :placeholder => 'Firstname', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
               <%= builder.input :lastname, :placeholder => 'Lastname', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
               <%= builder.input :phone, :placeholder => 'Phone', :label => false %>
-              <%= builder.fields_for :address do |addr| %>
-                  <%= addr.input :address1, :placeholder => 'Address', :label => false %>
-                  <%= addr.input :address2, :placeholder => 'Apt / Building / Suite', :label => false %>
+              <% if @cart.delivery_type == 'delivery' %>
+                  <%= builder.fields_for :address do |addr| %>
+                      <%= addr.input :address1, :placeholder => 'Address', :label => false %>
+                      <%= addr.input :address2, :placeholder => 'Apt / Building / Suite', :label => false %>
+                  <% end %>
               <% end %>
               <%= f.input :payment_type, collection: Order::PAYMENT_TYPES, as: :radio, item_wrapper_class: 'inline', checked: Order::PAYMENT_TYPES[0] %>
 

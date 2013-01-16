@@ -1,5 +1,5 @@
 class Cart < ActiveRecord::Base
-  attr_accessible :delivery_type, :store, :store_id, :cart_items
+  attr_accessible :delivery_type, :delivery_fee, :store, :store_id, :cart_items
 
   belongs_to :store
 
@@ -16,7 +16,13 @@ class Cart < ActiveRecord::Base
     current_item
   end
 
-  def total_price
+  def subtotal_price
     cart_items.to_a.sum { |item| item.total_price }
   end
+
+  def total_price
+    subtotal_price * 1.0825 + delivery_fee
+  end
+
+  DELIVERY_TYPES = [['Delivery', 'delivery'], ['Pick Up', 'pick_up']]
 end

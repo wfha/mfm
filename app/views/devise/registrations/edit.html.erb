@@ -3,23 +3,25 @@
     <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
     <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
-        <%= devise_error_messages! %>
+        <%= f.error_notification %>
 
         <%= f.input :email %>
         <%= f.input :firstname %>
         <%= f.input :lastname %>
         <%= f.input :phone %>
 
-        <%= f.input :password, :input_html => { :autocomplete => "off" }, :hint => 'Leave blank if you don\'t want to change it.' %>
-        <%= f.input :password_confirmation %>
+        <% current_user.build_address if current_user.address.nil? %>
         <%= f.fields_for :address do |addr| %>
             <%= addr.input :address1 %>
             <%= addr.input :address2 %>
         <% end %>
 
-        <i>(we need your current password to confirm your changes)</i>
-        <%= f.input :current_password %>
-        <%= f.button :submit %>
+        <h4 style="margin-left: 50px;">Leave blank if you don't want to change it</h4>
+        <%= f.input :password, :input_html => { :autocomplete => "off" } %>
+        <%= f.input :password_confirmation %>
+
+        <%= f.input :current_password, :hint => 'Use current password to confirm your changes' %>
+        <%= f.button :submit, :class => 'btn btn-primary' %>
     <% end %>
 
     <h3>Cancel my account</h3>

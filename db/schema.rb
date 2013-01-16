@@ -46,10 +46,11 @@ ActiveRecord::Schema.define(:version => 20121211155102) do
   add_index "cart_items", ["dish_id"], :name => "index_cart_items_on_dish_id"
 
   create_table "carts", :force => true do |t|
-    t.string   "delivery_type", :default => "Delivery", :null => false
+    t.string   "delivery_type",                               :default => "delivery", :null => false
+    t.decimal  "delivery_fee",  :precision => 8, :scale => 2, :default => 0.0
     t.integer  "store_id"
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
   end
 
   add_index "carts", ["store_id"], :name => "index_carts_on_store_id"
@@ -154,9 +155,8 @@ ActiveRecord::Schema.define(:version => 20121211155102) do
   create_table "orders", :force => true do |t|
     t.string   "invoice"
     t.string   "transaction_id"
-    t.string   "payment_type",                                 :default => "Cash", :null => false
+    t.string   "payment_type",                                 :default => "cash", :null => false
     t.string   "note"
-    t.decimal  "delivery_fee",   :precision => 8, :scale => 2, :default => 0.0
     t.decimal  "tip",            :precision => 8, :scale => 2, :default => 0.0
     t.integer  "store_id"
     t.integer  "cart_id"

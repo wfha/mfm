@@ -25,16 +25,18 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     @cart = current_cart(params[:store_id])
-    if @cart.cart_items.empty?
-      redirect_to home_stores_url, notice: "Your cart is empty!"
+    if @cart.total_price < @cart.store.delivery_minimum
+      redirect_to home_stores_url, notice: "The order doesn't meet minimum!"
       return
     end
 
     if user_signed_in?
-      current_user.address = Address.new unless current_user.address
+      current_user.build_address if @cart.delivery_type == 'delivery' && current_user.address.nil?
       @order = Order.new(:cart => @cart, :store => @cart.store, :user => current_user)
     else
-      @order = Order.new(:cart => @cart, :store => @cart.store, :user => User.new(:address => Address.new))
+      user = User.new
+      user.build_address if @cart.delivery_type == 'delivery'
+      @order = Order.new(:cart => @cart, :store => @cart.store, :user => user)
     end
 
     respond_to do |format|
@@ -54,12 +56,13 @@ class OrdersController < ApplicationController
     p = params[:order]
     if user_signed_in?
       @user = User.find(p[:user_attributes][:id])
-      @user.save!
+      @user.update_attributes(p[:user_attributes])
       p.delete(:user_attributes)
       @order = Order.new(p)
       @order.user = @user
     else
       @order = Order.new(p)
+      @order.user.validate_phone = true
     end
 
     if @order.user.email.blank? && @order.user.password.blank? && @order.user.password_confirmation.blank?
@@ -67,15 +70,18 @@ class OrdersController < ApplicationController
       @order.user.password = "guest_password"
       @order.user.password_confirmation = "guest_password"
     end
-    @order.user.save
 
     respond_to do |format|
       if @order.save
         new_cart(@order.store_id)
+
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.mobile { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render json: @order, status: :created, location: @order }
       else
+        @cart = current_cart(@order.store_id)
+        @order.user.email = ""
+
         format.html { render action: "new" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end

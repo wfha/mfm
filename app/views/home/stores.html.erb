@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span7" id="main">
     <div class="well">
-      <table class="table table-hover">
+      <table class="table table-hover" style="margin-bottom: 0px;">
         <% @stores.each do |store| %>
             <tr>
               <td width="35%">
@@ -34,8 +34,7 @@
                   :markers => { :data => @json, :options => { :list_container => "markers_list" }}
           )
       %>
-      <br/>
-      <ul id="markers_list"></ul>
+      <ul id="markers_list" style="display: none;"></ul>
     </div>
   </div>
 </div><!--/row-->

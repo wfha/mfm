@@ -5,7 +5,6 @@ class CreateOrders < ActiveRecord::Migration
       t.string :transaction_id
       t.string :payment_type, :default => 'cash', :null => false
       t.string :note
-      t.decimal :delivery_fee, :default => 0, :precision => 8, :scale => 2
       t.decimal :tip, :default => 0, :precision => 8, :scale => 2
       t.references :store
       t.references :cart

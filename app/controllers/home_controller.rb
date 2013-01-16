@@ -8,8 +8,11 @@ class HomeController < ApplicationController
   def stores
     @stores = Store.all
 
-    @addresses = Address.find_by_addressable_type('Store')
-    @json = @addresses.to_gmaps4rails
+    @addresses = Address.where(:addressable_type => 'Store')
+
+    if @addresses
+      @json = @addresses.to_gmaps4rails
+    end
   end
 
   def store_good
