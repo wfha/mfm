@@ -17,9 +17,12 @@
               <% end %>
               <%= f.input :payment_type, collection: Order::PAYMENT_TYPES, as: :radio, item_wrapper_class: 'inline', checked: Order::PAYMENT_TYPES[0] %>
 
-              <div id="card_wrap" style="display: none;margin-top: 20px;">
-                <%= f.input :card_type, collection: Order::CREDIT_CARD_TYPES, prompt: nil, label: "Card Type", selected: Order::CREDIT_CARD_TYPES[0], :wrapper_html => { :class => "sf_2_in_1" } %>
+              <div id="tip_wrap" style="display: none;">
                 <%= f.input :tip_rate, collection: Order::TIP_RATES, prompt: nil, label: 'Tip Rate', selected: Order::TIP_RATES[0], :wrapper_html => { :class => "sf_2_in_1" } %>
+              </div>
+
+              <div id="credit_card_wrap" style="display: none;">
+                <%= f.input :card_type, collection: Order::CREDIT_CARD_TYPES, prompt: nil, label: "Card Type", selected: Order::CREDIT_CARD_TYPES[0] %>
                 <%= f.input :card_number, label: false, placeholder: "Credit Card Number" %>
                 <%= f.input :card_verification, label: false, placeholder: "CVV Code" %>
                 <%= f.input :card_expires_on, :as => :date, :wrapper_html => { :class => "sf_2_in_1" },

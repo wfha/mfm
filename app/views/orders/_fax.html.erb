@@ -1,2 +1,69 @@
-<h1>Test from ERB template</h1>
-<h4>Good Good Good!</h4>
+<html>
+<body style='font-family:arial;'>
+
+<br/><br/><br/><br/>
+
+<table width='730px'>
+  <col width='330'/>
+  <col width='400'/>
+  <tr> <th rowspan='3'><h1 style='font-size:50px;'>777Burps</h1></th><td><h1>Order #: <%= @order.invoice %></h1></td> </tr>
+  <tr> <td>Order Time: <%= @order.created_at %></td> </tr>
+  <tr> <td>Order To: <%= @order.store.name %></td> </tr>
+</table>
+<br/><br/>
+
+<table width='730px'>
+  <col width='430'/>
+  <col width='300'/>
+  <tr> <td><b>Customer Info:</b></td><th rowspan='3'><h1><%= @order.cart.delivery_type %></h1></th> </tr>
+  <tr> <td><%= @order.user.firstname %> <%= @order.user.lastname %></td>                            </tr>
+  <tr> <td><%= @order.user.phone %>></td>                                                           </tr>
+  <tr> <td><%= @order.user.address.address1 %>, <%= @order.user.address.address2 %></td><th rowspan='2'><h2>Time: ASAP</h2></th> </tr>
+  <tr> <td><%= @order.user.address.city %>, <%= @order.user.address.state %> <%= @order.user.address.zip %></td>                 </tr>
+</table>
+<hr/>
+
+<table width='730px'>
+  <col width='530'/>
+  <col width='100'/>
+  <col width='100'/>
+  <tr> <th>Menu Item</th><th>Qty.</th><th align='left'>Amt.</th> </tr>
+  <% @order.cart.cart_items.each do |ci| %>
+      <tr> <td><%= ci.name %></td><td align='center'><%= ci.quantity %></td><td><%= ci.total_price %></td> </tr>
+      <tr> <td colspan='3'> --- <%= ci.note %></td> </tr>
+  <% end %>
+</table>
+<hr/>
+
+<table width='730px'>
+  <tr> <td><h4>Special Instructions</h4></td> </tr>
+  <tr> <td> --- <%= @order.note %></td>       </tr>
+</table>
+<hr/>
+
+<table width='730px'>
+  <col width='530'/>
+  <col width='100'/>
+  <col width='100'/>
+  <tr> <td><b>Pay by <%= @order.payment_type %>(Paid)</b></td><td align='right'>Subtotal</td><td><%= number_to_currency @order.cart.subtotal_price %></td> </tr>
+  <% if @order.payment_type == Order::PAYMENT_TYPES[0] %>
+      <tr> <td>Card#: <%= @card_number %></td>             <td align='right'>Tax</td>         <td><%= number_to_currency @order.cart.subtotal_price*0.0825 %></td>    </tr>
+      <tr> <td>Exp Date(MMYY): <%= @card_expires_on %></td><td align='right'>Delivery Fee</td><td><%= number_to_currency @order.cart.delivery_fee %></td>             </tr>
+      <tr> <td>Card Holder: <%= @card_number %></td>       <td align='right'>Tip</td>         <td><%= number_to_currency @order.tip %></td>                           </tr>
+      <tr> <td>Zipcode: <%= @card_verification %></td>     <td align='right'>Total</td>       <td><%= number_to_currency @order.cart.total_price + @order.tip %></td> </tr>
+      <br/>
+  <% else %>
+      <tr> <td></td><td align='right'>Tax</td>         <td><%= number_to_currency @order.cart.subtotal_price*0.0825 %></td>    </tr>
+      <tr> <td></td><td align='right'>Delivery Fee</td><td><%= number_to_currency @order.cart.delivery_fee %></td>             </tr>
+      <tr> <td></td><td align='right'>Tip</td>         <td>with cash</td>                                   </tr>
+      <tr> <td></td><td align='right'>Total</td>       <td><%= number_to_currency @order.cart.total_price + @order.tip %></td> </tr>
+      <br/>
+  <% end %>
+</table>
+
+<hr/>
+<br/>
+<p>For price adjustments or any issues, please contact 777Burps: 979-739-6180, 979-676-2867</p>
+
+</body>
+</html>

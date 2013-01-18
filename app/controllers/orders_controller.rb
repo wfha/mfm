@@ -54,6 +54,12 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     p = params[:order]
+
+    @card_type = p[:@card_type]
+    @card_number = p[:card_number]
+    @card_verification = p[:card_verification]
+    @card_expires_on = p[:card_expires_on]
+
     if user_signed_in?
       @user = User.find(p[:user_attributes][:id])
       @user.update_attributes(p[:user_attributes])
@@ -74,6 +80,15 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         new_cart(@order.store_id)
+
+        # Fax This Order
+        html = File.open(Rails.root.join('app/views/orders/_fax.html.erb')).read
+        template = ERB.new(html)
+        str = template.result(binding)
+        client = Savon.client(wsdl: "https://ws.interfax.net/dfs.asmx?WSDL")
+        response = client.call(:send_char_fax, :message => {'Username' => 'wanfenghuaian2', 'Password' => 'gt850829',
+                                                            'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
+        puts response.body[:send_char_fax_response][:send_char_fax_result]
 
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.mobile { redirect_to @order, notice: 'Order was successfully created.' }

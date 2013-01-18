@@ -1,22 +1,22 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
+  id: 1
   invoice: MyString
   transaction_id: MyString
   payment_type: MyString
   note: MyString
-  delivery_fee: 9.99
   tip: 9.99
   store: 
   cart: 
   user: 
 
 two:
+  id: 2
   invoice: MyString
   transaction_id: MyString
   payment_type: MyString
   note: MyString
-  delivery_fee: 9.99
   tip: 9.99
   store: 
   cart: 

@@ -14,19 +14,9 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :user
 
-  PAYMENT_TYPES = [['Cash', 'cash'], ['Credit Card', 'credit_card']]
+  PAYMENT_TYPES = [['Cash ', 'cash'], ['CreditCard ', 'credit_card'], ['PayPal ', 'paypal']]
   CREDIT_CARD_TYPES = [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]]
   TIP_RATES = [['Tip w/ cash', 0], ['Tip 5%', 0.05], ['Tip 10%', 0.1], ['Tip 15%', 0.15], ['Tip 20%', 0.2], ['Tip 25%', 0.25], ['Tip 30%', 0.3]]
 
-
-  after_create :send_fax
-
-  private
-  def send_fax
-    client = Savon.client(wsdl: "https://ws.interfax.net/dfs.asmx?WSDL")
-    response = client.call(:send_char_fax, :message => {'Username' => '', 'Password' => '',
-                                                        'FaxNumber' => '9790000000', 'Data' => '<h1>Order Been Faxed!</h1>',
-                                                        'FileType' => 'HTML'})
-  end
 
 end
