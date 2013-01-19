@@ -1,20 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="well">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @dish_feature.name %>
-</p>
+  <p>
+    <b>Name:</b>
+    <%= @dish_feature.name %>
+  </p>
 
-<p>
-  <b>Desc:</b>
-  <%= @dish_feature.desc %>
-</p>
+  <p>
+    <b>Desc:</b>
+    <%= @dish_feature.desc %>
+  </p>
 
-<p>
-  <b>Store:</b>
-  <%= @dish_feature.store.name %>
-</p>
+  <p>
+    <b>Store:</b>
+    <%= @dish_feature.store.name %>
+  </p>
 
 
-<%= link_to 'Edit', edit_store_dish_feature_path(@store, @dish_feature) %> |
-<%= link_to 'Back', store_dish_features_path(@store) %>
+  <%= link_to 'Edit', edit_store_dish_feature_path(@store, @dish_feature) %> |
+  <%= link_to 'Back', store_dish_features_path(@store) %>
+</div>

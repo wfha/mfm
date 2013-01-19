@@ -25,13 +25,15 @@
                       <ul class="thumbnails">
                         <% category.dishes.each do |dish| %>
                             <li class="span6">
-                              <div class="thumbnail store_menu_dish_wrap" rel="popover" title="<%= dish.name %>" data-content="<%= sanitize(dish.desc) %>">
+                              <div class="thumbnail store_menu_dish_wrap" rel="popover" title="<%= dish.name %>"
+                                   data-content="<% if dish.desc.empty? %>Info coming soon ...
+                                   <% else %><%= sanitize(dish.desc) %><% end %>">
                                 <%= link_to home_dish_modal_path(dish), :remote => true do %>
-                                    <%= dish.name %> -
-                                    <% dish.dish_features.each do |df| %>
-                                        <%= df.name %>
-                                    <% end %>
+                                    <%= dish.name %>
                                     <i class="pull-right"><%= number_to_currency(dish.price) %></i>
+                                    <% dish.dish_features.each do |df| %>
+                                        <div style="width: 16px;height: 16px;margin-right: 4px;" class="pull-right icons_dish_features-dish_feature_<%= df.name %>"></div>
+                                    <% end %>
                                 <% end %>
                               </div>
                             </li>

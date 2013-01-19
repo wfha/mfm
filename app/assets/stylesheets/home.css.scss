@@ -15,8 +15,14 @@
   }
 }
 
+/* store menu and store good */
+
+@import "icons_dish_features/*.png";
+@include all-icons_dish_features-sprites;
+/* In html, add: class='icons_dish_features-dish_feature_chef' */
+
 .store_menu_dish_wrap {
-  background: $orange;
+  @include background-image(linear-gradient($orange, $orange));
 
   a {display: block;color: $white;text-decoration: none;}
 }
