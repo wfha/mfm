@@ -211,7 +211,7 @@ DEPENDENCIES
   jquery-rails (~> 2.1.4)
   jquery_mobile_rails (~> 1.2.0)
   pg (~> 0.14.1)
-  rails (~> 3.2.9)
+  rails (~> 3.2.11)
   rmagick (~> 2.13.1)
   rvm-capistrano (~> 1.2.7)
   sass-rails (~> 3.2.3)
