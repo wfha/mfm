@@ -20,8 +20,12 @@ class Cart < ActiveRecord::Base
     cart_items.to_a.sum { |item| item.total_price }
   end
 
+  def tax
+    subtotal_price * 0.0825
+  end
+
   def total_price
-    subtotal_price * 1.0825 + delivery_fee
+    subtotal_price + tax + delivery_fee
   end
 
   DELIVERY_TYPES = [['Delivery', 'delivery'], ['Pick Up', 'pick_up']]

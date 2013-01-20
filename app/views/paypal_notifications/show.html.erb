@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Params:</b>
+  <%= @paypal_notification.params %>
+</p>
+
+<p>
+  <b>Order:</b>
+  <%= @paypal_notification.order %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @paypal_notification.status %>
+</p>
+
+<p>
+  <b>Transaction:</b>
+  <%= @paypal_notification.transaction_id %>
+</p>
+
+<p>
+  <b>Create:</b>
+  <%= @paypal_notification.create %>
+</p>
+
+
+<%= link_to 'Edit', edit_paypal_notification_path(@paypal_notification) %> |
+<%= link_to 'Back', paypal_notifications_path %>

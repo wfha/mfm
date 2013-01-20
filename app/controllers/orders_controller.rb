@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  # In order to use number_to_currency
+  include ActionView::Helpers::NumberHelper
+
   # GET /orders
   # GET /orders.json
   def index
@@ -81,18 +84,22 @@ class OrdersController < ApplicationController
       if @order.save
         new_cart(@order.store_id)
 
-        # Fax This Order
-        html = File.open(Rails.root.join('app/views/orders/_fax.html.erb')).read
-        template = ERB.new(html)
-        str = template.result(binding)
-        client = Savon.client(wsdl: "https://ws.interfax.net/dfs.asmx?WSDL")
-        response = client.call(:send_char_fax, :message => {'Username' => 'wanfenghuaian2', 'Password' => 'gt850829',
-                                                            'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
-        puts response.body[:send_char_fax_response][:send_char_fax_result]
+        if @order.payment_type == 'paypal'
+          format.html { redirect_to @order.paypal_url(home_stores_url, paypal_notifications_url) }
+        else
+          # Fax This Order
+          html = File.open(Rails.root.join('app/views/orders/_fax.html.erb')).read
+          template = ERB.new(html)
+          str = template.result(binding)
+          client = Savon.client(wsdl: "https://ws.interfax.net/dfs.asmx?WSDL")
+          response = client.call(:send_char_fax, :message => {'Username' => 'wanfenghuaian2', 'Password' => 'gt850829',
+                                                              'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
+          puts response.body[:send_char_fax_response][:send_char_fax_result]
 
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.mobile { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render json: @order, status: :created, location: @order }
+          format.html { redirect_to @order, notice: 'Order was successfully created.' }
+          format.mobile { redirect_to @order, notice: 'Order was successfully created.' }
+          format.json { render json: @order, status: :created, location: @order }
+        end
       else
         @cart = current_cart(@order.store_id)
         @order.user.email = ""

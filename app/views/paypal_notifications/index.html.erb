@@ -1,0 +1,31 @@
+<h1>Listing paypal_notifications</h1>
+
+<table>
+  <tr>
+    <th>Params</th>
+    <th>Order</th>
+    <th>Status</th>
+    <th>Transaction</th>
+    <th>Create</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @paypal_notifications.each do |paypal_notification| %>
+  <tr>
+    <td><%= paypal_notification.params %></td>
+    <td><%= paypal_notification.order %></td>
+    <td><%= paypal_notification.status %></td>
+    <td><%= paypal_notification.transaction_id %></td>
+    <td><%= paypal_notification.create %></td>
+    <td><%= link_to 'Show', paypal_notification %></td>
+    <td><%= link_to 'Edit', edit_paypal_notification_path(paypal_notification) %></td>
+    <td><%= link_to 'Destroy', paypal_notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Paypal notification', new_paypal_notification_path %>

@@ -1,9 +1,8 @@
 class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
-      t.string :invoice
-      t.string :transaction_id
       t.string :payment_type, :default => 'cash', :null => false
+      t.string :payment_status, :default => 'not_paid', :null => false
       t.string :note
       t.decimal :tip, :default => 0, :precision => 8, :scale => 2
       t.references :store

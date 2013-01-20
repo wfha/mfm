@@ -1,5 +1,8 @@
 Mfm::Application.routes.draw do
 
+  resources :paypal_notifications
+
+
   devise_for :users
 
   match 'home/index' => 'home#index', :as => :home_index
