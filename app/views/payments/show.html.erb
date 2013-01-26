@@ -1,18 +1,20 @@
-<p>
-  <b>Name:</b>
-  <%= @payment.name %>
-</p>
+<div class="well">
+  <p>
+    <b>Name:</b>
+    <%= @payment.name %>
+  </p>
 
-<p>
-  <b>Desc:</b>
-  <%= @payment.desc %>
-</p>
+  <p>
+    <b>Desc:</b>
+    <%= @payment.desc %>
+  </p>
 
-<p>
-  <b>Image:</b>
-  <%= image_tag @payment.image_url(:micro).to_s if @payment.image? %>
-</p>
+  <p>
+    <b>Image:</b>
+    <%= image_tag @payment.image_url(:micro).to_s if @payment.image? %>
+  </p>
 
 
-<%= link_to 'Edit', edit_payment_path(@payment) %> |
-<%= link_to 'Back', payments_path %>
+  <%= link_to 'Edit', edit_payment_path(@payment) %> |
+  <%= link_to 'Back', payments_path %>
+</div>

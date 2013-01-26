@@ -34,6 +34,17 @@ h4 {color: $blue_mfm;}
   }
 }
 
+/* Corner
+-------------------------------------------------- */
+#corner {
+
+  .navbar {
+    left: auto;
+  }
+}
+
+
+
 /* Fix row-fluid thumbnails issue
 -------------------------------------------------- */
 .row-fluid {

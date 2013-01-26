@@ -31,7 +31,11 @@ gem 'rvm-capistrano', '~> 1.2.7'
 # User system
 gem 'devise', '~> 2.1.2'
 gem 'cancan', '~> 1.6.8'
+
+# Form and Validation
 gem 'simple_form', '~> 2.0.4'
+gem 'client_side_validations', '~> 3.2.1'
+gem 'client_side_validations-simple_form', '~> 2.0.1'
 
 # Must be outside of assets
 gem 'coffee-rails', '~> 3.2.1'
@@ -42,8 +46,9 @@ gem 'flash_render', '~> 1.0.1'
 
 # Third Part Service
 gem 'savon', '~> 2.0.2'
-gem 'tropo-webapi-ruby', '~> 0.1.11'
+#gem 'tropo-webapi-ruby', '~> 0.1.11' # Only for Tropo scripting
 gem 'yelp', '0.0.0', :git => 'git://github.com/wfha/yelp.git'
+gem 'rest-client', '~> 1.6.7'
 
 # Payment
 gem 'activemerchant', '~> 1.29.3'

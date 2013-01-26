@@ -71,7 +71,6 @@ class OrdersController < ApplicationController
       @order.user = @user
     else
       @order = Order.new(p)
-      @order.user.validate_phone = true
     end
 
     if @order.user.email.blank? && @order.user.password.blank? && @order.user.password_confirmation.blank?
@@ -92,9 +91,21 @@ class OrdersController < ApplicationController
           template = ERB.new(html)
           str = template.result(binding)
           client = Savon.client(wsdl: "https://ws.interfax.net/dfs.asmx?WSDL")
-          response = client.call(:send_char_fax, :message => {'Username' => 'wanfenghuaian2', 'Password' => 'gt850829',
+          response_interfax = client.call(:send_char_fax, :message => {'Username' => 'wanfenghuaian2', 'Password' => 'gt850829',
                                                               'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
-          puts response.body[:send_char_fax_response][:send_char_fax_result]
+
+          # Phone This Order
+          if response_interfax.body[:send_char_fax_response][:send_char_fax_result].to_i > 0
+            response_tropo = RestClient.get 'https://api.tropo.com/1.0/sessions', {:params => {
+                :token => '1943ff1f022d764787fba66b7531e63fb8c82021f212660238db3991819cf3cb49dc2b85050c879439c0ca67',
+                :action => 'create', :phone => '19797396180', :order_id => '003021'}}
+
+            if response_tropo.code == 200
+              puts "Msg sent HTTP/#{response_tropo.code}"
+            else
+              puts "ERROR | HTTP/#{response_tropo.code}"
+            end
+          end
 
           format.html { redirect_to @order, notice: 'Order was successfully created.' }
           format.mobile { redirect_to @order, notice: 'Order was successfully created.' }

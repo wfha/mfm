@@ -1,6 +1,6 @@
 $('.modal').remove();
 
-$('#modal_wrap').html('<%=j render "dish_modal" %>');
+$('#modal_wrap_cart_item').html('<%=j render "dish_modal" %>');
 
 modal = $('.modal')
 

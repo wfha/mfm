@@ -1,8 +1,10 @@
 class HomeController < ApplicationController
 
   before_filter :yelp_client, :only => [:store_reviews, :load_store_reviews]
+  before_filter :new_ticket
 
   def index
+
   end
 
   def stores
@@ -68,7 +70,7 @@ class HomeController < ApplicationController
   end
 
   def grocery
-    @store = Store.find(2)
+    @store = Store.find(1)
     @cart = current_cart(@store.id)
   end
 
@@ -94,4 +96,7 @@ class HomeController < ApplicationController
     @client = Yelp::Client.new
   end
 
+  def new_ticket
+    @ticket = Ticket.new
+  end
 end

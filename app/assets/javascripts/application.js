@@ -16,3 +16,5 @@
 //= require_directory ./lib
 //= require_directory .
 //= require_directory ./gmaps4rails
+//= require rails.validations
+//= require rails.validations.simple_form

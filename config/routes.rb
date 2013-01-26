@@ -1,5 +1,8 @@
 Mfm::Application.routes.draw do
 
+  resources :tickets
+
+
   resources :paypal_notifications
 
 

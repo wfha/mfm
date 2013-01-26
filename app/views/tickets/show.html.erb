@@ -1,0 +1,17 @@
+<div class="well">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <b>Email:</b>
+    <%= @ticket.email %>
+  </p>
+
+  <p>
+    <b>Content:</b>
+    <%= @ticket.content %>
+  </p>
+
+
+  <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+  <%= link_to 'Back', tickets_path %>
+</div>

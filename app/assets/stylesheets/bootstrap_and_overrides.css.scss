@@ -296,6 +296,9 @@ $fluidGridGutterWidth768:      percentage($gridGutterWidth768/$gridRowWidth768);
 
 
 
+
+
+
 // Customized variables
 // --------------------------------------------------
 
@@ -305,6 +308,18 @@ $blue_mfm: #0088cc;
 
 $wellBackground:                    $yellow_mfm_transparent;
 $tableBorder:                       $orange; // table and cell border
+
+$dropdownBackground:            $purple;
+$dropdownBorder:                rgba(0,0,0,.2);
+$dropdownDividerTop:            #e5e5e5;
+$dropdownDividerBottom:         $white;
+
+$dropdownLinkColor:             $white;
+$dropdownLinkColorHover:        $purple;
+$dropdownLinkColorActive:       $purple;
+
+$dropdownLinkBackgroundActive:  $white;
+$dropdownLinkBackgroundHover:   $white;
 
 // Customized Functions
 // --------------------------------------------------
@@ -316,6 +331,7 @@ $tableBorder:                       $orange; // table and cell border
   -o-border-radius: $radius;
   -webkit-border-radius: $radius;
 }
+
 
 
 

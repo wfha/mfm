@@ -6,7 +6,7 @@
 <table width='730px'>
   <col width='330'/>
   <col width='400'/>
-  <tr> <th rowspan='3'><h1 style='font-size:50px;'>777Burps</h1></th><td><h1>Order #: <%= @order.invoice %></h1></td> </tr>
+  <tr> <th rowspan='3'><h1 style='font-size:50px;'>777Burps</h1></th><td><h1>Order #: Invoice ABC</h1></td> </tr>
   <tr> <td>Order Time: <%= @order.created_at %></td> </tr>
   <tr> <td>Order To: <%= @order.store.name %></td> </tr>
 </table>
@@ -46,11 +46,11 @@
   <col width='100'/>
   <col width='100'/>
   <tr> <td><b>Pay by <%= @order.payment_type %>(Paid)</b></td><td align='right'>Subtotal</td><td><%= number_to_currency @order.cart.subtotal_price %></td> </tr>
-  <% if @order.payment_type == Order::PAYMENT_TYPES[0] %>
-      <tr> <td>Card#: <%= @card_number %></td>             <td align='right'>Tax</td>         <td><%= number_to_currency @order.cart.subtotal_price*0.0825 %></td>    </tr>
-      <tr> <td>Exp Date(MMYY): <%= @card_expires_on %></td><td align='right'>Delivery Fee</td><td><%= number_to_currency @order.cart.delivery_fee %></td>             </tr>
-      <tr> <td>Card Holder: <%= @card_number %></td>       <td align='right'>Tip</td>         <td><%= number_to_currency @order.tip %></td>                           </tr>
-      <tr> <td>Zipcode: <%= @card_verification %></td>     <td align='right'>Total</td>       <td><%= number_to_currency @order.cart.total_price + @order.tip %></td> </tr>
+  <% if @order.payment_type == 'cash' %>
+      <tr> <td>Card #: <%= @order.card_number %></td>             <td align='right'>Tax</td>         <td><%= number_to_currency @order.cart.subtotal_price*0.0825 %></td>    </tr>
+      <tr> <td>Exp At (MM/YY): <%= @order.card_expires_on %></td><td align='right'>Delivery Fee</td><td><%= number_to_currency @order.cart.delivery_fee %></td>             </tr>
+      <tr> <td>Card Holder: <%= @order.card_number %></td>       <td align='right'>Tip</td>         <td><%= number_to_currency @order.tip %></td>                           </tr>
+      <tr> <td>CVV #: <%= @order.card_verification %></td>     <td align='right'>Total</td>       <td><%= number_to_currency @order.cart.total_price + @order.tip %></td> </tr>
       <br/>
   <% else %>
       <tr> <td></td><td align='right'>Tax</td>         <td><%= number_to_currency @order.cart.subtotal_price*0.0825 %></td>    </tr>

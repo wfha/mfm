@@ -1,7 +1,7 @@
 <%= image_tag @store.image_url(:small).to_s if @store.image? %>
 <br/><br/>
 
-<%= simple_form_for(@store, :html => { :class => 'form-horizontal' }) do |f| %>
+<%= simple_form_for(@store, :html => { :class => 'form-horizontal' }, :validate => true ) do |f| %>
     <%= f.error_notification %>
     <%= f.input :name %>
     <%= f.input :desc %>

@@ -35,11 +35,12 @@ class Address < ActiveRecord::Base
 
   def gmaps4rails_marker_picture
     {
-        "picture" => "#{self.addressable.image_url(:small).to_s}",
+        #"picture" => "#{self.addressable.image_url(:small).to_s}",
+        'picture' => '/assets/mfm_icon.png',
         "width" => 50,
-        "height" => 64,
+        "height" => 50,
         "marker_anchor" => [ 5, 10],
-        "shadow_picture" => "/assets/yelp_logo.png" ,
+        #"shadow_picture" => "/assets/yelp_logo.png" ,
         "shadow_width" => "110",
         "shadow_height" => "110",
         "shadow_anchor" => [5, 10],

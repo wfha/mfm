@@ -75,17 +75,41 @@
   <!-- Corner
  ================================================== -->
   <div id="corner">
-    <div class="navbar navbar-inverse navbar-fixed-bottom"  style="left: auto;">
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">
         <a class="brand">&nbsp;&nbsp;&nbsp;Talk to us: </a>
         <ul class="nav">
-          <li><%= link_to image_tag('/assets/icons_glyphish/white/09-chat-2.png'), 'https://twitter.com/777burps', target: '_blank' %></li>
+          <li><%= link_to image_tag('/assets/icons_glyphish/white/09-chat-2.png'), 'javascript: $("#modal_wrap_ticket .modal").modal("show");' %></li>
           <li><%= link_to image_tag('/assets/icons_glyphish/white/210-twitterbird.png'), 'https://twitter.com/777burps', target: '_blank' %></li>
           <li><%= link_to image_tag('/assets/icons_glyphish/white/208-facebook.png'), 'https://www.facebook.com/pages/777burps/118070065016234', target: '_blank' %></li>
         </ul>
       </div>
     </div>
   </div>
+
+  <% if params[:controller] == 'home' %>
+      <div id="modal_wrap_cart_item"></div>
+      <div id="modal_wrap_ticket">
+        <div class="modal hide fade">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h3>Thank you for using Meals4.Me. </h3>
+          </div>
+          <div class="modal-body">
+            <%= simple_form_for(@ticket, validate: true, html: { id: 'ticket_form' }, remote: true) do |f| %>
+                <%= f.error_notification %>
+                <%= f.input :email, placeholder: 'Email', label: false %>
+                <%= f.input :content, as: :text, input_html: { cols: 50, rows: 5}, placeholder: 'Describe your problem or leave your advice', label: false %>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Close</button>
+            <button class='btn btn-primary' onclick="$('form#ticket_form').validate().submit();">Submit</button>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
 </div>
 
 <%= yield :scripts %>
