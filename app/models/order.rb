@@ -17,10 +17,17 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :user
 
+  # If using delivery, validate the address
+  with_options if: :is_delivery? do |opt|
+    opt.validates_with CustomValidators::Distance
+  end
+
+  # If using credit card, validate credit card
   with_options if: :pay_with_credit_card? do |opt|
-    opt.validates_with CustomValidators::CardNumber
+    opt.validates :card_number, presence: true
     opt.validates :card_verification, presence: true, format: { with: CustomValidators::CardVerification.regex, message: CustomValidators::CardVerification.hint }
     opt.validates :card_expires_on, presence: true
+    opt.validates_with CustomValidators::CardNumber
   end
 
   TIP_RATES = [['Tip w/ cash', 0], ['Tip 5%', 0.05], ['Tip 10%', 0.1], ['Tip 15%', 0.15], ['Tip 20%', 0.2], ['Tip 25%', 0.25], ['Tip 30%', 0.3]]
@@ -35,6 +42,10 @@ class Order < ActiveRecord::Base
 
   def pay_with_credit_card?
     payment_type == 'credit_card'
+  end
+
+  def is_delivery?
+    cart.delivery_type == 'delivery'
   end
 
   def paypal_url(return_url, notify_url)

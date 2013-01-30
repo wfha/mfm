@@ -1,0 +1,20 @@
+<div data-role="content" data-inset="false">
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {data: {ajax: false} }) do |f| %>
+      <%= f.input :email, placeholder: 'Email', label: false %>
+      <%= f.input :password, placeholder: 'Password', label: false %>
+
+      <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <% if devise_mapping.rememberable? -%>
+              <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => 'Remem.' %>
+          <% end -%>
+        </div>
+        <div class="ui-block-b">
+          <%= f.button :submit, "Sign in" %>
+        </div>
+      </div>
+  <% end %>
+
+  <br/><hr/><br/>
+  <%= render :partial => "users/shared/links" %>
+</div><!-- /content -->

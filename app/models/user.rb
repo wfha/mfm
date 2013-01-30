@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
+  # Include default users modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -17,10 +17,14 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :address
 
-  validates :email, presence: true, uniqueness: true, format: { with: CustomValidators::Email.regex, message: CustomValidators::Email.hint }
-  validates :firstname, presence: true, format: { with: CustomValidators::Name.regex, message: CustomValidators::Name.hint }
-  validates :lastname, presence: true, format: { with: CustomValidators::Name.regex, message: CustomValidators::Name.hint }
-  validates :password, presence: true, confirmation: true, format: { with: CustomValidators::Password.regex, message: CustomValidators::Password.hint }
+  validates :email, presence: true, uniqueness: true,
+            format: { with: CustomValidators::Email.regex, message: CustomValidators::Email.hint }
+  validates :firstname, presence: true,
+            format: { with: CustomValidators::Name.regex, message: CustomValidators::Name.hint }
+  validates :lastname, presence: true,
+            format: { with: CustomValidators::Name.regex, message: CustomValidators::Name.hint }
+  validates :password, presence: true, confirmation: true, :on => :create,
+            format: { with: CustomValidators::Password.regex, message: CustomValidators::Password.hint }
   validates :phone, presence: true
 
   def role?(role)

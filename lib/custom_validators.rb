@@ -17,12 +17,12 @@ module CustomValidators
   class Name
     def self.regex
       # By Feng Wan
-      # 3 - 20 letters only
-      /^[a-zA-Z]{3,20}$/
+      # 2 - 20 letters only
+      /^[a-zA-Z]{2,20}$/
     end
 
     def self.hint
-      "should be 3-20 of a-Z"
+      "should be 2-20 of a-Z"
     end
   end
 
@@ -97,6 +97,20 @@ module CustomValidators
 
     def self.hint
       "should be 3 numbers"
+    end
+  end
+
+  # Distance between User and Store
+  # Problem: Errors cannot be shown correctly on the form attributes!
+  class Distance < ActiveModel::Validator
+    def validate(record)
+      dis = record.store.address.distance_to(record.user.address.address)
+
+      if dis.to_s == 'NaN'
+        record.errors[:note] << "please enter a valid address"
+      elsif dis > record.store.delivery_radius
+        record.errors[:note] << "you are far away from this store, extra delivery fee may apply"
+      end
     end
   end
 end

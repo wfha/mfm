@@ -1,0 +1,29 @@
+<div data-role="content" >
+  <div class="ui-body ui-body-e" style="padding: 10px;;">
+    <h1>Listing tickets</h1>
+
+    <table>
+      <tr>
+        <th>Email</th>
+        <th>Content</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+      <% @tickets.each do |ticket| %>
+          <tr>
+            <td><%= ticket.email %></td>
+            <td><%= ticket.content %></td>
+            <td><%= link_to 'Show', ticket %></td>
+            <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
+            <td><%= link_to 'X', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+      <% end %>
+    </table>
+
+    <br />
+
+    <%= link_to 'New Ticket', new_ticket_path, data: { role: 'button' }, rel: 'external' %>
+  </div>
+</div>

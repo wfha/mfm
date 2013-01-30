@@ -1,59 +1,40 @@
+@flag = 'nothing'
+@waiting = 10000
+@timeout = 5000
+
 def mfm_say
   say "Hello, you got an order from meals for me dot com, invoice is " + $order_id
   ask "If correct, please press 1. If not, please press 0.", {
       :choices  => "[1 DIGITS]",
-      :timeout  => 15.0,
+      :timeout  => @timeout,
       :onChoice => lambda { |invitee|
         if invitee.value == "1"
           say "All right! We know it."
+          @flag = 'success'
           hangup
-          'Success 1'
         else
           say "thats o.k. now they will probably talk about you."
+          @flag = 'failure'
           hangup
-          'Success 2'
         end
       }
   }
 end
 
-def mfm_call(waiting_time)
-  wait(waiting_time)
+def mfm_call
   call '+' + $phone, {
       :onAnswer => lambda {
         mfm_say
-      },
-      :onTimeout => lambda {
-        wait(waiting_time)
-        call '+' + $phone, {
-            :onAnswer => lambda {
-              mfm_say
-            },
-            :onTimeout => lambda {
-              wait(waiting_time)
-              call '+' + $phone, {
-                  :onAnswer => lambda {
-                    mfm_say
-                  },
-                  :onTimeout => {
-                      # Report failure
-                  }
-              }
-            }
-        }
       }
   }
 end
 
-flag = 'nothing'
-waiting_time = 0
-
-flag = mfm_call(waiting_time)
-
 3.times {
-  unless flag != 'nothing' || $currentCall.isActive
-    flag = mfm_call(waiting_time)
+  if @flag == 'nothing'
+    mfm_call
   end
+
+  wait(@waiting)
 }
 
 # Tropo Example Script

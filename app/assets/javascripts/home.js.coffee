@@ -8,7 +8,7 @@ $ ->
   $('.load_trigger').bind 'ajax:before', ->
     pos = $(this).position()
     $('#load_box_wrap').css({position: "absolute", left: pos.left + 100, top: pos.top }).show()
-    $('#load_box').html('<img src="/assets/loading_1.gif" alt="Loading ...... " style="margin: 150px 150px;"/>')
+    $('#load_box').html('<img src="/assets/loading.gif" alt="Loading ...... " style="margin: 150px 150px;"/>')
 
   $('#load_box_wrap .close').click ->
     $(this).parent().hide()

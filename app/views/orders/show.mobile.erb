@@ -1,10 +1,9 @@
-<i>
-  <% flash.each do |type, message| %>
-      <div class="alert <%= twitterized_type(type) %>">
-        <a class="close" data-dismiss="alert">x</a>
-        <strong><%= message %></strong>
-      </div>
-  <% end %>
-</i>
-
-<h1>THis reustl page for MOBILE</h1>
+<div data-role="content">
+  <div class="ui-body ui-body-e" style="padding: 10px;;">
+    <h4>Your order has been taken. Thank you for ordering with us.</h4>
+    <h4>The estimated delivery time is 60 minutes. </h4>
+    <br/>
+    <%= link_to 'Back to restaurants', home_stores_path, data: { role: 'button' }  %>
+    <%= link_to 'I want some grocery!', home_grocery_path, data: { role: 'button' }  %>
+  </div>
+</div><!-- /content -->

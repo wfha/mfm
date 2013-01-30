@@ -1,0 +1,16 @@
+<div data-role="content" >
+  <div class="ui-body ui-body-e" style="padding: 10px;;">
+    <h1>New ticket</h1>
+
+    <%= simple_form_for(@ticket, validate: true, html: { data: { ajax: false }}) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :email, placeholder: 'Email', label: false %>
+        <%= f.input :content, placeholder: 'Describe problem or leave advice', label: false %>
+        <%= f.button :submit %>
+    <% end %>
+
+    <br/><hr/><br/>
+    <%= link_to 'Back to restaurants', home_stores_path, data: { role: 'button' }, rel: 'external' %>
+    <%= link_to 'I want some grocery!', home_grocery_path, data: { role: 'button' }, rel: 'external' %>
+  </div>
+</div>

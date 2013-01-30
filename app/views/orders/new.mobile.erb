@@ -4,14 +4,15 @@
     <% unless user_signed_in? %>
         <div data-role="collapsible">
           <h3>Has Account?</h3>
-          <%= form_for("user", :url => user_session_path) do |f| %>
-              <%= f.text_field :email, :placeholder => 'Email' %>
+          <%= simple_form_for("user", url: user_session_path, html: { data: { ajax: false }}) do |f| %>
+              <%= f.input :email, placeholder: 'Email', label: false %>
+              <%= f.input :password, placeholder: 'Password', label: false %>
               <div class="ui-grid-a">
                 <div class="ui-block-a">
-                  <%= f.password_field :password, :placeholder => 'Password' %>
+                  <%= f.input :remember_me, as: :boolean, label: false, inline_label: 'Remem.' %>
                 </div>
                 <div class="ui-block-b">
-                  <%= f.submit 'Sign in' %>
+                  <%= f.button :submit, "Sign in" %>
                 </div>
               </div>
           <% end %>
@@ -20,65 +21,56 @@
 
     <div data-role="collapsible" data-collapsed="false">
       <% if user_signed_in? %>
-          <h3>Welcome, our user!</h3>
+          <h3>Welcome, <%= current_user.firstname %> <%= current_user.lastname %>!</h3>
       <% else %>
           <h3>No Account?</h3>
       <% end %>
-      <%= form_for(@order) do |f| %>
-          <% if @order.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
-                <ul>
-                  <% @order.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                  <% end %>
-                </ul>
+      <%= simple_form_for(@order, validate: true, html: { data: { ajax: false }}) do |f| %>
+          <%= f.error_notification %>
+          <%= f.input :note, :placeholder => 'Note', label: false %>
+          <%= f.fields_for :user do |builder| %>
+              <div class="ui-grid-a">
+                <div class="ui-block-a"><%= builder.input :firstname, placeholder: 'Firstname', label: false %></div>
+                <div class="ui-block-b"><%= builder.input :lastname, placeholder: 'Lastname', label: false %></div>
               </div>
-          <% end %>
-          <div class="ui-grid-a">
-            <div class="ui-block-a">
-              <%= f.text_field :note, :placeholder => 'Note' %>
-            </div>
-            <div class="ui-block-b">
-              <%= f.select :payment_type, Order::PAYMENT_TYPES, prompt: 'Select a payment method' %>
-            </div>
-          </div>
-          <div class="field">
-            <%= f.fields_for :user do |builder| %>
-                <div class="ui-grid-a">
-                  <div class="ui-block-a">
-                    <%= builder.text_field :firstname, :placeholder => 'Firstname' %>
-                  </div>
-                  <div class="ui-block-b">
-                    <%= builder.text_field :lastname, :placeholder => 'Lastname' %>
-                  </div>
-                </div>
 
-                <%= builder.text_field :phone, :placeholder => 'Phone' %>
-                <%= builder.fields_for :address do |addr| %>
-                    <%= addr.text_field :address1, :placeholder => 'Address' %>
-                    <%= addr.text_field :address2, :placeholder => 'Apt / Building / Suite' %>
+              <%= builder.input :phone, :placeholder => 'Phone', :label => false %>
+              <%= builder.fields_for :address do |addr| %>
+                  <%= addr.input :address1, :placeholder => 'Address', :label => false %>
+                  <%= addr.input :address2, :placeholder => 'Apt / Building / Suite', :label => false %>
+                  <%= addr.input :city, :placeholder => 'City', :label => false %>
+              <% end %>
+
+              <%= f.input :payment_type, collection: @order.payment_types %>
+
+              <div id="tip_wrap" style="display: none;">
+                <%= f.input :tip_rate, collection: Order::TIP_RATES, label: 'Tip Rate', selected: Order::TIP_RATES[0] %>
+              </div>
+
+              <div id="credit_card_wrap" style="display: none;">
+                <% @order.store.payments.each do |p| %>
+                    <%= image_tag p.image_url(:micro).to_s if p.image? %>
                 <% end %>
-                <% unless user_signed_in? %>
-                    <br/>
-                    <legend>Create Account (Optional)</legend>
-                    <%= builder.text_field :email, :placeholder => 'Email' %>
-                    <div class="ui-grid-a">
-                      <div class="ui-block-a">
-                        <%= builder.password_field :password, :placeholder => 'Password' %>
-                      </div>
-                      <div class="ui-block-b">
-                        <%= builder.password_field :password_confirmation, :placeholder => 'Confirmation' %>
-                      </div>
-                    </div>
-                <% end %>
-            <% end %>
-          </div>
-          <div class="actions">
-            <%= f.hidden_field :store_id %>
-            <%= f.hidden_field :cart_id %>
-            <%= f.submit 'Submit Order' %>
-          </div>
+                <%= f.input :card_number, label: false, placeholder: "Credit Card Number" %>
+                <%= f.input :card_verification, label: false, placeholder: "CVV Code" %>
+                <%= f.input :card_expires_on, :as => :date, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :order => [:month, :year] %>
+              </div>
+
+              <% unless user_signed_in? %>
+                  <br/>
+                  <legend>Create Account (Optional)</legend>
+                  <%= builder.input :email, placeholder: 'Email', label: false, validate: false %>
+                  <div class="ui-grid-a">
+                    <div class="ui-block-a"><%= builder.input :password, placeholder: 'Password', label: false, validate: false %></div>
+                    <div class="ui-block-b"><%= builder.input :password_confirmation, placeholder: 'Confirmation', label: false, validate: false %></div>
+                  </div>
+              <% end %>
+          <% end %>
+
+          <br/><hr/><br/>
+          <%= f.input :store_id, :as => :hidden %>
+          <%= f.input :cart_id, :as => :hidden %>
+          <%= f.button :submit %>
       <% end %>
     </div>
   </div>

@@ -1,30 +1,8 @@
-/* Background image */
-.ui-page {
-  background: #000000 url(/assets/bg_v1_m.jpg) repeat;
-  background-attachment:fixed;
-}
-
-/* the text in nav */
-.nav-glyphish .ui-btn .ui-btn-inner {
-  padding-top: 40px !important;
-}
-
-/* the image in nav */
-.nav-glyphish .ui-btn .ui-icon {
-  width: 30px!important;
-  height: 30px!important;
-  margin-left: -15px !important;
-  box-shadow: none!important;
-  -moz-box-shadow: none!important;
-  -webkit-box-shadow: none!important;
-  -webkit-border-radius: 0 !important;
-  border-radius: 0 !important;
-}
 
 #brand span.ui-btn-inner {padding-top: 23px !important;}
-#chat .ui-icon {background:  url(/assets/icons-glyphish/white/09-chat-2.png) 50% 50% no-repeat;}
-#user .ui-icon {background:  url(/assets/icons-glyphish/white/111-user.png) 50% 50% no-repeat;}
-#skull .ui-icon {background:  url(/assets/icons-glyphish/white/80-shopping-cart.png) 50% 50% no-repeat;}
+#support_icon .ui-icon {background:  url(/assets/icons_glyphish/white/09-chat-2.png) 50% 50% no-repeat;}
+#user_icon .ui-icon {background:  url(/assets/icons_glyphish/white/111-user.png) 50% 50% no-repeat;}
+#cart_icon .ui-icon {background:  url(/assets/icons_glyphish/white/80-shopping-cart.png) 50% 50% no-repeat;}
 
 /* the text in button for delivery_type */
 .button-glyphish .ui-btn .ui-btn-inner {

@@ -6,6 +6,7 @@ class Address < ActiveRecord::Base
   belongs_to :addressable, :polymorphic => true
 
   validates :address1, presence: true
+  validates :city, presence: true
 
   # ========== geocoder ==========
 
@@ -14,7 +15,11 @@ class Address < ActiveRecord::Base
   after_validation :geocode
 
   def address
-    [address1, address2, city, state, country, zip].compact.join(', ')
+    if address2.empty?
+      [address1, city, state, country, zip].compact.join(', ')
+    else
+      [address1, address2, city, state, country, zip].compact.join(', ')
+    end
   end
 
   # ========== gmaps4rails ==========

@@ -4,30 +4,48 @@
 
     <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
         <%= f.error_notification %>
-
         <%= f.input :email %>
         <%= f.input :firstname %>
         <%= f.input :lastname %>
         <%= f.input :phone %>
-
         <% current_user.build_address if current_user.address.nil? %>
         <%= f.fields_for :address do |addr| %>
             <%= addr.input :address1 %>
             <%= addr.input :address2 %>
+            <%= addr.input :city %>
         <% end %>
-
         <h4 style="margin-left: 50px;">Leave blank if you don't want to change it</h4>
         <%= f.input :password, :input_html => { :autocomplete => "off" } %>
         <%= f.input :password_confirmation %>
 
         <%= f.input :current_password, :hint => 'Use current password to confirm your changes' %>
         <%= f.button :submit, :class => 'btn btn-primary' %>
+        <%= link_to "Back to Stores", home_index_path, :class => 'btn' %>
     <% end %>
+  </div>
 
-    <h3>Cancel my account</h3>
+  <div class="span6 well">
+    <h2>My Orders</h2>
 
-    <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
-
-    <%= link_to "Back", :back %>
+    <table class="table table-striped" >
+      <% resource.orders.each do |order| %>
+          <tr>
+            <th>Invoice: <%= order.id %></th>
+            <th><%= order.cart.delivery_type %>@<%= order.store.name %></th>
+            <th><%=  order.created_at.strftime("%I:%M%P %m/%d/%Y")  %></th>
+          </tr>
+          <tr style="background-color: yellow;">
+            <td></td>
+            <td>
+              <b>Items: </b><%= order.cart.cart_items.size %>,
+              <b>Total: </b><%= number_to_currency order.cart.total_price %>
+            </td>
+            <td>
+              <button class="btn btn-primary">Details</button>
+              <button class="btn btn-primary">Reorder</button>
+            </td>
+          </tr>
+      <% end %>
+    </table>
   </div>
 </div>

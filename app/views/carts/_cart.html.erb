@@ -38,10 +38,10 @@
         <span class="right20"><%= number_to_currency(cart.total_price) %></span>
       </li>
       <li class="cart_footer" style="margin-top: 20px;">
-        <% if cart.total_price > cart.store.delivery_minimum || cart.delivery_type == "pick_up" %>
-            <%= link_to 'Proceed', new_order_path(store_id: cart.store_id), method: :get, :class => 'btn btn-primary pull-right' %>
-        <% else %>
+        <% if cart.delivery_type == "delivery" && cart.total_price < cart.store.delivery_minimum %>
             <%= link_to "Min.  #{number_to_currency(cart.store.delivery_minimum)}", 'javascript:;', :class => 'btn pull-right' %>
+        <% else %>
+            <%= link_to 'Proceed', new_order_path(store_id: cart.store_id), method: :get, :class => 'btn btn-primary pull-right' %>
         <% end %>
         <%= link_to 'Empty cart', cart, :class => 'btn', :remote => true, method: :delete, confirm: 'Are you sure?' %>
       </li>

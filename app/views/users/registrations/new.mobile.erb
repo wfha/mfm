@@ -1,0 +1,23 @@
+<div data-role="content" data-inset="false">
+  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),
+                      :validate => true, html: { data: { ajax: false }}) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="ui-grid-a">
+        <div class="ui-block-a"><%= f.input :firstname, :placeholder => 'Firstname', :label => false %></div>
+        <div class="ui-block-b"><%= f.input :lastname, :placeholder => 'Lastname', :label => false %></div>
+      </div>
+      <%= f.input :email, :placeholder => 'Email', :label => false %>
+      <div class="ui-grid-a">
+        <div class="ui-block-a"><%= f.input :password, :placeholder => 'Password', :label => false %></div>
+        <div class="ui-block-b"><%= f.input :password_confirmation, :placeholder => 'Confirmation', :label => false %></div>
+      </div>
+      <div>
+        <%= f.input :phone, as: :hidden, input_html: { value: '000000000' } %>
+        <%= f.button :submit, "Sign up" %>
+      </div>
+  <% end %>
+
+  <br/><hr/><br/>
+  <%= render "users/shared/links" %>
+</div><!-- /content -->

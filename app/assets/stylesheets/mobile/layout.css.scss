@@ -1,0 +1,42 @@
+/* CSS for simple_form */
+
+.alert {
+  line-height: 50px;
+}
+
+.alert-error {
+
+  color: #ff0000;
+}
+
+span.help-inline {
+
+  color: #ff0000;
+}
+
+
+/* Custom Theme */
+/* ======================================================================= */
+
+/* Background image */
+.ui-page {
+  background: #000000 url(/assets/bg_v1_m.jpg) repeat;
+  background-attachment:fixed;
+}
+
+/* the text in nav */
+.nav-glyphish .ui-btn .ui-btn-inner {
+  padding-top: 40px !important;
+}
+
+/* the image in nav */
+.nav-glyphish .ui-btn .ui-icon {
+  width: 30px!important;
+  height: 30px!important;
+  margin-left: -15px !important;
+  box-shadow: none!important;
+  -moz-box-shadow: none!important;
+  -webkit-box-shadow: none!important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+}

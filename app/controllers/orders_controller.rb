@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     @cart = current_cart(params[:store_id])
-    if @cart.total_price < @cart.store.delivery_minimum
+    if @cart.delivery_type == 'delivery' && @cart.total_price < @cart.store.delivery_minimum
       redirect_to home_stores_url, notice: "The order doesn't meet minimum!"
       return
     end
@@ -65,7 +65,7 @@ class OrdersController < ApplicationController
 
     if user_signed_in?
       @user = User.find(p[:user_attributes][:id])
-      @user.update_attributes(p[:user_attributes])
+      @user.update_attributes!(p[:user_attributes])
       p.delete(:user_attributes)
       @order = Order.new(p)
       @order.user = @user
@@ -116,6 +116,7 @@ class OrdersController < ApplicationController
         @order.user.email = ""
 
         format.html { render action: "new" }
+        format.mobile { render action: "new" }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end

@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require_directory .
 //= require jquery.mobile
+//= require rails.validations
+//= require rails.validations.simple_form

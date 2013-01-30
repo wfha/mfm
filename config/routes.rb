@@ -1,12 +1,6 @@
 Mfm::Application.routes.draw do
 
-  resources :tickets
-
-
-  resources :paypal_notifications
-
-
-  devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations", sessions: 'users/sessions', passwords: 'users/passwords' }
 
   match 'home/index' => 'home#index', :as => :home_index
 
@@ -32,8 +26,10 @@ Mfm::Application.routes.draw do
   resources :cart_items
   resources :orders
   resources :payments
+  resources :paypal_notifications
   resources :roles
   resources :tags
+  resources :tickets
 
   resources :stores do
     resources :coupons, :dish_choices, :dish_features, :hours, :menus, :plans

@@ -1,7 +1,7 @@
-<div data-role="content" data-inset="false">
+<div data-role="content" data-inset="false" class="ui-body ui-body-e">
   <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, data: {ajax: false} }) do |f| %>
       <%= devise_error_messages! %>
       <%= f.email_field :email, :placeholder => 'Email' %>
       <div class="ui-grid-a">
@@ -15,7 +15,14 @@
       <%= f.text_field :phone, :placeholder => 'Phone' %>
       <%= f.fields_for :address do |addr| %>
           <%= addr.text_field :address1, :placeholder => 'Address' %>
-          <%= addr.text_field :address2, :placeholder => 'Apt / Building / Suite' %>
+          <div class="ui-grid-a">
+            <div class="ui-block-a">
+              <%= addr.text_field :address2, :placeholder => 'Apt / Building / Suite' %>
+            </div>
+            <div class="ui-block-b">
+              <%= addr.text_field :city, :placeholder => 'City' %>
+            </div>
+          </div>
       <% end %>
 
       <br/>
@@ -30,13 +37,18 @@
         </div>
       </div>
       <%= f.password_field :current_password, :placeholder => 'Current Password' %>
-
+      <br/>
       <%= f.submit "Update" %>
   <% end %>
 
-  <h3>Cancel my account</h3>
+  <br/><hr/>
+  <div class="ui-grid-a">
+    <div class="ui-block-a">
+      <%= link_to "to Stores", home_stores_path, data: { role: 'button' }, rel: 'external' %>
+    </div>
+    <div class="ui-block-b">
+      <%= link_to "to Grocery", home_grocery_path, data: { role: 'button' }, rel: 'external' %>
+    </div>
+  </div>
 
-  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
-
-  <%= link_to "Back", :back %>
 </div><!-- /content -->

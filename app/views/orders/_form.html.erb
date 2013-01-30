@@ -1,21 +1,22 @@
 <ul class="thumbnails" style="margin: 0px;">
   <li class="span6" style="margin: 0px;">
     <div class="thumbnail">
-      <%= simple_form_for(@order, :validate => true, :html => { :style => "padding: 10px 15px;" } ) do |f| %>
+      <%= simple_form_for(@order, validate: true, html: { style: "padding: 10px 15px;" } ) do |f| %>
           <%= f.error_notification %>
           <h4>Finish the order</h4>
-          <%= f.input :note, :as => :text, :input_html => {:cols => 50, :rows => 2}, :placeholder => 'Special instructions', :label => false %>
+          <%= f.input :note, as: :text, input_html: {cols: 50, rows: 2}, placeholder: 'Special instructions', label: false %>
           <%= f.fields_for :user do |builder| %>
               <%= builder.input :firstname, :placeholder => 'Firstname', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
               <%= builder.input :lastname, :placeholder => 'Lastname', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
               <%= builder.input :phone, :placeholder => 'Phone', :label => false %>
               <% if @cart.delivery_type == 'delivery' %>
                   <%= builder.fields_for :address do |addr| %>
-                      <%= addr.input :address1, :placeholder => 'Address', :label => false %>
-                      <%= addr.input :address2, :placeholder => 'Apt / Building / Suite', :label => false %>
+                      <%= addr.input :address1, placeholder: 'Address', label: false %>
+                      <%= addr.input :address2, placeholder: 'Apt / Building / Suite', label: false %>
+                      <%= addr.input :city, placeholder: 'City', label: false %>
                   <% end %>
               <% end %>
-              <%= f.input :payment_type, collection: @order.payment_types, as: :radio, item_wrapper_class: 'inline', checked: @order.payment_types[0] %>
+              <%= f.input :payment_type, collection: @order.payment_types, as: :radio, item_wrapper_class: 'inline' %>
 
               <div id="tip_wrap" style="display: none;">
                 <%= f.input :tip_rate, collection: Order::TIP_RATES, prompt: nil, label: 'Tip Rate', selected: Order::TIP_RATES[0], :wrapper_html => { :class => "sf_2_in_1" } %>

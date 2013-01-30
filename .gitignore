@@ -14,8 +14,9 @@
 /log/*.log
 /tmp
 
-# Ignore database config
+# Ignore database/app config
 /config/database.yml
+/config/app_config.yml
 
 # Ignore IDE config
 /.idea

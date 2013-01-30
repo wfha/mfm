@@ -2,10 +2,6 @@
   <%= render 'store_header' %>
 
   <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="e">
-    <li data-role="list-divider">Address:</li>
-    <li><%= @store.address.address1 %></li>
-    <li data-role="list-divider">Phone:</li>
-    <li><%= @store.phone %></li>
     <li data-role="list-divider">Tags:</li>
     <li>
       <% @store.tags.each do |t| %>
@@ -25,5 +21,7 @@
           <p style="font-size:14px;margin-top: 3px;;"><%= h.open_at %> - <%= h.close_at %></p>
       <% end %>
     </li>
+    <li data-role="list-divider">Delivery Policy:</li>
+    <li><p>Within 3 miles.</p></li>
   </ul>
 </div><!-- /content -->
