@@ -51,5 +51,5 @@ gem 'yelp', '0.0.0', :git => 'git://github.com/wfha/yelp.git'
 gem 'rest-client', '~> 1.6.7'
 
 # Payment
-gem 'activemerchant', '~> 1.29.3'
-gem 'braintree', '~> 2.22.0'
+#gem 'activemerchant', '~> 1.29.3'
+#gem 'braintree', '~> 2.22.0'
