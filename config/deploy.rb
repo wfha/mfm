@@ -17,7 +17,7 @@ set :repository, "git@github.com:wfha/#{application}.git"
 set :branch, "master"
 
 # Fix sh bundle not found problem
-set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
+set :rvm_ruby_string, :local
 set :rvm_type, :user  # Don't use system-wide RVM
 
 # Create symbolic links for capistrano
