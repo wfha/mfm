@@ -23,7 +23,6 @@
         <ul class="nav">
           <li id="store"><%= link_to 'Restaurant Delivery', home_stores_path %></li>
           <li id="grocery"><%= link_to 'Grocery Delivery', home_grocery_path %></li>
-          <li><%= link_to 'Customer Service', home_index_path %></li>
           <% if user_signed_in? %>
               <li class=""><%= link_to current_user.firstname[0] + ". " + current_user.lastname, edit_user_registration_path %></li>
               <li class=""><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>

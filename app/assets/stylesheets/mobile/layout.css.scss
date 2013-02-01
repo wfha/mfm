@@ -40,3 +40,13 @@ span.help-inline {
   -webkit-border-radius: 0 !important;
   border-radius: 0 !important;
 }
+
+
+/* Form Input Label
+ * Label is necessary for placeholder_polyfill
+ * However, I don't want the label be seen
+-------------------------------------------------- */
+form.hide_input_label label.control-label {
+  display: none;
+}
+

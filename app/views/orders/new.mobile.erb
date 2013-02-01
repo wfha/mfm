@@ -4,9 +4,9 @@
     <% unless user_signed_in? %>
         <div data-role="collapsible">
           <h3>Has Account?</h3>
-          <%= simple_form_for("user", url: user_session_path, html: { data: { ajax: false }}) do |f| %>
-              <%= f.input :email, placeholder: 'Email', label: false %>
-              <%= f.input :password, placeholder: 'Password', label: false %>
+          <%= simple_form_for("user", url: user_session_path, html: { data: { ajax: false }, class: 'hide_input_label' }) do |f| %>
+              <%= f.input :email, placeholder: 'Email' %>
+              <%= f.input :password, placeholder: 'Password' %>
               <div class="ui-grid-a">
                 <div class="ui-block-a">
                   <%= f.input :remember_me, as: :boolean, label: false, inline_label: 'Remem.' %>
@@ -25,20 +25,20 @@
       <% else %>
           <h3>No Account?</h3>
       <% end %>
-      <%= simple_form_for(@order, validate: true, html: { data: { ajax: false }}) do |f| %>
+      <%= simple_form_for(@order, validate: true, html: { data: { ajax: false }, class: 'hide_input_label' }) do |f| %>
           <%= f.error_notification %>
-          <%= f.input :note, :placeholder => 'Note', label: false %>
+          <%= f.input :note, :placeholder => 'Note' %>
           <%= f.fields_for :user do |builder| %>
               <div class="ui-grid-a">
-                <div class="ui-block-a"><%= builder.input :firstname, placeholder: 'Firstname', label: false %></div>
-                <div class="ui-block-b"><%= builder.input :lastname, placeholder: 'Lastname', label: false %></div>
+                <div class="ui-block-a"><%= builder.input :firstname, placeholder: 'Firstname' %></div>
+                <div class="ui-block-b"><%= builder.input :lastname, placeholder: 'Lastname' %></div>
               </div>
 
-              <%= builder.input :phone, :placeholder => 'Phone', :label => false %>
+              <%= builder.input :phone, :placeholder => 'Phone' %>
               <%= builder.fields_for :address do |addr| %>
-                  <%= addr.input :address1, :placeholder => 'Address', :label => false %>
-                  <%= addr.input :address2, :placeholder => 'Apt / Building / Suite', :label => false %>
-                  <%= addr.input :city, :placeholder => 'City', :label => false %>
+                  <%= addr.input :address1, :placeholder => 'Address' %>
+                  <%= addr.input :address2, :placeholder => 'Apt / Building / Suite' %>
+                  <%= addr.input :city, :placeholder => 'City' %>
               <% end %>
 
               <%= f.input :payment_type, collection: @order.payment_types %>
@@ -51,18 +51,18 @@
                 <% @order.store.payments.each do |p| %>
                     <%= image_tag p.image_url(:micro).to_s if p.image? %>
                 <% end %>
-                <%= f.input :card_number, label: false, placeholder: "Credit Card Number" %>
-                <%= f.input :card_verification, label: false, placeholder: "CVV Code" %>
+                <%= f.input :card_number, placeholder: "Credit Card Number" %>
+                <%= f.input :card_verification, placeholder: "CVV Code" %>
                 <%= f.input :card_expires_on, :as => :date, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :order => [:month, :year] %>
               </div>
 
               <% unless user_signed_in? %>
                   <br/>
                   <legend>Create Account (Optional)</legend>
-                  <%= builder.input :email, placeholder: 'Email', label: false, validate: false %>
+                  <%= builder.input :email, placeholder: 'Email', validate: false %>
                   <div class="ui-grid-a">
-                    <div class="ui-block-a"><%= builder.input :password, placeholder: 'Password', label: false, validate: false %></div>
-                    <div class="ui-block-b"><%= builder.input :password_confirmation, placeholder: 'Confirmation', label: false, validate: false %></div>
+                    <div class="ui-block-a"><%= builder.input :password, placeholder: 'Password', validate: false %></div>
+                    <div class="ui-block-b"><%= builder.input :password_confirmation, placeholder: 'Confirmation', validate: false %></div>
                   </div>
               <% end %>
           <% end %>

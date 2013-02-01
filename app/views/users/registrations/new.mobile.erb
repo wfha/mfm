@@ -1,16 +1,16 @@
 <div data-role="content" data-inset="false">
   <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),
-                      :validate => true, html: { data: { ajax: false }}) do |f| %>
+                      :validate => true, html: { data: { ajax: false }, class: 'hide_input_label' }) do |f| %>
       <%= f.error_notification %>
 
       <div class="ui-grid-a">
-        <div class="ui-block-a"><%= f.input :firstname, :placeholder => 'Firstname', :label => false %></div>
-        <div class="ui-block-b"><%= f.input :lastname, :placeholder => 'Lastname', :label => false %></div>
+        <div class="ui-block-a"><%= f.input :firstname, :placeholder => 'Firstname' %></div>
+        <div class="ui-block-b"><%= f.input :lastname, :placeholder => 'Lastname' %></div>
       </div>
-      <%= f.input :email, :placeholder => 'Email', :label => false %>
+      <%= f.input :email, :placeholder => 'Email' %>
       <div class="ui-grid-a">
-        <div class="ui-block-a"><%= f.input :password, :placeholder => 'Password', :label => false %></div>
-        <div class="ui-block-b"><%= f.input :password_confirmation, :placeholder => 'Confirmation', :label => false %></div>
+        <div class="ui-block-a"><%= f.input :password, :placeholder => 'Password' %></div>
+        <div class="ui-block-b"><%= f.input :password_confirmation, :placeholder => 'Confirmation' %></div>
       </div>
       <div>
         <%= f.input :phone, as: :hidden, input_html: { value: '000000000' } %>

@@ -1,7 +1,8 @@
 <div data-role="content" data-inset="false">
-  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {data: {ajax: false} }) do |f| %>
-      <%= f.input :email, placeholder: 'Email', label: false %>
-      <%= f.input :password, placeholder: 'Password', label: false %>
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),
+                      html: { data: { ajax: false }, class: 'hide_input_label' }) do |f| %>
+      <%= f.input :email, placeholder: 'Email' %>
+      <%= f.input :password, placeholder: 'Password' %>
 
       <div class="ui-grid-a">
         <div class="ui-block-a">

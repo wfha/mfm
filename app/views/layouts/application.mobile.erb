@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mfm</title>
+  <title>Meals4.Me</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <%= stylesheet_link_tag    "mobile/application", :media => "all" %>
   <%= javascript_include_tag "mobile/application" %>
@@ -23,7 +23,7 @@
         <li style="width:20%"><%= link_to 'Support', 'javascript:;', data: {icon: 'custom'}, id: 'support_icon' %></li>
         <li style="width:20%">
           <% if user_signed_in? %>
-              <%= link_to 'User', 'javascript:;', data: {icon: 'custom'}, id: 'user_icon', method: 'delete' %>
+              <%= link_to current_user.firstname[0] + ". " + current_user.lastname, 'javascript:;', data: {icon: 'custom'}, id: 'user_icon', method: 'delete' %>
           <% else %>
               <%= link_to 'User', new_user_session_path, data: {icon: 'custom'}, id: 'user_icon', rel: "external" %>
           <% end %>

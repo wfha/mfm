@@ -1,19 +1,19 @@
 <ul class="thumbnails" style="margin: 0px;">
   <li class="span6" style="margin: 0px;">
     <div class="thumbnail">
-      <%= simple_form_for(@order, validate: true, html: { style: "padding: 10px 15px;" } ) do |f| %>
+      <%= simple_form_for(@order, validate: true, html: { style: "padding: 10px 15px;", class: 'hide_input_label' } ) do |f| %>
           <%= f.error_notification %>
           <h4>Finish the order</h4>
-          <%= f.input :note, as: :text, input_html: {cols: 50, rows: 2}, placeholder: 'Special instructions', label: false %>
+          <%= f.input :note, as: :text, input_html: {cols: 50, rows: 2}, placeholder: 'Special instructions' %>
           <%= f.fields_for :user do |builder| %>
-              <%= builder.input :firstname, :placeholder => 'Firstname', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
-              <%= builder.input :lastname, :placeholder => 'Lastname', :label => false, :wrapper_html => { :class => "sf_2_in_1" } %>
-              <%= builder.input :phone, :placeholder => 'Phone', :label => false %>
+              <%= builder.input :firstname, :placeholder => 'Firstname', :wrapper_html => { :class => "sf_2_in_1" } %>
+              <%= builder.input :lastname, :placeholder => 'Lastname', :wrapper_html => { :class => "sf_2_in_1" } %>
+              <%= builder.input :phone, :placeholder => 'Phone' %>
               <% if @cart.delivery_type == 'delivery' %>
                   <%= builder.fields_for :address do |addr| %>
-                      <%= addr.input :address1, placeholder: 'Address', label: false %>
-                      <%= addr.input :address2, placeholder: 'Apt / Building / Suite', label: false %>
-                      <%= addr.input :city, placeholder: 'City', label: false %>
+                      <%= addr.input :address1, placeholder: 'Address' %>
+                      <%= addr.input :address2, placeholder: 'Apt / Building / Suite' %>
+                      <%= addr.input :city, placeholder: 'City' %>
                   <% end %>
               <% end %>
               <%= f.input :payment_type, collection: @order.payment_types, as: :radio, item_wrapper_class: 'inline' %>
@@ -26,8 +26,8 @@
                 <% @order.store.payments.each do |p| %>
                     <%= image_tag p.image_url(:micro).to_s if p.image? %>
                 <% end %>
-                <%= f.input :card_number, label: false, placeholder: "Credit Card Number" %>
-                <%= f.input :card_verification, label: false, placeholder: "CVV Code" %>
+                <%= f.input :card_number, placeholder: "Credit Card Number" %>
+                <%= f.input :card_verification, placeholder: "CVV Code" %>
                 <%= f.input :card_expires_on, :as => :date, :wrapper_html => { :class => "sf_2_in_1" },
                             :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :order => [:month, :year] %>
               </div>
@@ -35,9 +35,9 @@
               <% unless user_signed_in? %>
                   <br/>
                   <h4>Get an account (Optional)</h4>
-                  <%= builder.input :email, :placeholder => 'Email', :label => false, :validate => false %>
-                  <%= builder.input :password, :placeholder => 'Password', :label => false, :wrapper_html => { :class => "sf_2_in_1" }, :validate => false %>
-                  <%= builder.input :password_confirmation, :placeholder => 'Confirmation', :label => false, :wrapper_html => { :class => "sf_2_in_1" }, :validate => false %>
+                  <%= builder.input :email, :placeholder => 'Email', :validate => false %>
+                  <%= builder.input :password, :placeholder => 'Password', :wrapper_html => { :class => "sf_2_in_1" }, :validate => false %>
+                  <%= builder.input :password_confirmation, :placeholder => 'Confirmation', :wrapper_html => { :class => "sf_2_in_1" }, :validate => false %>
               <% end %>
           <% end %>
 
@@ -51,11 +51,11 @@
   <li class="span6">
     <% unless user_signed_in? %>
         <div class="thumbnail">
-          <%= simple_form_for("user", :url => user_session_path, :html => { :style => "padding: 10px 15px;" }) do |f| %>
+          <%= simple_form_for("user", url: user_session_path, html: { style: "padding: 10px 15px;", class: 'hide_input_label' }) do |f| %>
               <h4>Already has an account?</h4>
-              <%= f.input :email, :placeholder => 'Email', :label => false %>
-              <%= f.input :password, :placeholder => 'Password', :label => false %>
-              <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => 'Remember me' %>
+              <%= f.input :email, :placeholder => 'Email' %>
+              <%= f.input :password, :placeholder => 'Password' %>
+              <%= f.input :remember_me, :as => :boolean, label: false, :inline_label => 'Remember me' %>
               <%= f.button :submit, 'Sign in', :class => 'btn btn-primary' %>
 
               <br/><br/>
