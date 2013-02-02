@@ -31,7 +31,7 @@ class Address < ActiveRecord::Base
   end
 
   def gmaps4rails_infowindow
-    "<b>#{self.address1}</b><br/>#{self.addressable.name}"
+    "<b>#{self.addressable.name}</b><br/>#{self.address1}"
   end
 
   def gmaps4rails_title

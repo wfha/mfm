@@ -1,16 +1,16 @@
 <div class="row-fluid">
   <div class="span4 well">
     <%= image_tag "/assets/mfm_logo.png" %>
+    <br/>
     <h4>Sign in</h4>
     <br/>
 
-    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name),
-                        :html => { :class => 'hide_input_label' }) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),
+                        html: { class: 'hide_input_label' }) do |f| %>
+        <%= f.error_notification %>
         <%= f.input :email, :placeholder => 'Email' %>
         <%= f.input :password, :placeholder => 'Password' %>
-        <% if devise_mapping.rememberable? -%>
-            <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => 'Remember me' %>
-        <% end -%>
+        <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => 'Remember me' %>
         <br/>
         <%= f.button :submit, 'Sign in', :class => 'btn btn-primary' %>
     <% end %>

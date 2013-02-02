@@ -1,12 +1,16 @@
-<h2>Resend confirmation instructions</h2>
+<div class="row-fluid">
+  <div class="span4 well">
+    <%= image_tag "/assets/mfm_logo.png" %>
+    <br/><br/>
+    <h4>Resend confirmation instructions</h4>
+    <br/>
 
-<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+    <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :email %>
+        <%= f.button :submit, "Resend confirmation instructions", class: 'btn btn-primary' %>
+    <% end %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.submit "Resend confirmation instructions" %></div>
-<% end %>
-
-<%= render "users/shared/links" %>
+    <%= render "users/shared/links" %>
+  </div>
+</div>

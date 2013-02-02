@@ -1,13 +1,14 @@
 <div class="row-fluid">
   <div class="span4 well">
-    <h2>Forgot password?</h2>
+    <%= image_tag "/assets/mfm_logo.png" %>
+    <br/><br/>
+    <h4>Forgot password?</h4>
+    <br/>
 
-    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-        <%= devise_error_messages! %>
-
-        <%= f.label :email %><%= f.email_field :email %>
-        <br/><br/>
-        <%= f.submit "Send me reset instructions", :class => 'btn btn-primary' %>
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :email %>
+        <%= f.button :submit, "Send me reset instructions", class: 'btn btn-primary' %>
     <% end %>
 
     <br/>

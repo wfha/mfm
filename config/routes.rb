@@ -1,6 +1,12 @@
 Mfm::Application.routes.draw do
 
-  devise_for :users, controllers: { registrations: "users/registrations", sessions: 'users/sessions', passwords: 'users/passwords' }
+  devise_for :users, controllers: {
+      confirmations: 'users/confirmations',
+      passwords:     'users/passwords',
+      registrations: 'users/registrations',
+      sessions:      'users/sessions',
+      unlocks:       'users/unlocks'
+  }
 
   match 'home/index' => 'home#index', :as => :home_index
 

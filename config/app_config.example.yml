@@ -1,17 +1,24 @@
+defaults: &defaults
+  main_email:      main_email@example.com
+  main_password:   main_password
+
 development:
-  paypal_email: feng04_1337681094_biz@yahoo.com.cn
-  paypal_secret: foobar
-  paypal_cert_id: WKKX2FSCFDB8C
+  <<: *defaults
+  paypal_email:    development@example.com
+  paypal_secret:   development_secret
+  paypal_cert_id:  development_cert_id
   paypal_base_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
 
 test:
-  paypal_email: test@example.com
-  paypal_secret: testsecret
-  paypal_cert_id: 123456789
-  paypal_base_url: testpaypalurl
+  <<: *defaults
+  paypal_email:    test@example.com
+  paypal_secret:   test_secret
+  paypal_cert_id:  test_cert_id
+  paypal_base_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
 
 production:
-  paypal_email: foo@example.com
-  paypal_secret: supersecret
-  paypal_cert_id: KLHZSK326HEDS
+  <<: *defaults
+  paypal_email:    production@example.com
+  paypal_secret:   production_secret
+  paypal_cert_id:  production_cert_id
   paypal_base_url: "https://www.paypal.com/cgi-bin/webscr"

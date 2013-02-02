@@ -5,14 +5,8 @@
       <%= f.input :password, placeholder: 'Password' %>
 
       <div class="ui-grid-a">
-        <div class="ui-block-a">
-          <% if devise_mapping.rememberable? -%>
-              <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => 'Remem.' %>
-          <% end -%>
-        </div>
-        <div class="ui-block-b">
-          <%= f.button :submit, "Sign in" %>
-        </div>
+        <div class="ui-block-a"><%= f.input :remember_me, as: :boolean, label: false, inline_label: 'Remem.' %></div>
+        <div class="ui-block-b"><%= f.button :submit, "Sign in" %></div>
       </div>
   <% end %>
 

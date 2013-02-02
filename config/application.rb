@@ -14,6 +14,8 @@ end
 
 module Mfm
   class Application < Rails::Application
+
+    # Enforce SSL connection
     config.force_ssl = true
 
     # Settings in config/environments/* take precedence over those specified here.
