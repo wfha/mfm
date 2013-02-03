@@ -1,7 +1,7 @@
 class Coupon < ActiveRecord::Base
-  attr_accessible :desc, :end_at, :name, :start_at, :image
+  attr_accessible :desc, :end_at, :name, :start_at, :photo
 
   belongs_to :store
 
-  mount_uploader :image, ImageUploader
+  mount_uploader :photo, PhotoUploader
 end

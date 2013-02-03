@@ -4,7 +4,7 @@
 
   <div class="ui-grid-a" id="restau_infos">
     <div class="ui-block-a">
-      <p><%= image_tag @store.image_url(:small).to_s, :width => '100%' %></p>
+      <p><%= image_tag @store.avatar_url(:small).to_s, :width => '100%' %></p>
     </div>
     <div class="ui-block-b">
       <%= link_to 'What\'s Good', home_store_good_path, data: {role: 'button', mini: true}, rel: 'external' %>

@@ -1,7 +1,7 @@
 class Payment < ActiveRecord::Base
-  attr_accessible :desc, :image, :name
+  attr_accessible :desc, :avatar, :name
 
   has_and_belongs_to_many :stores
 
-  mount_uploader :image, ImageUploader
+  mount_uploader :avatar, AvatarUploader
 end

@@ -13,7 +13,8 @@ group :assets do
 
   gem 'bootstrap-sass', '~> 2.2.1.1'
   gem 'rmagick', '~> 2.13.1'
-  gem 'carrierwave', '~> 0.7.1'
+  gem 'carrierwave', '~> 0.8.0'
+  gem 'fog', '~> 1.9.0'
 
   # Geo Info
   gem 'geocoder', '~> 1.1.5'

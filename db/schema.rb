@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(:version => 20130126171136) do
   create_table "coupons", :force => true do |t|
     t.string   "name"
     t.string   "desc"
-    t.string   "image"
+    t.string   "photo"
     t.integer  "store_id"
     t.datetime "start_at"
     t.datetime "end_at"
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(:version => 20130126171136) do
     t.string   "name"
     t.string   "desc"
     t.decimal  "price",       :precision => 8, :scale => 2
-    t.string   "image"
+    t.string   "photo"
     t.integer  "category_id"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(:version => 20130126171136) do
   create_table "payments", :force => true do |t|
     t.string   "name"
     t.string   "desc"
-    t.string   "image"
+    t.string   "avatar"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -200,7 +200,7 @@ ActiveRecord::Schema.define(:version => 20130126171136) do
   create_table "plans", :force => true do |t|
     t.string   "name"
     t.string   "desc"
-    t.string   "image"
+    t.string   "photo"
     t.integer  "store_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(:version => 20130126171136) do
   create_table "stores", :force => true do |t|
     t.string   "name"
     t.string   "desc"
-    t.string   "image"
+    t.string   "avatar"
     t.string   "phone"
     t.string   "fax"
     t.decimal  "delivery_minimum"
@@ -277,6 +277,7 @@ ActiveRecord::Schema.define(:version => 20130126171136) do
     t.integer  "failed_attempts",        :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.string   "avatar"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "firstname"

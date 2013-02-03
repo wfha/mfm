@@ -1,33 +1,35 @@
-<h1>Listing dish_choices</h1>
+<div class="well">
+  <h1>Listing dish_choices</h1>
 
-<table class='table table-hover table-bordered'>
-  <tr>
-    <th>Name</th>
-    <th>Desc</th>
-    <th>Must</th>
-    <th>Input Type</th>
-    <th>Checked</th>
-    <th>Content</th>
-    <th>Store</th>
-    <th colspan="3">Action</th>
-  </tr>
+  <table class='table table-hover table-bordered'>
+    <tr>
+      <th>Name</th>
+      <th>Desc</th>
+      <th>Must</th>
+      <th>Input Type</th>
+      <th>Checked</th>
+      <th>Content</th>
+      <th>Store</th>
+      <th colspan="3">Action</th>
+    </tr>
 
-  <% @dish_choices.each do |dish_choice| %>
-      <tr>
-        <td><%= dish_choice.name %></td>
-        <td><%= dish_choice.desc %></td>
-        <td><%= dish_choice.must %></td>
-        <td><%= dish_choice.input_type %></td>
-        <td><%= dish_choice.checked %></td>
-        <td><%= dish_choice.content %></td>
-        <td><%= dish_choice.store.name %></td>
-        <td><%= link_to 'Show', [@store, dish_choice] %></td>
-        <td><%= link_to 'Edit', edit_store_dish_choice_path(@store, dish_choice) %></td>
-        <td><%= link_to 'Destroy', [@store, dish_choice], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-  <% end %>
-</table>
+    <% @dish_choices.each do |dish_choice| %>
+        <tr>
+          <td><%= dish_choice.name %></td>
+          <td><%= dish_choice.desc %></td>
+          <td><%= dish_choice.must %></td>
+          <td><%= dish_choice.input_type %></td>
+          <td><%= dish_choice.checked %></td>
+          <td><%= dish_choice.content %></td>
+          <td><%= dish_choice.store.name %></td>
+          <td><%= link_to 'Show', [@store, dish_choice] %></td>
+          <td><%= link_to 'Edit', edit_store_dish_choice_path(@store, dish_choice) %></td>
+          <td><%= link_to 'Destroy', [@store, dish_choice], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </table>
 
-<br />
+  <br />
 
-<%= link_to 'New Dish choice', new_store_dish_choice_path %>
+  <%= link_to 'New Dish choice', new_store_dish_choice_path %>
+</div>

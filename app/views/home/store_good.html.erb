@@ -10,7 +10,7 @@
                   <% category.dishes.each do |dish| %>
                       <li class="span4">
                         <div class="thumbnail">
-                          <%= image_tag dish.image_url.to_s  %>
+                          <%= image_tag dish.photo_url.to_s  %>
                           <div class="caption">
                             <b><%= dish.name %></b>
                             <% dish.dish_features.each do |df| %>

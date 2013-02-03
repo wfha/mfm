@@ -11,7 +11,7 @@
 
   <p>
     <b>Image:</b>
-    <%= image_tag @payment.image_url(:micro).to_s if @payment.image? %>
+    <%= image_tag @payment.avatar_url(:small).to_s if @payment.avatar? %>
   </p>
 
 

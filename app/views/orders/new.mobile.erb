@@ -49,7 +49,7 @@
 
               <div id="credit_card_wrap" style="display: none;">
                 <% @order.store.payments.each do |p| %>
-                    <%= image_tag p.image_url(:micro).to_s if p.image? %>
+                    <%= image_tag p.avatar_url(:small).to_s if p.avatar? %>
                 <% end %>
                 <%= f.input :card_number, placeholder: "Credit Card Number" %>
                 <%= f.input :card_verification, placeholder: "CVV Code" %>

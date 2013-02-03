@@ -5,7 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Desc</th>
-      <th>Image</th>
+      <th>Avatar</th>
       <th>Phone</th>
       <th>Fax</th>
       <th>Delivery minimum</th>
@@ -18,7 +18,7 @@
         <tr>
           <td><%= store.name %></td>
           <td><%= store.desc %></td>
-          <td><%= image_tag store.image_url(:small).to_s if store.image? %></td>
+          <td><%= image_tag store.avatar_url(:small).to_s if store.avatar? %></td>
           <td><%= store.phone %></td>
           <td><%= store.fax %></td>
           <td><%= store.delivery_minimum %></td>

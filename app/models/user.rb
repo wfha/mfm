@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :address, :address_attributes, :firstname, :lastname, :phone
+                  :address, :address_attributes, :firstname, :lastname, :phone, :avatar
 
   has_one :address, :as => :addressable
 
@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
 
   accepts_nested_attributes_for :address
+
+  mount_uploader :avatar, AvatarUploader
 
   validates :email, presence: true, uniqueness: true,
             format: { with: CustomValidators::Email.regex, message: CustomValidators::Email.hint }

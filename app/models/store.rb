@@ -1,7 +1,7 @@
 class Store < ActiveRecord::Base
 
   attr_accessible :delivery_fee, :delivery_minimum, :delivery_radius,
-                  :desc, :fax, :image, :name, :phone, :tag_ids, :payment_ids, :address_attributes
+                  :desc, :fax, :avatar, :name, :phone, :tag_ids, :payment_ids, :address_attributes
 
   has_one :address, :as => :addressable
 
@@ -20,7 +20,7 @@ class Store < ActiveRecord::Base
 
   accepts_nested_attributes_for :address, :allow_destroy => true
 
-  mount_uploader :image, ImageUploader
+  mount_uploader :avatar, AvatarUploader
 
   validates :name, presence: true
   validates :phone, presence: true

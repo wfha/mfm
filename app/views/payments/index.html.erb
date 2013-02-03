@@ -13,7 +13,7 @@
         <tr>
           <td><%= payment.name %></td>
           <td><%= payment.desc %></td>
-          <td><%= image_tag payment.image_url(:micro).to_s if payment.image? %></td>
+          <td><%= image_tag payment.avatar_url(:small).to_s if payment.avatar? %></td>
           <td><%= link_to 'Show', payment %></td>
           <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
           <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

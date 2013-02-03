@@ -1,4 +1,4 @@
-<%= image_tag @store.image_url(:small).to_s if @store.image? %>
+<%= image_tag @store.avatar_url.to_s if @store.avatar? %>
 <br/><br/>
 
 <%= simple_form_for(@store, :html => { :class => 'form-horizontal' }, :validate => true ) do |f| %>
@@ -12,7 +12,7 @@
     <%= f.input :delivery_radius %>
     <%= f.association :tags, :as => :check_boxes, :item_wrapper_class => 'inline' %>
     <%= f.association :payments, :as => :check_boxes, :item_wrapper_class => 'inline' %>
-    <%= f.input :image %>
+    <%= f.input :avatar %>
 
     <%= f.fields_for :address do |builder| %>
         <%= builder.input :address1 %>

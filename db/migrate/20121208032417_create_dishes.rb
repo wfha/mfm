@@ -4,7 +4,7 @@ class CreateDishes < ActiveRecord::Migration
       t.string :name
       t.string :desc
       t.decimal :price, :precision => 8, :scale => 2
-      t.string :image
+      t.string :photo # For Carrierwave
       t.references :category
 
       t.timestamps

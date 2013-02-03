@@ -1,50 +1,12 @@
-<%= form_for([@category, @dish], :html => { :multipart => true }) do |f| %>
-    <% if @dish.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@dish.errors.count, "error") %> prohibited this dish from being saved:</h2>
+<%= simple_form_for([@category, @dish], :html => { :multipart => true }) do |f| %>
+    <%= f.error_notification %>
 
-          <ul>
-            <% @dish.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label :desc %><br />
-      <%= f.text_field :desc %>
-    </div>
-    <div class="field">
-      <%= f.label :dish_features %><br />
-      <% @category.menu.store.dish_features.each do |df| %>
-          <%= check_box_tag "dish[dish_feature_ids][]", df.id, @dish.dish_features.include?(df) %><%= df.name %>
-      <% end %>
-      <br/><br/>
-    </div>
-    <div class="field">
-      <%= f.label :dish_choices %><br />
-      <% @category.menu.store.dish_choices.each do |df| %>
-          <%= check_box_tag "dish[dish_choice_ids][]", df.id, @dish.dish_choices.include?(df) %><%= df.name %>
-      <% end %>
-      <br/><br/>
-    </div>
-    <div class="field">
-      <%= f.label :price %><br />
-      <%= f.text_field :price %>
-    </div>
-    <div class="field">
-      <%= f.label :image %><br />
-      <%= image_tag @dish.image_url(:small).to_s if @dish.image? %>
-      <br/>
-      <%= f.file_field :image %>
-    </div>
-    <br/>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+    <%= f.input :name %>
+    <%= f.input :desc %>
+    <%= f.association :dish_features, as: :check_boxes, item_wrapper_class: 'inline' %>
+    <%= f.association :dish_choices, as: :check_boxes, item_wrapper_class: 'inline' %>
+    <%= f.input :price, as: :string %>
+    <%= image_tag @dish.photo_url(:small).to_s if @dish.photo? %>
+    <%= f.input :photo %>
+    <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 <% end %>

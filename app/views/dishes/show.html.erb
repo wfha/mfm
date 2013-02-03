@@ -1,44 +1,46 @@
-<p id="notice"><%= notice %></p>
+<div class="well">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @dish.name %>
-</p>
+  <p>
+    <b>Name:</b>
+    <%= @dish.name %>
+  </p>
 
-<p>
-  <b>Desc:</b>
-  <%= @dish.desc %>
-</p>
+  <p>
+    <b>Desc:</b>
+    <%= @dish.desc %>
+  </p>
 
-<p>
-  <b>Price:</b>
-  <%= number_to_currency(@dish.price) %>
-</p>
+  <p>
+    <b>Price:</b>
+    <%= number_to_currency(@dish.price) %>
+  </p>
 
-<p>
-  <b>Image:</b>
-  <br/>
-  <%= image_tag @dish.image_url(:small).to_s if @dish.image? %>
-</p>
+  <p>
+    <b>Image:</b>
+    <br/>
+    <%= image_tag @dish.image_url(:small).to_s if @dish.image? %>
+  </p>
 
-<p>
-  <b>Category:</b>
-  <%= @dish.category.name %>
-</p>
+  <p>
+    <b>Category:</b>
+    <%= @dish.category.name %>
+  </p>
 
-<p>
-  <b>Dish Features:</b>
-  <% @dish.dish_features.each do |df| %>
-      <br/><%=df.name %> - <%= df.desc %>
-  <% end %>
-</p>
+  <p>
+    <b>Dish Features:</b>
+    <% @dish.dish_features.each do |df| %>
+        <br/><%=df.name %> - <%= df.desc %>
+    <% end %>
+  </p>
 
-<p>
-  <b>Dish Choices:</b>
-  <% @dish.dish_choices.each do |dc| %>
-      <br/><%=dc.name %> - <%= dc.desc %>
-  <% end %>
-</p>
+  <p>
+    <b>Dish Choices:</b>
+    <% @dish.dish_choices.each do |dc| %>
+        <br/><%=dc.name %> - <%= dc.desc %>
+    <% end %>
+  </p>
 
-<%= link_to 'Edit', edit_category_dish_path(@category, @dish) %> |
-<%= link_to 'Back', store_menus_path(@category.menu.store) %>
+  <%= link_to 'Edit', edit_category_dish_path(@category, @dish) %> |
+  <%= link_to 'Back', store_menus_path(@category.menu.store) %>
+</div>

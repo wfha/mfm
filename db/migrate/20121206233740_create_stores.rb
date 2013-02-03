@@ -3,7 +3,7 @@ class CreateStores < ActiveRecord::Migration
     create_table :stores do |t|
       t.string :name
       t.string :desc
-      t.string :image
+      t.string :avatar # For Carrierwave
       t.string :phone
       t.string :fax
       t.decimal :delivery_minimum

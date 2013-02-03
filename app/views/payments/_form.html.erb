@@ -1,31 +1,8 @@
-<%= form_for(@payment) do |f| %>
-    <% if @payment.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
-
-          <ul>
-            <% @payment.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label :desc %><br />
-      <%= f.text_field :desc %>
-    </div>
-    <div class="field">
-      <%= f.label :image %><br />
-      <%= image_tag @payment.image_url(:micro).to_s if @payment.image? %>
-      <br/>
-      <%= f.file_field :image %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+<%= simple_form_for(@payment) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name %>
+    <%= f.input :desc %>
+    <%= image_tag @payment.avatar_url(:small).to_s if @payment.avatar? %>
+    <%= f.input :avatar, as: :file %>
+    <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 <% end %>

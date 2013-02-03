@@ -33,6 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Token authenticatable
       # t.string :authentication_token
 
+      t.string :avatar # For Carrierwave
 
       t.timestamps
     end

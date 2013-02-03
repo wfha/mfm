@@ -1,6 +1,8 @@
-<h1>Editing dish</h1>
+<div class="well">
+  <h1>Editing dish</h1>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to 'Show', [@category, @dish] %> |
-<%= link_to 'Back', store_menus_path(@category.menu.store) %>
+  <%= link_to 'Show', [@category, @dish] %> |
+  <%= link_to 'Back', store_menus_path(@category.menu.store) %>
+</div>

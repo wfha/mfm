@@ -1,25 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="well">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @dish_choice.name %>
-</p>
+  <p>
+    <b>Name:</b>
+    <%= @dish_choice.name %>
+  </p>
 
-<p>
-  <b>Desc:</b>
-  <%= @dish_choice.desc %>
-</p>
+  <p>
+    <b>Desc:</b>
+    <%= @dish_choice.desc %>
+  </p>
 
-<p>
-  <b>Content:</b>
-  <%= @dish_choice.content %>
-</p>
+  <p>
+    <b>Content:</b>
+    <%= @dish_choice.content %>
+  </p>
 
-<p>
-  <b>Store:</b>
-  <%= @dish_choice.store.name %>
-</p>
+  <p>
+    <b>Store:</b>
+    <%= @dish_choice.store.name %>
+  </p>
 
 
-<%= link_to 'Edit', edit_store_dish_choice_path(@store, @dish_choice) %> |
-<%= link_to 'Back', store_dish_choices_path(@store) %>
+  <%= link_to 'Edit', edit_store_dish_choice_path(@store, @dish_choice) %> |
+  <%= link_to 'Back', store_dish_choices_path(@store) %>
+</div>

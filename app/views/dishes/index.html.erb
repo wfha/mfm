@@ -1,29 +1,31 @@
-<h1>Listing dishes</h1>
+<div class="well">
+  <h1>Listing dishes</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Desc</th>
-    <th>Price</th>
-    <th>Category</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Desc</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
-  <% @dishes.each do |dish| %>
-      <tr>
-        <td><%= dish.name %></td>
-        <td><%= dish.desc %></td>
-        <td><%= dish.price %></td>
-        <td><%= dish.category.name %></td>
-        <td><%= link_to 'Show', [@category, dish] %></td>
-        <td><%= link_to 'Edit', edit_category_dish_path(@category, dish) %></td>
-        <td><%= link_to 'Destroy', [@category, dish], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-  <% end %>
-</table>
+    <% @dishes.each do |dish| %>
+        <tr>
+          <td><%= dish.name %></td>
+          <td><%= dish.desc %></td>
+          <td><%= dish.price %></td>
+          <td><%= dish.category.name %></td>
+          <td><%= link_to 'Show', [@category, dish] %></td>
+          <td><%= link_to 'Edit', edit_category_dish_path(@category, dish) %></td>
+          <td><%= link_to 'Destroy', [@category, dish], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </table>
 
-<br />
+  <br />
 
-<%= link_to 'New Dish', new_category_dish_path(@category) %>
+  <%= link_to 'New Dish', new_category_dish_path(@category) %>
+</div>
