@@ -45,6 +45,18 @@ class PaypalNotificationsController < ApplicationController
     PaypalNotification.create!(:params => params, :order_id => params[:invoice],
                                :status => params[:payment_status], :transaction_id => params[:txn_id])
     render :nothing => true
+
+    #@paypal_notification = PaypalNotification.new(params[:paypal_notification])
+    #
+    #respond_to do |format|
+    #  if @paypal_notification.save
+    #    format.html { redirect_to @paypal_notification, notice: 'Paypal notification was successfully created.' }
+    #    format.json { render json: @paypal_notification, status: :created, location: @paypal_notification }
+    #  else
+    #    format.html { render action: "new" }
+    #    format.json { render json: @paypal_notification.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PUT /paypal_notifications/1

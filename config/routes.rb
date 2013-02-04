@@ -1,6 +1,7 @@
 Mfm::Application.routes.draw do
 
-  match '/delayed_job' => DelayedJobWeb, :anchor => false
+  resources :paypal_notifications
+
 
   devise_for :users, controllers: {
       confirmations: 'users/confirmations',
@@ -9,6 +10,9 @@ Mfm::Application.routes.draw do
       sessions:      'users/sessions',
       unlocks:       'users/unlocks'
   }
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  match '/delayed_job' => DelayedJobWeb, :anchor => false
 
   match 'home/index' => 'home#index', :as => :home_index
 

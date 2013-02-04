@@ -19,7 +19,7 @@
                   <% category.dishes.each do |dish| %>
                       <li class="span4">
                         <div class="thumbnail" style="background-color: #ffffff;">
-                          <%= image_tag dish.image_url.to_s  %>
+                          <%= image_tag dish.photo_url(:small).to_s  %>
                           <div class="caption">
                             <b><%= dish.name %></b>
                             <%= button_to number_to_currency(dish.price), home_dish_modal_path(dish),

@@ -5,11 +5,9 @@ one:
   order: 
   status: MyString
   transaction_id: MyString
-  create: MyString
 
 two:
   params: MyText
   order: 
   status: MyString
   transaction_id: MyString
-  create: MyString

@@ -32,6 +32,7 @@ gem 'rvm-capistrano', '~> 1.2.7'
 # User system
 gem 'devise', '~> 2.1.2'
 gem 'cancan', '~> 1.6.8'
+gem 'rails_admin', '~> 0.4.3'
 
 # Form and Validation
 gem 'simple_form', '~> 2.0.4'

@@ -5,7 +5,6 @@ class CreatePaypalNotifications < ActiveRecord::Migration
       t.references :order
       t.string :status
       t.string :transaction_id
-      t.string :create
 
       t.timestamps
     end

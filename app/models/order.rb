@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   # In order to use number_to_currency
+  include ActionView::Helpers::NumberHelper
   extend ActionView::Helpers::NumberHelper
 
   attr_accessible :invoice, :note, :payment_type, :tip, :transaction_id,
@@ -47,24 +48,24 @@ class Order < ActiveRecord::Base
 
   def paypal_url(return_url, notify_url)
     values = {
-        :business => APP_CONFIG['paypal_email'],
-        :cancel_return => '/orders/cancel',
-        :charset => 'utf-8',
-        :cmd => '_cart',
-        :currency_code => 'USD',
-        :custom => '',
-        :image_url => "http://secure.killervideostore.com/kvs-logo.png",
-        :invoice => id,
-        :lc => 'US',
-        :no_shipping => 0,
-        :no_note => 1,
-        :notify_url => notify_url,
+        :business       => APP_CONFIG['paypal_email'],
+        :cancel_return  => '/orders/cancel',
+        :charset        => 'utf-8',
+        :cmd            => '_cart',
+        :currency_code  => 'USD',
+        :custom         => '',
+        :image_url      => "https://meals4.me/assets/mfm_logo.png",
+        :invoice        => id,
+        :lc             => 'US',
+        :no_shipping    => 0,
+        :no_note        => 1,
+        :notify_url     => notify_url,
         :num_cart_items => cart.cart_items.size,
-        :return => return_url,
-        :rm => 2,
-        :secret => 'hello_token',
-        :tax_cart => number_with_precision(cart.tax, :precision => 2),
-        :upload => 1,
+        :return         => return_url,
+        :rm             => 2,
+        :secret         => 'hello_token',
+        :tax_cart       => number_with_precision(cart.tax, :precision => 2),
+        :upload         => 1,
     }
 
     cart.cart_items.each_with_index do |item, index|

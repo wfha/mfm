@@ -1,6 +1,8 @@
 class PaypalNotification < ActiveRecord::Base
-  attr_accessible :create, :params, :status, :transaction_id
+  attr_accessible :params, :status, :transaction_id
+
   belongs_to :order
+
   serialize :params
 
   after_create :mark_order_as_paid

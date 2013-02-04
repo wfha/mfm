@@ -6,7 +6,6 @@
     <th>Order</th>
     <th>Status</th>
     <th>Transaction</th>
-    <th>Create</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,7 +17,6 @@
     <td><%= paypal_notification.order %></td>
     <td><%= paypal_notification.status %></td>
     <td><%= paypal_notification.transaction_id %></td>
-    <td><%= paypal_notification.create %></td>
     <td><%= link_to 'Show', paypal_notification %></td>
     <td><%= link_to 'Edit', edit_paypal_notification_path(paypal_notification) %></td>
     <td><%= link_to 'Destroy', paypal_notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>

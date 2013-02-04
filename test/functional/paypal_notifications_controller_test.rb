@@ -18,7 +18,7 @@ class PaypalNotificationsControllerTest < ActionController::TestCase
 
   test "should create paypal_notification" do
     assert_difference('PaypalNotification.count') do
-      post :create, paypal_notification: { create: @paypal_notification.create, params: @paypal_notification.params, status: @paypal_notification.status, transaction_id: @paypal_notification.transaction_id }
+      post :create, paypal_notification: { params: @paypal_notification.params, status: @paypal_notification.status, transaction_id: @paypal_notification.transaction_id }
     end
 
     assert_redirected_to paypal_notification_path(assigns(:paypal_notification))
@@ -35,7 +35,7 @@ class PaypalNotificationsControllerTest < ActionController::TestCase
   end
 
   test "should update paypal_notification" do
-    put :update, id: @paypal_notification, paypal_notification: { create: @paypal_notification.create, params: @paypal_notification.params, status: @paypal_notification.status, transaction_id: @paypal_notification.transaction_id }
+    put :update, id: @paypal_notification, paypal_notification: { params: @paypal_notification.params, status: @paypal_notification.status, transaction_id: @paypal_notification.transaction_id }
     assert_redirected_to paypal_notification_path(assigns(:paypal_notification))
   end
 
