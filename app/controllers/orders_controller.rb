@@ -1,7 +1,4 @@
 class OrdersController < ApplicationController
-  # In order to use number_to_currency
-  include ActionView::Helpers::NumberHelper
-
   # GET /orders
   # GET /orders.json
   def index
@@ -58,11 +55,6 @@ class OrdersController < ApplicationController
   def create
     p = params[:order]
 
-    @card_type = p[:@card_type]
-    @card_number = p[:card_number]
-    @card_verification = p[:card_verification]
-    @card_expires_on = p[:card_expires_on]
-
     if user_signed_in?
       @user = User.find(p[:user_attributes][:id])
       @user.update_attributes!(p[:user_attributes])
@@ -86,26 +78,8 @@ class OrdersController < ApplicationController
         if @order.payment_type == 'paypal'
           format.html { redirect_to @order.paypal_url(home_stores_url, paypal_notifications_url) }
         else
-          # Fax This Order
-          html = File.open(Rails.root.join('app/views/orders/_fax.html.erb')).read
-          template = ERB.new(html)
-          str = template.result(binding)
-          client = Savon.client(wsdl: "https://ws.interfax.net/dfs.asmx?WSDL")
-          response_interfax = client.call(:send_char_fax, :message => {'Username' => 'wanfenghuaian2', 'Password' => 'gt850829',
-                                                              'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
-
-          # Phone This Order
-          if response_interfax.body[:send_char_fax_response][:send_char_fax_result].to_i > 0
-            response_tropo = RestClient.get 'https://api.tropo.com/1.0/sessions', {:params => {
-                :token => '1943ff1f022d764787fba66b7531e63fb8c82021f212660238db3991819cf3cb49dc2b85050c879439c0ca67',
-                :action => 'create', :phone => '19797396180', :order_id => '003021'}}
-
-            if response_tropo.code == 200
-              puts "Msg sent HTTP/#{response_tropo.code}"
-            else
-              puts "ERROR | HTTP/#{response_tropo.code}"
-            end
-          end
+          Order.delay.to_fax(@order.id, p[:card_number], p[:card_verification], p[:card_expires_on])
+          Order.delay(run_at: 5.minutes.from_now).to_phone(@order.id)
 
           format.html { redirect_to @order, notice: 'Order was successfully created.' }
           format.mobile { redirect_to @order, notice: 'Order was successfully created.' }

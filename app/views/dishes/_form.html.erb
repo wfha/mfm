@@ -8,5 +8,6 @@
     <%= f.input :price, as: :string %>
     <%= image_tag @dish.photo_url(:small).to_s if @dish.photo? %>
     <%= f.input :photo %>
+
     <%= f.button :submit, 'Submit', class: 'btn btn-primary' %>
 <% end %>

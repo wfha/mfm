@@ -52,8 +52,10 @@
                     <%= image_tag p.avatar_url(:small).to_s if p.avatar? %>
                 <% end %>
                 <%= f.input :card_number, placeholder: "Credit Card Number" %>
-                <%= f.input :card_verification, placeholder: "CVV Code" %>
-                <%= f.input :card_expires_on, :as => :date, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :order => [:month, :year] %>
+                <div class="ui-grid-a">
+                  <div class="ui-block-a"><%= f.input :card_verification, placeholder: "CVV Code" %></div>
+                  <div class="ui-block-b"><%= f.input :card_expires_on, placeholder: "Exp: MM/YY"  %></div>
+                </div>
               </div>
 
               <% unless user_signed_in? %>

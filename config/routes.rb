@@ -1,5 +1,7 @@
 Mfm::Application.routes.draw do
 
+  match '/delayed_job' => DelayedJobWeb, :anchor => false
+
   devise_for :users, controllers: {
       confirmations: 'users/confirmations',
       passwords:     'users/passwords',

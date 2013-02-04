@@ -100,6 +100,17 @@ module CustomValidators
     end
   end
 
+  # Credit Card Expires At
+  class CardExpiresOn
+    def self.regex
+      /^(?:0[1-9]|1[0-2])\/[0-9]{2}$/
+    end
+
+    def self.hint
+      "should be MM/YY"
+    end
+  end
+
   # Distance between User and Store
   # Problem: Errors cannot be shown correctly on the form attributes!
   class Distance < ActiveModel::Validator

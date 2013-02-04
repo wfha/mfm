@@ -25,6 +25,16 @@ set :shared_children, shared_children + %w{public/uploads}
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
+# Added for delayed job
+# ======================================
+require "delayed/recipes"
+
+set :rails_env, "production"
+
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
+
 namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"

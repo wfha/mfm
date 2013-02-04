@@ -24,12 +24,11 @@
 
               <div id="credit_card_wrap" style="display: none;">
                 <% @order.store.payments.each do |p| %>
-                    <%= image_tag p.image_url(:micro).to_s if p.image? %>
+                    <%= image_tag p.avatar_url(:small).to_s if p.avatar? %>
                 <% end %>
                 <%= f.input :card_number, placeholder: "Credit Card Number" %>
-                <%= f.input :card_verification, placeholder: "CVV Code" %>
-                <%= f.input :card_expires_on, :as => :date, :wrapper_html => { :class => "sf_2_in_1" },
-                            :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :order => [:month, :year] %>
+                <%= f.input :card_verification, placeholder: "CVV Code", wrapper_html: { class: "sf_2_in_1" } %>
+                <%= f.input :card_expires_on, placeholder: "Exp: MM/YY", wrapper_html: { class: "sf_2_in_1" } %>
               </div>
 
               <% unless user_signed_in? %>

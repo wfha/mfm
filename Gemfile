@@ -51,6 +51,11 @@ gem 'savon', '~> 2.0.2'
 gem 'yelp', '0.0.0', :git => 'git://github.com/wfha/yelp.git'
 gem 'rest-client', '~> 1.6.7'
 
+# Background Jobs
+gem 'delayed_job_active_record', '~> 0.3.3'
+gem 'delayed_job_web', '~> 1.1.2'
+gem 'daemons', '~> 1.1.9'
+
 # Payment
 #gem 'activemerchant', '~> 1.29.3'
 #gem 'braintree', '~> 2.22.0'

@@ -1,15 +1,12 @@
 class Order < ActiveRecord::Base
   # In order to use number_to_currency
-  include ActionView::Helpers::NumberHelper
+  extend ActionView::Helpers::NumberHelper
 
   attr_accessible :invoice, :note, :payment_type, :tip, :transaction_id,
                   :user, :user_attributes, :cart, :cart_id, :store, :store_id,
                   :card_number, :card_verification, :card_expires_on, :tip_rate
 
   attr_accessor :card_number, :card_verification, :card_expires_on, :tip_rate
-
-  # fix the virtual attribute :card_expires_on bug
-  columns_hash["card_expires_on"] = ActiveRecord::ConnectionAdapters::Column.new("card_expires_on", nil, "date")
 
   belongs_to :store
   belongs_to :cart
@@ -26,7 +23,7 @@ class Order < ActiveRecord::Base
   with_options if: :pay_with_credit_card? do |opt|
     opt.validates :card_number, presence: true
     opt.validates :card_verification, presence: true, format: { with: CustomValidators::CardVerification.regex, message: CustomValidators::CardVerification.hint }
-    opt.validates :card_expires_on, presence: true
+    opt.validates :card_expires_on, presence: true, format: { with: CustomValidators::CardExpiresOn.regex, message: CustomValidators::CardExpiresOn.hint }
     opt.validates_with CustomValidators::CardNumber
   end
 
@@ -100,4 +97,42 @@ class Order < ActiveRecord::Base
 
     APP_CONFIG['paypal_base_url'] + "?" + values.to_query
   end
+
+  def self.to_fax(order_id, *cc)
+    @order = Order.find(order_id)
+
+    if @order.payment_type == 'credit_card'
+      @order.card_number = cc[0]
+      @order.card_verification = cc[1]
+      @order.card_expires_on = cc[2]
+    end
+
+    html = File.open(Rails.root.join('app/views/orders/_fax.html.erb')).read
+    template = ERB.new(html)
+    str = template.result(binding)
+    client = Savon.client(wsdl: "https://ws.interfax.net/dfs.asmx?WSDL")
+    response_interfax = client.call(:send_char_fax, :message => {'Username' => 'wanfenghuaian2', 'Password' => 'gt850829',
+                                                                 'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
+
+    if response_interfax.body[:send_char_fax_response][:send_char_fax_result].to_i > 0
+      puts 'Success'
+    else
+      puts 'Failure'
+    end
+  end
+
+  def self.to_phone(order_id)
+    @order = Order.find(order_id)
+
+    response_tropo = RestClient.get 'https://api.tropo.com/1.0/sessions', {:params => {
+        :token => '1943ff1f022d764787fba66b7531e63fb8c82021f212660238db3991819cf3cb49dc2b85050c879439c0ca67',
+        :action => 'create', :phone => '19797396180', :order_id => '003021'}}
+
+    if response_tropo.code == 200
+      puts "Msg sent HTTP/#{response_tropo.code}"
+    else
+      puts "ERROR | HTTP/#{response_tropo.code}"
+    end
+  end
+
 end
