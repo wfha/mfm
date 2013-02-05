@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   include ActionView::Helpers::NumberHelper
   extend ActionView::Helpers::NumberHelper
 
-  attr_accessible :invoice, :note, :payment_type, :tip, :transaction_id,
+  attr_accessible :invoice, :note, :payment_type, :payment_status, :tip, :transaction_id,
                   :user, :user_attributes, :cart, :cart_id, :store, :store_id,
                   :card_number, :card_verification, :card_expires_on, :tip_rate
 
@@ -33,6 +33,8 @@ class Order < ActiveRecord::Base
   def payment_types
     if store.id.to_i == 1
       [['Cash ', 'cash'], ['PayPal ', 'paypal']]
+    elsif store.payments.include?(Payment.find_by_name("paypal"))
+      [['Cash ', 'cash'], ['CreditCard ', 'credit_card'], ['PayPal ', 'paypal']]
     else
       [['Cash ', 'cash'], ['CreditCard ', 'credit_card']]
     end
@@ -46,10 +48,10 @@ class Order < ActiveRecord::Base
     cart.delivery_type == 'delivery'
   end
 
-  def paypal_url(return_url, notify_url)
+  def paypal_url
     values = {
         :business       => APP_CONFIG['paypal_email'],
-        :cancel_return  => '/orders/cancel',
+        :cancel_return  => home_paypal_cancel_url,
         :charset        => 'utf-8',
         :cmd            => '_cart',
         :currency_code  => 'USD',
@@ -59,9 +61,9 @@ class Order < ActiveRecord::Base
         :lc             => 'US',
         :no_shipping    => 0,
         :no_note        => 1,
-        :notify_url     => notify_url,
+        :notify_url     => home_paypal_notify_url,
         :num_cart_items => cart.cart_items.size,
-        :return         => return_url,
+        :return         => home_stores_url,
         :rm             => 2,
         :secret         => 'hello_token',
         :tax_cart       => number_with_precision(cart.tax, :precision => 2),

@@ -8,13 +8,17 @@ class HomeController < ApplicationController
   end
 
   def stores
-    @stores = Store.all
-
-    @addresses = Address.where(:addressable_type => 'Store')
+    @stores = Store.where("id > 1")
+    @addresses = Address.where("addressable_type = 'Store' AND addressable_id > 1")
 
     if @addresses
       @json = @addresses.to_gmaps4rails
     end
+  end
+
+  def grocery
+    @store = Store.first
+    @cart = current_cart(@store.id)
   end
 
   def store_good
@@ -69,11 +73,6 @@ class HomeController < ApplicationController
     end
   end
 
-  def grocery
-    @store = Store.find(1)
-    @cart = current_cart(@store.id)
-  end
-
   def plans
     @plans = Plan.all
   end
@@ -81,6 +80,46 @@ class HomeController < ApplicationController
   def coupons
     @coupons = Coupon.all
   end
+
+  # The Paypal IPN Notify Page
+  # ======================================================
+
+  protect_from_forgery :except => [:paypal_notify]
+
+  include ActiveMerchant::Billing::Integrations
+  include ActionView::Helpers::NumberHelper
+
+  def paypal_notify
+    notify = Paypal::Notification.new(request.raw_post)
+    order = Order.find(notify.invoice)
+    if notify.acknowledge
+      begin
+        if notify.complete? and number_with_precision(order.cart.total_price, :precision => 2) == notify.amount
+          order.payment_status = 'paid'
+          order.updated_at = Time.now
+
+          Order.delay.to_fax(order.id)
+          Order.delay(run_at: 5.minutes.from_now).to_phone(order.id)
+        else
+          logger.error("Failed to verify Paypal's notification, please investigate")
+        end
+      rescue => e
+        order.payment_status = 'pending'
+        raise
+      ensure
+        order.save
+      end
+    end
+
+    render :nothing
+  end
+
+  def paypal_cancel
+
+  end
+
+  # Load the dish choices
+  # ======================================================
 
   def dish_modal
     @dish = Dish.find(params[:id])

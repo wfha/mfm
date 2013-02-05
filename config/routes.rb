@@ -1,8 +1,5 @@
 Mfm::Application.routes.draw do
 
-  resources :paypal_notifications
-
-
   devise_for :users, controllers: {
       confirmations: 'users/confirmations',
       passwords:     'users/passwords',
@@ -30,6 +27,9 @@ Mfm::Application.routes.draw do
   match 'home/plans' => 'home#plans', :as => :home_plans
   match 'home/dish_modal/:id' => 'home#dish_modal', :as => :home_dish_modal
 
+  match 'home/paypal_notify' => 'home#paypal_notify', :as => :home_paypal_notify
+  match 'home/paypal_cancel' => 'home#paypal_cancel', :as => :home_paypal_cancel
+
   resources :carts do
     member do
       get :type
@@ -38,7 +38,6 @@ Mfm::Application.routes.draw do
   resources :cart_items
   resources :orders
   resources :payments
-  resources :paypal_notifications
   resources :roles
   resources :tags
   resources :tickets

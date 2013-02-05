@@ -14,7 +14,7 @@
         <%= f.input :password_confirmation, :placeholder => 'Confirmation', :wrapper_html => { :class => "sf_2_in_1" } %>
         <%= f.input :phone, as: :hidden, input_html: { value: '000000000' } %>
         <br/>
-        <%= f.button :submit, 'Sign up', :class => "btn btn-primary" %>
+        <%= f.button :submit, 'Sign up', :class => "btn btn-primary", :disable_with => "Please wait..."  %>
     <% end %>
 
     <%= render "users/shared/links" %>

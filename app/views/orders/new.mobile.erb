@@ -49,7 +49,7 @@
 
               <div id="credit_card_wrap" style="display: none;">
                 <% @order.store.payments.each do |p| %>
-                    <%= image_tag p.avatar_url(:small).to_s if p.avatar? %>
+                    <%= image_tag p.avatar_url(:small).to_s if p.avatar? unless p.name == "paypal" %>
                 <% end %>
                 <%= f.input :card_number, placeholder: "Credit Card Number" %>
                 <div class="ui-grid-a">

@@ -10,7 +10,7 @@
   <div><%= f.label :password_confirmation, "Confirm new password" %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.submit "Change my password" %></div>
+  <div><%= f.submit "Change my password", :disable_with => "Please wait..."  %></div>
 <% end %>
 
 <%= render "users/shared/links" %>

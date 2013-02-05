@@ -16,7 +16,7 @@
 <br/><br/>
 <b>Payments:</b>
 <% @store.payments.each do |p| %>
-    <%= image_tag p.image_url(:micro).to_s if p.image? %>
+    <%= image_tag p.avatar_url(:small).to_s if p.avatar? %>
 <% end %>
 <br/><br/>
 <b>Delivery Policy:</b>

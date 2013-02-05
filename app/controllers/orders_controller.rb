@@ -76,7 +76,7 @@ class OrdersController < ApplicationController
         new_cart(@order.store_id)
 
         if @order.payment_type == 'paypal'
-          format.html { redirect_to @order.paypal_url(home_stores_url, paypal_notifications_url) }
+          format.html { redirect_to @order.paypal_url }
         else
           Order.delay.to_fax(@order.id, p[:card_number], p[:card_verification], p[:card_expires_on])
           Order.delay(run_at: 5.minutes.from_now).to_phone(@order.id)

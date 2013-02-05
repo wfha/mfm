@@ -58,5 +58,5 @@ gem 'delayed_job_web', '~> 1.1.2'
 gem 'daemons', '~> 1.1.9'
 
 # Payment
-#gem 'activemerchant', '~> 1.29.3'
+gem 'activemerchant', '~> 1.29.3'
 #gem 'braintree', '~> 2.22.0'

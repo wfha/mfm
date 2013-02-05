@@ -6,13 +6,13 @@
     <br/>
 
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),
-                        html: { class: 'hide_input_label' }) do |f| %>
+                        html: { class: "hide_input_label" }) do |f| %>
         <%= f.error_notification %>
-        <%= f.input :email, :placeholder => 'Email' %>
-        <%= f.input :password, :placeholder => 'Password' %>
-        <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => 'Remember me' %>
+        <%= f.input :email, :placeholder => "Email" %>
+        <%= f.input :password, :placeholder => "Password" %>
+        <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => "Remember me" %>
         <br/>
-        <%= f.button :submit, 'Sign in', :class => 'btn btn-primary' %>
+        <%= f.button :submit, "Sign in", :class => "btn btn-primary", :disable_with => "Please wait..." %>
     <% end %>
 
     <%= render "users/shared/links" %>

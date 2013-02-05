@@ -1,12 +1,6 @@
 <%= simple_form_for(@ticket, validate: true) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
+    <%= f.error_notification %>
     <%= f.input :email %>
     <%= f.input :content %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <%= f.button :submit, disable_with: "Saving..." %>
 <% end %>

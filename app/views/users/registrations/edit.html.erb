@@ -19,9 +19,9 @@
         <%= f.input :password, :input_html => { :autocomplete => "off" } %>
         <%= f.input :password_confirmation %>
 
-        <%= f.input :current_password, :hint => 'Use current password to confirm your changes' %>
-        <%= f.button :submit, :class => 'btn btn-primary' %>
-        <%= link_to "Back to Stores", home_index_path, :class => 'btn' %>
+        <%= f.input :current_password, :hint => "Use current password to confirm your changes" %>
+        <%= f.button :submit, :class => "btn btn-primary", :disable_with => "Please wait..."  %>
+        <%= link_to "Back to Stores", home_index_path, :class => "btn" %>
     <% end %>
   </div>
 

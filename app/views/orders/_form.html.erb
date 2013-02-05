@@ -24,7 +24,7 @@
 
               <div id="credit_card_wrap" style="display: none;">
                 <% @order.store.payments.each do |p| %>
-                    <%= image_tag p.avatar_url(:small).to_s if p.avatar? %>
+                    <%= image_tag p.avatar_url(:small).to_s if p.avatar? unless p.name == "paypal" %>
                 <% end %>
                 <%= f.input :card_number, placeholder: "Credit Card Number" %>
                 <%= f.input :card_verification, placeholder: "CVV Code", wrapper_html: { class: "sf_2_in_1" } %>
@@ -43,7 +43,7 @@
           <br/>
           <%= f.input :store_id, :as => :hidden %>
           <%= f.input :cart_id, :as => :hidden %>
-          <%= f.button :submit, :class => 'btn btn-primary' %>
+          <%= f.button :submit, :class => "btn btn-primary", :disable_with => "Saving..." %>
       <% end %>
     </div>
   </li>
@@ -55,7 +55,7 @@
               <%= f.input :email, :placeholder => 'Email' %>
               <%= f.input :password, :placeholder => 'Password' %>
               <%= f.input :remember_me, :as => :boolean, label: false, :inline_label => 'Remember me' %>
-              <%= f.button :submit, 'Sign in', :class => 'btn btn-primary' %>
+              <%= f.button :submit, 'Sign in', :class => 'btn btn-primary', :disable_with => "Please wait..." %>
 
               <br/><br/>
               <%= link_to "Forgot your password?", new_password_path('user') %>
