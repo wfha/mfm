@@ -43,7 +43,7 @@ Mfm::Application.routes.draw do
   resources :tickets
 
   resources :stores do
-    resources :coupons, :dish_choices, :dish_features, :hours, :menus, :plans
+    resources :coupons, :dish_choices, :dish_features, :dish_discounts, :hours, :menus, :plans
   end
 
   resources :menus do

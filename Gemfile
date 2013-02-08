@@ -38,6 +38,7 @@ gem 'rails_admin', '~> 0.4.3'
 gem 'simple_form', '~> 2.0.4'
 gem 'client_side_validations', '~> 3.2.1'
 gem 'client_side_validations-simple_form', '~> 2.0.1'
+gem 'nested_form', '~> 0.3.1'
 
 # Must be outside of assets
 gem 'coffee-rails', '~> 3.2.1'
@@ -60,3 +61,5 @@ gem 'daemons', '~> 1.1.9'
 # Payment
 gem 'activemerchant', '~> 1.29.3'
 #gem 'braintree', '~> 2.22.0'
+
+gem 'time_of_day', '~> 0.1.1'

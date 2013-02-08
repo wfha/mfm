@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130204200710) do
+ActiveRecord::Schema.define(:version => 20130207160427) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -117,6 +117,26 @@ ActiveRecord::Schema.define(:version => 20130204200710) do
   add_index "dish_choices_dishes", ["dish_id", "dish_choice_id"], :name => "index_dish_choices_dishes_on_dish_id_and_dish_choice_id"
   add_index "dish_choices_dishes", ["dish_id"], :name => "index_dish_choices_dishes_on_dish_id"
 
+  create_table "dish_discounts", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.decimal  "price"
+    t.integer  "store_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "dish_discounts", ["store_id"], :name => "index_dish_discounts_on_store_id"
+
+  create_table "dish_discounts_dishes", :id => false, :force => true do |t|
+    t.integer "dish_discount_id"
+    t.integer "dish_id"
+  end
+
+  add_index "dish_discounts_dishes", ["dish_discount_id", "dish_id"], :name => "index_dish_discounts_dishes_on_dish_discount_id_and_dish_id"
+  add_index "dish_discounts_dishes", ["dish_discount_id"], :name => "index_dish_discounts_dishes_on_dish_discount_id"
+  add_index "dish_discounts_dishes", ["dish_id"], :name => "index_dish_discounts_dishes_on_dish_id"
+
   create_table "dish_features", :force => true do |t|
     t.string   "name"
     t.string   "desc"
@@ -153,9 +173,10 @@ ActiveRecord::Schema.define(:version => 20130204200710) do
     t.string   "desc"
     t.string   "open_at"
     t.string   "close_at"
-    t.integer  "store_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "hourable_id"
+    t.string   "hourable_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "menus", :force => true do |t|
@@ -200,17 +221,6 @@ ActiveRecord::Schema.define(:version => 20130204200710) do
   add_index "payments_stores", ["payment_id", "store_id"], :name => "index_payments_stores_on_payment_id_and_store_id"
   add_index "payments_stores", ["payment_id"], :name => "index_payments_stores_on_payment_id"
   add_index "payments_stores", ["store_id"], :name => "index_payments_stores_on_store_id"
-
-  create_table "paypal_notifications", :force => true do |t|
-    t.text     "params"
-    t.integer  "order_id"
-    t.string   "status"
-    t.string   "transaction_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "paypal_notifications", ["order_id"], :name => "index_paypal_notifications_on_order_id"
 
   create_table "plans", :force => true do |t|
     t.string   "name"

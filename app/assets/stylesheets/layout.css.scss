@@ -43,6 +43,21 @@ h4 {color: $blue_mfm;}
   }
 }
 
+/* Placeholder_polyfill
+-------------------------------------------------- */
+label.control-label {
+
+  /* Let span.placeholder go with input */
+  position: relative;
+
+  span.placeholder {
+    font-size: $fontSizeSmall;
+  }
+}
+
+
+
+
 /* Fix row-fluid thumbnails issue
 -------------------------------------------------- */
 .row-fluid {

@@ -99,8 +99,8 @@
           <div class="modal-body">
             <%= simple_form_for(@ticket, validate: true, html: { id: 'ticket_form' }, remote: true) do |f| %>
                 <%= f.error_notification %>
-                <%= f.input :email, placeholder: 'Email', label: false %>
-                <%= f.input :content, as: :text, input_html: { cols: 50, rows: 5}, placeholder: 'Describe your problem or leave your advice', label: false %>
+                <%= f.input :email %>
+                <%= f.input :content, as: :text, input_html: { cols: 50, rows: 5} %>
             <% end %>
           </div>
           <div class="modal-footer">

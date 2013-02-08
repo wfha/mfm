@@ -1,6 +1,9 @@
-<%= simple_form_for(@store, :html => { :class => 'form-horizontal' }, :validate => true ) do |f| %>
+<%= simple_nested_form_for(@store, :html => { :class => 'form-horizontal' }, :validate => true ) do |f| %>
     <%= f.error_notification %>
 
+    <hr/>
+
+    <h4>Basic info:</h4>
     <%= f.input :name %>
     <%= f.input :desc %>
     <%= f.input :phone %>
@@ -13,6 +16,9 @@
     <%= image_tag @store.avatar_url.to_s if @store.avatar? %>
     <%= f.input :avatar %>
 
+    <hr/>
+
+    <h4>Address:</h4>
     <%= f.fields_for :address do |builder| %>
         <%= builder.input :address1 %>
         <%= builder.input :address2 %>
@@ -22,5 +28,19 @@
         <%= builder.input :zip %>
     <% end %>
 
-    <%= f.button :submit, disable_with: "Saving..." %>
+    <hr/>
+
+    <h4>Open Hours:</h4>
+    <%= f.link_to_add "Add", :hours, class: 'btn btn-primary' %>
+    <%= f.fields_for :hours do |hour| %>
+        <%= hour.input :name %>
+        <%= hour.input :desc %>
+        <%= hour.input :open_at %>
+        <%= hour.input :close_at %>
+        <%= hour.link_to_remove "Remove", class: 'btn btn-info' %>
+    <% end %>
+
+    <hr/>
+
+    <%= f.button :submit, disable_with: "Saving...", class: 'btn btn-primary' %>
 <% end %>

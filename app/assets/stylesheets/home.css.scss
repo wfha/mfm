@@ -21,8 +21,14 @@
 @include all-icons_dish_features-sprites;
 /* In html, add: class='icons_dish_features-dish_feature_chef' */
 
-.store_menu_dish_wrap {
-  @include background-image(linear-gradient($orange, $orange));
+.store_menu_dish_wrap_open {
+  background-color: $orange;
+
+  a {display: block;color: $white;text-decoration: none;}
+}
+
+.store_menu_dish_wrap_closed {
+  background-color: #333333;
 
   a {display: block;color: $white;text-decoration: none;}
 }

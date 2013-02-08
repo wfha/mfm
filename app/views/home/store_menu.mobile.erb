@@ -9,9 +9,14 @@
               <ul data-role="listview" data-split-icon="gear" data-inset="false" data-filter-theme="c" data-divider-theme="d">
                 <% category.dishes.each do |dish| %>
                     <li>
-                      <%= link_to home_dish_modal_path(dish), :remote => true do %>
-                          <%= dish.name %> - <%= number_to_currency dish.price %>
-                          <span class="ui-li-count">11</span>
+                      <% if @still_open %>
+                          <%= link_to home_dish_modal_path(dish), :remote => true do %>
+                              <%= dish.name %> - <%= number_to_currency dish.price %>
+                          <% end %>
+                      <% else %>
+                          <%= link_to 'javascript: alert("The store is closed!");' do %>
+                              <%= dish.name %> - <%= number_to_currency dish.price %>
+                          <% end %>
                       <% end %>
                     </li>
                 <% end %>

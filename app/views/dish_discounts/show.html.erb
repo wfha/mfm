@@ -1,0 +1,27 @@
+<div class="well">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <b>Name:</b>
+    <%= @dish_discount.name %>
+  </p>
+
+  <p>
+    <b>Desc:</b>
+    <%= @dish_discount.desc %>
+  </p>
+
+  <p>
+    <b>Price:</b>
+    <%= @dish_discount.price %>
+  </p>
+
+  <p>
+    <b>Store:</b>
+    <%= @dish_discount.store %>
+  </p>
+
+
+  <%= link_to 'Edit', edit_store_dish_discount_path(@store, @dish_discount) %> |
+  <%= link_to 'Back', store_dish_discounts_path(@store) %>
+</div>

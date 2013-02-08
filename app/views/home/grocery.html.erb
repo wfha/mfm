@@ -22,8 +22,12 @@
                           <%= image_tag dish.photo_url(:small).to_s  %>
                           <div class="caption">
                             <b><%= dish.name %></b>
-                            <%= button_to number_to_currency(dish.price), home_dish_modal_path(dish),
-                                          :remote => true, :class => 'pre_order btn btn-primary pull-right' %>
+                            <% if @store.still_open? %>
+                                <%= button_to number_to_currency(dish.price), home_dish_modal_path(dish),
+                                              :remote => true, :class => 'pre_order btn btn-primary pull-right' %>
+                            <% else %>
+                                <%= button_to number_to_currency(dish.price), "javascript:alert('The store is closed!');", :class => 'btn btn-inverse pull-right' %>
+                            <% end %>
                             <i><%= sanitize(dish.desc) %></i>
                           </div>
                         </div>
@@ -54,15 +58,31 @@
                       <ul class="thumbnails">
                         <% category.dishes.each do |dish| %>
                             <li class="span6">
-                              <div class="thumbnail store_menu_dish_wrap" rel="popover" title="<%= dish.name %>" data-content="<%= sanitize(dish.desc) %>">
-                                <%= link_to home_dish_modal_path(dish), :remote => true do %>
-                                    <%= dish.name %> -
-                                    <% dish.dish_features.each do |df| %>
-                                        <%= df.name %>
+                              <% if @store.still_open? %>
+                                  <div class="thumbnail store_menu_dish_wrap_open" rel="popover" title="<%= dish.name %>"
+                                       data-content="<% if dish.desc.empty? %>Info coming soon ...
+                                   <% else %><%= sanitize(dish.desc) %><% end %>">
+                                    <%= link_to home_dish_modal_path(dish), :remote => true do %>
+                                        <%= dish.name %>
+                                        <i class="pull-right"><%= number_to_currency(dish.price) %></i>
+                                        <% dish.dish_features.each do |df| %>
+                                            <div style="width: 16px;height: 16px;margin-right: 4px;" class="pull-right icons_dish_features-dish_feature_<%= df.name %>"></div>
+                                        <% end %>
                                     <% end %>
-                                    <i class="pull-right"><%= number_to_currency(dish.price) %></i>
-                                <% end %>
-                              </div>
+                                  </div>
+                              <% else %>
+                                  <div class="thumbnail store_menu_dish_wrap_closed" rel="popover" title="<%= dish.name %>"
+                                       data-content="<% if dish.desc.empty? %>Info coming soon ...
+                                   <% else %><%= sanitize(dish.desc) %><% end %>">
+                                    <%= link_to "javascript:alert('The store is closed!');" do %>
+                                        <%= dish.name %>
+                                        <i class="pull-right"><%= number_to_currency(dish.price) %></i>
+                                        <% dish.dish_features.each do |df| %>
+                                            <div style="width: 16px;height: 16px;margin-right: 4px;" class="pull-right icons_dish_features-dish_feature_<%= df.name %>"></div>
+                                        <% end %>
+                                    <% end %>
+                                  </div>
+                              <% end %>
                             </li>
                         <% end %>
                       </ul>

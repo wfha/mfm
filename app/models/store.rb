@@ -1,14 +1,17 @@
 class Store < ActiveRecord::Base
+  include Hourable
 
   attr_accessible :delivery_fee, :delivery_minimum, :delivery_radius,
-                  :desc, :fax, :avatar, :name, :phone, :tag_ids, :payment_ids, :address_attributes
+                  :desc, :fax, :avatar, :name, :phone, :tag_ids, :payment_ids,
+                  :address_attributes, :hours_attributes
 
   has_one :address, :as => :addressable
 
   has_many :coupons, :dependent => :destroy
   has_many :dish_choices, :dependent => :destroy
   has_many :dish_features, :dependent => :destroy
-  has_many :hours, :dependent => :destroy
+  has_many :dish_discounts, :dependent => :destroy
+  has_many :hours, :dependent => :destroy, :as => :hourable
   has_many :menus, :dependent => :destroy
   has_many :plans, :dependent => :destroy
   has_many :orders
@@ -19,6 +22,7 @@ class Store < ActiveRecord::Base
   # ========== More ==========
 
   accepts_nested_attributes_for :address, :allow_destroy => true
+  accepts_nested_attributes_for :hours, :allow_destroy => true
 
   mount_uploader :avatar, AvatarUploader
 

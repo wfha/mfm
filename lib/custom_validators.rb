@@ -56,7 +56,7 @@ module CustomValidators
     end
 
     def self.hint
-      "should be 8-30 of a-Z, 0-9 or _"
+      "start with letter, 8-30 long"
     end
   end
 

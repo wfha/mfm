@@ -24,21 +24,27 @@ class HomeController < ApplicationController
   def store_good
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
+    @dishes = Dish.joins(:dish_features, :category => :menu)
+    .where({ 'menus.store_id' => 2, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
+    @still_open = @store.still_open?
   end
 
   def store_menu
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
+    @still_open = @store.still_open?
   end
 
   def store_info
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
+    @still_open = @store.still_open?
   end
 
   def store_reviews
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
+    @still_open = @store.still_open?
 
     request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: '00CRzCP7C-1GMSGy3su_Ig')
     response = @client.search(request)
