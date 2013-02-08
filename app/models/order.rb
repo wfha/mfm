@@ -2,12 +2,13 @@ class Order < ActiveRecord::Base
   # In order to use number_to_currency
   include ActionView::Helpers::NumberHelper
   extend ActionView::Helpers::NumberHelper
+  include Rails.application.routes.url_helpers
 
   attr_accessible :invoice, :note, :payment_type, :payment_status, :tip, :transaction_id,
                   :user, :user_attributes, :cart, :cart_id, :store, :store_id,
-                  :card_number, :card_verification, :card_expires_on, :tip_rate
+                  :card_number, :card_verification, :card_expires_on
 
-  attr_accessor :card_number, :card_verification, :card_expires_on, :tip_rate
+  attr_accessor :card_number, :card_verification, :card_expires_on
 
   belongs_to :store
   belongs_to :cart
@@ -28,7 +29,8 @@ class Order < ActiveRecord::Base
     opt.validates_with CustomValidators::CardNumber
   end
 
-  TIP_RATES = [['Tip w/ cash', 0], ['Tip 5%', 0.05], ['Tip 10%', 0.1], ['Tip 15%', 0.15], ['Tip 20%', 0.2], ['Tip 25%', 0.25], ['Tip 30%', 0.3]]
+  TIP_RATES = [['Tip cash', 0], ['Tip $1.00', 1], ['Tip $2.00', 2], ['Tip $3.00', 3], ['Tip $4.00', 4], ['Tip $5.00', 5],
+               ['Tip $6.00', 6], ['Tip $7.00', 7], ['Tip $8.00', 8], ['Tip $9.00', 9], ['Tip $10.00', 10]]
 
   def payment_types
     if store.id.to_i == 1
@@ -51,7 +53,7 @@ class Order < ActiveRecord::Base
   def paypal_url
     values = {
         :business       => APP_CONFIG['paypal_email'],
-        :cancel_return  => home_paypal_cancel_url,
+        :cancel_return  => home_paypal_cancel_url(:host => APP_CONFIG['domain']),
         :charset        => 'utf-8',
         :cmd            => '_cart',
         :currency_code  => 'USD',
@@ -61,9 +63,9 @@ class Order < ActiveRecord::Base
         :lc             => 'US',
         :no_shipping    => 0,
         :no_note        => 1,
-        :notify_url     => home_paypal_notify_url,
+        :notify_url     => home_paypal_notify_url(:host => APP_CONFIG['domain']),
         :num_cart_items => cart.cart_items.size,
-        :return         => home_stores_url,
+        :return         => home_stores_url(:host => APP_CONFIG['domain']),
         :rm             => 2,
         :secret         => 'hello_token',
         :tax_cart       => number_with_precision(cart.tax, :precision => 2),

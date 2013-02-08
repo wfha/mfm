@@ -19,13 +19,16 @@ class HomeController < ApplicationController
   def grocery
     @store = Store.first
     @cart = current_cart(@store.id)
+    @dishes = Dish.joins(:dish_features, :category => :menu)
+    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
+    @still_open = @store.still_open?
   end
 
   def store_good
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
     @dishes = Dish.joins(:dish_features, :category => :menu)
-    .where({ 'menus.store_id' => 2, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
+    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
     @still_open = @store.still_open?
   end
 
@@ -100,7 +103,7 @@ class HomeController < ApplicationController
     order = Order.find(notify.invoice)
     if notify.acknowledge
       begin
-        if notify.complete? and number_with_precision(order.cart.total_price, :precision => 2) == notify.amount
+        if notify.complete? and number_with_precision((order.cart.total_price+order.tip), :precision => 2) == notify.amount
           order.payment_status = 'paid'
           order.updated_at = Time.now
 

@@ -69,6 +69,7 @@ class OrdersController < ApplicationController
       @order.user.email = "guest_#{Time.now.to_i}#{rand(99)}@meals4.me"
       @order.user.password = "guest_password"
       @order.user.password_confirmation = "guest_password"
+      @order.user.skip_confirmation! # Skip sending emails
     end
 
     respond_to do |format|
@@ -77,6 +78,7 @@ class OrdersController < ApplicationController
 
         if @order.payment_type == 'paypal'
           format.html { redirect_to @order.paypal_url }
+          format.mobile { redirect_to @order.paypal_url }
         else
           Order.delay.to_fax(@order.id, p[:card_number], p[:card_verification], p[:card_expires_on])
           Order.delay(run_at: 5.minutes.from_now).to_phone(@order.id)

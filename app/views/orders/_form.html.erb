@@ -19,7 +19,7 @@
               <%= f.input :payment_type, collection: @order.payment_types, as: :radio, item_wrapper_class: 'inline' %>
 
               <div id="tip_wrap" style="display: none;">
-                <%= f.input :tip_rate, collection: Order::TIP_RATES, prompt: nil, label: 'Tip Rate', selected: Order::TIP_RATES[0], :wrapper_html => { :class => "sf_2_in_1" } %>
+                <%= f.input :tip, collection: Order::TIP_RATES, prompt: nil, selected: Order::TIP_RATES[0], wrapper_html: { class: "sf_2_in_1" } %>
               </div>
 
               <div id="credit_card_wrap" style="display: none;">
