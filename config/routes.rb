@@ -11,24 +11,24 @@ Mfm::Application.routes.draw do
 
   match '/delayed_job' => DelayedJobWeb, :anchor => false
 
-  match 'home/index' => 'home#index', :as => :home_index
-
-  match 'home/stores' => 'home#stores', :as => :home_stores
-  match 'home/store_good/:id' => 'home#store_good', :as => :home_store_good
-  match 'home/store_menu/:id' => 'home#store_menu', :as => :home_store_menu
-  match 'home/store_info/:id' => 'home#store_info', :as => :home_store_info
-  match 'home/store_reviews/:id' => 'home#store_reviews', :as => :home_store_reviews
-  match 'home/load_store_good/:id' => 'home#load_store_good', :as => :home_load_store_good
-  match 'home/load_store_info/:id' => 'home#load_store_info', :as => :home_load_store_info
+  match 'home/index'                  => 'home#index',              :as => :home_index
+  match 'home/stores'                 => 'home#stores',             :as => :home_stores
+  match 'home/store_good/:id'         => 'home#store_good',         :as => :home_store_good
+  match 'home/store_menu/:id'         => 'home#store_menu',         :as => :home_store_menu
+  match 'home/store_info/:id'         => 'home#store_info',         :as => :home_store_info
+  match 'home/store_reviews/:id'      => 'home#store_reviews',      :as => :home_store_reviews
+  match 'home/load_store_good/:id'    => 'home#load_store_good',    :as => :home_load_store_good
+  match 'home/load_store_info/:id'    => 'home#load_store_info',    :as => :home_load_store_info
   match 'home/load_store_reviews/:id' => 'home#load_store_reviews', :as => :home_load_store_reviews
-
-  match 'home/grocery' => 'home#grocery', :as => :home_grocery
-  match 'home/coupons' => 'home#coupons', :as => :home_coupons
-  match 'home/plans' => 'home#plans', :as => :home_plans
-  match 'home/dish_modal/:id' => 'home#dish_modal', :as => :home_dish_modal
-
-  match 'home/paypal_notify' => 'home#paypal_notify', :as => :home_paypal_notify
-  match 'home/paypal_cancel' => 'home#paypal_cancel', :as => :home_paypal_cancel
+  match 'home/grocery'                => 'home#grocery',            :as => :home_grocery
+  match 'home/coupons'                => 'home#coupons',            :as => :home_coupons
+  match 'home/plans'                  => 'home#plans',              :as => :home_plans
+  match 'home/dish_modal/:id'         => 'home#dish_modal',         :as => :home_dish_modal
+  match 'home/paypal_notify'          => 'home#paypal_notify',      :as => :home_paypal_notify
+  match 'home/paypal_cancel'          => 'home#paypal_cancel',      :as => :home_paypal_cancel
+  match 'home/orders'                 => 'home#orders',             :as => :home_orders
+  match 'home/handle_order/:id'       => 'home#handle_order',       :as => :home_handle_order
+  match 'home/order_modal/:id'        => 'home#order_modal',        :as => :home_order_modal
 
   resources :carts do
     member do

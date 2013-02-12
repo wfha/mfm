@@ -115,23 +115,34 @@ class Order < ActiveRecord::Base
     html = File.open(Rails.root.join('app/views/orders/_fax.html.erb')).read
     template = ERB.new(html)
     str = template.result(binding)
-    client = Savon.client(wsdl: "https://ws.interfax.net/dfs.asmx?WSDL")
-    response_interfax = client.call(:send_char_fax, :message => {'Username' => 'wanfenghuaian2', 'Password' => 'gt850829',
-                                                                 'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
+    client = Savon.client(wsdl: APP_CONFIG[:interfax_url])
 
-    if response_interfax.body[:send_char_fax_response][:send_char_fax_result].to_i > 0
-      puts 'Success'
+    if APP_CONFIG[:mfm_mode] == "test"
+      response_interfax = client.call(:send_char_fax, :message => {'Username' => APP_CONFIG[:interfax_usr], 'Password' => APP_CONFIG[:interfax_pwd],
+                                                                   'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
     else
-      puts 'Failure'
+      response_interfax = client.call(:send_char_fax, :message => {'Username' => APP_CONFIG[:interfax_usr], 'Password' => APP_CONFIG[:interfax_pwd],
+                                                                   'FaxNumber' => store.fax, 'Data' => str, 'FileType' => 'HTML'})
+    end
+
+    @order = nil # Clear credit card info
+    if response_interfax.body[:send_char_fax_response][:send_char_fax_result].to_i > 0
+      @order = Order.find(order_id)
+      @order.handled = true
+      @order.save
+    else
+      # Fax failed
     end
   end
 
   def self.to_phone(order_id)
     @order = Order.find(order_id)
 
-    response_tropo = RestClient.get 'https://api.tropo.com/1.0/sessions', {:params => {
-        :token => '1943ff1f022d764787fba66b7531e63fb8c82021f212660238db3991819cf3cb49dc2b85050c879439c0ca67',
-        :action => 'create', :phone => '19797396180', :order_id => '003021'}}
+    if APP_CONFIG[:mfm_mode] == "test"
+      response_tropo = RestClient.get APP_CONFIG[:tropo_url], {params: {token: APP_CONFIG[:tropo_token], action: 'create', phone: '19797396180', order_id: '1234'}}
+    else
+      response_tropo = RestClient.get APP_CONFIG[:tropo_url], {params: {token: APP_CONFIG[:tropo_token], action: 'create', phone: "1" + store.phone, order_id: id}}
+    end
 
     if response_tropo.code == 200
       puts "Msg sent HTTP/#{response_tropo.code}"

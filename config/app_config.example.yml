@@ -1,9 +1,15 @@
 defaults: &defaults
-  main_email:      main_email@example.com
-  main_password:   main_password
   aws_aki:         ABCDEFG
   aws_sak:         ABCDEFG
   aws_bucket:      ABCDEFG
+  gmail_usr:       email@email.com
+  gmail_pwd:       ABCDEFG
+  interfax_url:    https://ws.interfax.net/dfs.asmx?WSDL
+  interfax_usr:    ABCDEFG
+  interfax_pwd:    ABCDEFG
+  mfm_mode:        Test
+  tropo_url:       https://api.tropo.com/1.0/sessions
+  tropo_token:     ABCDEFG
 
 production:
   <<: *defaults
@@ -13,7 +19,7 @@ production:
   paypal_email:    production@example.com
   paypal_secret:   production_secret
   paypal_cert_id:  production_cert_id
-  paypal_base_url: "https://www.paypal.com/cgi-bin/webscr"
+  paypal_base_url: https://www.paypal.com/cgi-bin/webscr
 
 development:
   <<: *defaults
@@ -23,7 +29,7 @@ development:
   paypal_email:    development@example.com
   paypal_secret:   development_secret
   paypal_cert_id:  development_cert_id
-  paypal_base_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
+  paypal_base_url: https://www.sandbox.paypal.com/cgi-bin/webscr
 
 test:
   <<: *defaults
@@ -33,4 +39,4 @@ test:
   paypal_email:    test@example.com
   paypal_secret:   test_secret
   paypal_cert_id:  test_cert_id
-  paypal_base_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
+  paypal_base_url: https://www.sandbox.paypal.com/cgi-bin/webscr

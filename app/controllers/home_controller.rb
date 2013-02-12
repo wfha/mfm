@@ -96,14 +96,15 @@ class HomeController < ApplicationController
   protect_from_forgery :except => [:paypal_notify]
 
   include ActiveMerchant::Billing::Integrations
-  include ActionView::Helpers::NumberHelper
 
   def paypal_notify
+    ActiveMerchant::Billing::Base.mode = :test
     notify = Paypal::Notification.new(request.raw_post)
     order = Order.find(notify.invoice)
     if notify.acknowledge
       begin
-        if notify.complete? and number_with_precision((order.cart.total_price+order.tip), :precision => 2) == notify.amount
+        amount_in_db = Money.new ((order.cart.total_price+order.tip)*100).round
+        if notify.complete? and amount_in_db == notify.amount
           order.payment_status = 'paid'
           order.updated_at = Time.now
 
@@ -120,11 +121,40 @@ class HomeController < ApplicationController
       end
     end
 
-    render :nothing
+    render :nothing => true
   end
 
   def paypal_cancel
 
+  end
+
+  def orders
+    @r_orders = Order.where("store_id > 1")
+    @g_orders = Order.where("store_id = 1")
+  end
+
+  def handle_order
+    @order = Order.find(params[:id])
+    if params[:handled] == "true"
+      @order.handled = true
+    else
+      @order.handled = false
+    end
+    @order.save
+
+    respond_to do |format|
+      format.js
+      format.mjs
+    end
+  end
+
+  def order_modal
+    @order = Order.find(params[:id])
+
+    respond_to do |format|
+      format.js
+      format.mjs
+    end
   end
 
   # Load the dish choices
@@ -134,8 +164,8 @@ class HomeController < ApplicationController
     @dish = Dish.find(params[:id])
 
     respond_to do |format|
-      format.mjs
       format.js
+      format.mjs
     end
   end
 

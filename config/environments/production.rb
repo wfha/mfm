@@ -59,8 +59,8 @@ Mfm::Application.configure do
       domain: APP_CONFIG['domain'],
       authentication: :plain,
       enable_starttls_auto: true,
-      user_name: APP_CONFIG['main_email'],
-      password: APP_CONFIG['main_password']
+      user_name: APP_CONFIG['gmail_usr'],
+      password: APP_CONFIG['gmail_pwd']
   }
 
   # Enable threaded mode

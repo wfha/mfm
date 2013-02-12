@@ -286,6 +286,7 @@ DEPENDENCIES
   gmaps4rails (~> 1.5.6)
   jquery-rails (~> 2.1.4)
   jquery_mobile_rails (~> 1.2.0)
+  money (~> 5.1.0)
   nested_form (~> 0.3.1)
   pg (~> 0.14.1)
   rails (~> 3.2.11)
