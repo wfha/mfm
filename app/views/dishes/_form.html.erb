@@ -3,9 +3,10 @@
 
     <%= f.input :name %>
     <%= f.input :desc %>
-    <%= f.association :dish_features, as: :check_boxes, item_wrapper_class: 'inline' %>
-    <%= f.association :dish_choices, as: :check_boxes, item_wrapper_class: 'inline' %>
-    <%= f.association :dish_discounts, as: :check_boxes, item_wrapper_class: 'inline' %>
+    <%= f.input :rank %>
+    <%= f.association :dish_features, as: :check_boxes, collection: @category.menu.store.dish_features, item_wrapper_class: 'inline' %>
+    <%= f.association :dish_choices, as: :check_boxes, collection: @category.menu.store.dish_choices, item_wrapper_class: 'inline' %>
+    <%= f.association :dish_discounts, as: :check_boxes, collection: @category.menu.store.dish_discounts, item_wrapper_class: 'inline' %>
     <%= f.input :price, as: :string %>
     <%= image_tag @dish.photo_url(:small).to_s if @dish.photo? %>
     <%= f.input :photo %>

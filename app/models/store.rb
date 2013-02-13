@@ -2,7 +2,7 @@ class Store < ActiveRecord::Base
   include Hourable
 
   attr_accessible :delivery_fee, :delivery_minimum, :delivery_radius,
-                  :desc, :fax, :avatar, :name, :phone, :tag_ids, :payment_ids,
+                  :desc, :fax, :avatar, :name, :phone, :rank, :tag_ids, :payment_ids,
                   :address_attributes, :hours_attributes
 
   has_one :address, :as => :addressable
@@ -12,7 +12,7 @@ class Store < ActiveRecord::Base
   has_many :dish_features, :dependent => :destroy
   has_many :dish_discounts, :dependent => :destroy
   has_many :hours, :dependent => :destroy, :as => :hourable
-  has_many :menus, :dependent => :destroy
+  has_many :menus, :dependent => :destroy, :order => :rank
   has_many :plans, :dependent => :destroy
   has_many :orders
 

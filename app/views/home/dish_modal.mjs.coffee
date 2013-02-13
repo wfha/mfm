@@ -6,6 +6,8 @@ modal = $('.modal')
 
 modal.find('input').change ->
   note = modal.find('input[name=note]')
+  price_adjustment = modal.find('input[name=price_adjustment]')
+
   note_val = ''
 
   modal.find('input:checked, input:text').each ->
@@ -16,5 +18,7 @@ modal.find('input').change ->
     note_val = note_val.substring(0, note_val.length-1)
 
   note.val note_val
+
+  price_adjustment.val $(this).attr("add")
 
 modal.popup('open');

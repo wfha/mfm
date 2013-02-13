@@ -15,7 +15,7 @@
 
     <% @menus.each do |menu| %>
         <tr style="background: #add8e6;">
-          <td><%= menu.name %></td>
+          <td><%= menu.name %>(Rank: <%= menu.rank %>)</td>
           <td><%= menu.desc %></td>
           <td colspan="4"></td>
           <td><%= link_to 'Edit', edit_store_menu_path(@store, menu) %></td>
@@ -24,7 +24,7 @@
         </tr>
         <% menu.categories.each do |category| %>
             <tr style="background: #ffff00;">
-              <td><%= category.name %></td>
+              <td><%= category.name %>(Rank: <%= category.rank %>)</td>
               <td><%= category.desc %></td>
               <td colspan="4"></td>
               <td><%= link_to 'Edit', edit_menu_category_path(menu, category) %></td>
@@ -33,7 +33,7 @@
             </tr>
             <% category.dishes.each do |dish| %>
                 <tr>
-                  <td><%= dish.name %></td>
+                  <td><%= dish.name %>(Rank: <%= dish.rank %>)</td>
                   <td><%= dish.desc %></td>
                   <td><% dish.dish_features.each do |df| %>  <%= df.name %> <% end %></td>
                   <td><% dish.dish_choices.each do |dc| %>   <%= dc.name %> <% end %></td>

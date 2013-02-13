@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211194840) do
+ActiveRecord::Schema.define(:version => 20130213184003) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -59,8 +59,9 @@ ActiveRecord::Schema.define(:version => 20130211194840) do
     t.string   "name"
     t.string   "desc"
     t.integer  "menu_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "rank",       :default => 0, :null => false
   end
 
   add_index "categories", ["menu_id"], :name => "index_categories_on_menu_id"
@@ -162,8 +163,9 @@ ActiveRecord::Schema.define(:version => 20130211194840) do
     t.decimal  "price",       :precision => 8, :scale => 2
     t.string   "photo"
     t.integer  "category_id"
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+    t.integer  "rank",                                      :default => 0, :null => false
   end
 
   add_index "dishes", ["category_id"], :name => "index_dishes_on_category_id"
@@ -183,8 +185,9 @@ ActiveRecord::Schema.define(:version => 20130211194840) do
     t.string   "name"
     t.string   "desc"
     t.integer  "store_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "rank",       :default => 0, :null => false
   end
 
   add_index "menus", ["store_id"], :name => "index_menus_on_store_id"
@@ -271,8 +274,9 @@ ActiveRecord::Schema.define(:version => 20130211194840) do
     t.decimal  "delivery_minimum"
     t.decimal  "delivery_fee"
     t.integer  "delivery_radius"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "rank",             :default => 0, :null => false
   end
 
   create_table "stores_tags", :id => false, :force => true do |t|

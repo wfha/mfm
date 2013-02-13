@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   end
 
   def stores
-    @stores = Store.where("id > 1")
+    @stores = Store.where("id > 1").order("rank")
     @addresses = Address.where("addressable_type = 'Store' AND addressable_id > 1")
 
     if @addresses
@@ -20,7 +20,7 @@ class HomeController < ApplicationController
     @store = Store.first
     @cart = current_cart(@store.id)
     @dishes = Dish.joins(:dish_features, :category => :menu)
-    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
+    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
     @still_open = @store.still_open?
   end
 
@@ -28,7 +28,7 @@ class HomeController < ApplicationController
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
     @dishes = Dish.joins(:dish_features, :category => :menu)
-    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
+    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
     @still_open = @store.still_open?
   end
 

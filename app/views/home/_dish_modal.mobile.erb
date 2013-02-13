@@ -18,7 +18,7 @@
           <br/>
       <% end %>
       <input type="hidden" name="note" />
-      <input type="hidden" name="price_adjustment" value="2" />
+      <input type="hidden" name="price_adjustment" value="0" />
       <input type="hidden" name="store_id" value="<%= @dish.category.menu.store.id %>" />
 
       <%= link_to 'Cancel', 'javascript:;', data: { role: "button", rel: 'back', inline: true, mini: true, icon: 'delete' } %>
