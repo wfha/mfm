@@ -81,14 +81,14 @@
         <a class="brand">&nbsp;&nbsp;&nbsp;Talk to us: </a>
         <ul class="nav">
           <li><%= link_to_function image_tag('/assets/icons_glyphish/white/09-chat-2.png'), '$("#modal_wrap_ticket .modal").modal("show")' %></li>
-          <li><%= link_to image_tag('/assets/icons_glyphish/white/210-twitterbird.png'), 'https://twitter.com/777burps', target: '_blank' %></li>
-          <li><%= link_to image_tag('/assets/icons_glyphish/white/208-facebook.png'), 'https://www.facebook.com/pages/777burps/118070065016234', target: '_blank' %></li>
+          <li><%= link_to image_tag('/assets/icons_glyphish/white/210-twitterbird.png'), APP_CONFIG["twitter_page"], target: '_blank' %></li>
+          <li><%= link_to image_tag('/assets/icons_glyphish/white/208-facebook.png'), APP_CONFIG["facebook_page"], target: '_blank' %></li>
         </ul>
       </div>
     </div>
   </div>
 
-  <% if params[:controller] == 'home' %>
+  <% if ["home", "users/registrations", "users/sessions", "users/passwords", "users/unlocks", "users/confirmations"].include?(params[:controller]) %>
       <div id="modal_wrap_cart_item"></div>
       <div id="modal_wrap_order"></div>
       <div id="modal_wrap_ticket">

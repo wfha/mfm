@@ -2,6 +2,7 @@ defaults: &defaults
   aws_aki:         ABCDEFG
   aws_sak:         ABCDEFG
   aws_bucket:      ABCDEFG
+  facebook_page:   http://www.facebook.com/pages/meals4me/149705428516213
   gmail_usr:       email@email.com
   gmail_pwd:       ABCDEFG
   interfax_url:    https://ws.interfax.net/dfs.asmx?WSDL
@@ -10,6 +11,7 @@ defaults: &defaults
   mfm_mode:        Test
   tropo_url:       https://api.tropo.com/1.0/sessions
   tropo_token:     ABCDEFG
+  twitter_page:    https://twitter.com/MealsForMe
 
 production:
   <<: *defaults

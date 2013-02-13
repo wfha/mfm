@@ -1,4 +1,4 @@
-Mfm::Application.routes.draw do
+  Mfm::Application.routes.draw do
 
   devise_for :users, controllers: {
       confirmations: 'users/confirmations',
@@ -29,6 +29,7 @@ Mfm::Application.routes.draw do
   match 'home/orders'                 => 'home#orders',             :as => :home_orders
   match 'home/handle_order/:id'       => 'home#handle_order',       :as => :home_handle_order
   match 'home/order_modal/:id'        => 'home#order_modal',        :as => :home_order_modal
+  match 'home/my_orders'              => 'home#my_orders',          :as => :home_my_orders
 
   resources :carts do
     member do

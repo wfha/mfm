@@ -47,11 +47,14 @@
       </div>
       <div class="ui-body ui-body-a" id="user_wrap" style="padding: 10px;display: none;">
         <% if user_signed_in? %>
-            <div class="ui-grid-a">
+            <div class="ui-grid-b">
               <div class="ui-block-a">
-                <%= link_to 'Edit file', edit_user_registration_path, data: { role: 'button' }, rel: 'external' %>
+                <%= link_to 'My profile', edit_user_registration_path, data: { role: 'button' }, rel: 'external' %>
               </div>
               <div class="ui-block-b">
+                <%= link_to 'My orders', home_my_orders_path, data: { role: 'button' }, rel: 'external' %>
+              </div>
+              <div class="ui-block-c">
                 <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', data: { role: 'button' }, rel: 'external' %>
               </div>
             </div>

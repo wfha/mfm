@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_filter :new_ticket
 
   def update
     @user = User.find(current_user.id)
@@ -24,5 +25,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def needs_password?(user, params)
     user.email != params[:user][:email] || !params[:user][:password].empty?
+  end
+
+  def new_ticket
+    @ticket = Ticket.new
   end
 end

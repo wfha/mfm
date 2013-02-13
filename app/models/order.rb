@@ -115,13 +115,13 @@ class Order < ActiveRecord::Base
     html = File.open(Rails.root.join('app/views/orders/_fax.html.erb')).read
     template = ERB.new(html)
     str = template.result(binding)
-    client = Savon.client(wsdl: APP_CONFIG[:interfax_url])
+    client = Savon.client(wsdl: APP_CONFIG["interfax_url"])
 
-    if APP_CONFIG[:mfm_mode] == "test"
-      response_interfax = client.call(:send_char_fax, :message => {'Username' => APP_CONFIG[:interfax_usr], 'Password' => APP_CONFIG[:interfax_pwd],
+    if APP_CONFIG["mfm_mode"] == "test"
+      response_interfax = client.call(:send_char_fax, :message => {'Username' => APP_CONFIG["interfax_usr"], 'Password' => APP_CONFIG["interfax_pwd"],
                                                                    'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
     else
-      response_interfax = client.call(:send_char_fax, :message => {'Username' => APP_CONFIG[:interfax_usr], 'Password' => APP_CONFIG[:interfax_pwd],
+      response_interfax = client.call(:send_char_fax, :message => {'Username' => APP_CONFIG["interfax_usr"], 'Password' => APP_CONFIG["interfax_pwd"],
                                                                    'FaxNumber' => store.fax, 'Data' => str, 'FileType' => 'HTML'})
     end
 
@@ -138,10 +138,10 @@ class Order < ActiveRecord::Base
   def self.to_phone(order_id)
     @order = Order.find(order_id)
 
-    if APP_CONFIG[:mfm_mode] == "test"
-      response_tropo = RestClient.get APP_CONFIG[:tropo_url], {params: {token: APP_CONFIG[:tropo_token], action: 'create', phone: '19797396180', order_id: '1234'}}
+    if APP_CONFIG["mfm_mode"] == "test"
+      response_tropo = RestClient.get APP_CONFIG["tropo_url"], {params: {token: APP_CONFIG["tropo_token"], action: 'create', phone: '19797396180', order_id: '1234'}}
     else
-      response_tropo = RestClient.get APP_CONFIG[:tropo_url], {params: {token: APP_CONFIG[:tropo_token], action: 'create', phone: "1" + store.phone, order_id: id}}
+      response_tropo = RestClient.get APP_CONFIG["tropo_url"], {params: {token: APP_CONFIG["tropo_token"], action: 'create', phone: "1" + store.phone, order_id: id}}
     end
 
     if response_tropo.code == 200

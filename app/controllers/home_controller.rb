@@ -129,8 +129,9 @@ class HomeController < ApplicationController
   end
 
   def orders
-    @r_orders = Order.where("store_id > 1")
-    @g_orders = Order.where("store_id = 1")
+    ds = Date.today.beginning_of_day
+    @r_orders = Order.where("store_id = 1 AND created_at >= :time", {:time => ds})
+    @g_orders = Order.where("store_id > 1 AND created_at >= :time", {:time => ds})
   end
 
   def handle_order
@@ -154,6 +155,12 @@ class HomeController < ApplicationController
     respond_to do |format|
       format.js
       format.mjs
+    end
+  end
+
+  def my_orders
+    if current_user.nil?
+      redirect_to home_index_path
     end
   end
 

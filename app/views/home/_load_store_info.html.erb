@@ -5,7 +5,7 @@
 <b>Hours:</b>
 <ul>
   <% @store.hours.each do |h| %>
-      <li><%= h.name %>: <%= h.open_at %> - <%= h.close_at %></li>
+      <li><%= h.desc %>: <%= h.open_at %> - <%= h.close_at %></li>
   <% end %>
 </ul>
 <br/>

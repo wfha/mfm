@@ -36,7 +36,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :mobile_device?
 
-  private
   def prepare_for_mobile
     session[:mobile_param] = params[:mobile] if params[:mobile]
     if mobile_device?
@@ -50,7 +49,6 @@ class ApplicationController < ActionController::Base
 
   # ========== Shopping Cart ==========
 
-  private
   def current_cart(store_id)
     Cart.find(session["cart_id_#{store_id}"])
   rescue ActiveRecord::RecordNotFound
@@ -60,7 +58,6 @@ class ApplicationController < ActionController::Base
     cart
   end
 
-  private
   def new_cart(store_id)
     store = Store.find(store_id)
     cart = Cart.create(:store_id => store_id, :delivery_fee => store.delivery_fee)

@@ -7,10 +7,14 @@
     <%= form_tag(cart_items_path(dish_id: @dish), :method => 'post', :remote => true) do |f| %>
         <% @dish.dish_choices.each do |dc| %>
             <br/>
-            <b><%= dc.name %>:</b>(<%= dc.desc %>)<br/>
+            <b><%= dc.name %>:&nbsp;&nbsp;&nbsp;</b>(<%= dc.desc %>)<br/>
             <% dc.content.split(',').each do |x| %>
-                <input type="<%= dc.input_type %>" name="<%= dc.name %>"
-                       value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> /><%= x.split(':')[0] %>
+                <input type="<%= dc.input_type %>" name="<%= dc.name %>" value="<%= x.split(':')[0] %>" add=<%= x.split(':')[1] %> />
+                <%= x.split(':')[0] %>
+                <% if x.split(':')[1].to_f > 0 %>
+                    +<%= number_to_currency x.split(':')[1] %>
+                <% end %>
+                &nbsp;&nbsp;&nbsp;
             <% end %>
             <br/>
         <% end %>

@@ -24,7 +24,12 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
-    @cart = current_cart(params[:store_id])
+    if params[:store_id]
+      @cart = current_cart(params[:store_id])
+    elsif params[:cart_id]
+      @cart = Cart.find(params[:cart_id])
+    end
+
     if @cart.delivery_type == 'delivery' && @cart.total_price < @cart.store.delivery_minimum
       redirect_to home_stores_url, notice: "The order doesn't meet minimum!"
       return

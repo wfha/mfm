@@ -17,7 +17,7 @@
     <li data-role="list-divider">Hours:</li>
     <li>
       <% @store.hours.each do |h| %>
-          <%= h.name %>: <br/>
+          <%= h.desc %>: <br/>
           <p style="font-size:14px;margin-top: 3px;;"><%= h.open_at %> - <%= h.close_at %></p>
       <% end %>
     </li>

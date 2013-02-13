@@ -1,0 +1,16 @@
+<div data-role="content">
+  <ul data-role="listview" data-inset="true" data-filter="false">
+    <% current_user.orders.each do |order| %>
+        <li>
+          <%= order.cart.delivery_type %>@<%= order.store.name %>
+          <br/><br/>
+          <p><%= order.created_at.strftime("%I:%M%P %m/%d/%Y")  %></p>
+          <p>
+            <b>Items: </b><%= order.cart.cart_items.size %>,
+            <b>Total: </b><%= number_to_currency order.cart.total_price %>
+          </p>
+          <%= link_to "ReOrder", new_order_path(cart_id: order.cart.id), data: { role: 'button', mini: true, ajax: false }, rel: 'external' %>
+        </li>
+    <% end %>
+  </ul>
+</div><!-- /content -->
