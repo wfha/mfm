@@ -8,8 +8,9 @@ class HomeController < ApplicationController
   end
 
   def stores
-    @stores = Store.where("id > 1").order("rank")
-    @addresses = Address.where("addressable_type = 'Store' AND addressable_id > 1")
+    @stores = Store.includes(:address).where("id > 1")
+    @addresses = []
+    @stores.each { |store| @addresses << store.address }
 
     if @addresses
       @json = @addresses.to_gmaps4rails
@@ -20,7 +21,7 @@ class HomeController < ApplicationController
     @store = Store.first
     @cart = current_cart(@store.id)
     @dishes = Dish.joins(:dish_features, :category => :menu)
-    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
+    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
     @still_open = @store.still_open?
   end
 
@@ -28,7 +29,7 @@ class HomeController < ApplicationController
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
     @dishes = Dish.joins(:dish_features, :category => :menu)
-    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
+    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
     @still_open = @store.still_open?
   end
 
@@ -56,6 +57,8 @@ class HomeController < ApplicationController
 
   def load_store_good
     @store = Store.find(params[:id])
+    @dishes = Dish.joins(:dish_features, :category => :menu)
+    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
 
     respond_to do |format|
       format.js

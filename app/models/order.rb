@@ -115,7 +115,7 @@ class Order < ActiveRecord::Base
     html = File.open(Rails.root.join('app/views/orders/_fax.html.erb')).read
     template = ERB.new(html)
     str = template.result(binding)
-    client = Savon.client(wsdl: APP_CONFIG["interfax_url"])
+    client = Savon.client(log: false, wsdl: APP_CONFIG["interfax_url"])  # Turn off log for security
 
     if APP_CONFIG["mfm_mode"] == "test"
       response_interfax = client.call(:send_char_fax, :message => {'Username' => APP_CONFIG["interfax_usr"], 'Password' => APP_CONFIG["interfax_pwd"],

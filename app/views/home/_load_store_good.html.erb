@@ -1,11 +1,7 @@
 <h4>Store Info</h4>
 <br/>
-<% @store.menus.each do |menu| %>
-    <% menu.categories.each do |category| %>
-        <% category.dishes.each do |dish| %>
-            <b><%= dish.name %></b><i> - <%= sanitize(dish.desc) %></i>
-            <i class="pull-right"><%= number_to_currency(dish.price) %></i><br/><br/>
-        <% end %>
-    <% end %>
+<% @dishes.each do |dish| %>
+    <b><%= dish.name %></b><i> - <%= sanitize(dish.desc) %></i>
+    <i class="pull-right"><%= number_to_currency(dish.price) %></i><br/><br/>
 <% end %>
 <%= link_to 'Find more', home_store_good_path(@store), :class => 'pull-right' %>

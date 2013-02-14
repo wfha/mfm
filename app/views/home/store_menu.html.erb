@@ -7,11 +7,7 @@
         <ul class="nav nav-tabs first_child_active" style="margin-bottom: 0px;">
           <% @store.menus.each do |menu| %>
               <li>
-                <a href="#menu_<%= menu.id %>">
-                  <%= menu.name %>
-                  <br/>
-                  <%= menu.desc %>
-                </a>
+                <a href="#menu_<%= menu.id %>"><%= menu.name %></a>
               </li>
           <% end %>
         </ul>
@@ -21,7 +17,7 @@
               <div class="tab-pane" id="menu_<%= menu.id %>">
                 <% menu.categories.each do |category| %>
                     <section id="<%= category.name %>">
-                      <h4><%= category.name %> | <%= category.desc %></h4>
+                      <h4><%= category.name %></h4>
                       <ul class="thumbnails">
                         <% category.dishes.each do |dish| %>
                             <li class="span6">
