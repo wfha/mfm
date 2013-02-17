@@ -9,4 +9,6 @@ class Dish < ActiveRecord::Base
   has_and_belongs_to_many :dish_choices
 
   mount_uploader :photo, PhotoUploader
+
+  ERROR_MSG = "This dish is currently not available!"
 end

@@ -1,29 +1,8 @@
-<%= form_for([@store, @hour]) do |f| %>
-    <% if @hour.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@hour.errors.count, "error") %> prohibited this hour from being saved:</h2>
-
-          <ul>
-            <% @hour.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label :open_at %><br />
-      <%= f.text_field :open_at %>
-    </div>
-    <div class="field">
-      <%= f.label :close_at %><br />
-      <%= f.text_field :close_at %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+<%= simple_form_for([@store, @hour]) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name %>
+    <%= f.input :desc %>
+    <%= f.input :open_at %>
+    <%= f.input :close_at %>
+    <%= f.button :submit, "Submit", class: "btn btn-primary", disable_with: "Saving..." %>
 <% end %>

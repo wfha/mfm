@@ -4,11 +4,18 @@ module Hourable
   def still_open?
     time_now = Time.now
     flag = false
-    hours.each do |hour|
-      oa = Time.parse(hour.open_at).time_of_day!
-      ca = Time.parse(hour.close_at).time_of_day!
-      flag = true if hour.name.include?(time_now.wday.to_s) && (oa..ca).cover?(time_now.time_of_day!)
+
+    # Open all time if no hours specified
+    if hours.empty?
+      flag = true
+    else
+      hours.each do |hour|
+        oa = Time.parse(hour.open_at).time_of_day!
+        ca = Time.parse(hour.close_at).time_of_day!
+        flag = true if hour.name.include?(time_now.wday.to_s) && (oa..ca).cover?(time_now.time_of_day!)
+      end
     end
+
     flag
   end
 end

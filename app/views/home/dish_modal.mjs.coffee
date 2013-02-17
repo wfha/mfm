@@ -4,21 +4,34 @@ $('#modal_wrap').html('<% self.formats = [:mobile] %><%=j render "dish_modal" %>
 
 modal = $('.modal')
 
-modal.find('input').change ->
-  note = modal.find('input[name=note]')
-  price_adjustment = modal.find('input[name=price_adjustment]')
+# Click Order Button In The Modal To Submit The Dish Order
+# Need to Check if must inputs are filled before submitting
+modal.find('button.confirm_to_order').click ->
+  flag = true
 
-  note_val = ''
+  modal.find('div.dish_choice_wrap').each ->
+    if $.trim($(this).attr("must")) == "true"
+      if $.trim($(this).attr("type")) == "radio" || $.trim($(this).attr("type")) == "checkbox"
+        if $(this).find("input:checked").length == 0
+          flag = false
 
-  modal.find('input:checked, input:text').each ->
-    if $(this).val()
-      note_val += ($(this).val() + ',')
+  if flag
+    note = modal.find('input[name=note]')
+    price_adjustment = modal.find('input[name=price_adjustment]')
+    note_val = ''
+    price_adjustment_val = 0
 
-  if note_val.charAt(note_val.length-1) == ','
-    note_val = note_val.substring(0, note_val.length-1)
+    modal.find('input:checked, input:text').each ->
+      if $(this).val()
+        note_val += ($(this).val() + ',')
+        price_adjustment_val += Number($(this).attr("add"))
 
-  note.val note_val
+    if note_val.charAt(note_val.length-1) == ','
+      note_val = note_val.substring(0, note_val.length-1)
 
-  price_adjustment.val $(this).attr("add")
+    note.val note_val
+    price_adjustment.val price_adjustment_val
+
+    modal.find('form').submit()
 
 modal.popup('open');

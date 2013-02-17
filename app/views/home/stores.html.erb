@@ -10,8 +10,8 @@
               <td width="45%">
                 <div>
                   <h4><%= store.name %></h4>
-                  <p><%= store.address.address1 %></p>
-                  <p><%= store.phone %> | <%= store.fax %></p>
+                  <p><b>Tags:</b> <% store.tags.each do |t| %><%= t.name %>,&nbsp;<% end %></p>
+                  <p><%= store.phone %> | <%= store.address.address1 %></p>
                   <%= link_to 'View Menu', home_store_good_path(store), :class => 'btn btn-primary' %>
                 </div>
               </td>

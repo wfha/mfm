@@ -1,7 +1,22 @@
-<%= simple_form_for([@menu, @category]) do |f| %>
+<%= simple_nested_form_for([@menu, @category]) do |f| %>
     <%= f.error_notification %>
     <%= f.input :name %>
     <%= f.input :desc %>
     <%= f.input :rank %>
+
+    <hr/>
+
+    <h4>Open Hours:</h4>
+    <%= f.link_to_add "Add", :hours, class: 'btn btn-primary' %>
+    <%= f.fields_for :hours do |hour| %>
+        <%= hour.input :name %>
+        <%= hour.input :desc %>
+        <%= hour.input :open_at %>
+        <%= hour.input :close_at %>
+        <%= hour.link_to_remove "Remove", class: 'btn btn-info' %>
+    <% end %>
+
+    <hr/>
+
     <%= f.button :submit, disable_with: "Saving...", class: 'btn btn-primary' %>
 <% end %>

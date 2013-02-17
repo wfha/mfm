@@ -22,7 +22,8 @@ class HomeController < ApplicationController
     @cart = current_cart(@store.id)
     @dishes = Dish.joins(:dish_features, :category => :menu)
     .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
-    @still_open = @store.still_open?
+    @store_still_open = @store.still_open?
+    @menu_still_open = true
   end
 
   def store_good
@@ -30,25 +31,29 @@ class HomeController < ApplicationController
     @cart = current_cart(@store.id)
     @dishes = Dish.joins(:dish_features, :category => :menu)
     .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
-    @still_open = @store.still_open?
+    @store_still_open = @store.still_open?
+    @menu_still_open = true
   end
 
   def store_menu
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
-    @still_open = @store.still_open?
+    @store_still_open = @store.still_open?
+    @menu_still_open = true
   end
 
   def store_info
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
-    @still_open = @store.still_open?
+    @store_still_open = @store.still_open?
+    @menu_still_open = true
   end
 
   def store_reviews
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
-    @still_open = @store.still_open?
+    @store_still_open = @store.still_open?
+    @menu_still_open = true
 
     request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: '00CRzCP7C-1GMSGy3su_Ig')
     response = @client.search(request)
@@ -172,6 +177,7 @@ class HomeController < ApplicationController
 
   def dish_modal
     @dish = Dish.find(params[:id])
+    @still_open = @dish.category.menu.store.still_open? && @dish.category.menu.still_open?
 
     respond_to do |format|
       format.js

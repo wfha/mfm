@@ -5,8 +5,10 @@
     </div>
     <div class="span9">
       <h1><%= @store.name %></h1>
-      <p><%= @store.address.address1 %></p>
-      <p><%= @store.phone %> | <%= @store.fax %> | <%= link_to 'Back to Restaurant List', home_stores_path %></p>
+      <p><b>Tags:</b> <% @store.tags.each do |t| %><%= t.name %>,&nbsp;<% end %></p>
+      <p><b>Tel:</b> <%= @store.phone %></p>
+      <p><b>Addr:</b> <%= @store.address.address1 %></p>
+      <p><%= link_to 'Back to Restaurant List', home_stores_path %></p>
       <br/>
       <div class="navbar">
         <div class="navbar-inner">

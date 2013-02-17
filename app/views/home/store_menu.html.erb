@@ -14,19 +14,20 @@
 
         <div class="tab-content first_child_active" style="background-color: #ffffff;border-left: 1px solid #dddddd;padding: 20px;">
           <% @store.menus.each do |menu| %>
+              <% @menu_still_open = menu.still_open? %>
               <div class="tab-pane" id="menu_<%= menu.id %>">
                 <% menu.categories.each do |category| %>
                     <section id="<%= category.name %>">
                       <h4><%= category.name %></h4>
                       <ul class="thumbnails">
                         <% category.dishes.each do |dish| %>
-                            <li class="span6">
-                              <% if @still_open %>
+                            <li class="span6" style="margin-bottom:10px">
+                              <% if @store_still_open && @menu_still_open %>
                                   <div class="thumbnail store_menu_dish_wrap_open" rel="popover" title="<%= dish.name %>"
                                        data-content="<% if dish.desc.empty? %>Info coming soon ...
                                    <% else %><%= sanitize(dish.desc) %><% end %>">
                                     <%= link_to home_dish_modal_path(dish), :remote => true do %>
-                                        <%= dish.name %>
+                                        <%= truncate(dish.name, length: 40) %>
                                         <i class="pull-right"><%= number_to_currency(dish.price) %></i>
                                         <% dish.dish_features.each do |df| %>
                                             <div style="width: 16px;height: 16px;margin-right: 4px;" class="pull-right icons_dish_features-dish_feature_<%= df.name %>"></div>
@@ -37,8 +38,8 @@
                                   <div class="thumbnail store_menu_dish_wrap_closed" rel="popover" title="<%= dish.name %>"
                                        data-content="<% if dish.desc.empty? %>Info coming soon ...
                                    <% else %><%= sanitize(dish.desc) %><% end %>">
-                                    <%= link_to "javascript:alert('The store is closed!');" do %>
-                                        <%= dish.name %>
+                                    <%= link_to "javascript:alert('" + Dish::ERROR_MSG + "');" do %>
+                                        <%= truncate(dish.name, length: 40) %>
                                         <i class="pull-right"><%= number_to_currency(dish.price) %></i>
                                         <% dish.dish_features.each do |df| %>
                                             <div style="width: 16px;height: 16px;margin-right: 4px;" class="pull-right icons_dish_features-dish_feature_<%= df.name %>"></div>
