@@ -6,7 +6,7 @@
 <table width='730px'>
   <col width='330'/>
   <col width='400'/>
-  <tr> <th rowspan='3'><h1 style='font-size:50px;'>777Burps</h1></th><td><h1>Order #: Invoice ABC</h1></td> </tr>
+  <tr> <th rowspan='3'><h1 style='font-size:50px;'>meals4me</h1></th><td><h1>Invoice #: <%= @order.id %></h1></td> </tr>
   <tr> <td>Order Time: <%= @order.created_at %></td> </tr>
   <tr> <td>Order To: <%= @order.store.name %></td> </tr>
 </table>
@@ -17,7 +17,7 @@
   <col width='300'/>
   <tr> <td><b>Customer Info:</b></td><th rowspan='3'><h1><%= @order.cart.delivery_type %></h1></th> </tr>
   <tr> <td><%= @order.user.firstname %> <%= @order.user.lastname %></td>                            </tr>
-  <tr> <td><%= @order.user.phone %>></td>                                                           </tr>
+  <tr> <td><%= @order.user.phone %></td>                                                            </tr>
   <% if @order.user.address %>
       <tr> <td><%= @order.user.address.address1 %>, <%= @order.user.address.address2 %></td><th rowspan='2'><h2>Time: ASAP</h2></th> </tr>
       <tr> <td><%= @order.user.address.city %>, <%= @order.user.address.state %> <%= @order.user.address.zip %></td> </tr>
@@ -60,7 +60,7 @@
   <% else %>
       <tr> <td>Card #: <%= @order.card_number %></td>           <td align='right'>Tax</td>         <td><%= number_to_currency @order.cart.subtotal_price*0.0825 %></td>    </tr>
       <tr> <td>Exp At(MM/YY): <%= @order.card_expires_on %></td><td align='right'>Delivery Fee</td><td><%= number_to_currency @order.cart.delivery_fee %></td>             </tr>
-      <tr> <td>Card Holder: <%= @order.card_number %></td>      <td align='right'>Tip</td>         <td><%= number_to_currency @order.tip %></td>                           </tr>
+      <tr> <td>Card Holder: </td>                               <td align='right'>Tip</td>         <td><%= number_to_currency @order.tip %></td>                           </tr>
       <tr> <td>CVV #: <%= @order.card_verification %></td>      <td align='right'>Total</td>       <td><%= number_to_currency @order.cart.total_price + @order.tip %></td> </tr>
       <br/>
   <% end %>
@@ -68,7 +68,7 @@
 
 <hr/>
 <br/>
-<p>For price adjustments or any issues, please contact 777Burps: 979-739-6180, 979-676-2867</p>
+<p>For price adjustments or any issues, please contact meals4me: 979-739-6180, 979-676-2867</p>
 
 </body>
 </html>

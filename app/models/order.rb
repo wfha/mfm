@@ -120,9 +120,9 @@ class Order < ActiveRecord::Base
     if APP_CONFIG["mfm_mode"] == "test"
       response_interfax = client.call(:send_char_fax, :message => {'Username' => APP_CONFIG["interfax_usr"], 'Password' => APP_CONFIG["interfax_pwd"],
                                                                    'FaxNumber' => '9790000000', 'Data' => str, 'FileType' => 'HTML'})
-    else
+    elsif APP_CONFIG["mfm_mode"] == "production"
       response_interfax = client.call(:send_char_fax, :message => {'Username' => APP_CONFIG["interfax_usr"], 'Password' => APP_CONFIG["interfax_pwd"],
-                                                                   'FaxNumber' => store.fax, 'Data' => str, 'FileType' => 'HTML'})
+                                                                   'FaxNumber' => @order.store.fax, 'Data' => str, 'FileType' => 'HTML'})
     end
 
     @order = nil # Clear credit card info
@@ -140,8 +140,8 @@ class Order < ActiveRecord::Base
 
     if APP_CONFIG["mfm_mode"] == "test"
       response_tropo = RestClient.get APP_CONFIG["tropo_url"], {params: {token: APP_CONFIG["tropo_token"], action: 'create', phone: '19797396180', order_id: '1234'}}
-    else
-      response_tropo = RestClient.get APP_CONFIG["tropo_url"], {params: {token: APP_CONFIG["tropo_token"], action: 'create', phone: "1" + store.phone, order_id: id}}
+    elsif APP_CONFIG["mfm_mode"] == "production"
+      response_tropo = RestClient.get APP_CONFIG["tropo_url"], {params: {token: APP_CONFIG["tropo_token"], action: 'create', phone: "1" + @order.store.phone, order_id: order_id}}
     end
 
     if response_tropo.code == 200

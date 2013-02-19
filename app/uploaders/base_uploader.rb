@@ -27,7 +27,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "/assets/mfm_logo_128x128.png"
+    "/assets/mfm_logo_400x300.png"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:

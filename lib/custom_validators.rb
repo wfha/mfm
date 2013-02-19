@@ -120,7 +120,7 @@ module CustomValidators
       if dis.to_s == 'NaN'
         record.errors[:note] << "please enter a valid address"
       elsif dis > record.store.delivery_radius
-        record.errors[:note] << "you are far away from this store, extra delivery fee may apply"
+        record.errors[:note] << "you are too far away from this restaurant"
       end
     end
   end

@@ -19,7 +19,7 @@
 
       <h4>Payments:</h4>
       <% @store.payments.each do |p| %>
-          <%= image_tag p.avatar_url(:micro).to_s if p.avatar? %>
+          <%= image_tag p.avatar_url(:small).to_s if p.avatar? %>
       <% end %>
       <br/><br/>
 

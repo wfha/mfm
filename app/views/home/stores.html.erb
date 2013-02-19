@@ -5,7 +5,7 @@
         <% @stores.each do |store| %>
             <tr>
               <td width="35%">
-                <%= link_to(image_tag(store.avatar_url.to_s, width: 150, height: 100, alt: 'Meals4.Me'), home_store_good_path(store)) %>
+                <%= link_to(image_tag(store.avatar_url.to_s, alt: 'Meals4.Me', style: "width:150px;height:150px;"), home_store_good_path(store)) %>
               </td>
               <td width="45%">
                 <div>

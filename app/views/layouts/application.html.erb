@@ -46,8 +46,8 @@
       </div>
   <% end %>
 
-  <h1 style="color: red;margin-bottom: 30px;">The site is BETA version, please don't order now!</h1>
-  <h1 style="color: red;margin-bottom: 30px;">We are coming soon!</h1>
+  <!--<h1 style="color: red;margin-bottom: 30px;">The site is BETA version, please don't order now!</h1>-->
+  <!--<h1 style="color: red;margin-bottom: 30px;">We are coming soon!</h1>-->
   <%= yield %>
 
   <!-- Footer
@@ -57,9 +57,7 @@
       <ul class="footer-links">
         <li><%= link_to 'Restaurant Delivery', home_stores_path %></li>
         <li class="muted">&middot;</li>
-        <li><%= link_to 'Grocery Delivery', home_stores_path %></li>
-        <li class="muted">&middot;</li>
-        <li><%= link_to 'Customer Service', home_stores_path %></li>
+        <li><%= link_to 'Grocery Delivery', home_grocery_path %></li>
         <li class="muted">&middot;</li>
         <li>
           <% if mobile_device? %>
@@ -68,6 +66,8 @@
               <%= link_to 'Mobile site', :mobile => 1 %>
           <% end %>
         </li>
+        <li class="muted">&middot;</li>
+        <li><%= link_to "Chrome Extension", "https://chrome.google.com/webstore/detail/meals4me/miinanihaigjbhiekjadnmagbfcmcmdp", target: "_blank" %></li>
         <li><p class="pull-right">&copy; Meals4.Me Company 2012.</p></li>
       </ul>
     </div>

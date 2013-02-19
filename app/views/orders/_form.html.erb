@@ -26,6 +26,7 @@
                 <% @order.store.payments.each do |p| %>
                     <%= image_tag p.avatar_url(:small).to_s if p.avatar? unless p.name == "paypal" %>
                 <% end %>
+                <p style="color:green;font-size:12px;font-style:italic;">Credit card will be encrypted and transferred to the store directly. It won't be stored anywhere nor seen by anyone.</p>
                 <%= f.input :card_number, placeholder: "Credit Card Number" %>
                 <%= f.input :card_verification, placeholder: "CVV Code", wrapper_html: { class: "sf_2_in_1" } %>
                 <%= f.input :card_expires_on, placeholder: "Exp: MM/YY", wrapper_html: { class: "sf_2_in_1" } %>
@@ -44,6 +45,7 @@
           <%= f.input :store_id, :as => :hidden %>
           <%= f.input :cart_id, :as => :hidden %>
           <%= f.button :submit, :class => "btn btn-primary", :disable_with => "Saving..." %>
+          <%= link_to "Back to Store", home_store_good_path(@order.store), :class => "btn btn-info" %>
       <% end %>
     </div>
   </li>
