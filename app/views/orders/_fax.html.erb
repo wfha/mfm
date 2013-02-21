@@ -50,7 +50,7 @@
   <col width='530'/>
   <col width='100'/>
   <col width='100'/>
-  <tr> <td><b>Pay by <%= @order.payment_type %>(Paid)</b></td><td align='right'>Subtotal</td><td><%= number_to_currency @order.cart.subtotal_price %></td> </tr>
+  <tr> <td><b>Pay by <%= @order.payment_type %>(<%= @order.payment_status %>)</b></td><td align='right'>Subtotal</td><td><%= number_to_currency @order.cart.subtotal_price %></td> </tr>
   <% if @order.payment_type == 'cash' %>
       <tr> <td></td><td align='right'>Tax</td>         <td><%= number_to_currency @order.cart.subtotal_price*0.0825 %></td>    </tr>
       <tr> <td></td><td align='right'>Delivery Fee</td><td><%= number_to_currency @order.cart.delivery_fee %></td>             </tr>

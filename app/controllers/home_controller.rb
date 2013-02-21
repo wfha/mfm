@@ -136,6 +136,34 @@ class HomeController < ApplicationController
 
   end
 
+  # Twilio Phone Instructions
+  # ============================
+  def reminder
+    @order_id = params[:order_id]
+    @post_to = APP_CONFIG['domain'] + "/home/directions?order_id=#{@order_id}"
+    render :action => "reminder.xml.builder", :layout => false
+  end
+
+  def directions
+    @order_id = params[:order_id]
+
+    if !params['Digits'] or params['Digits'] != '2'
+      redirect_to :action => 'reminder', :order_id => @order_id
+      return
+    end
+
+    @redirect_to = APP_CONFIG['domain'] + '/home/reminder'
+    render :action => "directions.xml.builder", :layout => false
+  end
+
+   def  test_twilio
+     Order.to_phone(1)
+   end
+
+
+  # Admin Console
+  # =======================
+
   def orders
     ds = Date.today.beginning_of_day
     @r_orders = Order.where("store_id = 1 AND created_at >= :time", {:time => ds})

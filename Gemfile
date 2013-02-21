@@ -52,6 +52,7 @@ gem 'savon', '~> 2.0.2'
 #gem 'tropo-webapi-ruby', '~> 0.1.11' # Only for Tropo scripting
 gem 'yelp', '0.0.0', :git => 'git://github.com/wfha/yelp.git'
 gem 'rest-client', '~> 1.6.7'
+gem 'twilio-ruby', '~> 3.9.0'
 
 # Background Jobs
 gem 'delayed_job_active_record', '~> 0.3.3'
