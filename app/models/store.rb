@@ -2,7 +2,7 @@ class Store < ActiveRecord::Base
   include Hourable
 
   attr_accessible :delivery_fee, :delivery_minimum, :delivery_radius,
-                  :desc, :fax, :avatar, :name, :phone, :rank, :tag_ids, :payment_ids,
+                  :desc, :fax, :avatar, :name, :phone, :rank, :tag_ids, :payment_ids, :service_ids,
                   :address_attributes, :hours_attributes
 
   has_one :address, :as => :addressable
@@ -17,6 +17,7 @@ class Store < ActiveRecord::Base
   has_many :orders
 
   has_and_belongs_to_many :payments
+  has_and_belongs_to_many :services
   has_and_belongs_to_many :tags
 
   # ========== More ==========
@@ -32,4 +33,16 @@ class Store < ActiveRecord::Base
   validates :delivery_fee, presence: true
   validates :delivery_minimum, presence: true
   validates :delivery_radius, presence: true
+
+  def has_effective_coupons?
+    coupons.where("rank > 0").size > 0
+  end
+
+  def can_order_online?
+    services.include?(Service.find_by_name("order_online"))
+  end
+
+  def can_reserve_online?
+    services.include?(Service.find_by_name("reserve_online"))
+  end
 end

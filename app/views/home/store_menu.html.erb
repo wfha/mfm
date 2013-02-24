@@ -22,23 +22,37 @@
                       <ul class="thumbnails">
                         <% category.dishes.each do |dish| %>
                             <li class="span6" style="margin-bottom:10px">
-                              <% if @store_still_open && @menu_still_open %>
-                                  <div class="thumbnail store_menu_dish_wrap_open" rel="popover" title="<%= dish.name %>"
-                                       data-content="<% if dish.desc.empty? %>Info coming soon ...
+                              <% if @can_order_online %>
+                                  <% if @store_still_open && @menu_still_open %>
+                                      <div class="thumbnail store_menu_dish_wrap_open" rel="popover" title="<%= dish.name %>"
+                                           data-content="<% if dish.desc.empty? %>Info coming soon ...
                                    <% else %><%= sanitize(dish.desc) %><% end %>">
-                                    <%= link_to home_dish_modal_path(dish), :remote => true do %>
-                                        <%= truncate(dish.name, length: 40) %>
-                                        <i class="pull-right"><%= number_to_currency(dish.price) %></i>
-                                        <% dish.dish_features.each do |df| %>
-                                            <div style="width: 16px;height: 16px;margin-right: 4px;" class="pull-right icons_dish_features-dish_feature_<%= df.name %>"></div>
+                                        <%= link_to home_dish_modal_path(dish), :remote => true do %>
+                                            <%= truncate(dish.name, length: 40) %>
+                                            <i class="pull-right"><%= number_to_currency(dish.price) %></i>
+                                            <% dish.dish_features.each do |df| %>
+                                                <div style="width: 16px;height: 16px;margin-right: 4px;" class="pull-right icons_dish_features-dish_feature_<%= df.name %>"></div>
+                                            <% end %>
                                         <% end %>
-                                    <% end %>
-                                  </div>
+                                      </div>
+                                  <% else %>
+                                      <div class="thumbnail store_menu_dish_wrap_closed" rel="popover" title="<%= dish.name %>"
+                                           data-content="<% if dish.desc.empty? %>Info coming soon ...
+                                   <% else %><%= sanitize(dish.desc) %><% end %>">
+                                        <%= link_to "javascript:alert('" + Dish::ERROR_MSG + "');" do %>
+                                            <%= truncate(dish.name, length: 40) %>
+                                            <i class="pull-right"><%= number_to_currency(dish.price) %></i>
+                                            <% dish.dish_features.each do |df| %>
+                                                <div style="width: 16px;height: 16px;margin-right: 4px;" class="pull-right icons_dish_features-dish_feature_<%= df.name %>"></div>
+                                            <% end %>
+                                        <% end %>
+                                      </div>
+                                  <% end %>
                               <% else %>
                                   <div class="thumbnail store_menu_dish_wrap_closed" rel="popover" title="<%= dish.name %>"
                                        data-content="<% if dish.desc.empty? %>Info coming soon ...
                                    <% else %><%= sanitize(dish.desc) %><% end %>">
-                                    <%= link_to "javascript:alert('" + Dish::ERROR_MSG + "');" do %>
+                                    <%= link_to 'javascript:alert("' + @store.name.to_s + ' cannot order online, please call ' + @store.phone + ' to place order!");' do %>
                                         <%= truncate(dish.name, length: 40) %>
                                         <i class="pull-right"><%= number_to_currency(dish.price) %></i>
                                         <% dish.dish_features.each do |df| %>

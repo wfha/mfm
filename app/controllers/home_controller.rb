@@ -7,6 +7,11 @@ class HomeController < ApplicationController
 
   end
 
+  def google
+    @info = "This is a google for restaurants"
+
+  end
+
   def stores
     @stores = Store.includes(:address).where("rank > 0").order("rank")
     @addresses = []
@@ -24,6 +29,7 @@ class HomeController < ApplicationController
     .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
     @store_still_open = @store.still_open?
     @menu_still_open = true
+    @can_order_online = @store.can_order_online?
   end
 
   def store_good
@@ -33,6 +39,7 @@ class HomeController < ApplicationController
     .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
     @store_still_open = @store.still_open?
     @menu_still_open = true
+    @can_order_online = @store.can_order_online?
   end
 
   def store_menu
@@ -40,6 +47,15 @@ class HomeController < ApplicationController
     @cart = current_cart(@store.id)
     @store_still_open = @store.still_open?
     @menu_still_open = true
+    @can_order_online = @store.can_order_online?
+  end
+
+  def store_coupons
+    @store = Store.find(params[:id])
+    @cart = current_cart(@store.id)
+    @store_still_open = @store.still_open?
+    @menu_still_open = true
+    @can_order_online = @store.can_order_online?
   end
 
   def store_info
@@ -47,6 +63,7 @@ class HomeController < ApplicationController
     @cart = current_cart(@store.id)
     @store_still_open = @store.still_open?
     @menu_still_open = true
+    @can_order_online = @store.can_order_online?
   end
 
   def store_reviews
@@ -54,6 +71,7 @@ class HomeController < ApplicationController
     @cart = current_cart(@store.id)
     @store_still_open = @store.still_open?
     @menu_still_open = true
+    @can_order_online = @store.can_order_online?
 
     request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: '00CRzCP7C-1GMSGy3su_Ig')
     response = @client.search(request)
@@ -137,32 +155,38 @@ class HomeController < ApplicationController
   end
 
   # Twilio Phone Instructions
-  # ============================
+  # ======================================================
   def reminder
     @order_id = params[:order_id]
-    @post_to = APP_CONFIG['domain'] + "/home/directions?order_id=#{@order_id}"
+    @post_to = "https://" + APP_CONFIG['domain'] + "/home/directions?order_id=#{@order_id}"
     render :action => "reminder.xml.builder", :layout => false
   end
 
   def directions
     @order_id = params[:order_id]
 
-    if !params['Digits'] or params['Digits'] != '2'
+    if !params['Digits'] or params['Digits'] != '1' or params['Digits'] != '2'
       redirect_to :action => 'reminder', :order_id => @order_id
       return
+    elsif params['Digits'] == '1'
+      @order = Order.find(@order_id)
+      @order.handled = true
+      @order.save
+    elsif params['Digits'] == '2'
+
     end
 
-    @redirect_to = APP_CONFIG['domain'] + '/home/reminder'
+    @redirect_to = "https://" + APP_CONFIG['domain'] + '/home/reminder'
     render :action => "directions.xml.builder", :layout => false
   end
 
-   def  test_twilio
-     Order.to_phone(1)
-   end
-
+  def test_twilio
+    Order.to_phone(1)
+    render :nothing => true
+  end
 
   # Admin Console
-  # =======================
+  # ======================================================
 
   def orders
     ds = Date.today.beginning_of_day

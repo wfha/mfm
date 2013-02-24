@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213184003) do
+ActiveRecord::Schema.define(:version => 20130223055007) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -73,8 +73,9 @@ ActiveRecord::Schema.define(:version => 20130213184003) do
     t.integer  "store_id"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "rank",       :default => 0, :null => false
   end
 
   add_index "coupons", ["store_id"], :name => "index_coupons_on_store_id"
@@ -231,8 +232,9 @@ ActiveRecord::Schema.define(:version => 20130213184003) do
     t.string   "desc"
     t.string   "photo"
     t.integer  "store_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "rank",       :default => 0, :null => false
   end
 
   add_index "plans", ["store_id"], :name => "index_plans_on_store_id"
@@ -264,6 +266,22 @@ ActiveRecord::Schema.define(:version => 20130213184003) do
   add_index "roles_users", ["role_id", "user_id"], :name => "index_roles_users_on_role_id_and_user_id"
   add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+
+  create_table "services", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "services_stores", :id => false, :force => true do |t|
+    t.integer "service_id"
+    t.integer "store_id"
+  end
+
+  add_index "services_stores", ["service_id", "store_id"], :name => "index_services_stores_on_service_id_and_store_id"
+  add_index "services_stores", ["service_id"], :name => "index_services_stores_on_service_id"
+  add_index "services_stores", ["store_id"], :name => "index_services_stores_on_store_id"
 
   create_table "stores", :force => true do |t|
     t.string   "name"

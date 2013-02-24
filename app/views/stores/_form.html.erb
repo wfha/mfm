@@ -13,6 +13,7 @@
     <%= f.input :delivery_fee %>
     <%= f.input :delivery_radius %>
     <%= f.association :tags, :as => :check_boxes, :item_wrapper_class => 'inline' %>
+    <%= f.association :services, :as => :check_boxes, :item_wrapper_class => 'inline' %>
     <%= f.association :payments, :as => :check_boxes, :item_wrapper_class => 'inline' %>
     <%= image_tag @store.avatar_url.to_s if @store.avatar? %>
     <%= f.input :avatar %>

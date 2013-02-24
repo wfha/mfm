@@ -1,21 +1,34 @@
-<div class="well">
+<div class="well" xmlns="http://www.w3.org/1999/html">
   <div class="row-fluid">
     <div class="span3">
       <%= image_tag @store.avatar_url.to_s, style: "width:100%;" %>
     </div>
     <div class="span9">
-      <h1><%= @store.name %></h1>
-      <p><b>Tags:</b> <% @store.tags.each do |t| %><%= t.name %>,&nbsp;<% end %></p>
-      <p><b>Tel:</b> <%= @store.phone %></p>
-      <p><b>Addr:</b> <%= @store.address.address1 %></p>
-      <p><%= link_to 'Back to Restaurant List', home_stores_path %></p>
-      <br/>
+      <h4><%= @store.name %></h4>
+      <table width="100%">
+        <tr>
+          <td><b>Telephone:</b><br/><%= @store.phone %></td>
+          <td><b>Address:</b><br/><%= @store.address.address1 %></td>
+          <td><b>Tags:</b><br/><% @store.tags.each do |t| %><%= t.name %>,&nbsp;<% end %></td>
+        </tr>
+        <tr>
+          <td><b>Hours:</b><br/><% @store.hours.each do |h| %><%= h.desc %>: <%= h.open_at %> - <%= h.close_at %><br/><% end %></td>
+          <td><b>Delivery Policy:</b><br/>Within <%= @store.delivery_radius %> miles.</td>
+          <td><b>Payments:</b><br/><% @store.payments.each do |p| %><%= image_tag p.avatar_url(:small).to_s if p.avatar? %><% end %></td>
+        </tr>
+      </table>
+
+      <%= link_to 'Back to Restaurant List', home_stores_path, style: "line-height: 40px;" %>
+
       <div class="navbar">
         <div class="navbar-inner">
           <ul class="nav">
             <li id="store_good"><%= link_to 'What\'s Good', home_store_good_path %></li>
             <li id="store_menu"><%= link_to 'Full Menu', home_store_menu_path %></li>
-            <li id="store_info"><%= link_to 'Store Info', home_store_info_path %></li>
+            <% if @store.has_effective_coupons? %>
+                <li id="store_coupons"><%= link_to 'Coupons!', home_store_coupons_path %></li>
+            <% end %>
+            <!--<li id="store_info"><%= link_to 'Store Info', home_store_info_path %></li>-->
             <li id="store_reviews"><%= link_to 'Store Reviews', home_store_reviews_path %></li>
           </ul>
         </div>

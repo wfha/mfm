@@ -52,3 +52,23 @@
 .caption {
   height: 80px;
 }
+
+
+/* Restaurant Google Page */
+.google {
+  p.services_icon {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 17px;
+    margin: 1px;
+    text-align: center;
+
+    a {
+      font-style: italic;
+      color: #ffffff;
+      text-decoration: none;
+    }
+  }
+}
+

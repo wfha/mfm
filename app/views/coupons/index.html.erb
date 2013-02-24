@@ -1,31 +1,36 @@
-<h1>Listing coupons</h1>
+<div class="well">
+  <h1>Listing coupons</h1>
 
-<table class='table table-hover table-bordered'>
-  <tr>
-    <th>Name</th>
-    <th>Desc</th>
-    <th>Image</th>
-    <th>Store</th>
-    <th>Start at</th>
-    <th>End at</th>
-    <th colspan="3">Action</th>
-  </tr>
+  <table class='table table-hover table-bordered'>
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Desc</th>
+      <th>Image</th>
+      <th>Store</th>
+      <th>Start at</th>
+      <th>End at</th>
+      <th colspan="3">Action</th>
+    </tr>
 
-  <% @coupons.each do |coupon| %>
-      <tr>
-        <td><%= coupon.name %></td>
-        <td><%= coupon.desc %></td>
-        <td><%= image_tag coupon.image_url(:small).to_s if coupon.image? %></td>
-        <td><%= coupon.store.name %></td>
-        <td><%= coupon.start_at %></td>
-        <td><%= coupon.end_at %></td>
-        <td><%= link_to 'Show', [@store, coupon] %></td>
-        <td><%= link_to 'Edit', edit_store_coupon_path(@store, coupon) %></td>
-        <td><%= link_to 'Destroy', [@store, coupon], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-  <% end %>
-</table>
+    <% @coupons.each do |coupon| %>
+        <tr>
+          <td><%= coupon.rank %></td>
+          <td><%= coupon.name %></td>
+          <td><%= coupon.desc %></td>
+          <td><%= image_tag coupon.photo_url(:micro).to_s if coupon.photo? %></td>
+          <td><%= coupon.store.name %></td>
+          <td><%= coupon.start_at %></td>
+          <td><%= coupon.end_at %></td>
+          <td><%= link_to 'Show', [@store, coupon] %></td>
+          <td><%= link_to 'Edit', edit_store_coupon_path(@store, coupon) %></td>
+          <td><%= link_to 'Destroy', [@store, coupon], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </table>
 
-<br />
+  <br />
 
-<%= link_to 'New Coupon', new_store_coupon_path(@store) %>
+  <%= link_to 'New Coupon', new_store_coupon_path(@store), class: "btn btn-primary" %>
+  <%= link_to 'Back to Stores', stores_path, :class => 'btn btn-info' %>
+</div>

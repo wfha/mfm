@@ -1,0 +1,24 @@
+<%= render 'store_header' %>
+
+<div class="row">
+  <div class="span8" id="main">
+    <div class="well">
+     <% @store.coupons.each do |coupon| %>
+            <div>
+              <%= image_tag coupon.photo_url(:small).to_s %>
+              <br/>
+              <%= coupon.name %> - <%= coupon.desc %>
+              <br/>
+              <%= coupon.start_at %> - <%= coupon.end_at %>
+              <hr/>
+            </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="span4">
+    <div class="well" id="side">
+      <div id="cart"><%= render @cart %></div>
+    </div>
+  </div>
+</div><!--/row-->

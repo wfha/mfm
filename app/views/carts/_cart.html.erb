@@ -1,60 +1,61 @@
-<% if cart.cart_items.empty? %>
-    <h4>Your Cart Is Empty!</h4>
-<% else %>
-    <ul>
-      <li>
-        <h4>Cart @ <%= cart.store.name %></h4>
-      </li>
-      <li class="cart_header" style="margin-bottom: 10px;">
-        <% if params[:controller] == "orders" %>
-            <% if cart.delivery_type == 'delivery' %>
-                <%= link_to 'Delivery', "javascript:;", class: 'active' %>
+<% if cart.store.can_order_online? %>
+    <% if cart.cart_items.empty? %>
+        <%= image_tag "/assets/mfm_logo.png" %>
+        <h4>Your Cart Is Empty!</h4>
+    <% else %>
+        <ul>
+          <li><h4>Cart @ <%= cart.store.name %></h4></li>
+          <li class="cart_header" style="margin-bottom: 10px;">
+            <% if params[:controller] == "orders" %>
+                <% if cart.delivery_type == 'delivery' %>
+                    <%= link_to 'Delivery', "javascript:;", class: 'active' %>
+                <% else %>
+                    <%= link_to 'Pick Up', "javascript:;", class: 'active' %>
+                <% end %>
             <% else %>
-                <%= link_to 'Pick Up', "javascript:;", class: 'active' %>
+                <% if cart.delivery_type == 'delivery' %>
+                    <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), class: 'active', remote: true %>
+                    <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), remote: true %>
+                <% else %>
+                    <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), remote: true %>
+                    <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), class: 'active', remote: true %>
+                <% end %>
             <% end %>
-        <% else %>
-            <% if cart.delivery_type == 'delivery' %>
-                <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), class: 'active', remote: true %>
-                <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), remote: true %>
-            <% else %>
-                <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), remote: true %>
-                <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), class: 'active', remote: true %>
-            <% end %>
-        <% end %>
-      </li>
+          </li>
 
-      <%= render(cart.cart_items) %>
+          <%= render(cart.cart_items) %>
 
-      <li class="cart_footer" style="margin-top: 10px;">
-        <span class="left75">Subtotal:</span>
-        <span class="right20"><%= number_to_currency(cart.subtotal_price) %></span>
-      </li>
-      <li class="cart_footer">
-        <span class="left75">Tax:</span>
-        <span class="right20"><%= number_to_currency(cart.subtotal_price*0.0825) %></span>
-      </li>
-
-      <% if cart.delivery_fee > 0 %>
+          <li class="cart_footer" style="margin-top: 10px;">
+            <span class="left75">Subtotal:</span>
+            <span class="right20"><%= number_to_currency(cart.subtotal_price) %></span>
+          </li>
           <li class="cart_footer">
-            <span class="left75">Delivery Fee:</span>
-            <span class="right20"><%= number_to_currency(cart.delivery_fee) %></span>
+            <span class="left75">Tax:</span>
+            <span class="right20"><%= number_to_currency(cart.subtotal_price*0.0825) %></span>
           </li>
-      <% end %>
-
-      <li class="cart_footer">
-        <span class="left75">Total:</span>
-        <span class="right20"><%= number_to_currency(cart.total_price) %></span>
-      </li>
-
-      <% unless params[:controller] == "orders" %>
-          <li class="cart_footer" style="margin-top: 20px;">
-            <% if cart.delivery_type == "delivery" && cart.total_price < cart.store.delivery_minimum %>
-                <%= link_to "Min.  #{number_to_currency(cart.store.delivery_minimum)}", 'javascript:;', :class => 'btn pull-right' %>
-            <% else %>
-                <%= link_to 'Proceed', new_order_path(store_id: cart.store_id), method: :get, :class => 'btn btn-primary pull-right' %>
-            <% end %>
-            <%= link_to 'Empty cart', cart, :class => 'btn', :remote => true, method: :delete, confirm: 'Are you sure?' %>
+          <% if cart.delivery_fee > 0 %>
+              <li class="cart_footer">
+                <span class="left75">Delivery Fee:</span>
+                <span class="right20"><%= number_to_currency(cart.delivery_fee) %></span>
+              </li>
+          <% end %>
+          <li class="cart_footer">
+            <span class="left75">Total:</span>
+            <span class="right20"><%= number_to_currency(cart.total_price) %></span>
           </li>
-      <% end %>
-    </ul>
+          <% unless params[:controller] == "orders" %>
+              <li class="cart_footer" style="margin-top: 20px;">
+                <% if cart.delivery_type == "delivery" && cart.total_price < cart.store.delivery_minimum %>
+                    <%= link_to "Min.  #{number_to_currency(cart.store.delivery_minimum)}", 'javascript:;', :class => 'btn pull-right' %>
+                <% else %>
+                    <%= link_to 'Proceed', new_order_path(store_id: cart.store_id), method: :get, :class => 'btn btn-primary pull-right' %>
+                <% end %>
+                <%= link_to 'Empty cart', cart, :class => 'btn', :remote => true, method: :delete, confirm: 'Are you sure?' %>
+              </li>
+          <% end %>
+        </ul>
+    <% end %>
+<% else %>
+    <%= image_tag "/assets/mfm_logo.png" %>
+    <h4><%= cart.store.name %> cannot order online, please call <span style="color: #8b0000;"><%= cart.store.phone %></span> to place order.</h4>
 <% end %>

@@ -34,7 +34,10 @@ $ ->
 
   # home/store page - highlight the icon based on the url
   # =================================================================
-  id_array = ['store_good', 'store_menu', 'store_info', 'store_reviews', 'grocery', 'store', 'sign_in', 'sign_up']
+  id_array = [
+    'store_good', 'store_menu', 'store_coupons', 'store_info', 'store_reviews',
+    'google', 'grocery', 'store', 'sign_in', 'sign_up'
+  ]
   for i in id_array
     if window.location.href.indexOf(i) > 0
       $('#' + i).attr('class', 'active')

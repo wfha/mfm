@@ -19,7 +19,7 @@
   <p>
     <b>Image:</b>
     <br/>
-    <%= image_tag @dish.image_url(:small).to_s if @dish.image? %>
+    <%= image_tag @dish.photo_url(:small).to_s if @dish.photo? %>
   </p>
 
   <p>

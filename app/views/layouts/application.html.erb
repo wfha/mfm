@@ -21,6 +21,7 @@
       <%= link_to 'Meals4.Me', home_index_path, :class => 'brand' %>
       <div class="nav-collapse collapse">
         <ul class="nav">
+          <li id="google"><%= link_to 'Restaurant Google', home_google_path %></li>
           <li id="store"><%= link_to 'Restaurant Delivery', home_stores_path %></li>
           <li id="grocery"><%= link_to 'Grocery Delivery', home_grocery_path %></li>
           <% if user_signed_in? %>
@@ -55,6 +56,8 @@
   <div id='footer'>
     <div class="well">
       <ul class="footer-links">
+        <li><%= link_to 'Restaurant Google', home_google_path %></li>
+        <li class="muted">&middot;</li>
         <li><%= link_to 'Restaurant Delivery', home_stores_path %></li>
         <li class="muted">&middot;</li>
         <li><%= link_to 'Grocery Delivery', home_grocery_path %></li>
@@ -118,17 +121,14 @@
 
 <% if Rails.env.production? %>
     <script type="text/javascript">
-
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-38643723-1']);
         _gaq.push(['_trackPageview']);
-
         (function() {
             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
-
     </script>
 <% end %>
 

@@ -1,36 +1,13 @@
-<p id="notice"><%= notice %></p>
+<div class="well">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @coupon.name %>
-</p>
+  <p><b>Name:</b><%= @coupon.name %></p>
+  <p><b>Desc:</b><%= @coupon.desc %></p>
+  <p><b>Image:</b><br/><%= image_tag @coupon.image_url(:small).to_s if @coupon.image? %></p>
+  <p><b>Store:</b><%= @coupon.store.name %></p>
+  <p><b>Start at:</b><%= @coupon.start_at %></p>
+  <p><b>End at:</b><%= @coupon.end_at %></p>
 
-<p>
-  <b>Desc:</b>
-  <%= @coupon.desc %>
-</p>
-
-<p>
-  <b>Image:</b>
-  <br/>
-  <%= image_tag @coupon.image_url(:small).to_s if @coupon.image? %>
-</p>
-
-<p>
-  <b>Store:</b>
-  <%= @coupon.store.name %>
-</p>
-
-<p>
-  <b>Start at:</b>
-  <%= @coupon.start_at %>
-</p>
-
-<p>
-  <b>End at:</b>
-  <%= @coupon.end_at %>
-</p>
-
-
-<%= link_to 'Edit', edit_store_coupon_path(@store, @coupon) %> |
-<%= link_to 'Back', store_coupons_path(@store) %>
+  <%= link_to 'Edit', edit_store_coupon_path(@store, @coupon) %> |
+  <%= link_to 'Back', store_coupons_path(@store) %>
+</div>
