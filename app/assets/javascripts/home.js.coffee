@@ -35,7 +35,7 @@ $ ->
   # home/store page - highlight the icon based on the url
   # =================================================================
   id_array = [
-    'store_good', 'store_menu', 'store_coupons', 'store_info', 'store_reviews',
+    'store_overview', 'store_good', 'store_menu', 'store_promo', 'store_info', 'store_review',
     'google', 'grocery', 'store', 'sign_in', 'sign_up'
   ]
   for i in id_array

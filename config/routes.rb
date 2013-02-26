@@ -16,11 +16,12 @@
 
   match 'home/index'                  => 'home#index',              :as => :home_index
   match 'home/stores'                 => 'home#stores',             :as => :home_stores
+  match 'home/store_overview/:id'     => 'home#store_overview',     :as => :home_store_overview
+  match 'home/store_info/:id'         => 'home#store_info',         :as => :home_store_info
   match 'home/store_good/:id'         => 'home#store_good',         :as => :home_store_good
   match 'home/store_menu/:id'         => 'home#store_menu',         :as => :home_store_menu
-  match 'home/store_coupons/:id'      => 'home#store_coupons',      :as => :home_store_coupons
-  match 'home/store_info/:id'         => 'home#store_info',         :as => :home_store_info
-  match 'home/store_reviews/:id'      => 'home#store_reviews',      :as => :home_store_reviews
+  match 'home/store_promo/:id'        => 'home#store_promo',        :as => :home_store_promo
+  match 'home/store_review/:id'       => 'home#store_review',       :as => :home_store_review
   match 'home/load_store_good/:id'    => 'home#load_store_good',    :as => :home_load_store_good
   match 'home/load_store_info/:id'    => 'home#load_store_info',    :as => :home_load_store_info
   match 'home/load_store_reviews/:id' => 'home#load_store_reviews', :as => :home_load_store_reviews

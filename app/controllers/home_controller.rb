@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_filter :yelp_client, :only => [:store_reviews, :load_store_reviews]
+  before_filter :yelp_client, :only => [:store_review, :load_store_review]
   before_filter :new_ticket
 
   def index
@@ -32,6 +32,25 @@ class HomeController < ApplicationController
     @can_order_online = @store.can_order_online?
   end
 
+  def store_overview
+    @store = Store.find(params[:id])
+    @cart = current_cart(@store.id)
+    @store_still_open = @store.still_open?
+    @menu_still_open = true
+    @can_order_online = @store.can_order_online?
+
+    @gallery = @store.gallery
+    @photos = @gallery.gallery_photos if @gallery
+  end
+
+  def store_info
+    @store = Store.find(params[:id])
+    @cart = current_cart(@store.id)
+    @store_still_open = @store.still_open?
+    @menu_still_open = true
+    @can_order_online = @store.can_order_online?
+  end
+
   def store_good
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
@@ -50,7 +69,7 @@ class HomeController < ApplicationController
     @can_order_online = @store.can_order_online?
   end
 
-  def store_coupons
+  def store_promo
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
     @store_still_open = @store.still_open?
@@ -58,15 +77,7 @@ class HomeController < ApplicationController
     @can_order_online = @store.can_order_online?
   end
 
-  def store_info
-    @store = Store.find(params[:id])
-    @cart = current_cart(@store.id)
-    @store_still_open = @store.still_open?
-    @menu_still_open = true
-    @can_order_online = @store.can_order_online?
-  end
-
-  def store_reviews
+  def store_review
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
     @store_still_open = @store.still_open?
@@ -96,7 +107,7 @@ class HomeController < ApplicationController
     end
   end
 
-  def load_store_reviews
+  def load_store_review
     @store = Store.find(params[:id])
 
     request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: '00CRzCP7C-1GMSGy3su_Ig')

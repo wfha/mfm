@@ -25,6 +25,7 @@ class StoresController < ApplicationController
   # GET /stores/new.json
   def new
     @store.build_address
+    @store.build_gallery
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,6 +35,7 @@ class StoresController < ApplicationController
 
   # GET /stores/1/edit
   def edit
+    @store.build_gallery if @store.gallery.nil?
   end
 
   # POST /stores

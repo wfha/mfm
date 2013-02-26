@@ -1,0 +1,45 @@
+<%= render 'store_header' %>
+
+<div class="row">
+  <div class="span8" id="main">
+    <div class="well">
+      <% unless @store.story.blank? %>
+          <h4>About <%= @store.name %></h4>
+          <p><%= @store.story %></p>
+      <% end %>
+
+      <% if @gallery && @photos %>
+          <hr/>
+          <h4><%= @gallery.name %></h4>
+          <p><%= @gallery.desc %></p>
+
+          <div id="store_gallery" class="carousel slide">
+            <ol class="carousel-indicators first_child_active">
+              <% @photos.each_with_index do |gp, i| %>
+                  <li data-target="#store_gallery" data-slide-to="<%= i %>"></li>
+              <% end %>
+            </ol>
+            <div class="carousel-inner first_child_active">
+              <% @photos.each do |gp| %>
+                  <div class="item">
+                    <%= image_tag gp.photo.to_s %>
+                    <div class="carousel-caption">
+                      <h4><%= gp.name %></h4>
+                      <p><%= gp.desc %></p>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+            <a class="left carousel-control" href="#store_gallery" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#store_gallery" data-slide="next">&rsaquo;</a>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="span4">
+    <div class="well" id="side">
+      <div id="cart"><%= render @cart %></div>
+    </div>
+  </div>
+</div><!--/row-->

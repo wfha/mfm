@@ -11,12 +11,12 @@
                 <div class="thumbnail">
                   <div class="row-fluid">
                     <div class="span3">
-                      <%= link_to home_store_good_path(store) do %>
+                      <%= link_to home_store_overview_path(store) do %>
                           <%= image_tag(store.avatar_url(:small).to_s) %>
                       <% end %>
                     </div>
                     <div class="span6">
-                      <%= link_to store.name, home_store_good_path(store) %>
+                      <%= link_to store.name, home_store_overview_path(store) %>
                       <br/>
                       <p style="font-size: 10px;line-height: 12px;">
                         <%= store.phone %>
@@ -33,7 +33,7 @@
                           <p class="services_icon" style="background: blue;"><%= link_to "Reserve", "javascript:;" %></p>
                       <% end %>
                       <% if store.has_effective_coupons? %>
-                          <p class="services_icon" style="background: purple;"><%= link_to "Coupon", home_store_coupons_path(store) %></p>
+                          <p class="services_icon" style="background: purple;"><%= link_to "Coupon", home_store_promo_path(store) %></p>
                       <% end %>
                     </div>
                   </div>

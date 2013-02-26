@@ -155,7 +155,7 @@ class Order < ActiveRecord::Base
     @order = Order.find(order_id)
 
     data = {
-        :from => "+1" + APP_CONFIG['twilio_number'],
+        :from => "+1" + APP_CONFIG['twilio_number'].to_s,
         :to => "+1" + @order.store.phone,
         :url => "https://" + APP_CONFIG['domain'] + "/home/reminder?order_id=#{order_id}"
         #:url => "http://twimlets.com/holdmusic?Bucket=com.twilio.music.ambient"

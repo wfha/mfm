@@ -6,41 +6,57 @@
     <h4>Basic info:</h4>
     <%= f.input :name %>
     <%= f.input :desc %>
-    <%= f.input :rank %>
-    <%= f.input :phone %>
-    <%= f.input :fax %>
+    <%= f.input :rank, :hint => "Decide the order, and 0 means hidden." %>
+    <%= f.input :phone, :hint => "Eg. : 9790009988. Don't use - or ()." %>
+    <%= f.input :fax, :hint => "Eg. : 9790009988. Don't use - or ()." %>
     <%= f.input :delivery_minimum %>
     <%= f.input :delivery_fee %>
     <%= f.input :delivery_radius %>
     <%= f.association :tags, :as => :check_boxes, :item_wrapper_class => 'inline' %>
     <%= f.association :services, :as => :check_boxes, :item_wrapper_class => 'inline' %>
     <%= f.association :payments, :as => :check_boxes, :item_wrapper_class => 'inline' %>
-    <%= image_tag @store.avatar_url.to_s if @store.avatar? %>
-    <%= f.input :avatar %>
+    <%= f.input :avatar, as: :image_preview, input_html: {preview_version: :small}, :hint => "Use square image (width = height)." %>
+    <%= f.input :story, :input_html => {:rows => 5, :cols => 50, :class => 'resizable'} %>
 
     <hr/>
 
     <h4>Address:</h4>
-    <%= f.fields_for :address do |builder| %>
-        <%= builder.input :address1 %>
-        <%= builder.input :address2 %>
-        <%= builder.input :city %>
-        <%= builder.input :state %>
-        <%= builder.input :country, :as => :string %>
-        <%= builder.input :zip %>
+    <%= f.fields_for :address do |addr| %>
+        <%= addr.input :address1 %>
+        <%= addr.input :address2 %>
+        <%= addr.input :city %>
+        <%= addr.input :state %>
+        <%= addr.input :country, :as => :string %>
+        <%= addr.input :zip %>
+    <% end %>
+
+    <hr/>
+
+    <h4>Gallery:</h4>
+    <%= f.fields_for :gallery do |gallery| %>
+        <%= gallery.input :name %>
+        <%= gallery.input :desc %>
+        <hr/>
+        <%= gallery.fields_for :gallery_photos do |g| %>
+            <%= g.input :name %>
+            <%= g.input :desc %>
+            <%= g.input :photo, as: :image_preview, input_html: {preview_version: :micro} %>
+            <%= g.link_to_remove "Remove", class: 'btn btn-info' %>
+        <% end %>
+        <%= gallery.link_to_add "Add", :gallery_photos, class: 'btn btn-primary' %>
     <% end %>
 
     <hr/>
 
     <h4>Open Hours:</h4>
-    <%= f.link_to_add "Add", :hours, class: 'btn btn-primary' %>
     <%= f.fields_for :hours do |hour| %>
-        <%= hour.input :name %>
+        <%= hour.input :name, :hint => "Eg. : 0 1 2 3 4 5 6" %>
         <%= hour.input :desc %>
-        <%= hour.input :open_at %>
-        <%= hour.input :close_at %>
+        <%= hour.input :open_at, :hint => "Eg. : 11:00" %>
+        <%= hour.input :close_at, :hint => "Eg. : 21:00" %>
         <%= hour.link_to_remove "Remove", class: 'btn btn-info' %>
     <% end %>
+    <%= f.link_to_add "Add", :hours, class: 'btn btn-primary' %>
 
     <hr/>
 

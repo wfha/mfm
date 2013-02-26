@@ -23,13 +23,18 @@
       <div class="navbar">
         <div class="navbar-inner">
           <ul class="nav">
-            <li id="store_good"><%= link_to 'What\'s Good', home_store_good_path %></li>
+            <% if @store.has_overview? %>
+                <li id="store_overview"><%= link_to 'Overview', home_store_overview_path %></li>
+            <% end %>
+            <% if @store.has_good_dishes? %>
+                <li id="store_good"><%= link_to 'What\'s Good', home_store_good_path %></li>
+            <% end %>
             <li id="store_menu"><%= link_to 'Full Menu', home_store_menu_path %></li>
             <% if @store.has_effective_coupons? %>
-                <li id="store_coupons"><%= link_to 'Coupons!', home_store_coupons_path %></li>
+                <li id="store_promo"><%= link_to 'Coupons!', home_store_promo_path %></li>
             <% end %>
-            <!--<li id="store_info"><%= link_to 'Store Info', home_store_info_path %></li>-->
-            <li id="store_reviews"><%= link_to 'Store Reviews', home_store_reviews_path %></li>
+            <li id="store_info"><%= link_to 'Store Info', home_store_info_path %></li>
+            <li id="store_review"><%= link_to 'Store Review', home_store_review_path %></li>
           </ul>
         </div>
       </div>

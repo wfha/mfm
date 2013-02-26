@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223055007) do
+ActiveRecord::Schema.define(:version => 20130226022754) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -171,6 +171,26 @@ ActiveRecord::Schema.define(:version => 20130223055007) do
 
   add_index "dishes", ["category_id"], :name => "index_dishes_on_category_id"
 
+  create_table "galleries", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.integer  "galleriable_id"
+    t.string   "galleriable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "gallery_photos", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.string   "photo"
+    t.integer  "gallery_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "gallery_photos", ["gallery_id"], :name => "index_gallery_photos_on_gallery_id"
+
   create_table "hours", :force => true do |t|
     t.string   "name"
     t.string   "desc"
@@ -295,6 +315,7 @@ ActiveRecord::Schema.define(:version => 20130223055007) do
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
     t.integer  "rank",             :default => 0, :null => false
+    t.text     "story"
   end
 
   create_table "stores_tags", :id => false, :force => true do |t|
