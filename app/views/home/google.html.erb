@@ -4,43 +4,41 @@
 
   <% Tag.all.each do |tag| %>
       <h4><%= tag.name %></h4>
-      <div class="row-fluid">
-        <ul class="thumbnails">
-          <% tag.stores.each do |store| %>
-              <li class="span3" style="margin-bottom:10px">
-                <div class="thumbnail">
-                  <div class="row-fluid">
-                    <div class="span3">
-                      <%= link_to home_store_overview_path(store) do %>
-                          <%= image_tag(store.avatar_url(:small).to_s) %>
-                      <% end %>
-                    </div>
-                    <div class="span6">
-                      <%= link_to store.name, home_store_overview_path(store) %>
+      <ul class="thumbnails">
+        <% tag.stores.each do |store| %>
+            <li class="span3" style="margin-bottom:10px; height: 67px;">
+              <div class="thumbnail" style="height: 59px;">
+                <div class="row-fluid">
+                  <div class="span3">
+                    <%= link_to home_store_overview_path(store) do %>
+                        <%= image_tag(store.avatar_url(:small).to_s) %>
+                    <% end %>
+                  </div>
+                  <div class="span6">
+                    <%= link_to store.name, home_store_overview_path(store) %>
+                    <br/>
+                    <p style="font-size: 10px;line-height: 12px;">
+                      <%= store.phone %>
                       <br/>
-                      <p style="font-size: 10px;line-height: 12px;">
-                        <%= store.phone %>
-                        <br/>
-                        <%= store.address.address1 %>
-                      </p>
-                    </div>
-                    <div class="span3">
-                      <p class="services_icon" style="background: #006400;"><%= link_to "Menu", home_store_menu_path(store) %></p>
-                      <% if store.can_order_online? %>
-                          <p class="services_icon" style="background: #ff0000;"><%= link_to "Order", home_store_good_path(store) %></p>
-                      <% end %>
-                      <% if store.can_reserve_online? %>
-                          <p class="services_icon" style="background: blue;"><%= link_to "Reserve", "javascript:;" %></p>
-                      <% end %>
-                      <% if store.has_effective_coupons? %>
-                          <p class="services_icon" style="background: purple;"><%= link_to "Coupon", home_store_promo_path(store) %></p>
-                      <% end %>
-                    </div>
+                      <%= store.address.address1 %>
+                    </p>
+                  </div>
+                  <div class="span3">
+                    <p class="services_icon" style="background: #006400;"><%= link_to "Menu", home_store_menu_path(store) %></p>
+                    <% if store.can_order_online? %>
+                        <p class="services_icon" style="background: #ff0000;"><%= link_to "Order", home_store_good_path(store) %></p>
+                    <% end %>
+                    <% if store.can_reserve_online? %>
+                        <p class="services_icon" style="background: blue;"><%= link_to "Reserve", "javascript:;" %></p>
+                    <% end %>
+                    <% if store.has_effective_coupons? %>
+                        <p class="services_icon" style="background: purple;"><%= link_to "Coupon", home_store_promo_path(store) %></p>
+                    <% end %>
                   </div>
                 </div>
-              </li>
-          <% end %>
-        </ul>
-      </div>
+              </div>
+            </li>
+        <% end %>
+      </ul>
   <% end %>
 </div>

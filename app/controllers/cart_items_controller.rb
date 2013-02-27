@@ -42,11 +42,12 @@ class CartItemsController < ApplicationController
   def create
     dish = Dish.find(params[:dish_id])
     note = params[:note]
-    price_adjustment = params[:price_adjustment]
+    price_adjustment = params[:price_adjustment].to_d
+    quantity = params[:quantity].to_i
     store_id = params[:store_id].to_i
 
     @cart = current_cart(store_id)
-    @cart_item = @cart.add_dish(dish.id, dish.name, dish.price + price_adjustment.to_d, note)
+    @cart_item = @cart.add_dish(dish.id, dish.name, dish.price + price_adjustment, quantity, note)
 
     respond_to do |format|
       if @cart_item.save

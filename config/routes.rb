@@ -28,6 +28,7 @@
   match 'home/grocery'                => 'home#grocery',            :as => :home_grocery
   match 'home/coupons'                => 'home#coupons',            :as => :home_coupons
   match 'home/plans'                  => 'home#plans',              :as => :home_plans
+  match 'home/print_coupon/:id'       => 'home#print_coupon',       :as => :home_print_coupon
   match 'home/dish_modal/:id'         => 'home#dish_modal',         :as => :home_dish_modal
   match 'home/paypal_notify'          => 'home#paypal_notify',      :as => :home_paypal_notify
   match 'home/paypal_cancel'          => 'home#paypal_cancel',      :as => :home_paypal_cancel

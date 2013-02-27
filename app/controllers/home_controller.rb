@@ -127,6 +127,12 @@ class HomeController < ApplicationController
     @coupons = Coupon.all
   end
 
+  def print_coupon
+    @coupon = Coupon.find(params[:id])
+
+    render :layout => false
+  end
+
   # The Paypal IPN Notify Page
   # ======================================================
 

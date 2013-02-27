@@ -4,14 +4,24 @@
   <div class="span8" id="main">
     <div class="well">
      <% @store.coupons.each do |coupon| %>
-            <div>
-              <%= image_tag coupon.photo_url(:small).to_s %>
-              <br/>
-              <%= coupon.name %> - <%= coupon.desc %>
-              <br/>
-              <%= coupon.start_at %> - <%= coupon.end_at %>
-              <hr/>
+          <div class="row-fluid">
+            <div class="span5">
+              <% unless coupon.name.blank? && coupon.desc.blank? %>
+                  <h4>Description:</h4>
+                  <%= coupon.name %> : <%= coupon.desc %>
+              <% end %>
+              <h4>Effective For:</h4>
+              From <%= coupon.start_at.strftime("%Y-%m-%d") %> to <%= coupon.end_at.strftime("%Y-%m-%d") %>
+              <br/><br/>
+              <a class="btn btn-primary" onclick="window.open('/home/print_coupon/<%= coupon.id %>','PrintCoupon','height=600, width=800, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');">
+                Print Coupon
+              </a>
             </div>
+            <div class="span7">
+              <%= image_tag coupon.photo_url(:small).to_s %>
+            </div>
+          </div>
+          <hr/>
       <% end %>
     </div>
   </div>

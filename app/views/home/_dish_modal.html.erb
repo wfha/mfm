@@ -23,7 +23,21 @@
                   <% end %>
                 </div>
             <% end %>
-            <input type="hidden" name="note" />
+
+            <b>Quantity:</b>
+            <br/>
+            <div class="sf_2_in_1">
+              <div class="controls">
+                <%= select_tag :quantity, options_for_select([1, 2, 3, 4, 5]) %>
+              </div>
+            </div>
+            <br/>
+
+            <b>Special Instructions:</b>
+            <br/>
+            <input type="text" name="note" add="0" />
+            <br/>
+
             <input type="hidden" name="price_adjustment" value="0" />
             <input type="hidden" name="store_id" value="<%= @dish.category.menu.store.id %>" />
         <% end %>
