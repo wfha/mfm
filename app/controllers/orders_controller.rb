@@ -77,28 +77,33 @@ class OrdersController < ApplicationController
       @order.user.skip_confirmation! # Skip sending emails
     end
 
+    # Set the status of this order
+    @order.status = "unconfirmed"
+
     respond_to do |format|
       if @order.save
         new_cart(@order.store_id)
 
         if @order.payment_type == 'paypal'
-          format.html { redirect_to @order.paypal_url }
+          format.html   { redirect_to @order.paypal_url }
           format.mobile { redirect_to @order.paypal_url }
         else
           Order.delay.to_fax(@order.id, p[:card_number], p[:card_verification], p[:card_expires_on])
-          Order.delay(run_at: 5.minutes.from_now).to_phone(@order.id)
+          Order.delay(run_at: 4.minutes.from_now).to_phone(@order.id)
+          Order.delay(run_at: 8.minutes.from_now).to_phone(@order.id)
+          Order.delay(run_at: 12.minutes.from_now).to_phone(@order.id)
 
-          format.html { redirect_to @order, notice: 'Order was successfully created.' }
+          format.html   { redirect_to @order, notice: 'Order was successfully created.' }
           format.mobile { redirect_to @order, notice: 'Order was successfully created.' }
-          format.json { render json: @order, status: :created, location: @order }
+          format.json   { render json: @order, status: :created, location: @order }
         end
       else
         @cart = current_cart(@order.store_id)
         @order.user.email = ""
 
-        format.html { render action: "new" }
+        format.html   { render action: "new" }
         format.mobile { render action: "new" }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+        format.json   { render json: @order.errors, status: :unprocessable_entity }
       end
     end
   end

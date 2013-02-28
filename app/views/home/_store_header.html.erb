@@ -23,9 +23,7 @@
       <div class="navbar">
         <div class="navbar-inner">
           <ul class="nav">
-            <% if @store.has_overview? %>
-                <li id="store_overview"><%= link_to 'Overview', home_store_overview_path %></li>
-            <% end %>
+            <li id="store_overview"><%= link_to 'Overview', home_store_overview_path %></li>
             <% if @store.has_good_dishes? %>
                 <li id="store_good"><%= link_to 'What\'s Good', home_store_good_path %></li>
             <% end %>

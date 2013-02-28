@@ -37,9 +37,9 @@
   match 'home/order_modal/:id'        => 'home#order_modal',        :as => :home_order_modal
   match 'home/my_orders'              => 'home#my_orders',          :as => :home_my_orders
 
-  match 'home/reminder' => 'home#reminder', :as => :home_reminder
-  match 'home/directions' => 'home#directions', :as => :home_directions
-  match 'home/test_twilio' => 'home#test_twilio', :as => :home_test_twilio
+  match 'home/phone_start'            => 'home#phone_start',        :as => :home_phone_start
+  match 'home/phone_end'              => 'home#phone_end',          :as => :home_phone_end
+  match 'home/phone_test'             => 'home#phone_test',         :as => :home_phone_test
 
   match 'home/google' => 'home#google', :as => :home_google
 

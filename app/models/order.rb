@@ -153,19 +153,19 @@ class Order < ActiveRecord::Base
 
   def self.to_phone(order_id)
     @order = Order.find(order_id)
-
-    data = {
-        :from => "+1" + APP_CONFIG['twilio_number'].to_s,
-        :to => "+1" + @order.store.phone,
-        :url => "https://" + APP_CONFIG['domain'] + "/home/reminder?order_id=#{order_id}"
-        #:url => "http://twimlets.com/holdmusic?Bucket=com.twilio.music.ambient"
-    }
-
-    begin
-      client = Twilio::REST::Client.new(APP_CONFIG['twilio_sid'], APP_CONFIG['twilio_token'])
-      client.account.calls.create data
-    rescue StandardError => bang
-      return
+    if @order.status == "unconfirmed"
+      data = {
+          :from => "+1" + APP_CONFIG['twilio_number'].to_s,
+          :to => "+1" + @order.store.phone,
+          :url => "https://" + APP_CONFIG['domain'] + "/home/phone_start?order_id=#{order_id}"
+          #:url => "http://twimlets.com/holdmusic?Bucket=com.twilio.music.ambient"
+      }
+      begin
+        client = Twilio::REST::Client.new(APP_CONFIG['twilio_sid'], APP_CONFIG['twilio_token'])
+        client.account.calls.create data
+      rescue StandardError => bang
+        return
+      end
     end
   end
 end

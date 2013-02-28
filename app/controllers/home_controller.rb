@@ -49,6 +49,10 @@ class HomeController < ApplicationController
     @store_still_open = @store.still_open?
     @menu_still_open = true
     @can_order_online = @store.can_order_online?
+
+    @addresses = []
+    @addresses << @store.address
+    @json = @addresses.to_gmaps4rails
   end
 
   def store_good
@@ -152,7 +156,9 @@ class HomeController < ApplicationController
           order.updated_at = Time.now
 
           Order.delay.to_fax(order.id)
-          Order.delay(run_at: 5.minutes.from_now).to_phone(order.id)
+          Order.delay(run_at: 4.minutes.from_now).to_phone(order.id)
+          Order.delay(run_at: 8.minutes.from_now).to_phone(order.id)
+          Order.delay(run_at: 12.minutes.from_now).to_phone(order.id)
         else
           logger.error("Failed to verify Paypal's notification, please investigate")
         end
@@ -173,31 +179,37 @@ class HomeController < ApplicationController
 
   # Twilio Phone Instructions
   # ======================================================
-  def reminder
+  def phone_start
     @order_id = params[:order_id]
-    @post_to = "https://" + APP_CONFIG['domain'] + "/home/directions?order_id=#{@order_id}"
-    render :action => "reminder.xml.builder", :layout => false
+    @post_to = "https://" + APP_CONFIG['domain'] + "/home/phone_end?order_id=#{@order_id}"
+    render :action => "phone_start.xml.builder", :layout => false
   end
 
-  def directions
+  def phone_end
     @order_id = params[:order_id]
 
-    if !params['Digits'] or params['Digits'] != '1' or params['Digits'] != '2'
-      redirect_to :action => 'reminder', :order_id => @order_id
+    if !params['Digits'] || (params['Digits'] != '1' && params['Digits'] != '2')
+      redirect_to :action => 'phone_start', :order_id => @order_id
       return
     elsif params['Digits'] == '1'
+      @msg = "You pressed one, you got the order."
       @order = Order.find(@order_id)
+      @order.status = "fax_succeeded"
       @order.handled = true
       @order.save
     elsif params['Digits'] == '2'
-
+      @msg = "You pressed two, you did not get the order."
+      @order = Order.find(@order_id)
+      @order.status = "fax_failed"
+      @order.handled = false
+      @order.save
     end
 
-    @redirect_to = "https://" + APP_CONFIG['domain'] + '/home/reminder'
-    render :action => "directions.xml.builder", :layout => false
+    @redirect_to = "https://" + APP_CONFIG['domain'] + "/home/phone_start?order_id=#{@order_id}"
+    render :action => "phone_end.xml.builder", :layout => false
   end
 
-  def test_twilio
+  def phone_test
     Order.to_phone(1)
     render :nothing => true
   end

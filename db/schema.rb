@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130226022754) do
+ActiveRecord::Schema.define(:version => 20130228222617) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -224,6 +224,7 @@ ActiveRecord::Schema.define(:version => 20130226022754) do
     t.datetime "created_at",                                                           :null => false
     t.datetime "updated_at",                                                           :null => false
     t.boolean  "handled",                                      :default => false,      :null => false
+    t.string   "status"
   end
 
   add_index "orders", ["cart_id"], :name => "index_orders_on_cart_id"

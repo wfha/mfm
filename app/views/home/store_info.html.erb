@@ -3,6 +3,18 @@
 <div class="row">
   <div class="span8" id="main">
     <div class="well">
+
+      <%= gmaps(
+                  :map_options => { :auto_adjust => true, :auto_zoom => false, :zoom => 16 },
+                  :markers => { :data => @json, :options => {}}
+          )
+      %>
+
+      <h4>Address:</h4>
+      <%= @store.address.address1 %>
+      <br/>
+      <%= @store.address.address2 if @store.address.address2 %>
+
       <h4>Hours:</h4>
       <ul>
         <% @store.hours.each do |h| %>
@@ -27,7 +39,8 @@
       Within 3 miles.
       <br/><br/>
 
-      <p><br/><%= link_to 'View Menu', home_store_good_path(@store), :class => 'btn btn-primary' %></p>
+
+      <p><br/><%= link_to 'View Menu', home_store_menu_path(@store), :class => 'btn btn-primary' %></p>
     </div>
   </div>
 
