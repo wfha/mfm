@@ -16,6 +16,11 @@
 
   match 'home/index'                  => 'home#index',              :as => :home_index
   match 'home/stores'                 => 'home#stores',             :as => :home_stores
+  match 'home/delivery'               => 'home#delivery',           :as => :home_delivery
+  match 'home/grocery'                => 'home#grocery',            :as => :home_grocery
+  match 'home/coupons'                => 'home#coupons',            :as => :home_coupons
+  match 'home/plans'                  => 'home#plans',              :as => :home_plans
+
   match 'home/store_overview/:id'     => 'home#store_overview',     :as => :home_store_overview
   match 'home/store_info/:id'         => 'home#store_info',         :as => :home_store_info
   match 'home/store_good/:id'         => 'home#store_good',         :as => :home_store_good
@@ -24,12 +29,10 @@
   match 'home/store_review/:id'       => 'home#store_review',       :as => :home_store_review
   match 'home/load_store_good/:id'    => 'home#load_store_good',    :as => :home_load_store_good
   match 'home/load_store_info/:id'    => 'home#load_store_info',    :as => :home_load_store_info
-  match 'home/load_store_reviews/:id' => 'home#load_store_reviews', :as => :home_load_store_reviews
-  match 'home/grocery'                => 'home#grocery',            :as => :home_grocery
-  match 'home/coupons'                => 'home#coupons',            :as => :home_coupons
-  match 'home/plans'                  => 'home#plans',              :as => :home_plans
+  match 'home/load_store_review/:id'  => 'home#load_store_review',  :as => :home_load_store_review
   match 'home/print_coupon/:id'       => 'home#print_coupon',       :as => :home_print_coupon
   match 'home/dish_modal/:id'         => 'home#dish_modal',         :as => :home_dish_modal
+
   match 'home/paypal_notify'          => 'home#paypal_notify',      :as => :home_paypal_notify
   match 'home/paypal_cancel'          => 'home#paypal_cancel',      :as => :home_paypal_cancel
   match 'home/orders'                 => 'home#orders',             :as => :home_orders
@@ -40,8 +43,6 @@
   match 'home/phone_start'            => 'home#phone_start',        :as => :home_phone_start
   match 'home/phone_end'              => 'home#phone_end',          :as => :home_phone_end
   match 'home/phone_test'             => 'home#phone_test',         :as => :home_phone_test
-
-  match 'home/google' => 'home#google', :as => :home_google
 
   resources :carts do
     member do

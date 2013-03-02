@@ -3,16 +3,18 @@ class HomeController < ApplicationController
   before_filter :yelp_client, :only => [:store_review, :load_store_review]
   before_filter :new_ticket
 
+  # Main Pages
+  # ======================================================
   def index
 
   end
 
-  def google
-    @info = "This is a google for restaurants"
+  def stores
+    @info = "This is a hub for restaurants"
 
   end
 
-  def stores
+  def delivery
     @stores = Store.includes(:address).where("rank > 0").order("rank")
     @addresses = []
     @stores.each { |store| @addresses << store.address }
@@ -32,6 +34,16 @@ class HomeController < ApplicationController
     @can_order_online = @store.can_order_online?
   end
 
+  def plans
+    @plans = Plan.all
+  end
+
+  def coupons
+    @coupons = Coupon.all
+  end
+
+  # All About Stores
+  # ======================================================
   def store_overview
     @store = Store.find(params[:id])
     @cart = current_cart(@store.id)
@@ -88,7 +100,7 @@ class HomeController < ApplicationController
     @menu_still_open = true
     @can_order_online = @store.can_order_online?
 
-    request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: '00CRzCP7C-1GMSGy3su_Ig')
+    request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: APP_CONFIG['yelp_yws_id'])
     response = @client.search(request)
     @reviews = response["businesses"]
   end
@@ -114,21 +126,13 @@ class HomeController < ApplicationController
   def load_store_review
     @store = Store.find(params[:id])
 
-    request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: '00CRzCP7C-1GMSGy3su_Ig')
+    request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: APP_CONFIG['yelp_yws_id'])
     response = @client.search(request)
     @reviews = response["businesses"]
 
     respond_to do |format|
       format.js
     end
-  end
-
-  def plans
-    @plans = Plan.all
-  end
-
-  def coupons
-    @coupons = Coupon.all
   end
 
   def print_coupon

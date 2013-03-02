@@ -592,7 +592,7 @@ RailsAdmin.config do |config|
 
   #   # Found associations:
 
-  #     configure :stores, :has_and_belongs_to_many_association 
+  #     configure :stores, :has_and_belongs_to_many_association
 
   #   # Found columns:
 
@@ -832,7 +832,7 @@ RailsAdmin.config do |config|
 
   #   # Found associations:
 
-  #     configure :stores, :has_and_belongs_to_many_association 
+  #     configure :stores, :has_and_belongs_to_many_association
 
   #   # Found columns:
 

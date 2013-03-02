@@ -5,7 +5,7 @@
     <div class="well">
       <%= image_tag "/assets/yelp_logo.png" %>
       <% unless @reviews.empty? %>
-          <h5><%= @reviews[0]['name'] %></h5>
+          <br/>
           <%= image_tag @reviews[0]['rating_img_url'] %> <%= @reviews[0]['review_count'] %> reviews
           <hr/>
           <% @reviews[0]['reviews'].each do |review| %>
@@ -14,8 +14,9 @@
               <%= image_tag review['rating_img_url'] %>
               <br/>
               <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
-              <br/><br/><br/>
+              <br/><br/>
           <% end %>
+          <hr/>
       <% end %>
     </div>
   </div>

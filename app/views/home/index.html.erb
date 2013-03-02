@@ -1,20 +1,28 @@
 <div class="row-fluid">
-  <div class="span8 offset2 well">
+  <div class="span12 well">
     <%= image_tag "/assets/mfm_logo.png" %>
 
     <h4>Starving, and a little lazy ... </h4>
     <h4>Tired of grocery shopping, delivery would be nice ... </h4>
-    <h4> <span class="pull-right">Wanna find more delivery restaurants in town ... </span></h4>
+    <h4><span class="pull-right">Wanna find more delivery restaurants in town ... </span></h4>
 
     <br/>
   </div>
 
   <ul class="thumbnails">
-    <li class="span4 offset2">
+    <li class="span4">
       <div class="thumbnail index_img_wrap">
         <%= link_to home_stores_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
+            <%= image_tag "/assets/hub.jpg" %>
+            <h3>Restaurant Hub</h3>
+        <% end %>
+      </div>
+    </li>
+    <li class="span4">
+      <div class="thumbnail index_img_wrap">
+        <%= link_to home_delivery_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
             <%= image_tag "/assets/food_delivery.jpg" %>
-            <h3>Restaurant Delivery</h3>
+            <h3 style="background: #154ecd;box-shadow: inset 0px 1px 2px #154ecd, 0px 1px 0px white;">Restaurant Delivery</h3>
         <% end %>
       </div>
     </li>

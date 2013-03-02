@@ -135,22 +135,6 @@ class Order < ActiveRecord::Base
     end
   end
 
-  #def self.to_phone(order_id)
-  #  @order = Order.find(order_id)
-  #
-  #  if APP_CONFIG["mfm_mode"] == "test"
-  #    response_tropo = RestClient.get APP_CONFIG["tropo_url"], {params: {token: APP_CONFIG["tropo_token"], action: 'create', phone: '19797396180', order_id: '1234'}}
-  #  elsif APP_CONFIG["mfm_mode"] == "production"
-  #    response_tropo = RestClient.get APP_CONFIG["tropo_url"], {params: {token: APP_CONFIG["tropo_token"], action: 'create', phone: "1" + @order.store.phone, order_id: order_id}}
-  #  end
-  #
-  #  if response_tropo.code == 200
-  #    puts "Msg sent HTTP/#{response_tropo.code}"
-  #  else
-  #    puts "ERROR | HTTP/#{response_tropo.code}"
-  #  end
-  #end
-
   def self.to_phone(order_id)
     @order = Order.find(order_id)
     if @order.status == "unconfirmed"

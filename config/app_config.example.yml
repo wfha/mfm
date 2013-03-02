@@ -12,6 +12,7 @@ defaults: &defaults
   tropo_url:       https://api.tropo.com/1.0/sessions
   tropo_token:     ABCDEFG
   twitter_page:    https://twitter.com/MealsForMe
+  yelp_yws_id:     ABCDEFG
 
 production:
   <<: *defaults

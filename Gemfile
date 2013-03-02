@@ -52,6 +52,7 @@ gem 'flash_render', '~> 1.0.1'
 gem 'savon', '~> 2.0.2'
 #gem 'tropo-webapi-ruby', '~> 0.1.11' # Only for Tropo scripting
 gem 'yelp', '0.0.0', :git => 'git://github.com/wfha/yelp.git'
+#gem 'google_places', '~> 0.9.1'
 gem 'rest-client', '~> 1.6.7'
 gem 'twilio-ruby', '~> 3.9.0'
 

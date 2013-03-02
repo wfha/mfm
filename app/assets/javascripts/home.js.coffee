@@ -36,7 +36,7 @@ $ ->
   # =================================================================
   id_array = [
     'store_overview', 'store_good', 'store_menu', 'store_promo', 'store_info', 'store_review',
-    'google', 'grocery', 'store', 'sign_in', 'sign_up'
+    'stores', 'delivery', 'grocery', 'sign_in', 'sign_up'
   ]
   for i in id_array
     if window.location.href.indexOf(i) > 0
