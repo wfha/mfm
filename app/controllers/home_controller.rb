@@ -138,7 +138,15 @@ class HomeController < ApplicationController
   def print_coupon
     @coupon = Coupon.find(params[:id])
 
-    render :layout => false
+    if session[:mobile_param] == "1"
+      if Rails.env.production?
+        send_file @coupon.photo_url.to_s, :type => 'image/jpeg', :disposition => 'attachment'
+      else
+        send_file Rails.public_path + @coupon.photo_url.to_s, :type => 'image/jpeg', :disposition => 'attachment'
+      end
+    else
+      render :layout => false
+    end
   end
 
   # The Paypal IPN Notify Page

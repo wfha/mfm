@@ -1,0 +1,32 @@
+<div data-role="content" class="hub">
+  <div data-role="collapsible-set" data-inset="true" data-content-theme="d">
+    <% Tag.all.each do |tag| %>
+        <div data-role="collapsible">
+          <h2><%= tag.name %></h2>
+          <ul data-role="listview" data-inset="false">
+            <% tag.stores.each do |store| %>
+                <li class="services_icons_wrap" data-icon="false">
+                  <%= link_to home_store_overview_path(store), rel: 'external' do %>
+                      <%= image_tag(store.avatar_url.to_s) %>
+                      <h2><%= store.name %></h2>
+                      <p><%= truncate store.desc, limit: 20 %></p>
+                  <% end %>
+                  <div class="services_icons">
+                    <p class="services_icon" style="background: #006400;"><%= link_to "Menu", home_store_menu_path(store) %></p>
+                    <% if store.can_order_online? %>
+                        <p class="services_icon" style="background: #ff0000;"><%= link_to "Order", home_store_good_path(store) %></p>
+                    <% end %>
+                    <!--<% if store.can_reserve_online? %>-->
+                        <!--<p class="services_icon" style="background: blue;"><%= link_to "Reserve", "javascript:;" %></p>-->
+                        <!--<% end %>-->
+                    <% if store.has_effective_coupons? %>
+                        <p class="services_icon" style="background: purple;"><%= link_to "Coupon", home_store_promo_path(store) %></p>
+                    <% end %>
+                  </div>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+  </div>
+</div>

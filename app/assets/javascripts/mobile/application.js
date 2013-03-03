@@ -10,9 +10,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+//= require_directory ../lib/klass
 //= require jquery
 //= require jquery_ujs
-//= require_directory .
 //= require jquery.mobile
+//= require_directory .
+
+//= require_directory ../lib/photoswipe
 //= require rails.validations
 //= require rails.validations.simple_form

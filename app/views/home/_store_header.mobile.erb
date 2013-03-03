@@ -4,14 +4,19 @@
 
   <div class="ui-grid-a" id="restau_infos">
     <div class="ui-block-a">
-      <p><%= image_tag @store.avatar_url(:small).to_s, :width => '100%' %></p>
+      <p><%= image_tag @store.avatar_url.to_s, :width => '100%' %></p>
     </div>
     <div class="ui-block-b">
-      <%= link_to 'Overview', home_store_overview_path, data: {role: 'button', mini: true}, rel: 'external' %>
-      <%= link_to 'What\'s Good', home_store_good_path, data: {role: 'button', mini: true}, rel: 'external' %>
-      <%= link_to 'Full Menu', home_store_menu_path, data: {role: 'button', mini: true}, rel: 'external' %>
-      <%= link_to 'Store Info', home_store_info_path, data: {role: 'button', mini: true}, rel: 'external' %>
-      <%= link_to 'Store Reviews', home_store_review_path, data: {role: 'button', mini: true}, rel: 'external' %>
+      <%= link_to 'Overview', home_store_overview_path, data: {role: 'button', mini: true}, rel: 'external', id: "store_overview" %>
+      <% if @store.has_good_dishes? %>
+          <%= link_to 'What\'s Good', home_store_good_path, data: {role: 'button', mini: true}, rel: 'external', id: "store_good" %>
+      <% end %>
+      <%= link_to 'Full Menu', home_store_menu_path, data: {role: 'button', mini: true}, rel: 'external', id: "store_menu" %>
+      <% if @store.has_effective_coupons? %>
+          <%= link_to 'Coupons!', home_store_promo_path, data: {role: 'button', mini: true}, rel: 'external', id: "store_promo" %>
+      <% end %>
+      <%= link_to 'Store Info', home_store_info_path, data: {role: 'button', mini: true}, rel: 'external', id: "store_info" %>
+      <%= link_to 'Store Reviews', home_store_review_path, data: {role: 'button', mini: true}, rel: 'external', id: "store_review" %>
     </div>
   </div><!-- /grid-a -->
 </div>

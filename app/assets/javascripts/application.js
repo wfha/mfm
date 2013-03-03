@@ -14,8 +14,8 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_directory .
-//= require_directory ./lib
-//= require_directory ./gmaps4rails
+//= require_directory ./lib/gmaps4rails
+//= require_directory ./lib/polyfill
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require jquery_nested_form

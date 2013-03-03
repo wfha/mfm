@@ -1,5 +1,28 @@
 <div data-role="content">
   <%= render 'store_header' %>
 
-
+  <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="e">
+    <li data-role="list-divider"><%= @store.name %>:</li>
+    <li>
+      <%= @store.story %>
+    </li>
+    <li data-role="list-divider"><%= @store.gallery.name %>:</li>
+    <li>
+      <div class="gallery">
+        <% if @gallery && @photos %>
+            <% @photos.each do |gp| %>
+                <div class="gallery_photo_wrap">
+                  <%= link_to image_tag(gp.photo_url(:small).to_s), gp.photo_url.to_s, rel: "external" %>
+                </div>
+            <% end %>
+        <% end %>
+      </div>
+    </li>
+  </ul>
 </div><!-- /content -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".gallery a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+    });
+</script>

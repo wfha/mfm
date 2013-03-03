@@ -22,7 +22,7 @@ group :assets do
 end
 
 gem 'jquery-rails', '~> 2.1.4'
-gem 'jquery_mobile_rails', '~> 1.2.0'
+gem 'jquery_mobile_rails', '~> 1.3.0'
 
 # Deployment
 gem 'unicorn', '~> 4.4.0'

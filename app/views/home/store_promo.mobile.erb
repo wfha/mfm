@@ -1,5 +1,24 @@
 <div data-role="content">
   <%= render 'store_header' %>
 
-  <h1>Promo</h1>
+  <ul data-role="listview" data-inset="true" data-filter="false" data-theme="e" data-divider-theme="e">
+    <% @store.coupons.each do |coupon| %>
+        <li>
+          <%= link_to coupon.photo_url.to_s, rel: 'external', class: "zoom" do %>
+              <%= image_tag(coupon.photo_url(:small).to_s, :width => 100, :height => 100) %>
+              <h3><%= coupon.name %></h3>
+              <p><%= coupon.start_at.strftime("%Y-%m-%d") %> to <%= coupon.end_at.strftime("%Y-%m-%d") %></p>
+          <% end %>
+        </li>
+        <li data-role="list-divider">
+          <%= link_to "Save Coupon", home_print_coupon_path(coupon), data: {role: 'button', mini: true}, rel: "external" %>
+        </li>
+    <% end %>
+  </ul>
 </div><!-- /content -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("a.zoom").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+    });
+</script>

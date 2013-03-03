@@ -1,11 +1,17 @@
 <div data-role="content">
-  <div class="ui-body ui-body-e" style="padding: 10px;;">
-    <%= image_tag "/assets/mfm_logo.png", :style => 'width:100%;' %>
-  </div>
+  <!--<div class="ui-body ui-body-e" style="padding: 10px;;">-->
+    <!--<%= image_tag "/assets/mfm_logo.png", :style => 'width:100%;' %>-->
+  <!--</div>-->
 
   <ul data-role="listview" data-inset="true" data-filter="false" id="index_ul">
     <li>
       <%= link_to home_stores_path, :rel => "external" do %>
+          <%= image_tag "/assets/hub.jpg" %>
+          <h3><br/><br/>Restaurant<br/>Hub</h3>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to home_delivery_path, :rel => "external" do %>
           <%= image_tag "/assets/food_delivery.jpg" %>
           <h3><br/><br/>Restaurant<br/>Delivery</h3>
       <% end %>
