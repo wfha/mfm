@@ -11,6 +11,7 @@
  *= require_self
  *= require_directory ./lib/gmaps4rails
  *= require_directory ./lib/polyfill
+ *= require_directory ./lib/zweatherfeed
  */
 
 @import "compass";

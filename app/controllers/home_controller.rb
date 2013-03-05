@@ -135,12 +135,16 @@ class HomeController < ApplicationController
     end
   end
 
+  require 'open-uri'
+
   def print_coupon
     @coupon = Coupon.find(params[:id])
 
-    if session[:mobile_param] == "1"
+    if mobile_device?
       if Rails.env.production?
-        send_file @coupon.photo_url.to_s, :type => 'image/jpeg', :disposition => 'attachment'
+        url = @coupon.photo_url.to_s
+        data = open(url).read
+        send_data data, :filename=>"coupon_#{@coupon.id}.jpg", :type => 'image/jpeg', :disposition => 'attachment'
       else
         send_file Rails.public_path + @coupon.photo_url.to_s, :type => 'image/jpeg', :disposition => 'attachment'
       end

@@ -40,6 +40,30 @@
 <!-- Body
 ================================================== -->
 <div class="container">
+  <div id="sites_nav">
+    <%= link_to image_tag("/assets/sites_nav/tamu_grey.png"), "http://howdy.tamu.edu", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/tamu_bus1-72.png"), "http://transport.tamu.edu", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/gmail.png"), "http://gmail.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/hotmail.png"), "http://hotmail.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/yahoo_mail.png"), "http://mail.yahoo.com", target: "_blank" %>
+
+    <%= link_to image_tag("/assets/sites_nav/google.png"), "http://google.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/wiki.png"), "http://wikipedia.com", target: "_blank" %>
+
+    <%= link_to image_tag("/assets/sites_nav/yahoo.png"), "http://yahoo.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/youtube.png"), "http://youtube.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/espn.png"), "http://espn.go.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/blogspot.png"), "http://blogspot.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/tumblr.png"), "http://tumblr.com", target: "_blank" %>
+
+    <%= link_to image_tag("/assets/sites_nav/facebook.png"), "http://facebook.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/twitter.png"), "http://twitter.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/linkedin.png"), "http://linkedin.com", target: "_blank" %>
+
+    <%= link_to image_tag("/assets/sites_nav/amazon.png"), "http://amazon.com", target: "_blank" %>
+    <%= link_to image_tag("/assets/sites_nav/ebay.png"), "http://ebay.com", target: "_blank" %>
+  </div>
+
   <% flash.each do |type, message| %>
       <div class="alert <%= twitterized_type(type) %>">
         <a class="close" data-dismiss="alert">x</a>

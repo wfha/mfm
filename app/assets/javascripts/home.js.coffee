@@ -3,7 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
 
-  # home/stores page
+  # home/index page
+  # =================================================================
+  $('#weather').weatherfeed(['77840'], {unit: 'f'})
+
+  # home/delivery page
   # =================================================================
   $('.load_trigger').bind 'ajax:before', ->
     pos = $(this).position()

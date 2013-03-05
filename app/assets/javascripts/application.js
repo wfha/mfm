@@ -16,6 +16,7 @@
 //= require_directory .
 //= require_directory ./lib/gmaps4rails
 //= require_directory ./lib/polyfill
+//= require_directory ./lib/zweatherfeed
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require jquery_nested_form
