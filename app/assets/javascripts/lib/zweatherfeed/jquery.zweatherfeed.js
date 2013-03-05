@@ -132,7 +132,7 @@
 
 				// Add item container
 				var html = '<div class="weatherItem '+ row +' '+ daynight +'"';
-				if (options.image) html += ' style="background-image: url(http://l.yimg.com/a/i/us/nws/weather/gr/'+ feed.item.condition.code + daynight.substring(0,1) +'.png); background-repeat: no-repeat;"';
+				if (options.image) html += ' style="background-image: url(/assets/icons_yahoo_weather/'+ feed.item.condition.code + daynight.substring(0,1) +'.png); background-repeat: no-repeat;"';
 				html += '>';
 		
 				// Add item data
@@ -157,7 +157,7 @@
 					var wfi = feed.item.forecast;
 
 					for (var i=0; i<wfi.length; i++) {
-						html += '<div class="weatherForecastItem" style="background-image: url(http://l.yimg.com/a/i/us/nws/weather/gr/'+ wfi[i].code +'s.png); background-repeat: no-repeat;">';
+						html += '<div class="weatherForecastItem" style="background-image: url(/assets/icons_yahoo_weather/'+ wfi[i].code +'s.png); background-repeat: no-repeat;">';
 						html += '<div class="weatherForecastDay">'+ wfi[i].day +'</div>';
 						html += '<div class="weatherForecastDate">'+ wfi[i].date +'</div>';
 						html += '<div class="weatherForecastText">'+ wfi[i].text +'</div>';

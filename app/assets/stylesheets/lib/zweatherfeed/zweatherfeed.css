@@ -1,24 +1,18 @@
 .weatherFeed {
     color: #1b10d6;
-    font-size: 90%;
-    margin: 2em 3em;
-    width: 280px;
+    margin: 0;
+    width: 100%;
 }
 .weatherFeed a { color: #888; }
-.weatherFeed a:hover {
-    color: #000;
-    text-decoration: none;
-}
-.weatherItem {
-    padding: 0.8em;
-    text-align: right;
-}
-.weatherCity { text-transform: uppercase; }
-.weatherTemp { font-size: 2.8em;font-weight: bold; }
-.weatherDesc, .weatherCity, .weatherForecastDay  { font-weight: bold; }
-.weatherDesc { margin-bottom: 0.4em; }
-.weatherRange, .weatherWind, .weatherLink, .weatherForecastItem { font-size: 0.8em; }
-.weatherLink, .weatherForecastItem { margin-top: 0.5em;text-align: left; }
+.weatherFeed a:hover { color: #000;text-decoration: none;}
+
+.weatherItem { padding: 5px;text-align: right; }
+.weatherCity { text-transform: capitalize;margin-bottom: 5px; }
+.weatherTemp { font-size: 30px;margin-bottom: 5px; }
+.weatherTemp, .weatherDesc, .weatherCity, .weatherForecastDay  { font-weight: bold; }
+.weatherDesc { margin-bottom: 5px; }
+.weatherRange, .weatherWind, .weatherLink, .weatherForecastItem { font-size: 12px; }
+.weatherLink, .weatherForecastItem { margin-top: 5px;text-align: left;display: none; }
 .weatherForecastItem {
     padding: 0.5em 0.5em 0.5em 80px;
     background-color: #fff;

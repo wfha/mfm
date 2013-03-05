@@ -12,13 +12,16 @@ h4 {color: $blue_mfm;}
 -------------------------------------------------- */
 #sites_nav {
   a {
-    img {
-      width: 50px;
-      height: 50px;
-      margin: 0px 10px 30px 0px;
-    }
+    display:inline-block;
+    width:50px;
+    height:50px;
+    margin: 0px 1px 20px 0px;
   }
 }
+
+@import "icons_sites_nav/*.png";
+@include all-icons_sites_nav-sprites;
+/* In html, add: class='icons_sites_nav-amazon_50x50' */
 
 
 /* Footer
