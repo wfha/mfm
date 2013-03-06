@@ -1,18 +1,18 @@
 <div class="row-fluid">
   <div class="span12 well">
-    <div class="span6">
+    <div class="span5">
       <%= image_tag "/assets/mfm_logo.png" %>
-      <h4>Starving, and a little lazy ... </h4>
-      <h4 class="pull-right">Tired of grocery shopping, delivery would be nice ... </h4>
-      <h4>Order food online easily, no hassle on the phone</h4>
-      <h4 class="pull-right">Find more amazing restaurants in town!</h4>
+      <h3 class="pull-right">Get your meals online! ^_^</h3>
     </div>
-    <div class="span4">
-      <h4><%= Date.today %>. Be Happy Everyday!</h4>
-      <p>Wicked Table Tennis Play</p>
-      <img src="https://i.chzbgr.com/maxW500/7080178176/h5AE5EA9F/" />
+    <div class="span3 offset1">
+      <%= link_to "https://chrome.google.com/webstore/detail/meals4me/miinanihaigjbhiekjadnmagbfcmcmdp", target: "_blank", style: "text-decoration: none;" do %>
+          <%= image_tag("/assets/mfm_chrome.png", style: "width: 160px; height: 120px;") %>
+          <br/>
+          <span class="badge badge-important">Get Meals4.Me on Chrome!</span>
+      <% end %>
     </div>
-    <div class="span2">
+    <div class="span3">
+        <b><%= Time.now.strftime("%Y-%m-%d, %A") %></b>
       <div id="weather"></div>
     </div>
   </div>

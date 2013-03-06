@@ -10,3 +10,14 @@ $ ->
   # Simple_form creates label with abbr
   # So have to create label and empty inside
   $('form.hide_input_label label.control-label').empty()
+
+  $('.sni').jrumble(
+    x: 4, y: 4,
+    rotation: 2,
+    speed: 50
+  ).hover(
+    (ev) ->
+      $(this).trigger('startRumble')
+    (ev) ->
+      $(this).trigger('stopRumble')
+  )
