@@ -23,6 +23,7 @@
         <ul class="nav">
           <li id="stores">  <%= link_to 'Restaurant Hub', home_stores_path %>       </li>
           <li id="delivery"><%= link_to 'Restaurant Delivery', home_delivery_path %></li>
+          <li id="coupons"> <%= link_to 'Restaurant Coupons', home_coupons_path %>  </li>
           <li id="grocery"> <%= link_to 'Grocery Delivery', home_grocery_path %>    </li>
           <% if user_signed_in? %>
               <li class=""><%= link_to current_user.firstname[0] + ". " + current_user.lastname, edit_user_registration_path %></li>
@@ -83,6 +84,8 @@
         <li class="muted">&middot;</li>
         <li><%= link_to 'Restaurant Delivery', home_delivery_path %></li>
         <li class="muted">&middot;</li>
+        <li><%= link_to 'Restaurant Coupons', home_coupons_path %></li>
+        <li class="muted">&middot;</li>
         <li><%= link_to 'Grocery Delivery', home_grocery_path %></li>
         <li class="muted">&middot;</li>
         <li>
@@ -116,6 +119,20 @@
 
   <% if ["home", "users/registrations", "users/sessions", "users/passwords", "users/unlocks", "users/confirmations"].include?(params[:controller]) %>
       <div id="modal_wrap_cart_item"></div>
+      <div id="modal_wrap_photo">
+        <div class="modal hide fade">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h3>This is the Coupon Page. </h3>
+          </div>
+          <div class="modal-body">
+            Coming soon ......
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
       <div id="modal_wrap_order"></div>
       <div id="modal_wrap_ticket">
         <div class="modal hide fade">

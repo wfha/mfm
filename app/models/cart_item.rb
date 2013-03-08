@@ -1,7 +1,7 @@
 class CartItem < ActiveRecord::Base
-  attr_accessible :name, :note, :price, :quantity, :dish_id, :cart_id
+  attr_accessible :name, :note, :price, :quantity, :cart_itemable, :cart_id
 
-  belongs_to :dish
+  belongs_to :cart_itemable, :polymorphic => true
   belongs_to :cart
 
   def total_price

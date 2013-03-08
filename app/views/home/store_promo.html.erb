@@ -9,13 +9,28 @@
               <% unless coupon.name.blank? && coupon.desc.blank? %>
                   <h4>Description:</h4>
                   <%= coupon.name %> : <%= coupon.desc %>
+                  <br/><br/>
               <% end %>
+
               <h4>Effective For:</h4>
               From <%= coupon.start_at.strftime("%Y-%m-%d") %> to <%= coupon.end_at.strftime("%Y-%m-%d") %>
               <br/><br/>
-              <a class="btn btn-primary" onclick="window.open('/home/print_coupon/<%= coupon.id %>','PrintCoupon','height=600, width=800, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');">
-                Print Coupon
-              </a>
+
+              <h4>Redeem Coupon</h4>
+              <table>
+                <tr>
+                  <td>
+                    For dine-in or phone order, print coupon.
+                    <%= link_to "Print Coupon", "javascript:;", class: "btn btn-primary", style: "width: 90px;",
+                                onclick: "window.open('/home/print_coupon/#{coupon.id}','PrintCoupon','height=600, width=800, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');" %>
+                  </td>
+                  <td>
+                    For online order, click for coupon code.
+                    <%= link_to "Coupon Code", "javascript:;", class: "btn btn-primary cfc", style: "width: 90px;" %>
+                    <%= link_to (coupon.id + 7777777).to_s(30), "javascript:;", class: "btn btn-info cfc", style: "display: none; width: 90px;" %>
+                  </td>
+                </tr>
+              </table>
             </div>
             <div class="span7">
               <%= image_tag coupon.photo_url(:small).to_s %>

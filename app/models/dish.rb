@@ -6,6 +6,8 @@ class Dish < ActiveRecord::Base
 
   has_one :gallery, :as => :galleriable
 
+  has_many :cart_items, :as => :cart_itemable
+
   has_and_belongs_to_many :dish_discounts
   has_and_belongs_to_many :dish_features
   has_and_belongs_to_many :dish_choices

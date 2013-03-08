@@ -4,6 +4,7 @@
     <%= f.input :name %>
     <%= f.input :desc %>
     <%= f.input :rank %>
+    <%= f.input :price %>
 
     <%= image_tag @coupon.photo_url(:micro).to_s if @coupon.photo? %>
     <%= f.input :photo %>

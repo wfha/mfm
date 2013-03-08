@@ -22,6 +22,7 @@
 
         width: 30%;
         height: 30px;
+        margin-bottom: 5px;
         line-height: 30px;
         text-align: center;
         font-weight: bold;
@@ -46,8 +47,8 @@
 
         width: 97%;
         height: 40px;
-        margin: 5px 0px;
-        padding: 5px;
+        margin-bottom: 5px;
+        padding: 0px 5px;
         border: 1px solid $orange;
       }
 
@@ -55,6 +56,18 @@
         color: $white;
         background-color: $orange;
       }
+    }
+
+    li.cart_coupon {
+      form {
+        margin: 0px 0px 5px 0px;
+
+        input {
+          width: 90px;
+          margin-bottom: 0px;
+        }
+      }
+
     }
 
     li.cart_footer {

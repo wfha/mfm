@@ -40,14 +40,26 @@ class CartItemsController < ApplicationController
   # POST /cart_items
   # POST /cart_items.json
   def create
-    dish = Dish.find(params[:dish_id])
-    note = params[:note]
-    price_adjustment = params[:price_adjustment].to_d
-    quantity = params[:quantity].to_i
     store_id = params[:store_id].to_i
-
     @cart = current_cart(store_id)
-    @cart_item = @cart.add_dish(dish.id, dish.name, dish.price + price_adjustment, quantity, note)
+
+    if params[:dish_id]
+      dish = Dish.find(params[:dish_id])
+      note = params[:note]
+      price_adjustment = params[:price_adjustment].to_d
+      quantity = params[:quantity].to_i
+
+      @cart_item = @cart.add_dish(dish, dish.name, dish.price + price_adjustment, quantity, note)
+    elsif params[:coupon_id]
+      begin
+        coupon = Coupon.find(params[:coupon_id].to_i(30) - 7777777)
+        quantity = 1
+
+        @cart_item = @cart.add_coupon(coupon, coupon.name, coupon.price, quantity)
+      rescue StandardError => bang
+        return
+      end
+    end
 
     respond_to do |format|
       if @cart_item.save

@@ -5,7 +5,7 @@
         <h3>Confirm your order</h3>
       </div>
       <div class="modal-body">
-        <%= form_tag(cart_items_path(dish_id: @dish), :method => 'post', :remote => true) do |f| %>
+        <%= form_tag(cart_items_path, :method => 'post', :remote => true) do %>
             <% @dish.dish_choices.each do |dc| %>
                 <div class="dish_choice_wrap" must="<%= dc.must %>" type="<%= dc.input_type %>">
                   <b><%= dc.name %>&#58;</b>
@@ -38,8 +38,9 @@
             <input type="text" name="note" add="0" />
             <br/>
 
-            <input type="hidden" name="price_adjustment" value="0" />
-            <input type="hidden" name="store_id" value="<%= @dish.category.menu.store.id %>" />
+            <%= hidden_field_tag :price_adjustment, 0 %>
+            <%= hidden_field_tag :dish_id, @dish.id %>
+            <%= hidden_field_tag :store_id, @dish.category.menu.store.id %>
         <% end %>
       </div>
       <div class="modal-footer">

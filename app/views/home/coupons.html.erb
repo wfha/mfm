@@ -1,2 +1,49 @@
-<h1>Home#coupons</h1>
-<p>Find me in app/views/home/coupons.html.erb</p>
+<div class="row">
+  <div class="span7" id="main">
+    <div class="well">
+      <table class="table table-hover" style="margin-bottom: 0px;">
+        <% @coupons.each do |coupon| %>
+            <tr>
+              <td width="35%">
+                <%= link_to_function image_tag(coupon.photo_url(:micro).to_s, alt: 'Meals4.Me', style: "width:200px;height:150px;"),
+                                     "$('#modal_wrap_photo .modal').modal('show').find('.modal-body').html(\"<img src=#{coupon.photo_url.to_s} alt='Meals4.Me' />\")" %>
+              </td>
+              <td width="65%">
+                <table style="margin: 0px;">
+                  <tr>
+                    <td colspan="2" style="border-top: none;padding: 5px;">
+                      <h4><%= coupon.name %> @ <%= link_to coupon.store.name, home_store_promo_path(coupon.store) %></h4>
+                      <span><%= coupon.desc %></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border-top: none;padding: 5px;" width="50%">
+                      <b>For dine-in or phone order, print coupon.</b>
+                      <%= link_to "Print Coupon", "javascript:;", class: "btn btn-info", style: "width: 90px;",
+                                  onclick: "window.open('/home/print_coupon/#{coupon.id}','PrintCoupon','height=600, width=800, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');" %>
+                    </td>
+                    <td style="border-top: none;padding: 5px;" width="50%">
+                      <b>For online order, click for coupon code.</b>
+                      <%= link_to "Coupon Code", "javascript:;", class: "btn btn-info cfc", style: "width: 90px;" %>
+                      <%= link_to (coupon.id + 7777777).to_s(30), "javascript:;", class: "btn btn-info cfc", style: "display: none;width: 90px;" %>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+  <div class="span5">
+    <div class="well" id="side_map">
+      <%= gmaps(
+                  :map_options => { :auto_adjust => true },
+                  :markers => { :data => @json, :options => { :list_container => "markers_list" }}
+          )
+      %>
+      <ul id="markers_list" style="display: none;"></ul>
+    </div>
+  </div>
+</div>

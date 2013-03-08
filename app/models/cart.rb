@@ -6,12 +6,20 @@ class Cart < ActiveRecord::Base
   has_many :cart_items, :dependent => :destroy
   has_many :orders
 
-  def add_dish(dish_id, name, price, quantity, note)
-    current_item = cart_items.find_by_dish_id_and_note(dish_id, note)
+  def add_dish(dish, name, price, quantity, note)
+    current_item = cart_items.find_by_cart_itemable_id_and_cart_itemable_type_and_note(dish.id, dish.class.to_s, note)
     if current_item
       current_item.quantity += quantity
     else
-      current_item = cart_items.build(dish_id: dish_id, name: name, price: price, quantity: quantity, note: note)
+      current_item = cart_items.build(cart_itemable: dish, name: name, price: price, quantity: quantity, note: note)
+    end
+    current_item
+  end
+
+  def add_coupon(coupon, name, price, quantity)
+    current_item = cart_items.find_by_cart_itemable_id_and_cart_itemable_type(coupon.id, coupon.class.to_s)
+    unless current_item
+      current_item = cart_items.build(cart_itemable: coupon, name: name, price: price, quantity: quantity)
     end
     current_item
   end

@@ -4,8 +4,8 @@
         <h4>Your Cart Is Empty!</h4>
     <% else %>
         <ul>
-          <li><h4>Cart @ <%= cart.store.name %></h4></li>
-          <li class="cart_header" style="margin-bottom: 10px;">
+          <li><h4 style="margin-top: 0px;">Cart @ <%= cart.store.name %></h4></li>
+          <li class="cart_header">
             <% if params[:controller] == "orders" %>
                 <% if cart.delivery_type == 'delivery' %>
                     <%= link_to 'Delivery', "javascript:;", class: 'active' %>
@@ -25,7 +25,17 @@
 
           <%= render(cart.cart_items) %>
 
-          <li class="cart_footer" style="margin-top: 10px;">
+          <% unless params[:controller] == "orders" %>
+              <li class="cart_coupon">
+                <%= form_tag(cart_items_path, method: 'post', remote: true) do %>
+                    <%= text_field_tag :coupon_id, "", placeholder: 'Coupon Code' %>
+                    <%= hidden_field_tag :store_id, cart.store.id %>
+                    <%= submit_tag "Apply", class: "btn btn-info" %>
+                <% end %>
+              </li>
+          <% end %>
+
+          <li class="cart_footer">
             <span class="left75">Subtotal:</span>
             <span class="right20"><%= number_to_currency(cart.subtotal_price) %></span>
           </li>
@@ -44,7 +54,7 @@
             <span class="right20"><%= number_to_currency(cart.total_price) %></span>
           </li>
           <% unless params[:controller] == "orders" %>
-              <li class="cart_footer" style="margin-top: 20px;">
+              <li class="cart_footer" style="margin-top: 10px;">
                 <% if cart.delivery_type == "delivery" && cart.total_price < cart.store.delivery_minimum %>
                     <%= link_to "Min.  #{number_to_currency(cart.store.delivery_minimum)}", 'javascript:;', :class => 'btn pull-right' %>
                 <% else %>

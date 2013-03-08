@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228222617) do
+ActiveRecord::Schema.define(:version => 20130308012241) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -33,17 +33,18 @@ ActiveRecord::Schema.define(:version => 20130228222617) do
 
   create_table "cart_items", :force => true do |t|
     t.string   "name"
-    t.decimal  "price",      :precision => 8, :scale => 2
-    t.integer  "quantity",                                 :default => 1
+    t.decimal  "price",              :precision => 8, :scale => 2
+    t.integer  "quantity",                                         :default => 1
     t.string   "note"
-    t.integer  "dish_id"
     t.integer  "cart_id"
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
+    t.integer  "cart_itemable_id"
+    t.string   "cart_itemable_type"
   end
 
   add_index "cart_items", ["cart_id"], :name => "index_cart_items_on_cart_id"
-  add_index "cart_items", ["dish_id"], :name => "index_cart_items_on_dish_id"
+  add_index "cart_items", ["cart_itemable_id", "cart_itemable_type"], :name => "index_cart_items_on_cart_itemable_id_and_cart_itemable_type"
 
   create_table "carts", :force => true do |t|
     t.string   "delivery_type",                               :default => "delivery", :null => false
@@ -73,9 +74,10 @@ ActiveRecord::Schema.define(:version => 20130228222617) do
     t.integer  "store_id"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "rank",       :default => 0, :null => false
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+    t.integer  "rank",                                     :default => 0,   :null => false
+    t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
   end
 
   add_index "coupons", ["store_id"], :name => "index_coupons_on_store_id"

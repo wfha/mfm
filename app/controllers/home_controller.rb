@@ -39,7 +39,13 @@ class HomeController < ApplicationController
   end
 
   def coupons
-    @coupons = Coupon.all
+    @coupons = Coupon.includes({ :store => :address })
+    @addresses = []
+    @coupons.each { |coupon| @addresses << coupon.store.address }
+
+    if @addresses
+      @json = @addresses.to_gmaps4rails
+    end
   end
 
   # All About Stores
