@@ -1,8 +1,20 @@
 class Dish < ActiveRecord::Base
   belongs_to :category
 
-  attr_accessible :desc, :photo, :name, :price, :rank, :gallery_attributes,
+  attr_accessible :desc, :name, :price, :rank, :gallery_attributes,
+                  :photo, :photo_cache, :remove_photo, # carrierwave and rails_admin
                   :dish_feature_ids, :dish_choice_ids, :dish_discount_ids
+
+  rails_admin do
+    field :name, :string
+    field :desc, :string
+    field :price, :decimal
+    field :photo, :carrierwave do
+      thumb_method :micro
+      delete_method :remove_photo
+      cache_method :photo_cache
+    end
+  end
 
   has_one :gallery, :as => :galleriable
 

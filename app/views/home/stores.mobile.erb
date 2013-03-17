@@ -1,6 +1,6 @@
 <div data-role="content" class="hub">
   <div data-role="collapsible-set" data-inset="true" data-content-theme="d">
-    <% Tag.all.each do |tag| %>
+    <% @tags.each do |tag| %>
         <div data-role="collapsible">
           <h2><%= tag.name %></h2>
           <ul data-role="listview" data-inset="false">

@@ -19,15 +19,24 @@
               <h4>Redeem Coupon</h4>
               <table>
                 <tr>
-                  <td>
-                    For dine-in or phone order, print coupon.
-                    <%= link_to "Print Coupon", "javascript:;", class: "btn btn-primary", style: "width: 90px;",
-                                onclick: "window.open('/home/print_coupon/#{coupon.id}','PrintCoupon','height=600, width=800, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');" %>
+                  <td width="50%">
+                    <% if coupon.scope.include? "in_store" %>
+                        For dine-in or phone order, print coupon.
+                        <%= link_to "Print Coupon", "javascript:;", class: "btn btn-primary", style: "width: 90px;",
+                                    onclick: "window.open('/home/print_coupon/#{coupon.id}','PrintCoupon','height=600, width=800, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');" %>
+                    <% end %>
                   </td>
-                  <td>
-                    For online order, click for coupon code.
-                    <%= link_to "Coupon Code", "javascript:;", class: "btn btn-primary cfc", style: "width: 90px;" %>
-                    <%= link_to (coupon.id + 7777777).to_s(30), "javascript:;", class: "btn btn-info cfc", style: "display: none; width: 90px;" %>
+                  <td width="50%">
+                    <% if coupon.scope.include? "online" %>
+                        For online order, click for coupon code.
+                        <% if coupon.still_open? %>
+                            <%= link_to "Coupon Code", "javascript:;", class: "btn btn-primary cfc", style: "width: 90px;" %>
+                            <%= link_to coupon.encode_coupon, "javascript:;", class: "btn btn-info cfc", style: "display: none; width: 90px;" %>
+                        <% else %>
+                            <%= link_to "Coupon Code", "javascript:alert('Not the right time. Please check the effective time on the coupon.');",
+                                        class: "btn btn-primary", style: "width: 90px;" %>
+                        <% end %>
+                    <% end %>
                   </td>
                 </tr>
               </table>

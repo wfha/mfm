@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308012241) do
+ActiveRecord::Schema.define(:version => 20130317165433) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -74,10 +74,12 @@ ActiveRecord::Schema.define(:version => 20130308012241) do
     t.integer  "store_id"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.datetime "created_at",                                                :null => false
-    t.datetime "updated_at",                                                :null => false
-    t.integer  "rank",                                     :default => 0,   :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
+    t.integer  "rank",                                     :default => 0,    :null => false
     t.decimal  "price",      :precision => 8, :scale => 2, :default => 0.0
+    t.text     "scope"
+    t.decimal  "minimum",    :precision => 8, :scale => 2, :default => 20.0
   end
 
   add_index "coupons", ["store_id"], :name => "index_coupons_on_store_id"
@@ -333,8 +335,9 @@ ActiveRecord::Schema.define(:version => 20130308012241) do
   create_table "tags", :force => true do |t|
     t.string   "name"
     t.string   "desc"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "rank",       :default => 0, :null => false
   end
 
   create_table "tickets", :force => true do |t|

@@ -10,8 +10,7 @@ class HomeController < ApplicationController
   end
 
   def stores
-    @info = "This is a hub for restaurants"
-
+    @tags = Tag.includes(:stores).where("rank > 0").order("rank")
   end
 
   def delivery

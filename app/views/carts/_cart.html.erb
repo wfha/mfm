@@ -31,6 +31,9 @@
                     <%= text_field_tag :coupon_id, "", placeholder: 'Coupon Code' %>
                     <%= hidden_field_tag :store_id, cart.store.id %>
                     <%= submit_tag "Apply", class: "btn btn-info" %>
+                    <% if @message %>
+                        <span style="color: #ff0000;"><%= @message %></span>
+                    <% end %>
                 <% end %>
               </li>
           <% end %>

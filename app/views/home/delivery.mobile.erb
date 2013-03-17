@@ -1,12 +1,13 @@
 <div data-role="content">
-  <ul data-role="listview" data-inset="true" data-filter="false">
+  <br/>
+  <ul data-role="listview" data-inset="true" data-filter="true">
     <% @stores.each do |store| %>
         <li>
           <%= link_to home_store_good_path(store), rel: 'external' do %>
               <%= image_tag(store.avatar_url.to_s) %>
               <h3><%= store.name %></h3>
               <p><%= store.desc %></p>
-              <span class="ui-li-count">11</span>
+              <!--<span class="ui-li-count">11</span>-->
           <% end %>
         </li>
     <% end %>

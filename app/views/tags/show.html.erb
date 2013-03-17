@@ -1,17 +1,10 @@
 <div class="well">
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @tag.name %>
-</p>
+  <p><b>Name:</b><%= @tag.name %></p>
+  <p><b>Desc:</b><%= @tag.desc %></p>
+  <p><b>Rank:</b><%= @tag.rank %></p>
 
-<p>
-  <b>Desc:</b>
-  <%= @tag.desc %>
-</p>
-
-
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>
+  <%= link_to 'Edit', edit_tag_path(@tag) %> |
+  <%= link_to 'Back', tags_path %>
 </div>

@@ -2,5 +2,6 @@
     <%= f.error_notification %>
     <%= f.input :name %>
     <%= f.input :desc %>
+    <%= f.input :rank, :hint => "Decide the order, and 0 means hidden." %>
     <%= f.button :submit, disable_with: "Saving..." %>
 <% end %>

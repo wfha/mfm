@@ -1,13 +1,61 @@
 # RailsAdmin config file. Generated on February 03, 2013 23:59
 # See github.com/sferik/rails_admin for more informations
 
+#require Rails.root.join('lib', 'rails_admin_publish.rb')
+
 RailsAdmin.config do |config|
+
+  # Load the class in lib/rails_admin_publish.rb
+  module RailsAdmin
+    module Config
+      module Actions
+        class Publish < RailsAdmin::Config::Actions::Base
+          RailsAdmin::Config::Actions.register(self)
+        end
+      end
+    end
+  end
+
+  config.actions do
+    # root actions
+    dashboard                     # mandatory
+                                  # collection actions
+    index                         # mandatory
+    new
+    export
+    history_index
+    bulk_delete
+                                  # member actions
+    show
+    edit
+    delete
+    history_show
+    show_in_app
+
+    # Set the custom action here
+    publish do
+      # Make it visible only for article model. You can remove this if you don't need.
+      visible do
+        bindings[:abstract_model].model.to_s == "Article"
+      end
+    end
+  end
+
+  # Navigation
+  config.navigation_static_links = {
+      'Google' => 'http://www.google.com',
+      'Yahoo!' => 'http://www.yahoo.com',
+      'TAMU' => 'http://www.tamu.edu'
+  }
+  config.navigation_static_label = "My Links"
+
+
   config.authorize_with :cancan
 
   ################  Global configuration  ################
 
   # Set the admin name here (optional second array element will appear in red). For example:
-  config.main_app_name = ['Mfm', 'Admin']
+  config.main_app_name = ['Meals4.Me', 'Admin']
   # or for a more dynamic name:
   # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 
@@ -27,7 +75,7 @@ RailsAdmin.config do |config|
   # config.default_items_per_page = 20
 
   # Exclude specific models (keep the others):
-  # config.excluded_models = ['Address', 'Cart', 'CartItem', 'Category', 'Coupon', 'Dish', 'DishChoice', 'DishFeature', 'Hour', 'Menu', 'Order', 'Payment', 'PaypalNotification', 'Plan', 'Role', 'Store', 'Tag', 'Ticket', 'User']
+  config.excluded_models = ['Address']
 
   # Include specific models (exclude the others):
   # config.included_models = ['Address', 'Cart', 'CartItem', 'Category', 'Coupon', 'Dish', 'DishChoice', 'DishFeature', 'Hour', 'Menu', 'Order', 'Payment', 'PaypalNotification', 'Plan', 'Role', 'Store', 'Tag', 'Ticket', 'User']
@@ -303,20 +351,20 @@ RailsAdmin.config do |config|
 
   #   # Found associations:
 
-  #     configure :category, :belongs_to_association 
-  #     configure :dish_features, :has_and_belongs_to_many_association 
-  #     configure :dish_choices, :has_and_belongs_to_many_association 
+  #     configure :category, :belongs_to_association
+  #     configure :dish_features, :has_and_belongs_to_many_association
+  #     configure :dish_choices, :has_and_belongs_to_many_association
 
   #   # Found columns:
 
-  #     configure :id, :integer 
-  #     configure :name, :string 
-  #     configure :desc, :string 
-  #     configure :price, :decimal 
-  #     configure :photo, :carrierwave 
-  #     configure :category_id, :integer         # Hidden 
-  #     configure :created_at, :datetime 
-  #     configure :updated_at, :datetime 
+  #     configure :id, :integer
+  #     configure :name, :string
+  #     configure :desc, :string
+  #     configure :price, :decimal
+  #     configure :photo, :carrierwave
+  #     configure :category_id, :integer         # Hidden
+  #     configure :created_at, :datetime
+  #     configure :updated_at, :datetime
 
   #   # Cross-section configuration:
 
@@ -773,30 +821,30 @@ RailsAdmin.config do |config|
 
   #   # Found associations:
 
-  #     configure :address, :has_one_association 
-  #     configure :coupons, :has_many_association 
-  #     configure :dish_choices, :has_many_association 
-  #     configure :dish_features, :has_many_association 
-  #     configure :hours, :has_many_association 
-  #     configure :menus, :has_many_association 
-  #     configure :plans, :has_many_association 
-  #     configure :orders, :has_many_association 
-  #     configure :payments, :has_and_belongs_to_many_association 
-  #     configure :tags, :has_and_belongs_to_many_association 
+  #     configure :address, :has_one_association
+  #     configure :coupons, :has_many_association
+  #     configure :dish_choices, :has_many_association
+  #     configure :dish_features, :has_many_association
+  #     configure :hours, :has_many_association
+  #     configure :menus, :has_many_association
+  #     configure :plans, :has_many_association
+  #     configure :orders, :has_many_association
+  #     configure :payments, :has_and_belongs_to_many_association
+  #     configure :tags, :has_and_belongs_to_many_association
 
   #   # Found columns:
 
-  #     configure :id, :integer 
-  #     configure :name, :string 
-  #     configure :desc, :string 
-  #     configure :avatar, :carrierwave 
-  #     configure :phone, :string 
-  #     configure :fax, :string 
-  #     configure :delivery_minimum, :decimal 
-  #     configure :delivery_fee, :decimal 
-  #     configure :delivery_radius, :integer 
-  #     configure :created_at, :datetime 
-  #     configure :updated_at, :datetime 
+  #     configure :id, :integer
+  #     configure :name, :string
+  #     configure :desc, :string
+  #     configure :avatar, :carrierwave
+  #     configure :phone, :string
+  #     configure :fax, :string
+  #     configure :delivery_minimum, :decimal
+  #     configure :delivery_fee, :decimal
+  #     configure :delivery_radius, :integer
+  #     configure :created_at, :datetime
+  #     configure :updated_at, :datetime
 
   #   # Cross-section configuration:
 

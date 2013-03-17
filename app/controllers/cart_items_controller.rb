@@ -52,24 +52,50 @@ class CartItemsController < ApplicationController
       @cart_item = @cart.add_dish(dish, dish.name, dish.price + price_adjustment, quantity, note)
     elsif params[:coupon_id]
       begin
-        coupon = Coupon.find(params[:coupon_id].to_i(30) - 7777777)
+        coupon = Coupon.find(Coupon.decode_coupon params[:coupon_id])
         quantity = 1
 
-        @cart_item = @cart.add_coupon(coupon, coupon.name, coupon.price, quantity)
+        if @cart.total_price >= coupon.minimum                       # Validate coupon minimum
+          if coupon.store.id == store_id                             # Validate coupon store
+            if Time.now.between?(coupon.start_at, coupon.end_at)     # Validate coupon expiration
+              if coupon.still_open?                                  # Validate coupon time
+                @cart_item = @cart.add_coupon(coupon, coupon.name, coupon.price, quantity)
+                @message = "Coupon applied"
+              else
+                @message = "Not right time"
+              end
+            else
+              @message = "Expired coupon"
+            end
+          else
+            @message = "Not this store"
+          end
+        else
+          @message = "Not reach minimum"
+        end
+
       rescue StandardError => bang
+        @message = "Invalid coupon"
         return
       end
     end
 
     respond_to do |format|
-      if @cart_item.save
-        format.html { redirect_to @cart_item, notice: 'Cart item was successfully created.' }
-        format.js   { @current_item = @cart_item }
-        format.mjs   { @current_item = @cart_item }
-        format.json { render json: @cart_item, status: :created, location: @cart_item }
+      if @cart_item
+        if @cart_item.save
+          format.js   { @current_item = @cart_item }
+          format.mjs  { @current_item = @cart_item }
+          format.html { redirect_to @cart_item, notice: 'Cart item was successfully created.' }
+          format.json { render json: @cart_item, status: :created, location: @cart_item }
+        else
+          format.js   { @current_item = @cart_item }
+          format.mjs  { @current_item = @cart_item }
+          format.html { render action: "new" }
+          format.json { render json: @cart_item.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render action: "new" }
-        format.json { render json: @cart_item.errors, status: :unprocessable_entity }
+        format.js   {}
+        format.mjs  {}
       end
     end
   end
@@ -96,6 +122,7 @@ class CartItemsController < ApplicationController
     @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
     @cart = @cart_item.cart
+    @cart.update_coupons
 
     respond_to do |format|
       format.html { redirect_to cart_items_url }

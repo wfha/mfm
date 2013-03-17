@@ -24,6 +24,14 @@ class Cart < ActiveRecord::Base
     current_item
   end
 
+  def update_coupons   # In case the coupon minimum is not reached
+    coupon_items = cart_items.where("cart_itemable_type = 'Coupon'")
+    coupon_items.each do |ci|
+      ci.destroy if ci.cart_itemable.minimum > total_price
+    end
+    reload # Reload the object of cart_item
+  end
+
   def subtotal_price
     cart_items.to_a.sum { |item| item.total_price }
   end

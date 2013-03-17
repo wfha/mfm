@@ -1,7 +1,4 @@
-  Mfm::Application.routes.draw do
-
-  resources :services
-
+Mfm::Application.routes.draw do
 
   devise_for :users, controllers: {
       confirmations: 'users/confirmations',
@@ -53,6 +50,7 @@
   resources :orders
   resources :payments
   resources :roles
+  resources :services
   resources :tags
   resources :tickets
 

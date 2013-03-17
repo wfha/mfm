@@ -1,10 +1,10 @@
 class Store < ActiveRecord::Base
   include Hourable
 
-  attr_accessible :delivery_fee, :delivery_minimum, :delivery_radius,
-                  :desc, :fax, :avatar, :name, :phone, :rank, :gallery, :story,
+  attr_accessible :delivery_fee, :delivery_minimum, :delivery_radius, :desc, :fax, :name, :phone, :rank, :gallery, :story,
+                  :avatar, :avatar_cache, :remove_avatar, # carrierwave and rails_admin
                   :tag_ids, :payment_ids, :service_ids,
-                  :address_attributes, :gallery_attributes, :hours_attributes
+                  :address_attributes, :gallery_attributes, :hours_attributes, :menus_attributes
 
   has_one :address, :as => :addressable
   has_one :gallery, :as => :galleriable
@@ -27,6 +27,7 @@ class Store < ActiveRecord::Base
   accepts_nested_attributes_for :address, :allow_destroy => true
   accepts_nested_attributes_for :gallery, :allow_destroy => true
   accepts_nested_attributes_for :hours, :allow_destroy => true
+  accepts_nested_attributes_for :menus,  :allow_destroy => true
 
   mount_uploader :avatar, AvatarUploader
 

@@ -51,7 +51,7 @@
     <h4>Open Hours:</h4>
     <%= f.fields_for :hours do |hour| %>
         <%= hour.input :name, :hint => "Eg. : 0 1 2 3 4 5 6" %>
-        <%= hour.input :desc %>
+        <%= hour.input :desc, :hint => "Eg. : Mon - Fri" %>
         <%= hour.input :open_at, :hint => "Eg. : 11:00" %>
         <%= hour.input :close_at, :hint => "Eg. : 21:00" %>
         <%= hour.link_to_remove "Remove", class: 'btn btn-info' %>

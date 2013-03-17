@@ -1,18 +1,29 @@
-<%= simple_form_for([@store, @coupon]) do |f| %>
+<%= simple_nested_form_for([@store, @coupon]) do |f| %>
     <%= f.error_notification %>
 
     <%= f.input :name %>
     <%= f.input :desc %>
     <%= f.input :rank %>
     <%= f.input :price %>
-
-    <%= image_tag @coupon.photo_url(:micro).to_s if @coupon.photo? %>
-    <%= f.input :photo %>
-
+    <%= f.input :minimum %>
+    <%= f.input :scope, collection: Coupon::SCOPE_CHOICES, as: :check_boxes, checked: @coupon.scope %>
+    <%= f.input :photo, as: :image_preview, input_html: {preview_version: :micro}%>
     <%= f.input :start_at, wrapper_html: { class: "sf_2_in_1" } %>
     <%= f.input :end_at, wrapper_html: { class: "sf_2_in_1" } %>
 
-    <br/>
+    <hr/>
+
+    <h4>Open Hours:</h4>
+    <%= f.fields_for :hours do |hour| %>
+        <%= hour.input :name, :hint => "Eg. : 0 1 2 3 4 5 6" %>
+        <%= hour.input :desc, :hint => "Eg. : Mon - Fri" %>
+        <%= hour.input :open_at, :hint => "Eg. : 11:00" %>
+        <%= hour.input :close_at, :hint => "Eg. : 21:00" %>
+        <%= hour.link_to_remove "Remove", class: 'btn btn-info' %>
+    <% end %>
+    <%= f.link_to_add "Add", :hours, class: 'btn btn-primary' %>
+
+    <hr/>
 
     <%= f.button :submit, disable_with: "Saving...", class: 'btn btn-primary' %>
 <% end %>

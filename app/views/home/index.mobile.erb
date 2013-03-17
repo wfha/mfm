@@ -6,21 +6,27 @@
   <ul data-role="listview" data-inset="true" data-filter="false" id="index_ul">
     <li>
       <%= link_to home_stores_path, :rel => "external" do %>
-          <%= image_tag "/assets/hub.jpg" %>
+          <%= image_tag "/assets/restaurant_hub.jpg" %>
           <h3><br/><br/>Restaurant<br/>Hub</h3>
       <% end %>
     </li>
     <li>
       <%= link_to home_delivery_path, :rel => "external" do %>
-          <%= image_tag "/assets/food_delivery.jpg" %>
+          <%= image_tag "/assets/restaurant_delivery.jpg" %>
           <h3><br/><br/>Restaurant<br/>Delivery</h3>
       <% end %>
     </li>
     <li>
-      <%= link_to home_grocery_path, :rel => "external" do %>
-          <%= image_tag "/assets/grocery_delivery.jpg" %>
-          <h3><br/><br/>Grocery<br/>Delivery</h3>
+      <%= link_to home_coupons_path, :rel => "external" do %>
+          <%= image_tag "/assets/restaurant_coupons.jpg" %>
+          <h3><br/><br/>Restaurant<br/>Coupons</h3>
       <% end %>
     </li>
+    <!--<li>-->
+      <!--<%= link_to home_grocery_path, :rel => "external" do %>-->
+          <!--<%= image_tag "/assets/grocery_delivery.jpg" %>-->
+          <!--<h3><br/><br/>Grocery<br/>Delivery</h3>-->
+      <!--<% end %>-->
+    <!--</li>-->
   </ul>
 </div><!-- /content -->

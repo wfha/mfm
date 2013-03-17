@@ -93,8 +93,8 @@ label.control-label {
 .affix-top {}
 .affix {top: 60px;}
 .affix-bottom {position: absolute;top: auto;bottom: 100px;}
-#side.affix {width: 260px;}
-#side_map.affix {width: 340px;}
+#side.affix {width: 270px;}
+#side_map.affix {width: 350px;}
 
 /* Responsive
 -------------------------------------------------- */
@@ -102,22 +102,36 @@ label.control-label {
 /* Desktop large
 ------------------------- */
 @media (min-width: 1200px) {
-  #side.affix {width: 330px;}
-  #side_map.affix {width: 430px;}
+  // Original Span Spacing
+  //#side.affix {width: 330px;}
+  //#side_map.affix {width: 430px;}
+
+  #side.affix {width: 340px;}
+  #side_map.affix {width: 440px;}
 }
 
 /* Desktop
 ------------------------- */
 @media (max-width: 980px) {
-  #side.affix {width: 260px;}
-  #side_map.affix {width: 340px;}
+  // Original Span Spacing
+  //#side.affix {width: 260px;}
+  //#side_map.affix {width: 340px;}
+
+  #side.affix {width: 270px;}
+  #side_map.affix {width: 350px;}
 }
 
 /* Tablet to desktop
 ------------------------- */
 @media (min-width: 768px) and (max-width: 979px) {
-  #side.affix {width: 190px;top: 20px;}
-  #side_map.affix {width: 250px;top: 20px;}
+  // Original Span Spacing
+  //#side.affix {width: 190px;top: 20px;}
+  //#side_map.affix {width: 250px;top: 20px;}
+
+  #side.affix {width: 200px;top: 20px;}
+  #side_map.affix {width: 260px;top: 20px;}
+
+  body { padding-top: 0px;}
 }
 
 /* Tablet
@@ -125,6 +139,8 @@ label.control-label {
 @media (max-width: 767px) {
   #side.affix {width: auto;margin-bottom: 20px;position: static;width: auto;top: 0;}
   #side_map.affix {width: auto;margin-bottom: 20px;position: static;width: auto;top: 0;}
+
+  body { padding-top: 0px;}
 }
 
 /* Landscape phones
