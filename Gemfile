@@ -67,3 +67,6 @@ gem 'activemerchant', '~> 1.29.3'
 #gem 'braintree', '~> 2.22.0'
 
 gem 'time_of_day', '~> 0.1.1'
+
+# Log, Memory, Sql Analysis
+gem 'newrelic_rpm'

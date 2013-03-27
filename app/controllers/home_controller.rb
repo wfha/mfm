@@ -24,7 +24,7 @@ class HomeController < ApplicationController
   end
 
   def grocery
-    @store = Store.first
+    @store = Store.find(1)
     @cart = current_cart(@store.id)
     @dishes = Dish.joins(:dish_features, :category => :menu)
     .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
@@ -219,14 +219,14 @@ class HomeController < ApplicationController
       @order.handled = true
       @order.save
     elsif params['Digits'] == '2'
-      @msg = "You pressed two, you did not get the order."
+      @msg = "You pressed two, you did not get the order. We'll look at it."
       @order = Order.find(@order_id)
       @order.status = "fax_failed"
       @order.handled = false
       @order.save
     end
 
-    @redirect_to = "https://" + APP_CONFIG['domain'] + "/home/phone_start?order_id=#{@order_id}"
+    #@redirect_to = "https://" + APP_CONFIG['domain'] + "/home/phone_start?order_id=#{@order_id}"
     render :action => "phone_end.xml.builder", :layout => false
   end
 
