@@ -126,6 +126,7 @@ GEM
     haml (3.1.7)
     highline (1.6.15)
     hike (1.2.1)
+    hodel_3000_compliant_logger (0.1.1)
     httpi (2.0.0)
       rack
     i18n (0.6.1)
@@ -164,6 +165,9 @@ GEM
     newrelic_rpm (3.6.0.78)
     nokogiri (1.5.6)
     nori (2.0.3)
+    oink (0.10.1)
+      activerecord
+      hodel_3000_compliant_logger
     orm_adapter (0.4.0)
     pg (0.14.1)
     polyglot (0.3.3)
@@ -213,6 +217,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     remotipart (1.0.2)
+    request-log-analyzer (1.12.8)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rmagick (2.13.1)
@@ -300,9 +305,11 @@ DEPENDENCIES
   money (~> 5.1.0)
   nested_form (~> 0.3.1)
   newrelic_rpm
+  oink (~> 0.10.1)
   pg (~> 0.14.1)
   rails (~> 3.2.11)
   rails_admin (~> 0.4.3)
+  request-log-analyzer (~> 1.12.8)
   rest-client (~> 1.6.7)
   rmagick (~> 2.13.1)
   rvm-capistrano (~> 1.2.7)

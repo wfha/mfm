@@ -68,5 +68,7 @@ gem 'activemerchant', '~> 1.29.3'
 
 gem 'time_of_day', '~> 0.1.1'
 
-# Log, Memory, Sql Analysis
+# Memory, Log, Sql Analysis and Monitoring
 gem 'newrelic_rpm'
+gem 'oink', '~> 0.10.1'
+gem 'request-log-analyzer', '~> 1.12.8'

@@ -20,10 +20,10 @@
       <%= f.text_field :desc %>
     </div>
     <div class="field">
-      <%= f.label :image %><br />
-      <%= image_tag @plan.image_url(:small).to_s if @plan.image? %>
+      <%= f.label :photo %><br />
+      <%= image_tag @plan.photo_url(:small).to_s if @plan.photo? %>
       <br/>
-      <%= f.file_field :image %>
+      <%= f.file_field :photo %>
     </div>
     <div class="actions">
       <%= f.submit %>

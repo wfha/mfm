@@ -15,6 +15,9 @@ end
 module Mfm
   class Application < Rails::Application
 
+    # Oink
+    config.middleware.use Oink::Middleware
+
     # Enforce SSL connection
     config.force_ssl = true
 
