@@ -1,4 +1,8 @@
 class DishDiscountsController < ApplicationController
+
+  # Authenticate @dish_discount for the whole controller
+  authorize_resource
+
   # GET /dish_discounts
   # GET /dish_discounts.json
   def index

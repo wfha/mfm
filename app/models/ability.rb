@@ -9,7 +9,10 @@ class Ability
     elsif user.role? :member
       can :manage, :all
     else
-      can :manage, :all
+      can [:type, :destroy], Cart
+      can [:create, :destroy], CartItem
+      can [:create], Ticket
+      can [:create], Order
     end
 
     #can :read, :all                   # allow everyone to read everything

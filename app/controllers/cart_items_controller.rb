@@ -1,9 +1,11 @@
 class CartItemsController < ApplicationController
+
+  # Authenticate and load @cart_item for the whole controller
+  load_and_authorize_resource
+
   # GET /cart_items
   # GET /cart_items.json
   def index
-    @cart_items = CartItem.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @cart_items }
@@ -13,8 +15,6 @@ class CartItemsController < ApplicationController
   # GET /cart_items/1
   # GET /cart_items/1.json
   def show
-    @cart_item = CartItem.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @cart_item }
@@ -24,8 +24,6 @@ class CartItemsController < ApplicationController
   # GET /cart_items/new
   # GET /cart_items/new.json
   def new
-    @cart_item = CartItem.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @cart_item }
@@ -34,7 +32,6 @@ class CartItemsController < ApplicationController
 
   # GET /cart_items/1/edit
   def edit
-    @cart_item = CartItem.find(params[:id])
   end
 
   # POST /cart_items
@@ -103,8 +100,6 @@ class CartItemsController < ApplicationController
   # PUT /cart_items/1
   # PUT /cart_items/1.json
   def update
-    @cart_item = CartItem.find(params[:id])
-
     respond_to do |format|
       if @cart_item.update_attributes(params[:cart_item])
         format.html { redirect_to @cart_item, notice: 'Cart item was successfully updated.' }
@@ -119,7 +114,6 @@ class CartItemsController < ApplicationController
   # DELETE /cart_items/1
   # DELETE /cart_items/1.json
   def destroy
-    @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
     @cart = @cart_item.cart
     @cart.update_coupons

@@ -1,4 +1,8 @@
 class CouponsController < ApplicationController
+
+  # Authenticate @coupon for the whole controller
+  authorize_resource
+
   # GET /coupons
   # GET /coupons.json
   def index

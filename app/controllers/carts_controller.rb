@@ -1,9 +1,11 @@
 class CartsController < ApplicationController
+
+  # Authenticate and load @cart for the whole controller
+  load_and_authorize_resource
+
   # GET /carts
   # GET /carts.json
   def index
-    @carts = Cart.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @carts }
@@ -29,8 +31,6 @@ class CartsController < ApplicationController
   # GET /carts/new
   # GET /carts/new.json
   def new
-    @cart = Cart.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @cart }
@@ -39,14 +39,11 @@ class CartsController < ApplicationController
 
   # GET /carts/1/edit
   def edit
-    @cart = Cart.find(params[:id])
   end
 
   # POST /carts
   # POST /carts.json
   def create
-    @cart = Cart.new(params[:cart])
-
     respond_to do |format|
       if @cart.save
         format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
@@ -61,8 +58,6 @@ class CartsController < ApplicationController
   # PUT /carts/1
   # PUT /carts/1.json
   def update
-    @cart = Cart.find(params[:id])
-
     respond_to do |format|
       if @cart.update_attributes(params[:cart])
         format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
@@ -77,7 +72,6 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
-    @cart = Cart.find(params[:id])
     @store = @cart.store
     @cart.destroy
 
@@ -90,7 +84,6 @@ class CartsController < ApplicationController
 
   # Change cart type: delivery or pick-up
   def type
-    @cart = Cart.find(params[:id])
     @cart.delivery_type = params[:delivery_type]
     @cart.save
 

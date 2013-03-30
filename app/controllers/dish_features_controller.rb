@@ -1,4 +1,8 @@
 class DishFeaturesController < ApplicationController
+
+  # Authenticate @dish_feature for the whole controller
+  authorize_resource
+
   # GET /dish_features
   # GET /dish_features.json
   def index

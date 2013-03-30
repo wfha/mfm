@@ -1,9 +1,11 @@
 class PaymentsController < ApplicationController
+
+  # Authenticate and load @payment for the whole controller
+  load_and_authorize_resource
+
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @payments }
@@ -13,8 +15,6 @@ class PaymentsController < ApplicationController
   # GET /payments/1
   # GET /payments/1.json
   def show
-    @payment = Payment.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @payment }
@@ -24,8 +24,6 @@ class PaymentsController < ApplicationController
   # GET /payments/new
   # GET /payments/new.json
   def new
-    @payment = Payment.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @payment }
@@ -34,14 +32,11 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1/edit
   def edit
-    @payment = Payment.find(params[:id])
   end
 
   # POST /payments
   # POST /payments.json
   def create
-    @payment = Payment.new(params[:payment])
-
     respond_to do |format|
       if @payment.save
         format.html { redirect_to @payment, notice: 'Payment was successfully created.' }
@@ -56,8 +51,6 @@ class PaymentsController < ApplicationController
   # PUT /payments/1
   # PUT /payments/1.json
   def update
-    @payment = Payment.find(params[:id])
-
     respond_to do |format|
       if @payment.update_attributes(params[:payment])
         format.html { redirect_to @payment, notice: 'Payment was successfully updated.' }
@@ -72,7 +65,6 @@ class PaymentsController < ApplicationController
   # DELETE /payments/1
   # DELETE /payments/1.json
   def destroy
-    @payment = Payment.find(params[:id])
     @payment.destroy
 
     respond_to do |format|

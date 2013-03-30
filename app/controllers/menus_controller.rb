@@ -1,4 +1,8 @@
 class MenusController < ApplicationController
+
+  # Authenticate @menu for the whole controller
+  authorize_resource
+
   # GET /menus
   # GET /menus.json
   def index

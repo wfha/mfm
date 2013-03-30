@@ -1,4 +1,8 @@
 class PlansController < ApplicationController
+
+  # Authenticate @plan for the whole controller
+  authorize_resource
+
   # GET /plans
   # GET /plans.json
   def index

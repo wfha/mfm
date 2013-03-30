@@ -1,4 +1,8 @@
 class OrdersController < ApplicationController
+
+  # Authenticate @order for the whole controller
+  authorize_resource
+
   # GET /orders
   # GET /orders.json
   def index

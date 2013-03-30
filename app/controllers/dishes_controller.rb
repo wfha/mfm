@@ -1,4 +1,8 @@
 class DishesController < ApplicationController
+
+  # Authenticate @dish for the whole controller
+  authorize_resource
+
   # GET /dishes
   # GET /dishes.json
   def index

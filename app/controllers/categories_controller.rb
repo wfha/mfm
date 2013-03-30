@@ -1,4 +1,8 @@
 class CategoriesController < ApplicationController
+
+  # Authenticate @category for the whole controller
+  authorize_resource
+
   # GET /categories
   # GET /categories.json
   def index
