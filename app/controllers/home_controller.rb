@@ -239,9 +239,18 @@ class HomeController < ApplicationController
   # ======================================================
 
   def orders
-    ds = Date.today.beginning_of_day
-    @r_orders = Order.where("store_id = 1 AND created_at >= :time", {:time => ds})
-    @g_orders = Order.where("store_id > 1 AND created_at >= :time", {:time => ds})
+    if params[:date]
+      @date = Date.parse params[:date]
+    else
+      @date = Date.today
+    end
+
+    st = @date.beginning_of_day
+    en = @date.end_of_day
+
+    @g_orders = Order.where("store_id = 1 AND created_at >= :st AND created_at <= :en", {:st => st, :en => en})
+    @r_orders = Order.where("store_id > 1 AND created_at >= :st AND created_at <= :en", {:st => st, :en => en})
+    @tickets = Ticket.where("created_at >= :st AND created_at <= :en", {:st => st, :en => en})
   end
 
   def handle_order
@@ -259,8 +268,14 @@ class HomeController < ApplicationController
     end
   end
 
-  def order_modal
-    @order = Order.find(params[:id])
+  def handle_ticket
+    @ticket = Ticket.find(params[:id])
+    if params[:handled] == "true"
+      @ticket.handled = true
+    else
+      @ticket.handled = false
+    end
+    @ticket.save
 
     respond_to do |format|
       format.js
@@ -268,9 +283,12 @@ class HomeController < ApplicationController
     end
   end
 
-  def my_orders
-    if current_user.nil?
-      redirect_to home_index_path
+  def order_modal
+    @order = Order.find(params[:id])
+
+    respond_to do |format|
+      format.js
+      format.mjs
     end
   end
 

@@ -34,8 +34,8 @@ Mfm::Application.routes.draw do
   match 'home/paypal_cancel'          => 'home#paypal_cancel',      :as => :home_paypal_cancel
   match 'home/orders'                 => 'home#orders',             :as => :home_orders
   match 'home/handle_order/:id'       => 'home#handle_order',       :as => :home_handle_order
+  match 'home/handle_ticket/:id'      => 'home#handle_ticket',      :as => :home_handle_ticket
   match 'home/order_modal/:id'        => 'home#order_modal',        :as => :home_order_modal
-  match 'home/my_orders'              => 'home#my_orders',          :as => :home_my_orders
 
   match 'home/phone_start'            => 'home#phone_start',        :as => :home_phone_start
   match 'home/phone_end'              => 'home#phone_end',          :as => :home_phone_end

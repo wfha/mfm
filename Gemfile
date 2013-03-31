@@ -23,6 +23,7 @@ end
 
 gem 'jquery-rails', '~> 2.1.4'
 gem 'jquery_mobile_rails', '~> 1.3.0'
+gem 'bootstrap-datepicker-rails', '~> 1.0.0.2'
 
 # Deployment
 gem 'unicorn', '~> 4.4.0'

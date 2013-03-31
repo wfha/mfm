@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap-datepicker/core
 //= require_directory .
 //= require_directory ./lib/gmaps4rails
 //= require_directory ./lib/polyfill

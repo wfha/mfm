@@ -51,3 +51,17 @@ $ ->
   # =================================================================
   $(".cfc").click ->
     $(this).hide().siblings(".cfc").show()
+
+
+  # home/orders page
+  # =================================================================
+  $("#datepicker").datepicker {
+    "format" : "yyyy-mm-dd",
+    "weekStart" : 1,
+    "autoclose" : true
+  }
+
+  $("#dateupdater").click ->
+    $(this).attr "href", $(this).attr("href") + "?date=" + $("#datepicker").val()
+
+

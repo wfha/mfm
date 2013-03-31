@@ -1,6 +1,35 @@
 <div class="well">
+  <div class="pull-right">
+    <input type="text" id='datepicker' value="<%= @date.strftime "%F" %>" style="width:90px;margin-top:8px;" />
+    <%= link_to "Update", {}, :class => "btn btn-primary", :id => "dateupdater" %>
+  </div>
+  <h2>Tickets and Orders Summary</h2>
+  <br/>
 
-  <h1>Grocery Orders:</h1>
+  <h4>Tickets:</h4>
+  <table class="table table-hover table-bordered">
+    <tr>
+      <th>ID</th>
+      <th>Status</th>
+      <th>Email</th>
+      <th>Content</th>
+      <th>Action</th>
+    </tr>
+    <% @tickets.each do |t| %>
+        <tr<% unless t.handled %> style="background-color: #ff0000;"<% end %> id="ticket_<%= t.id %>">
+          <td><%= t.id %></td>
+          <td>Handled</td>
+          <td><%= t.email %></td>
+          <td><%= t.content %></td>
+          <td>
+            <%= link_to "Handle", home_handle_ticket_path(t, handled: true), remote: true, disable_with: "......", class: "btn btn-primary" %>
+            <%= link_to "Undo", home_handle_ticket_path(t, handled: false), remote: true, disable_with: "......", class: "btn btn-primary" %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+
+  <h4>Grocery Orders:</h4>
   <table class='table table-hover table-bordered'>
     <tr>
       <th>ID</th>
@@ -13,9 +42,8 @@
       <th>Note</th>
       <th>Action</th>
     </tr>
-
     <% @g_orders.each do |order| %>
-        <tr<% unless order.handled %> style="background-color: #FFFFFF;"<% end %> id="order_<%= order.id %>">
+        <tr<% unless order.handled %> style="background-color: #ff0000;"<% end %> id="order_<%= order.id %>">
           <td><%= order.id %></td>
           <td><%= order.cart.delivery_type %>@<%= order.store.name %></td>
           <td><%= order.user.phone %> / <%= order.user.firstname %> <%= order.user.lastname %></td>
@@ -33,7 +61,7 @@
     <% end %>
   </table>
 
-  <h1>Restaurant Orders:</h1>
+  <h4>Restaurant Orders:</h4>
   <table class='table table-hover table-bordered'>
     <tr>
       <th>ID</th>
@@ -46,9 +74,8 @@
       <th>Note</th>
       <th>Action</th>
     </tr>
-
     <% @r_orders.each do |order| %>
-        <tr<% unless order.handled %> style="background-color: #FFFFFF;"<% end %> id="order_<%= order.id %>">
+        <tr<% unless order.handled %> style="background-color: #ff0000;"<% end %> id="order_<%= order.id %>">
           <td><%= order.id %></td>
           <td><%= order.cart.delivery_type %>@<%= order.store.name %></td>
           <td><%= order.user.phone %> / <%= order.user.firstname %> <%= order.user.lastname %></td>
