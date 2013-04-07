@@ -17,12 +17,13 @@ module CustomValidators
   class Name
     def self.regex
       # By Feng Wan
-      # 2 - 20 letters only
-      /^[a-zA-Z]{2,20}$/
+      # 2 - 50 letters only
+      # Following Facebook
+      /^[a-zA-Z]{2,50}$/
     end
 
     def self.hint
-      "should be 2-20 of a-Z"
+      "should be 2-50 of a-Z"
     end
   end
 

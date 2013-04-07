@@ -93,9 +93,9 @@ class OrdersController < ApplicationController
           format.mobile { redirect_to @order.paypal_url }
         else
           Order.delay.to_fax(@order.id, p[:card_number], p[:card_verification], p[:card_expires_on])
-          Order.delay(run_at: 4.minutes.from_now).to_phone(@order.id)
-          Order.delay(run_at: 8.minutes.from_now).to_phone(@order.id)
-          Order.delay(run_at: 12.minutes.from_now).to_phone(@order.id)
+          Order.delay(run_at: 3.minutes.from_now).to_phone(@order.id)
+          #Order.delay(run_at: 5.minutes.from_now).to_phone(@order.id)
+          #Order.delay(run_at: 7.minutes.from_now).to_phone(@order.id)
 
           format.html   { redirect_to @order, notice: 'Order was successfully created.' }
           format.mobile { redirect_to @order, notice: 'Order was successfully created.' }

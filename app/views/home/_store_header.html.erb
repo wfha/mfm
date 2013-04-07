@@ -1,3 +1,12 @@
+<% content_for :facebook_head do %>
+    <%= tag :meta, property: "fb:app_id", content: "450339078377328"  %>
+    <%= tag :meta, property: "og:type", content: "mealsforme:store"  %>
+    <%= tag :meta, property: "og:url", content: home_store_good_url(@store)  %>
+    <%= tag :meta, property: "og:title", content: @store.name  %>
+    <%= tag :meta, property: "og:image", content: request.protocol + request.host + @store.avatar_url.to_s  %>
+    <%= tag :meta, property: "og:site_name", content: "Meals4.Me"  %>
+<% end %>
+
 <div class="well" xmlns="http://www.w3.org/1999/html">
   <div class="row-fluid">
     <div class="span3">

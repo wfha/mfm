@@ -12,7 +12,7 @@ class Ability
       can [:type, :destroy], Cart
       can [:create, :destroy], CartItem
       can [:create], Ticket
-      can [:create], Order
+      can [:create, :read], Order
     end
 
     #can :read, :all                   # allow everyone to read everything

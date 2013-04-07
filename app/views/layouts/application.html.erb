@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= yield :facebook_head %>
 </head>
 <body>
 
@@ -30,6 +31,8 @@
               <li class=""><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
           <% else %>
               <li id="sign_in"><%= link_to 'Sign in', new_user_session_path %></li>
+              <li id="sign_in"><%= link_to 'With Facebook', user_omniauth_authorize_path(:facebook) %></li>
+              <li id="sign_in"><%= link_to 'With Twitter', user_omniauth_authorize_path(:twitter) %></li>
               <li id="sign_up"><%= link_to 'Sign up', new_user_registration_path %></li>
           <% end %>
         </ul>
@@ -41,6 +44,9 @@
 <!-- Body
 ================================================== -->
 <div class="container">
+
+  <!-- Nav Icons
+  ================================================== -->
   <div id="sites_nav">
     <a href="http://howdy.tamu.edu" class="sni icons_sites_nav-tamu_grey_40x40" target="_blank"></a>
     <a href="http://calendar.tamu.edu" class="sni icons_sites_nav-tamu_calendar_40x40" target="_blank"></a>
@@ -103,7 +109,7 @@
   </div>
 
   <!-- Corner
- ================================================== -->
+  ================================================== -->
   <div id="corner">
     <div class="navbar navbar-inverse navbar-fixed-bottom">
       <div class="navbar-inner">

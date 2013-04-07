@@ -12,43 +12,59 @@
       <% end %>
     </div>
     <div class="span3">
-        <b><%= Time.now.strftime("%Y-%m-%d, %A") %></b>
+      <b><%= Time.now.strftime("%Y-%m-%d, %A") %></b>
       <div id="weather"></div>
     </div>
   </div>
+</div>
 
-  <ul class="thumbnails">
-    <li class="span4">
-      <div class="thumbnail index_img_wrap">
-        <%= link_to home_stores_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
-            <%= image_tag "/assets/restaurant_hub.jpg" %>
-            <h3>Restaurant Hub</h3>
-        <% end %>
-      </div>
-    </li>
-    <li class="span4">
-      <div class="thumbnail index_img_wrap">
-        <%= link_to home_delivery_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
-            <%= image_tag "/assets/restaurant_delivery.jpg" %>
-            <h3 style="background: #154ecd;box-shadow: inset 0px 1px 2px #154ecd, 0px 1px 0px white;">Restaurant Delivery</h3>
-        <% end %>
-      </div>
-    </li>
-    <li class="span4">
-      <div class="thumbnail index_img_wrap">
-        <%= link_to home_coupons_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
-            <%= image_tag "/assets/restaurant_coupons.jpg" %>
-            <h3 style="background: #32cd32;box-shadow: inset 0px 1px 2px #32cd32, 0px 1px 0px white;">Restaurant Coupons</h3>
-        <% end %>
-      </div>
-    </li>
-    <!--<li class="span4">-->
+<div class="row-fluid">
+  <div class="span8">
+    <ul class="thumbnails">
+      <li class="span4">
+        <div class="thumbnail index_img_wrap">
+          <%= link_to home_stores_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
+              <%= image_tag "/assets/restaurant_hub.jpg" %>
+              <h3>Restaurant <br/> Hub</h3>
+          <% end %>
+        </div>
+      </li>
+      <li class="span4">
+        <div class="thumbnail index_img_wrap">
+          <%= link_to home_delivery_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
+              <%= image_tag "/assets/restaurant_delivery.jpg" %>
+              <h3 style="background: #154ecd;box-shadow: inset 0px 1px 2px #154ecd, 0px 1px 0px white;">Restaurant <br/> Delivery</h3>
+          <% end %>
+        </div>
+      </li>
+      <li class="span4">
+        <div class="thumbnail index_img_wrap">
+          <%= link_to home_coupons_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
+              <%= image_tag "/assets/restaurant_coupons.jpg" %>
+              <h3 style="background: #32cd32;box-shadow: inset 0px 1px 2px #32cd32, 0px 1px 0px white;">Restaurant <br/> Coupons</h3>
+          <% end %>
+        </div>
+      </li>
+      <!--<li class="span4">-->
       <!--<div class="thumbnail index_img_wrap">-->
-        <!--<%= link_to home_grocery_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>-->
-            <!--<%= image_tag "/assets/grocery_delivery.jpg" %>-->
-            <!--<h3 style="background: #32cd32;box-shadow: inset 0px 1px 2px #32cd32, 0px 1px 0px white;">Grocery Delivery</h3>-->
-        <!--<% end %>-->
+      <!--<%= link_to home_grocery_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>-->
+          <!--<%= image_tag "/assets/grocery_delivery.jpg" %>-->
+          <!--<h3 style="background: #32cd32;box-shadow: inset 0px 1px 2px #32cd32, 0px 1px 0px white;">Grocery Delivery</h3>-->
+          <!--<% end %>-->
       <!--</div>-->
-    <!--</li>-->
-  </ul>
+      <!--</li>-->
+    </ul>
+  </div>
+  <div class="span4 well" style="background: #ffffff;padding: 10px;">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=450339078377328";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-like-box" data-href="https://www.facebook.com/pages/meals4me/149705428516213"
+         data-width="400" data-height="490" data-border-color="#FFFFFF" data-show-faces="true" data-stream="true" data-header="false"></div>
+  </div>
 </div>

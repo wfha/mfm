@@ -1,0 +1,12 @@
+// Place all the styles related to the omniauth_callbacks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// set a fluid width for Facebook's social plugins
+.fb-like-box, .fb-like-box > span[style], .fb_iframe_widget iframe[style] {
+  width: 100% !important;
+  border: none;
+}
+
+
+
