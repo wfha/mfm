@@ -2,10 +2,34 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// url: /home/index
 // set a fluid width for Facebook's social plugins
 .fb-like-box, .fb-like-box > span[style], .fb_iframe_widget iframe[style] {
   width: 100% !important;
   border: none;
+}
+
+// url: /users/sign_in
+// set styles for social media sign in
+#social_media_sign_in {
+  border-left: 5px solid $orange;
+
+  a {
+    text-decoration:none;
+    display:block;
+    color: #ffffff;
+    font-weight: bold;
+    width: 220px;
+    height:40px;
+    line-height: 40px;
+    margin: 0px 0px 20px 20px;
+
+    img {
+      width: 36px;
+      height: 36px;
+      margin-right:10px;
+    }
+  }
 }
 
 

@@ -4,14 +4,21 @@
       <%= image_tag "/assets/mfm_logo.png" %>
       <h3>Get your meals online! - College Station</h3>
     </div>
-    <div class="span3">
+    <div class="span2">
       <%= link_to "https://chrome.google.com/webstore/detail/meals4me/miinanihaigjbhiekjadnmagbfcmcmdp", target: "_blank", style: "text-decoration: none;" do %>
-          <%= image_tag("/assets/mfm_chrome.png", style: "width: 160px; height: 120px;") %>
+          <%= image_tag("/assets/mfm_chrome_260x200.png", style: "width: 160px; height: 120px;") %>
           <br/>
-          <span class="badge badge-important">Get Meals4.Me on Chrome!</span>
+          <span class="badge badge-important">Meals4.Me on Chrome!</span>
       <% end %>
     </div>
-    <div class="span3">
+    <div class="span2">
+      <%= link_to "https://www.facebook.com/pages/meals4me/149705428516213", target: "_blank", style: "text-decoration: none;" do %>
+          <%= image_tag("/assets/mfm_facebook_260x200.png", style: "width: 160px; height: 120px;") %>
+          <br/>
+          <span class="badge badge-info">Meals4.Me on Facebook!</span>
+      <% end %>
+    </div>
+    <div class="span2">
       <b><%= Time.now.strftime("%Y-%m-%d, %A") %></b>
       <div id="weather"></div>
     </div>
@@ -65,6 +72,6 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
     <div class="fb-like-box" data-href="https://www.facebook.com/pages/meals4me/149705428516213"
-         data-width="400" data-height="490" data-border-color="#FFFFFF" data-show-faces="true" data-stream="true" data-header="false"></div>
+         data-width="400" data-height="510" data-border-color="#FFFFFF" data-show-faces="true" data-stream="true" data-header="false"></div>
   </div>
 </div>

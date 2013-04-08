@@ -1,20 +1,42 @@
 <div class="row-fluid">
-  <div class="span4 well">
-    <%= image_tag "/assets/mfm_logo.png" %>
-    <br/>
-    <h4>Sign in</h4>
-    <br/>
+  <div class="span6 well">
+    <table width="100%">
+      <tr>
+        <th colspan="2">
+          <%= image_tag "/assets/mfm_logo.png" %>
+          <br/>
+          <h3>Sign In with</h3>
+        </th>
+      </tr>
+      <tr>
+        <td width="50%">
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),
+                              html: { class: "hide_input_label" }) do |f| %>
+              <%= f.error_notification %>
+              <%= f.input :email, :placeholder => "Email" %>
+              <%= f.input :password, :placeholder => "Password" %>
+              <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => "Remember me" %>
+              <%= f.button :submit, "Sign in", :class => "btn btn-primary", :disable_with => "Please wait..." %>
+          <% end %>
+        </td>
+        <td width="50%" id="social_media_sign_in">
+          <%= link_to user_omniauth_authorize_path(:facebook), style: "background-color: #3b5998;" do %>
+              <%= image_tag '/assets/facebook_100x100.png' %>
+              Sign in with Facebook
+          <% end %>
+          <!--<%= link_to user_omniauth_authorize_path(:facebook), style: "background-color: #d84a38;" do %>-->
+              <!--<%= image_tag '/assets/google_100x100.png' %>-->
+              <!--Sign in with Google+-->
+          <!--<% end %>-->
+          <!--<%= link_to user_omniauth_authorize_path(:facebook), style: "background-color: #29c5f6;" do %>-->
+              <!--<%= image_tag '/assets/twitter_100x100.png' %>-->
+              <!--Sign in with Twitter-->
+          <!--<% end %>-->
+        </td>
+      </tr>
+    </table>
 
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),
-                        html: { class: "hide_input_label" }) do |f| %>
-        <%= f.error_notification %>
-        <%= f.input :email, :placeholder => "Email" %>
-        <%= f.input :password, :placeholder => "Password" %>
-        <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => "Remember me" %>
-        <br/>
-        <%= f.button :submit, "Sign in", :class => "btn btn-primary", :disable_with => "Please wait..." %>
-    <% end %>
-
+    <br/><br/>
     <%= render "users/shared/links" %>
   </div>
 </div>

@@ -31,9 +31,13 @@
               <li class=""><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
           <% else %>
               <li id="sign_in"><%= link_to 'Sign in', new_user_session_path %></li>
-              <li id="sign_in"><%= link_to 'With Facebook', user_omniauth_authorize_path(:facebook) %></li>
-              <li id="sign_in"><%= link_to 'With Twitter', user_omniauth_authorize_path(:twitter) %></li>
               <li id="sign_up"><%= link_to 'Sign up', new_user_registration_path %></li>
+              <li id="sign_in">
+                <%= link_to user_omniauth_authorize_path(:facebook), style: "background-color: #3b5998;" do %>
+                    <%= image_tag '/assets/facebook_100x100.png', width: 30, height: 30, style: "float:left;margin:-5px 5px 0px -10px;"  %>
+                    Sign in with Facebook
+                <% end %>
+              </li>
           <% end %>
         </ul>
       </div>

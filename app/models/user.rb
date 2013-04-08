@@ -95,7 +95,7 @@ class User < ActiveRecord::Base
   def apply_omniauth(omniauth)
     self.firstname = omniauth.info.first_name if firstname.blank?
     self.lastname = omniauth.info.last_name if lastname.blank?
-    self.phone = '1233215678'
+    self.phone = '0000000000'
 
     if omniauth.provider == 'facebook'
       self.email = omniauth.info.email if email.blank?
