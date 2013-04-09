@@ -24,10 +24,10 @@
               <%= image_tag '/assets/facebook_100x100.png' %>
               Sign in with Facebook
           <% end %>
-          <!--<%= link_to user_omniauth_authorize_path(:facebook), style: "background-color: #d84a38;" do %>-->
-              <!--<%= image_tag '/assets/google_100x100.png' %>-->
-              <!--Sign in with Google+-->
-          <!--<% end %>-->
+          <%= link_to user_omniauth_authorize_path(:google_oauth2), style: "background-color: #d84a38;" do %>
+              <%= image_tag '/assets/google_100x100.png' %>
+              Sign in with Google+
+          <% end %>
           <!--<%= link_to user_omniauth_authorize_path(:facebook), style: "background-color: #29c5f6;" do %>-->
               <!--<%= image_tag '/assets/twitter_100x100.png' %>-->
               <!--Sign in with Twitter-->

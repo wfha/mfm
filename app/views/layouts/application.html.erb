@@ -25,17 +25,32 @@
           <li id="stores">  <%= link_to 'Restaurant Hub', home_stores_path %>       </li>
           <li id="delivery"><%= link_to 'Restaurant Delivery', home_delivery_path %></li>
           <li id="coupons"> <%= link_to 'Restaurant Coupons', home_coupons_path %>  </li>
-          <li id="grocery"> <%= link_to 'Grocery Delivery', home_grocery_path %>    </li>
+          <!--<li id="grocery"> <%= link_to 'Grocery Delivery', home_grocery_path %>    </li>-->
           <% if user_signed_in? %>
-              <li class=""><%= link_to current_user.firstname[0] + ". " + current_user.lastname, edit_user_registration_path %></li>
+              <li class="">
+                <%= link_to edit_user_registration_path do %>
+                    <% if current_user.avatar.present? %>
+                        <%= image_tag current_user.avatar.to_s %>
+                    <% else %>
+                        <%= image_tag '/assets/blue_head_100x100.png' %>
+                    <% end %>
+                    <%= current_user.firstname[0].upcase + ". " + current_user.lastname.capitalize %>
+                <% end %>
+              </li>
               <li class=""><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
           <% else %>
               <li id="sign_in"><%= link_to 'Sign in', new_user_session_path %></li>
               <li id="sign_up"><%= link_to 'Sign up', new_user_registration_path %></li>
-              <li id="sign_in">
+              <li>
                 <%= link_to user_omniauth_authorize_path(:facebook), style: "background-color: #3b5998;" do %>
-                    <%= image_tag '/assets/facebook_100x100.png', width: 30, height: 30, style: "float:left;margin:-5px 5px 0px -10px;"  %>
-                    Sign in with Facebook
+                    <%= image_tag '/assets/facebook_100x100.png' %>
+                    Sign in w. Facebook
+                <% end %>
+              </li>
+              <li>
+                <%= link_to user_omniauth_authorize_path(:google_oauth2), style: "background-color: #d84a38;" do %>
+                    <%= image_tag '/assets/google_100x100.png' %>
+                    Sign in w. Google
                 <% end %>
               </li>
           <% end %>

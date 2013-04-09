@@ -22,6 +22,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       user = User.new
       user.apply_omniauth(omniauth)
+      user.skip_confirmation!     # Users registered with Facebook, Google don't need confirmation
       if user.save
         flash[:notice] = "Signed In Successfully!"
         sign_in_and_redirect(:user, user)
@@ -34,4 +35,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   alias_method :twitter, :all
   alias_method :facebook, :all
+  alias_method :google_oauth2, :all
 end

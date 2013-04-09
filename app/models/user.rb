@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :address, :address_attributes, :firstname, :lastname, :phone, :avatar
+                  :address, :address_attributes, :firstname, :lastname, :phone,
+                  :avatar, :avatar_cache, :remove_avatar  # carrierwave and rails_admin
 
   has_one :address, :as => :addressable
 
@@ -18,7 +19,13 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :address
 
-  #mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, AvatarUploader
+
+  # Validate the avatar picture
+  # =======================================================
+  #validates_presence_of   :avatar
+  #validates_integrity_of  :avatar
+  #validates_processing_of :avatar
 
   validates :email, presence: true, uniqueness: true,
             format: { with: CustomValidators::Email.regex, message: CustomValidators::Email.hint }
@@ -39,26 +46,22 @@ class User < ActiveRecord::Base
       user.provider = auth.provider
       user.uid = auth.uid
 
-      if auth.provider == "facebook"
+      if auth.provider == "facebook" || omniauth.provider == 'google_oauth2'
         user.oauth_token = auth.credentials.token
         user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-
         user.firstname = auth.info.first_name
         user.lastname = auth.info.last_name
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
         user.phone = '0000000000'
-
         user.save
       elsif auth.provider == "twitter"
         user.oauth_token = auth.credentials.token
-
         user.firstname = auth.info.name.split[0]
         user.lastname = auth.info.name.split[1]
         user.email = "guest_#{Time.now.to_i}#{rand(99)}@meals4.me"
         user.password = Devise.friendly_token[0,20]
         user.phone = '0000000000'
-
         user.save
       end
     end
@@ -97,9 +100,9 @@ class User < ActiveRecord::Base
     self.lastname = omniauth.info.last_name if lastname.blank?
     self.phone = '0000000000'
 
-    if omniauth.provider == 'facebook'
-      self.email = omniauth.info.email if email.blank?
-
+    if omniauth.provider == 'facebook' || omniauth.provider == 'google_oauth2'
+      self.email = omniauth.info.email if email.blank?       # Save Email
+      self.remote_avatar_url = omniauth.info.image           # Save Remote Picture
       authentications.build(
           :provider => omniauth.provider, :uid => omniauth.uid,
           :oauth_token => omniauth.credentials.token,

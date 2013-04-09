@@ -21,3 +21,8 @@ $ ->
     (ev) ->
       $(this).trigger('stopRumble')
   )
+
+  # Edit the width of file input
+  # File input width cannot be set in css for firefox, so has to use size=5
+  # Maybe due to carrierwave, input_html: {size: 5} doesn't work, so implement it in JS
+  $('input[type=file]').attr size: 5

@@ -1,6 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :new_ticket
 
+  def create
+    super
+    session[:omniauth] = nil unless @user.new_record?        # Clear omniauth in the session
+  end
+
   def update
     @user = User.find(current_user.id)
 
@@ -41,8 +46,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def create
-    super
-    session[:omniauth] = nil unless @user.new_record?
-  end
 end

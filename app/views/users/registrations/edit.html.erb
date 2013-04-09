@@ -5,6 +5,14 @@
     <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),
                         :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
         <%= f.error_notification %>
+
+        <% unless resource.avatar.present? %>
+            <div style="text-align: center;"><%= image_tag '/assets/blue_head_100x100.png' %></div>
+        <% end %>
+        <%= f.input :avatar, as: :image_preview, input_html: {preview_version: :small}, hint: "Use square image (width = height)." %>
+        <!--Maybe due to carrierwave, this doesn't work-->
+        <!--input_html: {size: 5}-->
+        <!--So implement it in js-->
         <%= f.input :email %>
         <%= f.input :firstname %>
         <%= f.input :lastname %>
