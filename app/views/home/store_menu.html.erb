@@ -75,7 +75,14 @@
 
   <div class="span4">
     <div class="well" id="side">
-      <div id="cart"><%= render @cart %></div>
+      <div id="cart">
+        <% if @cart %>
+            <%= render @cart %>
+        <% else %>
+            <%= image_tag "/assets/mfm_logo.png" %>
+            <h4>Your Cart Is Empty!</h4>
+        <% end %>
+      </div>
     </div>
   </div>
 </div><!--/row-->

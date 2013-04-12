@@ -3,48 +3,65 @@
     <%= tag :meta, property: "og:type", content: "mealsforme:store"  %>
     <%= tag :meta, property: "og:url", content: home_store_good_url(@store)  %>
     <%= tag :meta, property: "og:title", content: @store.name  %>
-    <%= tag :meta, property: "og:image", content: request.protocol + request.host + @store.avatar_url.to_s  %>
+    <% if Rails.env == "production" %>
+        <%= tag :meta, property: "og:image", content: @store.avatar_url.to_s  %>
+    <% else %>
+        <%= tag :meta, property: "og:image", content: request.protocol + request.host + @store.avatar_url.to_s  %>
+    <% end %>
     <%= tag :meta, property: "og:site_name", content: "Meals4.Me"  %>
 <% end %>
 
 <div class="well" xmlns="http://www.w3.org/1999/html">
   <div class="row-fluid">
-    <div class="span3">
-      <%= image_tag @store.avatar_url.to_s, style: "width:100%;" %>
-    </div>
-    <div class="span9">
-      <h4><%= @store.name %></h4>
+    <div class="span7">
       <table width="100%">
         <tr>
-          <td><b>Telephone:</b><br/><%= @store.phone %></td>
-          <td><b>Address:</b><br/><%= @store.address.address1 %></td>
-          <td><b>Tags:</b><br/><% @store.tags.each do |t| %><%= t.name %>,&nbsp;<% end %></td>
+          <td rowspan="4" width="26%" style="padding-right: 10px;">
+            <%= image_tag @store.avatar_url.to_s, style: "width:100%;margin-bottom:10px;" %>
+          </td>
+          <td colspan="2" width="74%">
+            <h4>
+              <%= @store.name %>
+              <%= link_to 'Back to Restaurant Hub', home_stores_path, style: "font-weight:normal;font-size:14px;", class: "pull-right" %>
+            </h4>
+          </td>
         </tr>
         <tr>
-          <td><b>Hours:</b><br/><% @store.hours.each do |h| %><%= h.desc %>: <%= h.open_at %> - <%= h.close_at %><br/><% end %></td>
-          <td><b>Delivery Policy:</b><br/>Within <%= @store.delivery_radius %> miles.</td>
-          <td><b>Payments:</b><br/><% @store.payments.each do |p| %><%= image_tag p.avatar_url(:small).to_s if p.avatar? %><% end %></td>
+          <td width="37%" style="font-size:12px;"><%= image_tag "/assets/icons_glyphish/gray/75-phone.png" %>&nbsp;&nbsp;<%= @store.phone %></td>
+          <td width="37%" style="font-size:12px;"><%= image_tag "/assets/icons_glyphish/gray/53-house.png" %>&nbsp;&nbsp;<%= @store.address.address1 %></td>
+        </tr>
+        <tr>
+          <td style="font-size:12px;"><%= image_tag "/assets/icons_glyphish/gray/feng-car.png", width: 30 %>Within <%= @store.delivery_radius %> miles.</td>
+          <td style="font-size:12px;"><%= image_tag "/assets/icons_glyphish/gray/192-credit-card.png" %><% @store.payments.each do |p| %><%= image_tag p.avatar_url(:small).to_s if p.avatar? %><% end %></td>
+        </tr>
+        <tr>
+          <td style="font-size:12px;"><%= image_tag "/assets/icons_glyphish/gray/15-tags.png" %>&nbsp;&nbsp;<% @store.tags.each do |t| %><%= t.name %>,&nbsp;<% end %></td>
+          <td style="font-size:12px;"><%= image_tag "/assets/icons_glyphish/gray/11-clock.png" %><% @store.hours.each do |h| %><%= h.desc %>: <%= h.open_at %> - <%= h.close_at %><br/><% end %></td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <div class="navbar" style="margin-bottom: 0px;">
+              <div class="navbar-inner">
+                <ul class="nav">
+                  <li id="store_overview"><%= link_to 'Home', home_store_overview_path %></li>
+                  <% if @store.has_good_dishes? %>
+                      <li id="store_good"><%= link_to 'Wt\'s Good', home_store_good_path %></li>
+                  <% end %>
+                  <li id="store_menu"><%= link_to 'Menu', home_store_menu_path %></li>
+                  <% if @store.has_effective_coupons? %>
+                      <li id="store_promo"><%= link_to 'Coupon', home_store_promo_path %></li>
+                  <% end %>
+                  <li id="store_review"><%= link_to 'Review', home_store_review_path %></li>
+                  <li id="store_info"><%= link_to 'Info', home_store_info_path %></li>
+                </ul>
+              </div>
+            </div>
+          </td>
         </tr>
       </table>
-
-      <%= link_to 'Back to Restaurant List', home_stores_path, style: "line-height: 40px;" %>
-
-      <div class="navbar">
-        <div class="navbar-inner">
-          <ul class="nav">
-            <li id="store_overview"><%= link_to 'Overview', home_store_overview_path %></li>
-            <% if @store.has_good_dishes? %>
-                <li id="store_good"><%= link_to 'What\'s Good', home_store_good_path %></li>
-            <% end %>
-            <li id="store_menu"><%= link_to 'Full Menu', home_store_menu_path %></li>
-            <% if @store.has_effective_coupons? %>
-                <li id="store_promo"><%= link_to 'Coupons!', home_store_promo_path %></li>
-            <% end %>
-            <li id="store_info"><%= link_to 'Store Info', home_store_info_path %></li>
-            <li id="store_review"><%= link_to 'Store Review', home_store_review_path %></li>
-          </ul>
-        </div>
-      </div>
+    </div>
+    <div class="span5">
+      <div class="fb-comments" data-href="http://meals4.me/home/store_overview/<%= @store.id %>" data-width="400" data-num-posts="3"></div>
     </div>
   </div>
 </div>

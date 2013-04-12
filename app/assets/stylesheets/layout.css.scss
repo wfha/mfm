@@ -19,13 +19,13 @@ h4 {color: $blue_mfm;}
   }
 }
 
-/* Navbar images
+/* Navbar images - Add picture in the fixed-top nav bar
 -------------------------------------------------- */
-.navbar .nav li a img {
+.navbar-fixed-top .nav li a img {
   width: 30px;
   height: 30px;
   float:left;
-  margin:-3px 5px 0px -10px;
+  margin:-3px 6px 0px -12px;
 }
 
 @import "icons_sites_nav/*.png";

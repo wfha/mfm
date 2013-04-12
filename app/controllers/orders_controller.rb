@@ -29,11 +29,18 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     if params[:store_id]
-      @cart = current_cart(params[:store_id])
+      @cart = current_cart(params[:store_id], false)
     elsif params[:cart_id]
       @cart = Cart.find(params[:cart_id])
     end
 
+    # Redirect if the cart is empty
+    unless @cart
+      redirect_to home_stores_url, notice: "Your Cart is Empty!"
+      return
+    end
+
+    # Redirect if the cart doesn't meet minimum
     if @cart.delivery_type == 'delivery' && @cart.total_price < @cart.store.delivery_minimum
       redirect_to home_stores_url, notice: "The order doesn't meet minimum!"
       return
@@ -86,7 +93,8 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        new_cart(@order.store_id)
+        # Clear the cart in the session
+        session.delete "cart_id_#{@order.store_id}"
 
         if @order.payment_type == 'paypal'
           format.html   { redirect_to @order.paypal_url }
@@ -102,7 +110,7 @@ class OrdersController < ApplicationController
           format.json   { render json: @order, status: :created, location: @order }
         end
       else
-        @cart = current_cart(@order.store_id)
+        @cart = current_cart(@order.store_id, false)
         @order.user.email = ""
 
         format.html   { render action: "new" }

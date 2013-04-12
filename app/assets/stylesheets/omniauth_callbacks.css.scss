@@ -9,6 +9,11 @@
   border: none;
 }
 
+.fb-comments, .fb-comments > span[style], .fb_iframe_widget iframe[style] {
+  width: 100% !important;
+  border: none;
+}
+
 // url: /users/sign_in
 // set styles for social media sign in
 #social_media_sign_in {
@@ -23,6 +28,8 @@
     height:40px;
     line-height: 40px;
     margin: 0px 0px 10px 20px;
+
+    @include rounded-corners(4px);
 
     img {
       width: 36px;

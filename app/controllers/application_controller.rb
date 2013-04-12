@@ -55,18 +55,14 @@ class ApplicationController < ActionController::Base
 
   # ========== Shopping Cart ==========
 
-  def current_cart(store_id)
+  def current_cart(store_id, create)
     Cart.find(session["cart_id_#{store_id}"])
   rescue ActiveRecord::RecordNotFound
-    store = Store.find(store_id)
-    cart = Cart.create(:store_id => store_id, :delivery_fee => store.delivery_fee)
-    session["cart_id_#{store_id}"] = cart.id
-    cart
-  end
-
-  def new_cart(store_id)
-    store = Store.find(store_id)
-    cart = Cart.create(:store_id => store_id, :delivery_fee => store.delivery_fee)
-    session["cart_id_#{store_id}"] = cart.id
+    if create
+      store = Store.find(store_id)
+      cart = Cart.create(:store_id => store_id, :delivery_fee => store.delivery_fee)
+      session["cart_id_#{store_id}"] = cart.id
+      cart
+    end
   end
 end

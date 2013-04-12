@@ -1,24 +1,24 @@
 <div class="row-fluid">
   <div class="span12 well">
-    <div class="span6">
+    <div class="span5">
       <%= image_tag "/assets/mfm_logo.png" %>
-      <h3>Get your meals online! - College Station</h3>
+      <h4>Get your meals online! - College Station</h4>
     </div>
     <div class="span2">
       <%= link_to "https://chrome.google.com/webstore/detail/meals4me/miinanihaigjbhiekjadnmagbfcmcmdp", target: "_blank", style: "text-decoration: none;" do %>
           <%= image_tag("/assets/mfm_chrome_260x200.png", style: "width: 160px; height: 120px;") %>
           <br/>
-          <span class="badge badge-important">Meals4.Me on Chrome!</span>
+          <span class="badge badge-important">Meals4.Me @ Chrome</span>
       <% end %>
     </div>
     <div class="span2">
       <%= link_to "https://www.facebook.com/pages/meals4me/149705428516213", target: "_blank", style: "text-decoration: none;" do %>
           <%= image_tag("/assets/mfm_facebook_260x200.png", style: "width: 160px; height: 120px;") %>
           <br/>
-          <span class="badge badge-info">Meals4.Me on Facebook!</span>
+          <span class="badge badge-info">Meals4.Me @ Facebook</span>
       <% end %>
     </div>
-    <div class="span2">
+    <div class="span3">
       <b><%= Time.now.strftime("%Y-%m-%d, %A") %></b>
       <div id="weather"></div>
     </div>
@@ -32,7 +32,7 @@
         <div class="thumbnail index_img_wrap">
           <%= link_to home_stores_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
               <%= image_tag "/assets/restaurant_hub.jpg" %>
-              <h3>Restaurant <br/> Hub</h3>
+              <h4>Restaurant <br/> Hub</h4>
           <% end %>
         </div>
       </li>
@@ -40,7 +40,7 @@
         <div class="thumbnail index_img_wrap">
           <%= link_to home_delivery_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
               <%= image_tag "/assets/restaurant_delivery.jpg" %>
-              <h3 style="background: #154ecd;box-shadow: inset 0px 1px 2px #154ecd, 0px 1px 0px white;">Restaurant <br/> Delivery</h3>
+              <h4 style="background: #154ecd;box-shadow: inset 0px 1px 2px #154ecd, 0px 1px 0px white;">Restaurant <br/> Delivery</h4>
           <% end %>
         </div>
       </li>
@@ -48,7 +48,7 @@
         <div class="thumbnail index_img_wrap">
           <%= link_to home_coupons_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
               <%= image_tag "/assets/restaurant_coupons.jpg" %>
-              <h3 style="background: #32cd32;box-shadow: inset 0px 1px 2px #32cd32, 0px 1px 0px white;">Restaurant <br/> Coupons</h3>
+              <h4 style="background: #32cd32;box-shadow: inset 0px 1px 2px #32cd32, 0px 1px 0px white;">Restaurant <br/> Coupons</h4>
           <% end %>
         </div>
       </li>
@@ -56,22 +56,32 @@
       <!--<div class="thumbnail index_img_wrap">-->
       <!--<%= link_to home_grocery_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>-->
           <!--<%= image_tag "/assets/grocery_delivery.jpg" %>-->
-          <!--<h3 style="background: #32cd32;box-shadow: inset 0px 1px 2px #32cd32, 0px 1px 0px white;">Grocery Delivery</h3>-->
+          <!--<h4 style="background: #32cd32;box-shadow: inset 0px 1px 2px #32cd32, 0px 1px 0px white;">Grocery Delivery</h4>-->
           <!--<% end %>-->
       <!--</div>-->
       <!--</li>-->
     </ul>
+
+    <div class="well">
+      <table width="100%">
+        <tr>
+          <th width="60%">
+            <%= image_tag "/assets/joey_500x250.gif", style: "width:100%;" %>
+          </th>
+          <th width="40%">
+            <h2>Do you share?</h2>
+            <br/>
+            <%= link_to "Share<h4>Meals4.Me</h4>on Facebook".html_safe, "javascript:;", class: "btn btn-primary", style: "width: 150px;",
+                        onclick: "window.open('https://www.facebook.com/sharer/sharer.php?u=http://meals4.me','Share','height=300, width=500, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');" %>
+            <br/>
+            <h4>One click to support us.</h4>
+          </th>
+        </tr>
+      </table>
+    </div>
   </div>
   <div class="span4 well" style="background: #ffffff;padding: 10px;">
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=450339078377328";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
     <div class="fb-like-box" data-href="https://www.facebook.com/pages/meals4me/149705428516213"
-         data-width="400" data-height="510" data-border-color="#FFFFFF" data-show-faces="true" data-stream="true" data-header="false"></div>
+         data-width="400" data-height="540" data-border-color="#FFFFFF" data-show-faces="true" data-stream="true" data-header="false"></div>
   </div>
 </div>

@@ -40,19 +40,17 @@
               <li class=""><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
           <% else %>
               <li id="sign_in"><%= link_to 'Sign in', new_user_session_path %></li>
+              <li>
+                <%= link_to user_omniauth_authorize_path(:facebook), style: "background-color: #3c5a98;" do %>
+                    <%= image_tag '/assets/facebook_100x100.png' %> Sign in
+                <% end %>
+              </li>
+              <li>
+                <%= link_to user_omniauth_authorize_path(:google_oauth2), style: "background-color: #dd4c39;" do %>
+                    <%= image_tag '/assets/google_100x100.png' %> Sign in
+                <% end %>
+              </li>
               <li id="sign_up"><%= link_to 'Sign up', new_user_registration_path %></li>
-              <li>
-                <%= link_to user_omniauth_authorize_path(:facebook), style: "background-color: #3b5998;" do %>
-                    <%= image_tag '/assets/facebook_100x100.png' %>
-                    Sign in w. Facebook
-                <% end %>
-              </li>
-              <li>
-                <%= link_to user_omniauth_authorize_path(:google_oauth2), style: "background-color: #d84a38;" do %>
-                    <%= image_tag '/assets/google_100x100.png' %>
-                    Sign in w. Google
-                <% end %>
-              </li>
           <% end %>
         </ul>
       </div>
@@ -98,6 +96,12 @@
 
   <!--<h1 style="color: red;margin-bottom: 30px;">The site is BETA version, please don't order now!</h1>-->
   <!--<h1 style="color: red;margin-bottom: 30px;">We are coming soon!</h1>-->
+  <!--<div style="background: #ffffff;">-->
+    <!--<%= session.inspect %>-->
+    <!--<br/>-->
+    <!--<%= @cart %>-->
+  <!--</div>-->
+
   <%= yield %>
 
   <!-- Footer
@@ -135,7 +139,7 @@
         <a class="brand">&nbsp;&nbsp;&nbsp;Talk to us: </a>
         <ul class="nav">
           <li><%= link_to_function image_tag('/assets/icons_glyphish/white/09-chat-2.png'), '$("#modal_wrap_ticket .modal").modal("show")' %></li>
-          <li><%= link_to image_tag('/assets/icons_glyphish/white/210-twitterbird.png'), APP_CONFIG["twitter_page"], target: '_blank' %></li>
+          <!--<li><%= link_to image_tag('/assets/icons_glyphish/white/210-twitterbird.png'), APP_CONFIG["twitter_page"], target: '_blank' %></li>-->
           <li><%= link_to image_tag('/assets/icons_glyphish/white/208-facebook.png'), APP_CONFIG["facebook_page"], target: '_blank' %></li>
         </ul>
       </div>

@@ -38,7 +38,7 @@ class CartItemsController < ApplicationController
   # POST /cart_items.json
   def create
     store_id = params[:store_id].to_i
-    @cart = current_cart(store_id)
+    @cart = current_cart(store_id, true)
 
     if params[:dish_id]
       dish = Dish.find(params[:dish_id])

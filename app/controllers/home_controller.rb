@@ -25,7 +25,7 @@ class HomeController < ApplicationController
 
   def grocery
     @store = Store.find(1)
-    @cart = current_cart(@store.id)
+    @cart = current_cart(@store.id, false)
     @dishes = Dish.joins(:dish_features, :category => :menu)
     .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
     @store_still_open = @store.still_open?
@@ -51,7 +51,7 @@ class HomeController < ApplicationController
   # ======================================================
   def store_overview
     @store = Store.find(params[:id])
-    @cart = current_cart(@store.id)
+    @cart = current_cart(@store.id, false)
     @store_still_open = @store.still_open?
     @menu_still_open = true
     @can_order_online = @store.can_order_online?
@@ -62,7 +62,7 @@ class HomeController < ApplicationController
 
   def store_info
     @store = Store.find(params[:id])
-    @cart = current_cart(@store.id)
+    @cart = current_cart(@store.id, false)
     @store_still_open = @store.still_open?
     @menu_still_open = true
     @can_order_online = @store.can_order_online?
@@ -74,7 +74,7 @@ class HomeController < ApplicationController
 
   def store_good
     @store = Store.find(params[:id])
-    @cart = current_cart(@store.id)
+    @cart = current_cart(@store.id, false)
     @dishes = Dish.joins(:dish_features, :category => :menu)
     .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
     @store_still_open = @store.still_open?
@@ -84,7 +84,7 @@ class HomeController < ApplicationController
 
   def store_menu
     @store = Store.find(params[:id])
-    @cart = current_cart(@store.id)
+    @cart = current_cart(@store.id, false)
     @store_still_open = @store.still_open?
     @menu_still_open = true
     @can_order_online = @store.can_order_online?
@@ -92,7 +92,7 @@ class HomeController < ApplicationController
 
   def store_promo
     @store = Store.find(params[:id])
-    @cart = current_cart(@store.id)
+    @cart = current_cart(@store.id, false)
     @store_still_open = @store.still_open?
     @menu_still_open = true
     @can_order_online = @store.can_order_online?
@@ -100,7 +100,7 @@ class HomeController < ApplicationController
 
   def store_review
     @store = Store.find(params[:id])
-    @cart = current_cart(@store.id)
+    @cart = current_cart(@store.id, false)
     @store_still_open = @store.still_open?
     @menu_still_open = true
     @can_order_online = @store.can_order_online?

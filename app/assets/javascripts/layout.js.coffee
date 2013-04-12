@@ -22,7 +22,26 @@ $ ->
       $(this).trigger('stopRumble')
   )
 
+
   # Edit the width of file input
   # File input width cannot be set in css for firefox, so has to use size=5
   # Maybe due to carrierwave, input_html: {size: 5} doesn't work, so implement it in JS
   $('input[type=file]').attr size: 5
+
+
+
+  # Facebook SDK
+  # =============================================================================
+
+  $('body').prepend('<div id="fb-root"></div>')
+  $.ajax
+    url: "#{window.location.protocol}//connect.facebook.net/en_US/all.js"
+    dataType: 'script'
+    cache: true
+
+window.fbAsyncInit = ->
+  FB.init
+    appId: 450339078377328
+    xfbml: 1
+
+

@@ -34,18 +34,19 @@
 }
 
 .index_img_wrap {
-  h3 {
-    text-align: center;
-    display: inline-block;
-    width: 100%;
-    padding: 10px;
-    margin-left: -10px;
-    color: $white;
-    background: $orange;
-    font-weight: bold;
-    box-shadow: inset 0px 1px 2px $purple, 0px 1px 0px $white;
+  a {
+    h4 {
+      text-align: center;
+      display: inline-block;
+      width: 90%;
+      padding:8px;
+      color: $white;
+      background: $orange;
+      font-weight: bold;
+      box-shadow: inset 0px 1px 2px $purple, 0px 1px 0px $white;
 
-    @include rounded-corners(4px);
+      @include rounded-corners(4px);
+    }
   }
 }
 

@@ -58,4 +58,10 @@ class Store < ActiveRecord::Base
   def can_reserve_online?
     services.include?(Service.find_by_name("reserve_online"))
   end
+
+  # Generate human and seo friendly url
+  # ======================================================
+  def to_param
+    "#{id} #{name}".parameterize
+  end
 end
