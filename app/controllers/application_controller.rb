@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     if create
       store = Store.find(store_id)
-      cart = Cart.create(:store_id => store_id, :delivery_fee => store.delivery_fee)
+      cart = Cart.create(store_id: store_id, delivery_fee: store.delivery_fee, delivery_type: session["cart_delivery_type_#{store_id}"])
       session["cart_id_#{store_id}"] = cart.id
       cart
     end

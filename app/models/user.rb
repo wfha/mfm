@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
                   :address, :address_attributes, :firstname, :lastname, :phone,
                   :avatar, :avatar_cache, :remove_avatar  # carrierwave and rails_admin
 
+  # Condition to validate phone
+  attr_accessor :validate_phone
+
   has_one :address, :as => :addressable
 
   has_many :orders
@@ -35,7 +38,7 @@ class User < ActiveRecord::Base
             format: { with: CustomValidators::Name.regex, message: CustomValidators::Name.hint }
   validates :password, presence: true, confirmation: true, :on => :create,
             format: { with: CustomValidators::Password.regex, message: CustomValidators::Password.hint }, :if => :password_required?
-  validates :phone, presence: true
+  validates :phone, presence: true, :if => :phone_required?
 
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)
@@ -53,7 +56,6 @@ class User < ActiveRecord::Base
         user.lastname = auth.info.last_name
         user.email = auth.info.email
         user.password = Devise.friendly_token[0,20]
-        user.phone = '0000000000'
         user.save
       elsif auth.provider == "twitter"
         user.oauth_token = auth.credentials.token
@@ -61,7 +63,6 @@ class User < ActiveRecord::Base
         user.lastname = auth.info.name.split[1]
         user.email = "guest_#{Time.now.to_i}#{rand(99)}@meals4.me"
         user.password = Devise.friendly_token[0,20]
-        user.phone = '0000000000'
         user.save
       end
     end
@@ -82,6 +83,14 @@ class User < ActiveRecord::Base
     (authentications.empty? || !password.blank?) && super
   end
 
+  def phone_required?
+    if validate_phone
+      true
+    else
+      false
+    end
+  end
+
   def facebook
     oauth_token = authentications.find_by_provider("facebook").oauth_token
     @facebook ||= Koala::Facebook::API.new(oauth_token)
@@ -98,7 +107,6 @@ class User < ActiveRecord::Base
   def apply_omniauth(omniauth)
     self.firstname = omniauth.info.first_name if firstname.blank?
     self.lastname = omniauth.info.last_name if lastname.blank?
-    self.phone = '0000000000'
 
     if omniauth.provider == 'facebook' || omniauth.provider == 'google_oauth2'
       self.email = omniauth.info.email if email.blank?       # Save Email

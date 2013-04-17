@@ -9,16 +9,24 @@
             <% if params[:controller] == "orders" %>
                 <% if cart.delivery_type == 'delivery' %>
                     <%= link_to 'Delivery', "javascript:;", class: 'active' %>
-                <% else %>
+                <% elsif cart.delivery_type == 'pick_up' %>
                     <%= link_to 'Pick Up', "javascript:;", class: 'active' %>
+                <% elsif cart.delivery_type == 'express' %>
+                    <%= link_to 'Express', "javascript:;", class: 'active' %>
                 <% end %>
             <% else %>
                 <% if cart.delivery_type == 'delivery' %>
-                    <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), class: 'active', remote: true %>
-                    <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), remote: true %>
-                <% else %>
-                    <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), remote: true %>
-                    <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), class: 'active', remote: true %>
+                    <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), class: 'active', remote: true if cart.store.has_delivery_service? %>
+                    <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), remote: true if cart.store.has_pick_up_service? %>
+                    <%= link_to 'Express', type_cart_path(cart, delivery_type: :express), remote: true if cart.store.has_express_service? %>
+                <% elsif cart.delivery_type == 'pick_up' %>
+                    <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), remote: true if cart.store.has_delivery_service? %>
+                    <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), class: 'active', remote: true if cart.store.has_pick_up_service? %>
+                    <%= link_to 'Express', type_cart_path(cart, delivery_type: :express), remote: true if cart.store.has_express_service? %>
+                <% elsif cart.delivery_type == 'express' %>
+                    <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), remote: true if cart.store.has_delivery_service? %>
+                    <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), remote: true if cart.store.has_pick_up_service? %>
+                    <%= link_to 'Express', type_cart_path(cart, delivery_type: :express), class: 'active', remote: true if cart.store.has_express_service? %>
                 <% end %>
             <% end %>
           </li>

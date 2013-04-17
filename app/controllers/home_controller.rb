@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
 
-  before_filter :yelp_client, :only => [:store_review, :load_store_review]
+  before_filter :yelp_client, :only => [:store_review, :load_store_review, :store_overview]
   before_filter :new_ticket
+  before_filter :store_setup, :only => [:store_overview, :store_good, :store_info, :store_menu, :store_promo, :store_review]
 
   # Main Pages
   # ======================================================
@@ -50,61 +51,40 @@ class HomeController < ApplicationController
   # All About Stores
   # ======================================================
   def store_overview
-    @store = Store.find(params[:id])
-    @cart = current_cart(@store.id, false)
-    @store_still_open = @store.still_open?
-    @menu_still_open = true
-    @can_order_online = @store.can_order_online?
-
     @gallery = @store.gallery
     @photos = @gallery.gallery_photos if @gallery
+
+    # store_review
+    #=========================
+    request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: APP_CONFIG['yelp_yws_id'])
+    response = @client.search(request)
+    @reviews = response["businesses"]
+
+    # store_info
+    #=========================
+    @addresses = []
+    @addresses << @store.address
+    @json = @addresses.to_gmaps4rails
   end
 
   def store_info
-    @store = Store.find(params[:id])
-    @cart = current_cart(@store.id, false)
-    @store_still_open = @store.still_open?
-    @menu_still_open = true
-    @can_order_online = @store.can_order_online?
-
     @addresses = []
     @addresses << @store.address
     @json = @addresses.to_gmaps4rails
   end
 
   def store_good
-    @store = Store.find(params[:id])
-    @cart = current_cart(@store.id, false)
     @dishes = Dish.joins(:dish_features, :category => :menu)
     .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }).order("rank") #.select("distinct(dishes.id)")
-    @store_still_open = @store.still_open?
-    @menu_still_open = true
-    @can_order_online = @store.can_order_online?
   end
 
   def store_menu
-    @store = Store.find(params[:id])
-    @cart = current_cart(@store.id, false)
-    @store_still_open = @store.still_open?
-    @menu_still_open = true
-    @can_order_online = @store.can_order_online?
   end
 
   def store_promo
-    @store = Store.find(params[:id])
-    @cart = current_cart(@store.id, false)
-    @store_still_open = @store.still_open?
-    @menu_still_open = true
-    @can_order_online = @store.can_order_online?
   end
 
   def store_review
-    @store = Store.find(params[:id])
-    @cart = current_cart(@store.id, false)
-    @store_still_open = @store.still_open?
-    @menu_still_open = true
-    @can_order_online = @store.can_order_online?
-
     request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: APP_CONFIG['yelp_yws_id'])
     response = @client.search(request)
     @reviews = response["businesses"]
@@ -313,4 +293,25 @@ class HomeController < ApplicationController
   def new_ticket
     @ticket = Ticket.new
   end
+
+  def store_setup
+    @store = Store.find(params[:id])
+    if params[:delivery_type]
+      session["cart_delivery_type_#{@store.id}"] = params[:delivery_type]
+    else
+      unless session["cart_delivery_type_#{@store.id}"]
+        if @store.has_delivery_service?
+          session["cart_delivery_type_#{@store.id}"] = 'delivery'
+        elsif @store.has_pick_up_service?
+          session["cart_delivery_type_#{@store.id}"] = 'pick_up'
+        elsif @store.has_express_service?
+          session["cart_delivery_type_#{@store.id}"] = 'express'
+        end
+      end
+    end
+    @cart = current_cart(@store.id, false)
+    @store_still_open = @store.still_open?
+    @menu_still_open = true
+  end
+
 end

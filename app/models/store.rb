@@ -59,6 +59,18 @@ class Store < ActiveRecord::Base
     services.include?(Service.find_by_name("reserve_online"))
   end
 
+  def has_delivery_service?
+    services.include?(Service.find_by_name("delivery_service"))
+  end
+
+  def has_pick_up_service?
+    services.include?(Service.find_by_name("pick_up_service"))
+  end
+
+  def has_express_service?
+    services.include?(Service.find_by_name("express_service"))
+  end
+
   # Generate human and seo friendly url
   # ======================================================
   def to_param

@@ -40,6 +40,7 @@
       display: inline-block;
       width: 90%;
       padding:8px;
+      margin:0px 0px 4px 0px;
       color: $white;
       background: $orange;
       font-weight: bold;
@@ -55,21 +56,15 @@
 }
 
 
-/* Restaurant Google Page */
+/* Restaurant Hub Page */
 .hub {
-  p.services_icon {
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 18px;
-    margin: 1px;
-    text-align: center;
+  a.tag_name_toggle {
+    margin-bottom: 15px;
+  }
 
-    a {
-      font-style: italic;
-      color: #ffffff;
-      text-decoration: none;
-    }
+  a.label {
+    font-size:10px;
+    text-align: center;
   }
 }
 

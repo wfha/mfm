@@ -88,6 +88,9 @@ class OrdersController < ApplicationController
       @order.user.skip_confirmation! # Skip sending emails
     end
 
+    # Need to validate the phone number for the order
+    @order.user.validate_phone = true
+
     # Set the status of this order
     @order.status = "unconfirmed"
 

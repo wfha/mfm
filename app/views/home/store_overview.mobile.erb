@@ -2,10 +2,6 @@
   <%= render 'store_header' %>
 
   <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="e">
-    <li data-role="list-divider"><%= @store.name %>:</li>
-    <li>
-      <%= @store.story %>
-    </li>
     <li data-role="list-divider"><%= @store.gallery.name %>:</li>
     <li>
       <div class="gallery">
@@ -18,7 +14,55 @@
         <% end %>
       </div>
     </li>
+    <li data-role="list-divider"><%= @store.name %>:</li>
+    <li>
+      <%= @store.story %>
+    </li>
+    <li data-role="list-divider">Tags:</li>
+    <li>
+      <% @store.tags.each do |t| %>
+          <%= t.name %>
+      <% end %>
+    </li>
+    <li data-role="list-divider">Payments:</li>
+    <li>
+      <% @store.payments.each do |p| %>
+          <p><%= image_tag p.avatar_url(:small).to_s if p.avatar? %></p>
+      <% end %>
+    </li>
+    <li data-role="list-divider">Hours:</li>
+    <li>
+      <% @store.hours.each do |h| %>
+          <%= h.desc %>: <br/>
+          <p style="font-size:14px;margin-top: 3px;;"><%= h.open_at %> - <%= h.close_at %></p>
+      <% end %>
+    </li>
+    <li data-role="list-divider">Delivery Policy:</li>
+    <li><p>Within 3 miles.</p></li>
   </ul>
+
+  <% unless @reviews.empty? %>
+      <ul data-role="listview" data-inset="true" data-theme="e" data-divider-theme="e">
+        <li data-role="list-divider">
+          <h3>
+            <%= image_tag "/assets/yelp_logo.png" %>
+            <%= @reviews[0]['name'] %>
+            <p class="ui-li-aside"><%= image_tag @reviews[0]['rating_img_url'] %></p>
+            <span class="ui-li-count"><%= @reviews[0]['review_count'] %></span>
+          </h3>
+        </li>
+        <% @reviews[0]['reviews'].each do |review| %>
+            <li>
+              <h3>
+                <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %> <%= review['user_name'] %>
+              </h3>
+              <p><%= review['text_excerpt'] %></p>
+              <p><%= link_to 'Read more', review['url'] %></p>
+              <p class="ui-li-aside"><%= image_tag review['rating_img_url'] %></p>
+            </li>
+        <% end %>
+      </ul>
+  <% end %>
 </div><!-- /content -->
 
 <script type="text/javascript">

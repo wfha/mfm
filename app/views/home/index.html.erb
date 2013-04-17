@@ -6,20 +6,21 @@
     </div>
     <div class="span2">
       <%= link_to "https://chrome.google.com/webstore/detail/meals4me/miinanihaigjbhiekjadnmagbfcmcmdp", target: "_blank", style: "text-decoration: none;" do %>
-          <%= image_tag("/assets/mfm_chrome_260x200.png", style: "width: 160px; height: 120px;") %>
+          <br/>
+          <%= image_tag("/assets/mfm_chrome_260x200.png", style: "width: 100px; height: 75px;") %>
           <br/>
           <span class="badge badge-important">Meals4.Me @ Chrome</span>
       <% end %>
     </div>
     <div class="span2">
       <%= link_to "https://www.facebook.com/pages/meals4me/149705428516213", target: "_blank", style: "text-decoration: none;" do %>
-          <%= image_tag("/assets/mfm_facebook_260x200.png", style: "width: 160px; height: 120px;") %>
+          <%= image_tag("/assets/mfm_facebook_260x200.png", style: "width: 100px; height: 75px;") %>
           <br/>
           <span class="badge badge-info">Meals4.Me @ Facebook</span>
       <% end %>
     </div>
     <div class="span3">
-      <b><%= Time.now.strftime("%Y-%m-%d, %A") %></b>
+      <!--<b><%= Time.now.strftime("%Y-%m-%d, %A") %></b>-->
       <div id="weather"></div>
     </div>
   </div>
@@ -31,24 +32,24 @@
       <li class="span4">
         <div class="thumbnail index_img_wrap">
           <%= link_to home_stores_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
-              <%= image_tag "/assets/restaurant_hub.jpg" %>
               <h4>Restaurant <br/> Hub</h4>
+              <%= image_tag "/assets/restaurant_hub.jpg" %>
           <% end %>
         </div>
       </li>
       <li class="span4">
         <div class="thumbnail index_img_wrap">
           <%= link_to home_delivery_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
-              <%= image_tag "/assets/restaurant_delivery.jpg" %>
               <h4 style="background: #154ecd;box-shadow: inset 0px 1px 2px #154ecd, 0px 1px 0px white;">Restaurant <br/> Delivery</h4>
+              <%= image_tag "/assets/restaurant_delivery.jpg" %>
           <% end %>
         </div>
       </li>
       <li class="span4">
         <div class="thumbnail index_img_wrap">
           <%= link_to home_coupons_path, :style => 'text-align:center;background-color:#ffffff;display:block;' do %>
-              <%= image_tag "/assets/restaurant_coupons.jpg" %>
               <h4 style="background: #32cd32;box-shadow: inset 0px 1px 2px #32cd32, 0px 1px 0px white;">Restaurant <br/> Coupons</h4>
+              <%= image_tag "/assets/restaurant_coupons.jpg" %>
           <% end %>
         </div>
       </li>
@@ -63,21 +64,19 @@
     </ul>
 
     <div class="well">
-      <table width="100%">
-        <tr>
-          <th width="60%">
-            <%= image_tag "/assets/joey_500x250.gif", style: "width:100%;" %>
-          </th>
-          <th width="40%">
-            <h2>Do you share?</h2>
-            <br/>
-            <%= link_to "Share<h4>Meals4.Me</h4>on Facebook".html_safe, "javascript:;", class: "btn btn-primary", style: "width: 150px;",
-                        onclick: "window.open('https://www.facebook.com/sharer/sharer.php?u=http://meals4.me','Share','height=300, width=500, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');" %>
-            <br/>
-            <h4>One click to support us.</h4>
-          </th>
-        </tr>
-      </table>
+      <div class="row-fluid">
+        <div class="span8">
+          <%= image_tag "/assets/joey_500x250.gif", style: "width:100%;" %>
+        </div>
+        <div class="span4" style="text-align: center;">
+          <h2>Do you share?</h2>
+          <br/>
+          <%= link_to "Share<h4>Meals4.Me</h4>on Facebook".html_safe, "javascript:;", class: "btn btn-primary", style: "width: 150px;",
+                      onclick: "window.open('https://www.facebook.com/sharer/sharer.php?u=http://meals4.me','Share','height=300, width=500, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');" %>
+          <br/>
+          <h4>One click to support us.</h4>
+        </div>
+      </div>
     </div>
   </div>
   <div class="span4 well" style="background: #ffffff;padding: 10px;">

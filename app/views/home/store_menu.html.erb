@@ -22,7 +22,7 @@
                       <ul class="thumbnails">
                         <% category.dishes.each do |dish| %>
                             <li class="span6" style="margin-bottom:10px">
-                              <% if @can_order_online %>
+                              <% if session["cart_delivery_type_#{@store.id}"] %>
                                   <% if @store_still_open && @menu_still_open %>
                                       <div class="thumbnail store_menu_dish_wrap_open" rel="popover" title="<%= dish.name %>"
                                            data-content="<% if dish.desc.empty? %>Info coming soon ...

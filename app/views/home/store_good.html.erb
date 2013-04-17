@@ -15,7 +15,7 @@
                     <% dish.dish_features.each do |df| %>
                         <div style="width: 16px;height: 16px;margin-right: 4px;" class="pull-right icons_dish_features-dish_feature_<%= df.name %>"></div>
                     <% end %>
-                    <% if @can_order_online %>
+                    <% if session["cart_delivery_type_#{@store.id}"] %>
                         <% if @store_still_open && @menu_still_open %>
                             <%= link_to number_to_currency(dish.price), home_dish_modal_path(dish), :remote => true,
                                         :class => 'pre_order btn btn-primary pull-right' %>

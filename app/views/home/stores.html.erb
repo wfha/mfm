@@ -1,39 +1,24 @@
-<div class="well hub">
+<div class="hub">
   <% @tags.each do |tag| %>
       <% unless tag.stores.empty? %>
-          <h4 style="font-size: 22px;"><%= tag.name %></h4>
+          <a class="btn btn-block btn-info btn-large tag_name_toggle"><%= tag.name %></a>
           <div class="row-fluid">
             <ul class="thumbnails">
               <% tag.stores.each do |store| %>
-                  <li class="span3" style="margin-bottom:15px; height: 67px;">
-                    <div class="thumbnail" style="height: 59px;">
-                      <div class="row-fluid">
-                        <div class="span3">
-                          <%= link_to home_store_overview_path(store) do %>
-                              <%= image_tag(store.avatar_url(:small).to_s) %>
-                          <% end %>
-                        </div>
-                        <div class="span6">
-                          <%= link_to store.name, home_store_overview_path(store) %>
-                          <br/>
-                          <p style="font-size: 10px;line-height: 12px;">
-                            <%= store.phone %>
-                            <br/>
-                            <%= store.address.address1 %>
-                          </p>
-                        </div>
-                        <div class="span3">
-                          <p class="services_icon" style="background: #006400;"><%= link_to "Menu", home_store_menu_path(store) %></p>
-                          <% if store.can_order_online? %>
-                              <p class="services_icon" style="background: #ff0000;"><%= link_to "Order", home_store_good_path(store) %></p>
-                          <% end %>
-                          <!--<% if store.can_reserve_online? %>-->
-                              <!--<p class="services_icon" style="background: blue;"><%= link_to "Reserve", "javascript:;" %></p>-->
-                              <!--<% end %>-->
-                          <% if store.has_effective_coupons? %>
-                              <p class="services_icon" style="background: purple;"><%= link_to "Coupon", home_store_promo_path(store) %></p>
-                          <% end %>
-                        </div>
+                  <li class="span3" style="height: 70px;margin-bottom: 15px;">
+                    <div class="thumbnail" style="height: 60px;">
+                      <div class="pull-left" style="width: 60px;">
+                        <%= link_to image_tag(store.avatar_url(:small).to_s), home_store_overview_path(store) %>
+                      </div>
+                      <div class="pull-left" style="margin-left: 5px;">
+                        <%= link_to store.name, home_store_overview_path(store) %>
+                      </div>
+                      <div class="pull-right" style="width: 155px;">
+                        <%= link_to "Menu", home_store_menu_path(store), class: 'label label-inverse' %>
+                        <%= link_to "Delivery", home_store_menu_path(store, delivery_type: :delivery), class: 'label label-important' if store.has_delivery_service? %>
+                        <%= link_to "Pick Up", home_store_menu_path(store, delivery_type: :pick_up), class: 'label label-important' if store.has_pick_up_service? %>
+                        <%= link_to "Express", home_store_menu_path(store, delivery_type: :express), class: 'label label-success' if store.has_express_service? %>
+                        <%= link_to "Coupon", home_store_promo_path(store), class: 'label label-info' if store.has_effective_coupons? %>
                       </div>
                     </div>
                   </li>

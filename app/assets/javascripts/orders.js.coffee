@@ -17,3 +17,14 @@ $ ->
     else if $(this).val() == 'credit_card'
       $('div#tip_wrap').show()
       $('div#credit_card_wrap').show()
+
+  # Express Include No. of Persons
+  #===================================
+  $('select#no_of_persons').change ->
+    v = $(this).val()
+    vf
+    if v == "1"
+      vf = v + " person"
+    else
+      vf = v + " persons"
+    $('textarea#order_note').val vf

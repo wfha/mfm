@@ -3,16 +3,11 @@
 <div class="row">
   <div class="span8" id="main">
     <div class="well">
-      <% unless @store.story.blank? %>
-          <h4>About <%= @store.name %></h4>
-          <p><%= @store.story %></p>
-      <% end %>
 
       <% if @gallery && @photos %>
-          <hr/>
-          <h4><%= @gallery.name %></h4>
-          <p><%= @gallery.desc %></p>
-
+          <!--<hr/>-->
+          <!--<h4><%= @gallery.name %></h4>-->
+          <!--<p><%= @gallery.desc %></p>-->
           <div id="store_gallery" class="carousel slide">
             <ol class="carousel-indicators first_child_active">
               <% @photos.each_with_index do |gp, i| %>
@@ -34,6 +29,62 @@
             <a class="right carousel-control" href="#store_gallery" data-slide="next">&rsaquo;</a>
           </div>
       <% end %>
+
+      <% unless @store.story.blank? %>
+          <h4>About <%= @store.name %></h4>
+          <p><%= @store.story %></p>
+      <% end %>
+
+      <h4>Address:</h4>
+      <%= @store.address.address1 %>
+      <br/>
+      <%= @store.address.address2 if @store.address.address2 %>
+
+      <h4>Hours:</h4>
+      <ul>
+        <% @store.hours.each do |h| %>
+            <li><%= h.desc %>: <%= h.open_at %> - <%= h.close_at %></li>
+        <% end %>
+      </ul>
+      <br/>
+
+      <h4>Tags:</h4>
+      <% @store.tags.each do |t| %>
+          <%= t.name %>
+      <% end %>
+      <br/><br/>
+
+      <h4>Payments:</h4>
+      <% @store.payments.each do |p| %>
+          <%= image_tag p.avatar_url(:small).to_s if p.avatar? %>
+      <% end %>
+      <br/><br/>
+
+      <h4>Delivery Policy:</h4>
+      Within 3 miles.
+      <br/><br/>
+
+      <% unless @reviews.empty? %>
+          <%= image_tag "/assets/yelp_logo.png" %>
+          <br/>
+          <%= image_tag @reviews[0]['rating_img_url'] %> <%= @reviews[0]['review_count'] %> reviews
+          <hr/>
+          <% @reviews[0]['reviews'].each do |review| %>
+              <%= image_tag review['user_photo_url_small'], :width => 20, :height => 20 %>
+              <%= review['user_name'] %>
+              <%= image_tag review['rating_img_url'] %>
+              <br/>
+              <%= review['text_excerpt'] %> <%= link_to 'Read more', review['url'] %>
+              <br/><br/>
+          <% end %>
+          <hr/>
+      <% end %>
+
+      <%= gmaps(
+                  :map_options => { :auto_adjust => true, :auto_zoom => false, :zoom => 16 },
+                  :markers => { :data => @json, :options => {}}
+          )
+      %>
     </div>
   </div>
 
