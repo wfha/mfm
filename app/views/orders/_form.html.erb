@@ -28,7 +28,7 @@
           <% elsif @cart.delivery_type == 'delivery' %>
               Deliver at around?
           <% end %>
-          <%= f.input :expected_at, collection: Order::EXPECTED_AT_TIMES, prompt: nil, selected: Order::EXPECTED_AT_TIMES[0], :wrapper_html => { :class => "sf_2_in_1" } %>
+          <%= f.input :expected_at, collection: Order::EXPECTED_AT_TIMES, prompt: nil, :wrapper_html => { :class => "sf_2_in_1" } %>
 
           <%= f.input :note, as: :text, input_html: {cols: 50, rows: 2}, placeholder: 'Special instructions' %>
           <%= f.fields_for :user do |builder| %>
@@ -70,8 +70,8 @@
           <br/>
           <%= f.input :store_id, :as => :hidden %>
           <%= f.input :cart_id, :as => :hidden %>
+          <%= link_to "Back to Store", home_store_menu_path(@order.store), :class => "btn" %>
           <%= f.button :submit, :class => "btn btn-primary", :disable_with => "Saving..." %>
-          <%= link_to "Back to Store", home_store_good_path(@order.store), :class => "btn btn-info" %>
       <% end %>
     </div>
   </li>

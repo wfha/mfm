@@ -1,0 +1,12 @@
+// url: /home/index
+// set a fluid width for Facebook's social plugins
+.fb-like-box, .fb-like-box > span[style], .fb_iframe_widget iframe[style] {
+  width: 100% !important;
+  border: none;
+  background-color: #ffffff;
+}
+
+.fb-comments, .fb-comments > span[style], .fb_iframe_widget iframe[style] {
+  width: 100% !important;
+  border: none;
+}

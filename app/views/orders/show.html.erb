@@ -1,21 +1,37 @@
 <div class="row">
   <div class="span8">
     <div class="well">
+      <%= image_tag "/assets/mfm_logo.png", class: "pull-right" %>
       <h4>Your order has been taken. Thank you for ordering with us.</h4>
-      <h4>The estimated delivery time is 60 minutes. </h4>
+      <h4>The estimated delivery time is 45 minutes. </h4>
       <br/>
       <%= link_to 'Back to restaurant list', home_stores_path, :class => 'btn btn-primary'  %>
-      <%= link_to 'I want some grocery', home_grocery_path, :class => 'btn btn-info'  %>
+      <%= link_to 'Go check out coupons', home_coupons_path, :class => 'btn btn-info'  %>
+      <!--<%= link_to 'I want some grocery', home_grocery_path, :class => 'btn btn-info'  %>-->
+    </div>
+
+    <div class="well">
+      <div class="row-fluid">
+        <div class="span8">
+          <%= image_tag "/assets/share_or_like_360x270.jpg", style: "width:100%;" %>
+        </div>
+        <div class="span4" style="text-align: center;">
+          <br/><br/>
+          <h2>Be happy everyday!</h2>
+          <br/>
+          <%= link_to "Share<h4>Meals4.Me</h4>on Facebook".html_safe, "javascript:;", class: "btn btn-primary", style: "width: 150px;",
+                      onclick: "window.open('https://www.facebook.com/sharer/sharer.php?u=http://meals4.me','Share','height=300, width=500, top=150,left=300, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');" %>
+          <br/>
+          <h4>One click to support us.</h4>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="span4">
-    <div class="well">
-      <h4>Your order has been taken. Thank you for ordering with us.</h4>
-      <h4>The estimated delivery time is 60 minutes. </h4>
-      <br/>
-      <%= link_to 'Back to restaurant list', home_stores_path, :class => 'btn btn-primary'  %>
-      <%= link_to 'I want some grocery', home_grocery_path, :class => 'btn btn-info'  %>
+    <div class="well" style="background: #ffffff;padding: 10px;">
+      <div class="fb-like-box" data-href="https://www.facebook.com/pages/meals4me/149705428516213"
+           data-width="400" data-height="540" data-border-color="#FFFFFF" data-show-faces="true" data-stream="true" data-header="false"></div>
     </div>
   </div>
 </div>

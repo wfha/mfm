@@ -1,6 +1,6 @@
 <div data-role="popup" data-theme="d" data-overlay-theme="b" class="ui-content modal" style="max-width:340px;">
   <h3>Confirm your order</h3>
-  <%= form_tag(cart_items_path(dish_id: @dish.id), method: 'post', remote: true, data: {ajax: false}) do |f| %>
+  <%= form_tag(cart_items_path, method: 'post', remote: true, data: { ajax: false }) do %>
       <% @dish.dish_choices.each do |dc| %>
           <div class="dish_choice_wrap" must="<%= dc.must %>" type="<%= dc.input_type %>">
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -27,8 +27,9 @@
       <input type="text" name="note" add="0" />
       <br/>
 
-      <input type="hidden" name="price_adjustment" value="0" />
-      <input type="hidden" name="store_id" value="<%= @dish.category.menu.store.id %>" />
+      <%= hidden_field_tag :price_adjustment, 0 %>
+      <%= hidden_field_tag :dish_id, @dish.id %>
+      <%= hidden_field_tag :store_id, @dish.category.menu.store.id %>
 
       <button data-inline=true data-mini=true data-icon=delete data-rel=back >Cancel</button>
       <button data-inline=true data-mini=true data-icon=check data-theme='b' class='confirm_to_order'>Order</button>

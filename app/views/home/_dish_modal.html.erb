@@ -24,19 +24,15 @@
                 </div>
             <% end %>
 
-            <b>Quantity:</b>
-            <br/>
+            <b>Quantity:</b><br/>
             <div class="sf_2_in_1">
               <div class="controls">
                 <%= select_tag :quantity, options_for_select([1, 2, 3, 4, 5]) %>
               </div>
-            </div>
-            <br/>
+            </div><br/>
 
-            <b>Special Instructions:</b>
-            <br/>
-            <input type="text" name="note" add="0" />
-            <br/>
+            <b>Special Instructions:</b><br/>
+            <input type="text" name="note" add="0" /><br/>
 
             <%= hidden_field_tag :price_adjustment, 0 %>
             <%= hidden_field_tag :dish_id, @dish.id %>

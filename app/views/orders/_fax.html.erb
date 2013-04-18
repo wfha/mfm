@@ -19,10 +19,10 @@
   <tr> <td><%= @order.user.firstname %> <%= @order.user.lastname %></td>                            </tr>
   <tr> <td><%= @order.user.phone %></td>                                                            </tr>
   <% if @order.user.address %>
-      <tr> <td><%= @order.user.address.address1 %>, <%= @order.user.address.address2 %></td><th rowspan='2'><h2>Time: ASAP</h2></th> </tr>
+      <tr> <td><%= @order.user.address.address1 %>, <%= @order.user.address.address2 %></td><th rowspan='2'><h2>Time: <%= @order.expected_at %></h2></th> </tr>
       <tr> <td><%= @order.user.address.city %>, <%= @order.user.address.state %> <%= @order.user.address.zip %></td> </tr>
   <% else %>
-      <tr> <td></td><th rowspan='2'><h2>Time: ASAP</h2></th> </tr>
+      <tr> <td></td><th rowspan='2'><h2>Time: <%= @order.expected_at %></h2></th> </tr>
       <tr> <td></td> </tr>
   <% end %>
 </table>

@@ -29,9 +29,7 @@
           <% end %>
         </li>
         <li style="width:20%">
-          <% if @cart %>
-              <%= link_to 'Cart', 'javascript:;', data: {icon: 'custom'}, id: 'cart_icon' %>
-          <% end %>
+          <%= link_to 'Cart', 'javascript:;', data: {icon: 'custom'}, id: 'cart_icon' if @has_cart %>
         </li>
       </ul>
     </div>
@@ -61,7 +59,11 @@
         <% end %>
       </div>
       <div id="cart_wrap" style="display: none;">
-        <%= render @cart if @cart %>
+        <% if @cart %>
+            <%= render @cart %>
+        <% else %>
+            <h4>Your Cart Is Empty!</h4>
+        <% end %>
       </div>
     </div>
   </div><!-- /header -->
@@ -73,6 +75,10 @@
       </div>
   <% end %>
 
+  <!--<div style="background: #ffffff;">-->
+  <!--<%= session.inspect %>-->
+  <!--</div>-->
+
   <%= yield %>
 
   <div data-role="footer">
@@ -81,7 +87,7 @@
         <li><%= link_to 'Hub', home_stores_path, :data => { :icon => 'star' }, :rel => "external" %></li>
         <li><%= link_to 'Delivery', home_delivery_path, :data => { :icon => 'star' }, :rel => "external" %></li>
         <li><%= link_to 'Coupon', home_coupons_path, :data => { :icon => 'star' }, :rel => "external" %></li>
-        <li><%= link_to 'Grocery', home_grocery_path, :data => { :icon => 'star' }, :rel => "external" %></li>
+        <!--<li><%= link_to 'Grocery', home_grocery_path, :data => { :icon => 'star' }, :rel => "external" %></li>-->
         <li><%= link_to 'Desktop', { :mobile => 0 }, :data => { :icon => 'home' }, :rel => "external" %></li>
       </ul>
     </div>

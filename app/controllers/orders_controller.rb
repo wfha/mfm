@@ -17,6 +17,8 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @has_cart = true # Show the cart toggle
+
     @order = Order.find(params[:id])
 
     respond_to do |format|
@@ -28,6 +30,8 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
+    @has_cart = true # Show the cart toggle
+
     if params[:store_id]
       @cart = current_cart(params[:store_id], false)
     elsif params[:cart_id]

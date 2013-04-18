@@ -310,6 +310,7 @@ class HomeController < ApplicationController
       end
     end
     @cart = current_cart(@store.id, false)
+    @has_cart = true  # Show the cart toggle in mobile version
     @store_still_open = @store.still_open?
     @menu_still_open = true
   end

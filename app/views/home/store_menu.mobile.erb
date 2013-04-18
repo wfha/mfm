@@ -10,12 +10,18 @@
               <ul data-role="listview" data-split-icon="gear" data-inset="false" data-filter-theme="c" data-divider-theme="d">
                 <% category.dishes.each do |dish| %>
                     <li>
-                      <% if @store_still_open && @menu_still_open %>
-                          <%= link_to home_dish_modal_path(dish), :remote => true do %>
-                              <%= number_to_currency dish.price %> <%= dish.name %>
+                      <% if session["cart_delivery_type_#{@store.id}"] %>
+                          <% if @store_still_open && @menu_still_open %>
+                              <%= link_to home_dish_modal_path(dish), :remote => true do %>
+                                  <%= number_to_currency dish.price %> <%= dish.name %>
+                              <% end %>
+                          <% else %>
+                              <%= link_to "javascript: alert('" + Dish::ERROR_MSG + "');" do %>
+                                  <%= number_to_currency dish.price %> <%= dish.name %>
+                              <% end %>
                           <% end %>
                       <% else %>
-                          <%= link_to "javascript: alert('" + Dish::ERROR_MSG + "');" do %>
+                          <%= link_to 'javascript:alert("' + @store.name.to_s + ' cannot order online, please call ' + @store.phone + ' to place order!");' do %>
                               <%= number_to_currency dish.price %> <%= dish.name %>
                           <% end %>
                       <% end %>

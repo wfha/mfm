@@ -32,6 +32,7 @@ modal.find('button.confirm_to_order').click ->
     note.val note_val
     price_adjustment.val price_adjustment_val
 
-    modal.find('form').submit()
+    # For some reason, this causes duplicate submissions
+#    modal.find('form').submit()
 
 modal.popup('open');
