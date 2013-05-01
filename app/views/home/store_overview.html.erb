@@ -69,10 +69,6 @@
         </div>
       </div>
 
-
-
-
-
       <% unless @reviews.empty? %>
           <%= image_tag "/assets/yelp_logo.png" %>
           <br/>
@@ -97,16 +93,5 @@
     </div>
   </div>
 
-  <div class="span4">
-    <div class="well" id="side">
-      <div id="cart">
-        <% if @cart %>
-            <%= render @cart %>
-        <% else %>
-            <%= image_tag "/assets/mfm_logo.png" %>
-            <h4>Your Cart Is Empty!</h4>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render 'store_cart' %>
 </div><!--/row-->

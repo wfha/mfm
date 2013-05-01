@@ -17,15 +17,12 @@
                     <% end %>
                     <% if session["cart_delivery_type_#{@store.id}"] %>
                         <% if @store_still_open && @menu_still_open %>
-                            <%= link_to number_to_currency(dish.price), home_dish_modal_path(dish), :remote => true,
-                                        :class => 'pre_order btn btn-primary pull-right' %>
+                            <%= link_to number_to_currency(dish.price), home_dish_modal_path(dish), :remote => true, :class => 'pre_order btn btn-primary pull-right' %>
                         <% else %>
-                            <%= link_to number_to_currency(dish.price), "javascript:alert('" + Dish::ERROR_MSG + "');",
-                                        :class => 'btn btn-inverse pull-right' %>
+                            <%= link_to number_to_currency(dish.price), "javascript:alert('" + Dish::ERROR_MSG + "');", :class => 'btn btn-inverse pull-right' %>
                         <% end %>
                     <% else %>
-                        <%= link_to number_to_currency(dish.price), 'javascript:alert("' + @store.name.to_s + ' cannot order online, please call ' + @store.phone + ' to place order!");',
-                                    :class => 'btn btn-inverse pull-right' %>
+                        <%= link_to number_to_currency(dish.price), 'javascript:alert("' + @store.name.to_s + ' cannot order online, please call ' + @store.phone + ' to place order!");', :class => 'btn btn-inverse pull-right' %>
                     <% end %>
                     <i><%= truncate(sanitize(dish.desc), length: 40) %></i>
                   </div>
@@ -37,16 +34,5 @@
     </div>
   </div>
 
-  <div class="span4">
-    <div class="well" id="side">
-      <div id="cart">
-        <% if @cart %>
-            <%= render @cart %>
-        <% else %>
-            <%= image_tag "/assets/mfm_logo.png" %>
-            <h4>Your Cart Is Empty!</h4>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render 'store_cart' %>
 </div><!--/row-->

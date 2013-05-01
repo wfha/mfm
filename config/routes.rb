@@ -1,5 +1,8 @@
 Mfm::Application.routes.draw do
 
+  resources :advertisements
+
+
   devise_for :users, controllers: {
       confirmations:      'users/confirmations',
       passwords:          'users/passwords',
@@ -8,7 +11,6 @@ Mfm::Application.routes.draw do
       unlocks:            'users/unlocks',
       omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   match '/delayed_job' => DelayedJobWeb, :anchor => false
 

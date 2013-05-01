@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416190759) do
+ActiveRecord::Schema.define(:version => 20130430185904) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(:version => 20130416190759) do
   end
 
   add_index "addresses", ["addressable_id", "addressable_type"], :name => "index_addresses_on_addressable_id_and_addressable_type"
+
+  create_table "advertisements", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.integer  "rank",       :default => 0, :null => false
+    t.string   "banner"
+    t.string   "target_url"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -276,19 +288,6 @@ ActiveRecord::Schema.define(:version => 20130416190759) do
   end
 
   add_index "plans", ["store_id"], :name => "index_plans_on_store_id"
-
-  create_table "rails_admin_histories", :force => true do |t|
-    t.text     "message"
-    t.string   "username"
-    t.integer  "item"
-    t.string   "table"
-    t.integer  "month",      :limit => 2
-    t.integer  "year",       :limit => 8
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
-  end
-
-  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_rails_admin_histories"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

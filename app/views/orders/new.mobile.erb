@@ -47,7 +47,7 @@
           <% elsif @cart.delivery_type == 'delivery' %>
               Deliver at around?
           <% end %>
-          <%= f.input :expected_at, collection: Order::EXPECTED_AT_TIMES, prompt: nil %>
+          <%= f.input :expected_at, collection: @order.times_left_for_today, prompt: nil %>
 
           <%= f.input :note, :placeholder => 'Note' %>
           <%= f.fields_for :user do |builder| %>

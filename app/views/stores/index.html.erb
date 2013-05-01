@@ -1,5 +1,14 @@
 <div class="well">
-  <h1>Listing stores</h1>
+  <%= link_to "Manage Payments", payments_path, class: "btn btn-info" %>
+  <%= link_to "Manage Services", services_path, class: "btn btn-info" %>
+  <%= link_to "Manage Tags", tags_path, class: "btn btn-info" %>
+  <%= link_to "Manage Ads", advertisements_path, class: "btn btn-info" %>
+
+  <%= link_to 'New Store', new_store_path, class: "btn btn-primary pull-right" %>
+
+  <br/><br/>
+
+  <h1>Manage Stores</h1>
 
   <table class='table table-hover table-bordered'>
     <tr>
@@ -33,9 +42,5 @@
         </tr>
     <% end %>
   </table>
-
-  <br />
-
-  <%= link_to 'New Store', new_store_path %>
 </div>
 

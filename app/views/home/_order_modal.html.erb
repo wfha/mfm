@@ -10,7 +10,7 @@
     </h4>
   </div>
   <div class="modal-body">
-    <table class="table">
+    <table class="table table-bordered">
       <% @order.cart.cart_items.each do |ci| %>
           <tr>
             <td width="200"><%= ci.name %></td>
@@ -20,11 +20,23 @@
           </tr>
       <% end %>
       <tr> <td colspan="4"><b>Note:</b> <%= @order.note %></td>                                                 </tr>
-      <tr> <td colspan="2"></td><td>Subtotal:</td><td><%= number_to_currency @order.cart.subtotal_price %></td> </tr>
-      <tr> <td colspan="2"></td><td>Tax:</td>     <td><%= number_to_currency @order.cart.tax %></td>            </tr>
-      <tr> <td colspan="2"></td><td>Total:</td>   <td><%= number_to_currency @order.cart.total_price %></td>    </tr>
+      <tr>
+        <td colspan="2" rowspan="4">
+          <!--Order User Name-->
+          <%= @order.user.firstname + " " + @order.user.lastname %>
+
+          <!--Order User Address-->
+          <% if @order.user.address %>
+              <br/><%= @order.user.address.addr1 + " " + @order.user.address.addr2 %>
+              <br/><%= @order.user.address.city + " " + @order.user.address.zip %>
+          <% end %>
+        </td>
+        <td>Subtotal:</td><td><%= number_to_currency @order.cart.subtotal_price %></td>
+      </tr>
+      <tr> <td>Tax:</td>  <td><%= number_to_currency @order.cart.tax %></td>         </tr>
+      <tr> <td>Total:</td><td><%= number_to_currency @order.cart.total_price %></td> </tr>
+      <tr> <td>Tip:</td>  <td><%= number_to_currency @order.tip %></td>              </tr>
     </table>
-    <h4>Tip: <%= @order.tip %></h4>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal">Close</button>

@@ -25,17 +25,18 @@
           <!--Schedule the delivery/pick up/delivery time-->
           <% if @cart.delivery_type == 'express' || @cart.delivery_type == 'pick_up' %>
               Arrive at around?&nbsp;
-          <% elsif @cart.delivery_type == 'delivery' %>
+          <% elsif @cart.delivery_type == 'delivery' || @cart.delivery_type == 'melivery' %>
               Deliver at around?
           <% end %>
-          <%= f.input :expected_at, collection: Order::EXPECTED_AT_TIMES, prompt: nil, :wrapper_html => { :class => "sf_2_in_1" } %>
+
+          <%= f.input :expected_at, collection: @order.times_left_for_today, prompt: nil, :wrapper_html => { :class => "sf_2_in_1" } %>
 
           <%= f.input :note, as: :text, input_html: {cols: 50, rows: 2}, placeholder: 'Special instructions' %>
           <%= f.fields_for :user do |builder| %>
               <%= builder.input :firstname, :placeholder => 'Firstname', :wrapper_html => { :class => "sf_2_in_1" } %>
               <%= builder.input :lastname, :placeholder => 'Lastname', :wrapper_html => { :class => "sf_2_in_1" } %>
               <%= builder.input :phone, :placeholder => 'Phone' %>
-              <% if @cart.delivery_type == 'delivery' %>
+              <% if @cart.delivery_type == 'delivery' || @cart.delivery_type == 'melivery' %>
                   <%= builder.fields_for :address do |addr| %>
                       <%= addr.input :address1, placeholder: 'Address' %>
                       <%= addr.input :address2, placeholder: 'Apt / Building / Suite' %>

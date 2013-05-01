@@ -1,0 +1,15 @@
+<div class="span4">
+  <div class="well" id="side">
+    <div id="cart">
+      <% if @cart %>
+          <%= render @cart %>
+      <% elsif !(@store.has_delivery_service? || @store.has_melivery_service? || @store.has_pick_up_service? || @store.has_express_service?) %>
+          <%= image_tag "/assets/mfm_logo.png" %>
+          <h4><%= @store.name %> cannot order online, please call <span style="color: #8b0000;"><%= @store.phone %></span> to place order.</h4>
+      <% else %>
+          <%= image_tag "/assets/mfm_logo.png" %>
+          <h4>Your Cart Is Empty!</h4>
+      <% end %>
+    </div>
+  </div>
+</div>

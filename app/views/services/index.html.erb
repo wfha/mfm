@@ -1,7 +1,7 @@
 <div class="well">
   <h1>Listing services</h1>
 
-  <table>
+  <table class="table table-bordered">
     <tr>
       <th>Name</th>
       <th>Desc</th>
@@ -22,6 +22,6 @@
   </table>
 
   <br />
-
-  <%= link_to 'New Service', new_service_path %>
+  <%= link_to 'Back to Stores', stores_path, class: "btn btn-info" %>
+  <%= link_to 'New Service', new_service_path, class: "btn btn-primary" %>
 </div>

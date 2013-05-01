@@ -1,0 +1,11 @@
+<div class="well">
+  <p id="notice"><%= notice %></p>
+
+  <p><b>Name:</b><%= @advertisement.name %></p>
+  <p><b>Desc:</b><%= @advertisement.desc %></p>
+  <p><b>Banner:</b><%= image_tag @advertisement.banner_url(:micro).to_s %></p>
+  <p><b>Target url:</b><%= @advertisement.target_url %></p>
+
+  <%= link_to 'Edit', edit_advertisement_path(@advertisement) %> |
+  <%= link_to 'Back', advertisements_path %>
+</div>

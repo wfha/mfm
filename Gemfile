@@ -2,17 +2,27 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.11'
 
-# Database
-gem 'pg', '~> 0.14.1'
+platforms :jruby do
+  #gem 'jruby-openssl'
+  gem 'activerecord-jdbcpostgresql-adapter' # Database Postgresql in Java
+  gem 'therubyrhino', :group => :assets
+  gem "rmagick4j", "~> 0.3.7", :group => :assets
+  gem "warbler", "~> 1.3.6"
+end
+
+platforms :ruby do
+  gem 'pg', '~> 0.14.1' # Database Postgresql
+  gem 'unicorn', '~> 4.4.0' # Ruby Server
+  gem 'rmagick', '~> 2.13.1', :group => :assets
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'compass-rails', '~> 1.0.3'
-
   gem 'bootstrap-sass', '~> 2.3.0.1'
-  gem 'rmagick', '~> 2.13.1'
+
   gem 'carrierwave', '~> 0.8.0'
   gem 'fog', '~> 1.9.0'
 
@@ -26,14 +36,13 @@ gem 'jquery_mobile_rails', '~> 1.3.0'
 gem 'bootstrap-datepicker-rails', '~> 1.0.0.2'
 
 # Deployment
-gem 'unicorn', '~> 4.4.0'
 gem 'capistrano', '~> 2.13.5'
 gem 'rvm-capistrano', '~> 1.2.7'
 
 # User system
 gem 'devise', '~> 2.1.2'
 gem 'cancan', '~> 1.6.8'
-gem 'rails_admin', '~> 0.4.3'
+#gem 'rails_admin', '~> 0.4.3' # Too Heavy
 
 # Form and Validation
 gem 'simple_form', '~> 2.0.4'

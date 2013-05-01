@@ -14,9 +14,10 @@
                         <%= link_to store.name, home_store_overview_path(store) %>
                       </div>
                       <div class="pull-right" style="width: 155px;">
-                        <%= link_to "Menu", home_store_menu_path(store), class: 'label label-important' %>
-                        <%= link_to "Delivery", home_store_menu_path(store, delivery_type: :delivery), class: 'label label-default' if store.has_delivery_service? %>
-                        <%= link_to "Pick Up", home_store_menu_path(store, delivery_type: :pick_up), class: 'label label-warning' if store.has_pick_up_service? %>
+                        <%= link_to "Menu", home_store_menu_path(store), class: 'label label-default' %>
+                        <%= link_to "Delivery", home_store_menu_path(store, delivery_type: :delivery), class: 'label label-important' if store.has_delivery_service? %>
+                        <%= link_to "Delivery", home_store_menu_path(store, delivery_type: :melivery), class: 'label label-warning' if store.has_melivery_service? %>
+                        <%= link_to "Pick Up", home_store_menu_path(store, delivery_type: :pick_up), class: 'label label-inverse' if store.has_pick_up_service? %>
                         <%= link_to "Express", home_store_menu_path(store, delivery_type: :express), class: 'label label-success' if store.has_express_service? %>
                         <%= link_to "Coupon", home_store_promo_path(store), class: 'label label-info' if store.has_effective_coupons? %>
                       </div>

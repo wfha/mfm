@@ -5,17 +5,6 @@ class Dish < ActiveRecord::Base
                   :photo, :photo_cache, :remove_photo, # carrierwave and rails_admin
                   :dish_feature_ids, :dish_choice_ids, :dish_discount_ids
 
-  rails_admin do
-    field :name, :string
-    field :desc, :string
-    field :price, :decimal
-    field :photo, :carrierwave do
-      thumb_method :micro
-      delete_method :remove_photo
-      cache_method :photo_cache
-    end
-  end
-
   has_one :gallery, :as => :galleriable
 
   has_many :cart_items, :as => :cart_itemable

@@ -32,17 +32,25 @@ class Order < ActiveRecord::Base
   TIP_RATES = [['Tip cash', 0], ['Tip $1.00', 1], ['Tip $2.00', 2], ['Tip $3.00', 3], ['Tip $4.00', 4], ['Tip $5.00', 5],
                ['Tip $6.00', 6], ['Tip $7.00', 7], ['Tip $8.00', 8], ['Tip $9.00', 9], ['Tip $10.00', 10]]
 
-  EXPECTED_AT_TIMES = ['ASAP', '12:00 pm', '12:30 pm', '13:00 pm', '13:30 pm', '14:00 pm', '14:30 pm', '15:00 pm', '15:30 pm', '16:00 pm', '16:30 pm',
-                       '17:00 pm', '17:30 pm', '18:00 pm', '18:30 pm', '19:00 pm', '19:30 pm', '20:00 pm', '20:30 pm', '21:00 pm', '21:30 pm', '22:00 pm']
-
   def payment_types
-    if store.id.to_i == 1
-      [['Cash ', 'cash'], ['PayPal ', 'paypal']]
-    elsif store.payments.include?(Payment.find_by_name("paypal"))
-      [['Cash ', 'cash'], ['CreditCard ', 'credit_card'], ['PayPal ', 'paypal']]
-    else
+    if cart.delivery_type == "delivery" || cart.delivery_type == "pick_up" || cart.delivery_type == "express"
       [['Cash ', 'cash'], ['CreditCard ', 'credit_card']]
+    elsif cart.delivery_type == "melivery"
+      [['Cash ', 'cash'], ['PayPal ', 'paypal']]
     end
+  end
+
+  def times_left_for_today
+    left_times = ['ASAP']
+    all_times = ['12:00 pm', '12:30 pm', '13:00 pm', '13:30 pm', '14:00 pm', '14:30 pm', '15:00 pm', '15:30 pm', '16:00 pm', '16:30 pm',
+        '17:00 pm', '17:30 pm', '18:00 pm', '18:30 pm', '19:00 pm', '19:30 pm', '20:00 pm', '20:30 pm', '21:00 pm', '21:30 pm', '22:00 pm']
+
+    all_times.each do |t|
+      if Time.now < Time.parse(t)
+        left_times << t
+      end
+    end
+    left_times
   end
 
   def pay_with_credit_card?

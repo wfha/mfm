@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   # Main Pages
   # ======================================================
   def index
-
+   @ads = Advertisement.all
   end
 
   def stores
@@ -156,10 +156,10 @@ class HomeController < ApplicationController
           order.payment_status = 'paid'
           order.updated_at = Time.now
 
-          Order.delay.to_fax(order.id)
-          Order.delay(run_at: 4.minutes.from_now).to_phone(order.id)
-          Order.delay(run_at: 8.minutes.from_now).to_phone(order.id)
-          Order.delay(run_at: 12.minutes.from_now).to_phone(order.id)
+          # How to notice the paypal order
+          #Order.delay.to_fax(order.id)
+          #Order.delay(run_at: 3.minutes.from_now).to_phone(order.id)
+
         else
           logger.error("Failed to verify Paypal's notification, please investigate")
         end
@@ -302,6 +302,8 @@ class HomeController < ApplicationController
       unless session["cart_delivery_type_#{@store.id}"]
         if @store.has_delivery_service?
           session["cart_delivery_type_#{@store.id}"] = 'delivery'
+        elsif @store.has_melivery_service?
+          session["cart_delivery_type_#{@store.id}"] = 'melivery'
         elsif @store.has_pick_up_service?
           session["cart_delivery_type_#{@store.id}"] = 'pick_up'
         elsif @store.has_express_service?

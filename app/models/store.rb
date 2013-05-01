@@ -51,16 +51,14 @@ class Store < ActiveRecord::Base
     good_dishes.size > 0
   end
 
-  def can_order_online?
-    services.include?(Service.find_by_name("order_online"))
-  end
-
-  def can_reserve_online?
-    services.include?(Service.find_by_name("reserve_online"))
-  end
-
+  # Delivery Types for Carts / Services of Stores
+  # ==========================================================
   def has_delivery_service?
     services.include?(Service.find_by_name("delivery_service"))
+  end
+
+  def has_melivery_service?
+    services.include?(Service.find_by_name("melivery_service"))
   end
 
   def has_pick_up_service?

@@ -1,0 +1,18 @@
+<%= simple_form_for(@advertisement) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :desc %>
+    <%= f.input :rank %>
+    <%= f.input :start_at, wrapper_html: { class: "sf_2_in_1" } %>
+    <%= f.input :end_at, wrapper_html: { class: "sf_2_in_1" } %>
+    <%= f.input :banner, as: :image_preview, input_html: {preview_version: :micro},
+                :hint => "Use image with width:height = 3:1`." %>
+    <%= f.input :target_url %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+<% end %>

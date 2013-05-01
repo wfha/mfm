@@ -6,9 +6,7 @@
       <div class="row-fluid">
         <ul class="nav nav-tabs first_child_active" style="margin-bottom: 0px;">
           <% @store.menus.each do |menu| %>
-              <li>
-                <a href="#menu_<%= menu.id %>"><%= menu.name %></a>
-              </li>
+              <li><a href="#menu_<%= menu.id %>"><%= menu.name %></a></li>
           <% end %>
         </ul>
 
@@ -25,8 +23,7 @@
                               <% if session["cart_delivery_type_#{@store.id}"] %>
                                   <% if @store_still_open && @menu_still_open %>
                                       <div class="thumbnail store_menu_dish_wrap_open" rel="popover" title="<%= dish.name %>"
-                                           data-content="<% if dish.desc.empty? %>Info coming soon ...
-                                   <% else %><%= sanitize(dish.desc) %><% end %>">
+                                           data-content="<%= dish.desc.empty? ? "Info coming soon ..." : sanitize(dish.desc) %>">
                                         <%= link_to home_dish_modal_path(dish), :remote => true do %>
                                             <%= truncate(dish.name, length: 40) %>
                                             <i class="pull-right"><%= number_to_currency(dish.price) %></i>
@@ -37,8 +34,7 @@
                                       </div>
                                   <% else %>
                                       <div class="thumbnail store_menu_dish_wrap_closed" rel="popover" title="<%= dish.name %>"
-                                           data-content="<% if dish.desc.empty? %>Info coming soon ...
-                                   <% else %><%= sanitize(dish.desc) %><% end %>">
+                                           data-content="<%= dish.desc.empty? ? "Info coming soon ..." : sanitize(dish.desc) %>">
                                         <%= link_to "javascript:alert('" + Dish::ERROR_MSG + "');" do %>
                                             <%= truncate(dish.name, length: 40) %>
                                             <i class="pull-right"><%= number_to_currency(dish.price) %></i>
@@ -50,8 +46,7 @@
                                   <% end %>
                               <% else %>
                                   <div class="thumbnail store_menu_dish_wrap_closed" rel="popover" title="<%= dish.name %>"
-                                       data-content="<% if dish.desc.empty? %>Info coming soon ...
-                                   <% else %><%= sanitize(dish.desc) %><% end %>">
+                                       data-content="<%= dish.desc.empty? ? "Info coming soon ..." : sanitize(dish.desc) %>">
                                     <%= link_to 'javascript:alert("' + @store.name.to_s + ' cannot order online, please call ' + @store.phone + ' to place order!");' do %>
                                         <%= truncate(dish.name, length: 40) %>
                                         <i class="pull-right"><%= number_to_currency(dish.price) %></i>
@@ -73,16 +68,5 @@
     </div>
   </div>
 
-  <div class="span4">
-    <div class="well" id="side">
-      <div id="cart">
-        <% if @cart %>
-            <%= render @cart %>
-        <% else %>
-            <%= image_tag "/assets/mfm_logo.png" %>
-            <h4>Your Cart Is Empty!</h4>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render 'store_cart' %>
 </div><!--/row-->
