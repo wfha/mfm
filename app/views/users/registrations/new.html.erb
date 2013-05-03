@@ -10,20 +10,14 @@
       </tr>
       <tr>
         <td width="50%">
-          <% if resource.errors.any? %>
-              <div id="error_explanation">
-                <b><%= pluralize(resource.errors.count, "error") %> prohibited this plan from being saved:</b>
-                <ul>
-                  <% resource.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                  <% end %>
-                </ul>
-              </div>
-          <% end %>
-
           <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),
                               :validate => true, :html => { :class => 'hide_input_label' } ) do |f| %>
-              <%= f.error_notification %>
+              <% if session[:omniauth] %>
+                  <%= f.error_notification :message => "Please give a password for Meals4.Me." %>
+              <% else %>
+                  <%= f.error_notification %>
+              <% end %>
+
               <%= f.input :firstname, :placeholder => 'Firstname', :wrapper_html => { :class => "sf_2_in_1" } %>
               <%= f.input :lastname, :placeholder => 'Lastname', :wrapper_html => { :class => "sf_2_in_1" } %>
               <%= f.input :email, :placeholder => 'Email' %>

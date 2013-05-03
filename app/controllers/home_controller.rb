@@ -159,7 +159,9 @@ class HomeController < ApplicationController
           # How to notice the paypal order
           #Order.delay.to_fax(order.id)
           #Order.delay(run_at: 3.minutes.from_now).to_phone(order.id)
-
+          Order.delay.to_phone(order.id)
+          # Create cash back for this order
+          Transaction.create(name: "From Order", user_id: order.user.id, amount: order.cart.total_price/100)
         else
           logger.error("Failed to verify Paypal's notification, please investigate")
         end
@@ -213,63 +215,6 @@ class HomeController < ApplicationController
   def phone_test
     Order.to_phone(1)
     render :nothing => true
-  end
-
-  # Admin Console
-  # ======================================================
-
-  def orders
-    if params[:date]
-      @date = Date.parse params[:date]
-    else
-      @date = Date.today
-    end
-
-    st = @date.beginning_of_day
-    en = @date.end_of_day
-
-    @g_orders = Order.where("store_id = 1 AND created_at >= :st AND created_at <= :en", {:st => st, :en => en})
-    @r_orders = Order.where("store_id > 1 AND created_at >= :st AND created_at <= :en", {:st => st, :en => en})
-    @tickets = Ticket.where("created_at >= :st AND created_at <= :en", {:st => st, :en => en})
-  end
-
-  def handle_order
-    @order = Order.find(params[:id])
-    if params[:handled] == "true"
-      @order.handled = true
-    else
-      @order.handled = false
-    end
-    @order.save
-
-    respond_to do |format|
-      format.js
-      format.mjs
-    end
-  end
-
-  def handle_ticket
-    @ticket = Ticket.find(params[:id])
-    if params[:handled] == "true"
-      @ticket.handled = true
-    else
-      @ticket.handled = false
-    end
-    @ticket.save
-
-    respond_to do |format|
-      format.js
-      format.mjs
-    end
-  end
-
-  def order_modal
-    @order = Order.find(params[:id])
-
-    respond_to do |format|
-      format.js
-      format.mjs
-    end
   end
 
   # Load the dish choices

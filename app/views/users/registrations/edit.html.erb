@@ -33,28 +33,33 @@
     <% end %>
   </div>
 
-  <div class="span6 well">
-    <h2>My Orders</h2>
+  <div class="span6">
+    <div class="well">
+      <h2>My Cash Back: <span style="color: green;"><%= number_to_currency resource.cash_back %></span></h2>
+    </div>
 
-    <table class="table table-striped" >
-      <% resource.orders.each do |order| %>
-          <tr>
-            <th>Invoice: <%= order.id %></th>
-            <th><%= order.cart.delivery_type %>@<%= order.store.name %></th>
-            <th><%= order.created_at.strftime("%I:%M%P %m/%d/%Y")  %></th>
-          </tr>
-          <tr style="background-color: yellow;">
-            <td></td>
-            <td>
-              <b>Items: </b><%= order.cart.cart_items.size %>,
-              <b>Total: </b><%= number_to_currency order.cart.total_price %>
-            </td>
-            <td>
-              <%= link_to "Details", home_order_modal_path(order), remote: true, class: "btn btn-primary" %>
-              <%= link_to "ReOrder", new_order_path(cart_id: order.cart.id), method: :get, class: "btn btn-info" %>
-            </td>
-          </tr>
-      <% end %>
-    </table>
+    <div class="well">
+      <h2>My Orders</h2>
+      <table class="table table-striped" >
+        <% resource.orders.each do |order| %>
+            <tr>
+              <th>Invoice: <%= order.id %></th>
+              <th><%= order.cart.delivery_type %>@<%= order.store.name %></th>
+              <th><%= order.created_at.strftime("%I:%M%P %m/%d/%Y")  %></th>
+            </tr>
+            <tr style="background-color: yellow;">
+              <td></td>
+              <td>
+                <b>Items: </b><%= order.cart.cart_items.size %>,
+                <b>Total: </b><%= number_to_currency order.cart.total_price %>
+              </td>
+              <td>
+                <%= link_to "Details", admin_order_modal_path(order), remote: true, class: "btn btn-primary" %>
+                <%= link_to "ReOrder", new_order_path(cart_id: order.cart.id), method: :get, class: "btn btn-info" %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>

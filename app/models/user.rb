@@ -15,8 +15,9 @@ class User < ActiveRecord::Base
 
   has_one :address, :as => :addressable
 
-  has_many :orders
-  has_many :authentications
+  has_many :orders              # For getting all the orders for this user
+  has_many :authentications     # For signing in with Facebook and Google
+  has_many :transactions        # For calculating cash back balance for this user
 
   has_and_belongs_to_many :roles
 
@@ -37,58 +38,33 @@ class User < ActiveRecord::Base
   validates :lastname, presence: true,
             format: { with: CustomValidators::Name.regex, message: CustomValidators::Name.hint }
   validates :password, presence: true, confirmation: true, :on => :create,
-            format: { with: CustomValidators::Password.regex, message: CustomValidators::Password.hint }, :if => :password_required?
+            format: { with: CustomValidators::Password.regex, message: CustomValidators::Password.hint }
   validates :phone, presence: true, :if => :phone_required?
 
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)
   end
 
-  def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-
-      if auth.provider == "facebook" || omniauth.provider == 'google_oauth2'
-        user.oauth_token = auth.credentials.token
-        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-        user.firstname = auth.info.first_name
-        user.lastname = auth.info.last_name
-        user.email = auth.info.email
-        user.password = Devise.friendly_token[0,20]
-        user.save
-      elsif auth.provider == "twitter"
-        user.oauth_token = auth.credentials.token
-        user.firstname = auth.info.name.split[0]
-        user.lastname = auth.info.name.split[1]
-        user.email = "guest_#{Time.now.to_i}#{rand(99)}@meals4.me"
-        user.password = Devise.friendly_token[0,20]
-        user.save
-      end
-    end
-  end
-
-  def self.new_with_session(params, session)
-    if session["devise.user_attributes"]
-      new(session["devise.user_attributes"], without_protection: true) do |user|
-        user.attributes = params
-        user.valid?
-      end
-    else
-      super
-    end
-  end
-
+  # Skip password for users that use facebook and google to sign in
   def password_required?
     (authentications.empty? || !password.blank?) && super
   end
 
+  # Skip phone validation when sign up
   def phone_required?
     if validate_phone
       true
     else
       false
     end
+  end
+
+  def cash_back
+    b = 0
+    transactions.each do |tran|
+      b += tran.amount
+    end
+    b
   end
 
   def facebook

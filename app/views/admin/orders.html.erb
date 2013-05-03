@@ -22,8 +22,8 @@
           <td><%= t.email %></td>
           <td><%= t.content %></td>
           <td>
-            <%= link_to "Handle", home_handle_ticket_path(t, handled: true), remote: true, disable_with: "......", class: "btn btn-primary" %>
-            <%= link_to "Undo", home_handle_ticket_path(t, handled: false), remote: true, disable_with: "......", class: "btn btn-primary" %>
+            <%= link_to "Handle", admin_handle_ticket_path(t, handled: true), remote: true, disable_with: "......", class: "btn btn-primary" %>
+            <%= link_to "Undo", admin_handle_ticket_path(t, handled: false), remote: true, disable_with: "......", class: "btn btn-primary" %>
           </td>
         </tr>
     <% end %>
@@ -53,9 +53,9 @@
           <td><%= order.created_at.strftime("%m/%d/%Y %H:%M%p") %></td>
           <td><%= order.note %></td>
           <td>
-            <%= link_to "Details", home_order_modal_path(order), remote: true, disable_with: "......", class: "btn btn-info" %>
-            <%= link_to "Handle", home_handle_order_path(order, handled: true), remote: true, disable_with: "......", class: "btn btn-primary" %>
-            <%= link_to "Undo", home_handle_order_path(order, handled: false), remote: true, disable_with: "......", class: "btn btn-primary" %>
+            <%= link_to "Details", admin_order_modal_path(order), remote: true, disable_with: "......", class: "btn btn-info" %>
+            <%= link_to "Handle", admin_handle_order_path(order, handled: true), remote: true, disable_with: "......", class: "btn btn-primary" %>
+            <%= link_to "Undo", admin_handle_order_path(order, handled: false), remote: true, disable_with: "......", class: "btn btn-primary" %>
           </td>
         </tr>
     <% end %>
@@ -85,11 +85,14 @@
           <td><%= order.created_at.strftime("%m/%d/%Y %H:%M%p") %></td>
           <td><%= order.note %></td>
           <td>
-            <%= link_to 'Details', home_order_modal_path(order), remote: true, disable_with: "......", class: "btn btn-info" %>
-            <%= link_to ' Handle ', home_handle_order_path(order, handled: true), remote: true, disable_with: "......", class: "btn btn-primary" %>
-            <%= link_to 'Undo', home_handle_order_path(order, handled: false), remote: true, disable_with: "......", class: "btn btn-primary" %>
+            <%= link_to 'Details', admin_order_modal_path(order), remote: true, disable_with: "......", class: "btn btn-info" %>
+            <%= link_to ' Handle ', admin_handle_order_path(order, handled: true), remote: true, disable_with: "......", class: "btn btn-primary" %>
+            <%= link_to 'Undo', admin_handle_order_path(order, handled: false), remote: true, disable_with: "......", class: "btn btn-primary" %>
           </td>
         </tr>
     <% end %>
   </table>
+
+  <br/>
+  <%= link_to 'Back to Stores', stores_path, class: "btn btn-info" %>
 </div>

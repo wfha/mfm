@@ -124,7 +124,7 @@
         </li>
         <li class="muted">&middot;</li>
         <li><%= link_to "Chrome Extension", "https://chrome.google.com/webstore/detail/meals4me/miinanihaigjbhiekjadnmagbfcmcmdp", target: "_blank" %></li>
-        <li><p class="pull-right">&copy; Meals4.Me Company 2012.</p></li>
+        <li><p class="pull-right">&copy; Meals4<%= link_to ".", admin_index_path, style: "color: #333333;" %>Me Company 2012.</p></li>
       </ul>
     </div>
   </div>
@@ -144,8 +144,11 @@
     </div>
   </div>
 
-  <% if ["home", "users/registrations", "users/sessions", "users/passwords", "users/unlocks", "users/confirmations"].include?(params[:controller]) %>
+  <% if params[:controller] == "home" %>
+      <!--Displya of a cart_item when ordering-->
       <div id="modal_wrap_cart_item"></div>
+
+      <!--Display of a photo, for dish-->
       <div id="modal_wrap_photo">
         <div class="modal hide fade">
           <div class="modal-header">
@@ -160,7 +163,15 @@
           </div>
         </div>
       </div>
+  <% end %>
+
+  <% if ["admin", "users/registrations"].include?(params[:controller]) %>
+      <!--The display of a order, for admin and user-->
       <div id="modal_wrap_order"></div>
+  <% end %>
+
+  <% if ["home", "users/registrations", "users/sessions", "users/passwords", "users/unlocks", "users/confirmations"].include?(params[:controller]) %>
+      <!--The form to submit a ticket-->
       <div id="modal_wrap_ticket">
         <div class="modal hide fade">
           <div class="modal-header">
@@ -181,7 +192,6 @@
         </div>
       </div>
   <% end %>
-
 </div>
 
 <%= yield :scripts %>

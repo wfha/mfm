@@ -107,10 +107,14 @@ class OrdersController < ApplicationController
           format.html   { redirect_to @order.paypal_url }
           format.mobile { redirect_to @order.paypal_url }
         else
+          # Create cash back for this order
+          Transaction.create(name: "From Order", user_id: @order.user.id, amount: @order.cart.total_price/100)
+
+          # Send Fax with delayed_jobs
           Order.delay.to_fax(@order.id, p[:card_number], p[:card_verification], p[:card_expires_on])
+
+          # Send Call with delayed_jobs
           Order.delay(run_at: 3.minutes.from_now).to_phone(@order.id)
-          #Order.delay(run_at: 5.minutes.from_now).to_phone(@order.id)
-          #Order.delay(run_at: 7.minutes.from_now).to_phone(@order.id)
 
           format.html   { redirect_to @order, notice: 'Order was successfully created.' }
           format.mobile { redirect_to @order, notice: 'Order was successfully created.' }

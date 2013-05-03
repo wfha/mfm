@@ -12,10 +12,8 @@
         <div class="ui-block-a"><%= f.input :password, :placeholder => 'Password' %></div>
         <div class="ui-block-b"><%= f.input :password_confirmation, :placeholder => 'Confirmation' %></div>
       </div>
-      <div>
-        <%= f.input :phone, as: :hidden, input_html: { value: '000000000' } %>
-        <%= f.button :submit, "Sign up" %>
-      </div>
+
+      <%= f.button :submit, "Sign up" %>
   <% end %>
 
   <br/><hr/><br/>

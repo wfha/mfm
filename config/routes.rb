@@ -1,6 +1,6 @@
 Mfm::Application.routes.draw do
 
-  resources :advertisements
+  resources :transactions
 
 
   devise_for :users, controllers: {
@@ -14,36 +14,41 @@ Mfm::Application.routes.draw do
 
   match '/delayed_job' => DelayedJobWeb, :anchor => false
 
-  match 'home/index'                  => 'home#index',              :as => :home_index
-  match 'home/stores'                 => 'home#stores',             :as => :home_stores
-  match 'home/delivery'               => 'home#delivery',           :as => :home_delivery
-  match 'home/grocery'                => 'home#grocery',            :as => :home_grocery
-  match 'home/coupons'                => 'home#coupons',            :as => :home_coupons
-  match 'home/plans'                  => 'home#plans',              :as => :home_plans
+  match 'admin/index'                 => 'admin#index',              :as => :admin_index
+  match 'admin/users'                 => 'admin#users',              :as => :admin_users
+  match 'admin/orders'                => 'admin#orders',             :as => :admin_orders
+  match 'admin/handle_order/:id'      => 'admin#handle_order',       :as => :admin_handle_order
+  match 'admin/handle_ticket/:id'     => 'admin#handle_ticket',      :as => :admin_handle_ticket
+  match 'admin/order_modal/:id'       => 'admin#order_modal',        :as => :admin_order_modal
+  match 'admin/create_transaction'    => 'admin#create_transaction', :as => :admin_create_transaction
 
-  match 'home/store_overview/:id'     => 'home#store_overview',     :as => :home_store_overview
-  match 'home/store_info/:id'         => 'home#store_info',         :as => :home_store_info
-  match 'home/store_good/:id'         => 'home#store_good',         :as => :home_store_good
-  match 'home/store_menu/:id'         => 'home#store_menu',         :as => :home_store_menu
-  match 'home/store_promo/:id'        => 'home#store_promo',        :as => :home_store_promo
-  match 'home/store_review/:id'       => 'home#store_review',       :as => :home_store_review
-  match 'home/load_store_good/:id'    => 'home#load_store_good',    :as => :home_load_store_good
-  match 'home/load_store_info/:id'    => 'home#load_store_info',    :as => :home_load_store_info
-  match 'home/load_store_review/:id'  => 'home#load_store_review',  :as => :home_load_store_review
-  match 'home/print_coupon/:id'       => 'home#print_coupon',       :as => :home_print_coupon
-  match 'home/dish_modal/:id'         => 'home#dish_modal',         :as => :home_dish_modal
+  match 'home/index'                  => 'home#index',               :as => :home_index
+  match 'home/stores'                 => 'home#stores',              :as => :home_stores
+  match 'home/delivery'               => 'home#delivery',            :as => :home_delivery
+  match 'home/grocery'                => 'home#grocery',             :as => :home_grocery
+  match 'home/coupons'                => 'home#coupons',             :as => :home_coupons
+  match 'home/plans'                  => 'home#plans',               :as => :home_plans
 
-  match 'home/paypal_notify'          => 'home#paypal_notify',      :as => :home_paypal_notify
-  match 'home/paypal_cancel'          => 'home#paypal_cancel',      :as => :home_paypal_cancel
-  match 'home/orders'                 => 'home#orders',             :as => :home_orders
-  match 'home/handle_order/:id'       => 'home#handle_order',       :as => :home_handle_order
-  match 'home/handle_ticket/:id'      => 'home#handle_ticket',      :as => :home_handle_ticket
-  match 'home/order_modal/:id'        => 'home#order_modal',        :as => :home_order_modal
+  match 'home/store_overview/:id'     => 'home#store_overview',      :as => :home_store_overview
+  match 'home/store_info/:id'         => 'home#store_info',          :as => :home_store_info
+  match 'home/store_good/:id'         => 'home#store_good',          :as => :home_store_good
+  match 'home/store_menu/:id'         => 'home#store_menu',          :as => :home_store_menu
+  match 'home/store_promo/:id'        => 'home#store_promo',         :as => :home_store_promo
+  match 'home/store_review/:id'       => 'home#store_review',        :as => :home_store_review
+  match 'home/load_store_good/:id'    => 'home#load_store_good',     :as => :home_load_store_good
+  match 'home/load_store_info/:id'    => 'home#load_store_info',     :as => :home_load_store_info
+  match 'home/load_store_review/:id'  => 'home#load_store_review',   :as => :home_load_store_review
+  match 'home/print_coupon/:id'       => 'home#print_coupon',        :as => :home_print_coupon
+  match 'home/dish_modal/:id'         => 'home#dish_modal',          :as => :home_dish_modal
 
-  match 'home/phone_start'            => 'home#phone_start',        :as => :home_phone_start
-  match 'home/phone_end'              => 'home#phone_end',          :as => :home_phone_end
-  match 'home/phone_test'             => 'home#phone_test',         :as => :home_phone_test
+  match 'home/paypal_notify'          => 'home#paypal_notify',       :as => :home_paypal_notify
+  match 'home/paypal_cancel'          => 'home#paypal_cancel',       :as => :home_paypal_cancel
 
+  match 'home/phone_start'            => 'home#phone_start',         :as => :home_phone_start
+  match 'home/phone_end'              => 'home#phone_end',           :as => :home_phone_end
+  match 'home/phone_test'             => 'home#phone_test',          :as => :home_phone_test
+
+  resources :advertisements
   resources :carts do
     member do
       get :type

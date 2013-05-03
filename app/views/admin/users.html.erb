@@ -1,0 +1,50 @@
+<div class="well">
+  <h2>Listing Users</h2>
+  <table class="table table-bordered">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Orders</th>
+      <th>Confirmed?</th>
+      <th>Scores</th>
+      <th>Actions</th>
+    </tr>
+    <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.firstname + " " + user.lastname %></td>
+          <td><%= user.email %></td>
+          <td><%= user.address.address1 + ", " + user.address.address2 if user.address %></td>
+          <td>
+            <%= user.orders.size %>  (<%= link_to "Show/Hide", "javascript:;", class: "orders_toggler", style: "font-size: 12px;" %>)
+            <div style="display: none;">
+              <% user.orders.each do |order| %>
+                  <%= order.id %> |
+                  <%= order.payment_type %> |
+                  <%= order.payment_status %> |
+                  <br/>
+              <% end %>
+            </div>
+          </td>
+          <td><%= user.confirmed? %></td>
+          <td>
+            <%= user.cash_back %> (<%= link_to "Change", "javascript:;", class: "orders_toggler", style: "font-size: 12px;" %>)
+            <div style="display: none;">
+              <%= form_tag(admin_create_transaction_path, :method => "post", :remote => true) do %>
+                  Add Amount<br/>
+                  <input type="hidden" name="user_id" value="<%= user.id %>" />
+                  <input type="text" name="amount" value="0.00" style="width: 30px;margin-top: 10px;" />
+                  <input type="submit" value="Submit" class="btn btn-primary" />
+              <% end %>
+            </div>
+          </td>
+          <td><%= link_to "Edit User", "#" %></td>
+        </tr>
+    <% end %>
+  </table>
+
+  <br/>
+  <%= link_to 'Back to Stores', stores_path, class: "btn btn-info" %>
+</div>

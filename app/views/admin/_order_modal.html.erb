@@ -27,8 +27,8 @@
 
           <!--Order User Address-->
           <% if @order.user.address %>
-              <br/><%= @order.user.address.addr1 + " " + @order.user.address.addr2 %>
-              <br/><%= @order.user.address.city + " " + @order.user.address.zip %>
+              <br/><%= @order.user.address.address1 %>,&nbsp;<%= @order.user.address.address2 %>
+              <br/><%= @order.user.address.city %>,&nbsp;<%= @order.user.address.zip %>
           <% end %>
         </td>
         <td>Subtotal:</td><td><%= number_to_currency @order.cart.subtotal_price %></td>
