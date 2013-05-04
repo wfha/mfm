@@ -35,6 +35,7 @@
                         <%= image_tag '/assets/blue_head_100x100.png' %>
                     <% end %>
                     <%= current_user.firstname[0].upcase + ". " + current_user.lastname.capitalize %>
+                    <span id="cash_back_in_bar">(<%= number_to_currency current_user.cash_back %>)</span>
                 <% end %>
               </li>
               <li class=""><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>

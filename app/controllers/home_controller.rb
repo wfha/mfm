@@ -161,7 +161,7 @@ class HomeController < ApplicationController
           #Order.delay(run_at: 3.minutes.from_now).to_phone(order.id)
           Order.delay.to_phone(order.id)
           # Create cash back for this order
-          Transaction.create(name: "From Order", user_id: order.user.id, amount: order.cart.total_price/100)
+          order.to_transaction
         else
           logger.error("Failed to verify Paypal's notification, please investigate")
         end

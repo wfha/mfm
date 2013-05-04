@@ -1,1 +1,1 @@
-location.reload()
+$("#cash_back_<%= @user_id %>").html("<%= @cash_back %>")

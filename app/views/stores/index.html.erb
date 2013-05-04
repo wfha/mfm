@@ -18,9 +18,8 @@
       <th>Name</th>
       <th>Avatar</th>
       <th>Phone/Fax</th>
-      <th>Delivery minimum</th>
-      <th>Delivery fee</th>
-      <th>Delivery radius</th>
+      <th>Delivery min|fee|radius</th>
+      <th>Cash Back Rate</th>
       <th colspan="7">Action</th>
     </tr>
 
@@ -30,9 +29,12 @@
           <td><%= store.name %></td>
           <td><%= image_tag store.avatar_url(:small).to_s if store.avatar? %></td>
           <td><%= store.phone %><br/><%= store.fax %></td>
-          <td><%= store.delivery_minimum %></td>
-          <td><%= store.delivery_fee %></td>
-          <td><%= store.delivery_radius %></td>
+          <td>
+            <%= number_to_currency store.delivery_minimum %> |
+            <%= number_to_currency store.delivery_fee %> |
+            <%= store.delivery_radius %> miles
+          </td>
+          <td><%= store.cash_back_rate %></td>
           <td><%= link_to 'Menus', store_menus_path(store) %></td>
           <td><%= link_to 'Featu', store_dish_features_path(store) %></td>
           <td><%= link_to 'Choic', store_dish_choices_path(store) %></td>

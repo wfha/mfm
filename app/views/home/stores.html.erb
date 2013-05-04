@@ -12,6 +12,11 @@
                       </div>
                       <div class="pull-left" style="margin-left: 5px;">
                         <%= link_to store.name, home_store_overview_path(store) %>
+                        <% if store.cash_back_rate > 0 %>
+                            <span style="color: green;font-weight: bold;font-family: times;font-style: italic;font-size: 12px;">
+                              &nbsp;<%= store.cash_back_rate * 100 %>% Reward
+                            </span>
+                        <% end %>
                       </div>
                       <div class="pull-right" style="width: 155px;">
                         <%= link_to "Menu", home_store_menu_path(store), class: 'label label-default' %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503012256) do
+ActiveRecord::Schema.define(:version => 20130503153202) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address1"
@@ -329,10 +329,11 @@ ActiveRecord::Schema.define(:version => 20130503012256) do
     t.decimal  "delivery_minimum"
     t.decimal  "delivery_fee"
     t.integer  "delivery_radius"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.integer  "rank",             :default => 0, :null => false
+    t.datetime "created_at",                                                      :null => false
+    t.datetime "updated_at",                                                      :null => false
+    t.integer  "rank",                                           :default => 0,   :null => false
     t.text     "story"
+    t.decimal  "cash_back_rate",   :precision => 8, :scale => 4, :default => 0.0
   end
 
   create_table "stores_tags", :id => false, :force => true do |t|

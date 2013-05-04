@@ -56,6 +56,14 @@
         <span class="left75">Total:</span>
         <span class="right20"><%= number_to_currency(cart.total_price) %></span>
       </li>
+
+      <!--Give cash back when signed in and in a cash_back store-->
+      <% if user_signed_in? && cart.store.cash_back_rate > 0 %>
+          <li class="cart_footer" style="color:#006400;font-weight:bold;font-family: times;text-align:center;">
+            You are earning <%= number_to_currency cart.total_price * cart.store.cash_back_rate %> cash back!
+          </li>
+      <% end %>
+
       <% unless params[:controller] == "orders" %>
           <li class="cart_footer" style="margin-top: 10px;">
             <% if (cart.delivery_type == "delivery" || cart.delivery_type == "melivery") && (cart.total_price < cart.store.delivery_minimum) %>

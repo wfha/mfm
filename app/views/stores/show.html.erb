@@ -7,6 +7,7 @@
   <p><b>Delivery minimum:</b><%= @store.delivery_minimum %></p>
   <p><b>Delivery fee:</b><%= @store.delivery_fee %></p>
   <p><b>Delivery radius:</b><%= @store.delivery_radius %></p>
+  <p><b>Cash Back Rate:</b><%= @store.cash_back_rate %></p>
   <p><b>Position: </b>(<%= @store.address.latitude %>, <%= @store.address.longitude %>)</p>
 
   <%= link_to 'Edit', edit_store_path(@store) %> |

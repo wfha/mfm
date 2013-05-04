@@ -1,8 +1,5 @@
 Mfm::Application.routes.draw do
 
-  resources :transactions
-
-
   devise_for :users, controllers: {
       confirmations:      'users/confirmations',
       passwords:          'users/passwords',
@@ -21,6 +18,7 @@ Mfm::Application.routes.draw do
   match 'admin/handle_ticket/:id'     => 'admin#handle_ticket',      :as => :admin_handle_ticket
   match 'admin/order_modal/:id'       => 'admin#order_modal',        :as => :admin_order_modal
   match 'admin/create_transaction'    => 'admin#create_transaction', :as => :admin_create_transaction
+  match 'admin/create_redeem'         => 'admin#create_redeem',      :as => :admin_create_redeem
 
   match 'home/index'                  => 'home#index',               :as => :home_index
   match 'home/stores'                 => 'home#stores',              :as => :home_stores
@@ -61,6 +59,7 @@ Mfm::Application.routes.draw do
   resources :services
   resources :tags
   resources :tickets
+  resources :transactions
 
   resources :stores do
     resources :coupons, :dish_choices, :dish_features, :dish_discounts, :hours, :menus, :plans

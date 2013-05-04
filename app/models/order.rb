@@ -114,6 +114,7 @@ class Order < ActiveRecord::Base
     APP_CONFIG['paypal_base_url'] + "?" + values.to_query
   end
 
+  # Use class method because of delayed_job
   def self.to_fax(order_id, *cc)
     @order = Order.find(order_id)
 
@@ -146,6 +147,7 @@ class Order < ActiveRecord::Base
     end
   end
 
+  # Use class method because of delayed_job
   def self.to_phone(order_id)
     @order = Order.find(order_id)
     if @order.status == "unconfirmed"
@@ -162,5 +164,10 @@ class Order < ActiveRecord::Base
         return
       end
     end
+  end
+
+  # Use regular method because of no delayed_job
+  def to_transaction
+    Transaction.create(name: "From Order", user_id: user.id, amount: (cart.total_price * store.cash_back_rate))
   end
 end

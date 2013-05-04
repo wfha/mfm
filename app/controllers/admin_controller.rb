@@ -63,9 +63,43 @@ class AdminController < ApplicationController
   end
 
   def create_transaction
+    # Get redeem amount and user from params
+    amount = params[:amount].to_f
+    @user_id = params[:user_id].to_i
+
+    # Create the transaction
+    Transaction.create(name: "From Admin", user_id: @user_id, amount: amount)
+
+    # After transaction, get the new cash back amount
+    @cash_back = User.find(@user_id).cash_back
+
+    respond_to do |format|
+      format.js
+      format.mjs
+    end
+  end
+
+  def create_redeem
+    # Get redeem amount and user from params
     amount = params[:amount].to_f
     user_id = params[:user_id].to_i
-    Transaction.create(name: "From Admin", user_id: user_id, amount: amount)
+    user = User.find(user_id)
+
+    # The result of create_redeem, default to false
+    @result = false
+
+    # Make sure user has enought cash back to redeem
+    if amount < user.cash_back && amount > 0
+      # Create the transaction for this redeem
+      @tran = Transaction.create(name: "From Redeem", user_id: user_id, amount: -amount)
+
+      # After redeem, refresh user object and get new cash back amount
+      user.reload
+      @cash_back = user.cash_back
+
+      # The result of create_redeem
+      @result = true
+    end
 
     respond_to do |format|
       format.js

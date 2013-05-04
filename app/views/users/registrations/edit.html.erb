@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div class="span6 well">
-    <h2>Edit <%= resource_name.to_s.humanize %></h2>
+    <h3>Edit <%= resource_name.to_s.humanize %></h3>
 
     <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),
                         :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
@@ -35,17 +35,69 @@
 
   <div class="span6">
     <div class="well">
-      <h2>My Cash Back: <span style="color: green;"><%= number_to_currency resource.cash_back %></span></h2>
+      <h3>
+        My Cash Back:
+        <span id="cash_back" style="color: green;"><%= number_to_currency resource.cash_back %></span>
+        <div class="pull-right">
+          <%= link_to "Details", "javascript:;", id: "cash_back_details_toggler", class: "btn btn-primary" %>
+          <%= link_to "Claim", "javascript:;", id: "cash_back_claim_toggler", class: "btn btn-info" %>
+        </div>
+      </h3>
+      <div id="cash_back_claim" style="display: none;">
+        <hr/>
+        <h4>Choose the amount to redeem:</h4>
+        <%= form_tag(admin_create_redeem_path, :method => "post", :remote => true) do %>
+            <% if resource.cash_back > 5 %>
+                <%= radio_button_tag "amount", 5 %>
+            <% else %>
+                <%= radio_button_tag "amount", 5, false, disabled: true %>
+            <% end %>
+            $5.00&nbsp;&nbsp;&nbsp;
+
+            <% if resource.cash_back > 10 %>
+                <%= radio_button_tag "amount", 10 %>
+            <% else %>
+                <%= radio_button_tag "amount", 10, false, disabled: true %>
+            <% end %>
+            $10.00&nbsp;&nbsp;&nbsp;
+
+            <% if resource.cash_back > 15 %>
+                <%= radio_button_tag "amount", 15 %>
+            <% else %>
+                <%= radio_button_tag "amount", 15, false, disabled: true %>
+            <% end %>
+            $15.00&nbsp;&nbsp;&nbsp;
+
+            <% if resource.cash_back > 20 %>
+                <%= radio_button_tag "amount", 20 %>
+            <% else %>
+                <%= radio_button_tag "amount", 20, false, disabled: true %>
+            <% end %>
+            $20.00
+
+            <%= hidden_field_tag "user_id", resource.id %>
+            <%= submit_tag "Redeem", class: "btn btn-primary pull-right", :disable_with => "Processing..." %>
+        <% end %>
+      </div>
+      <table class="table table-striped table-bordered" id="cash_back_details" style="display: none;">
+        <% resource.transactions.each do |tran| %>
+            <tr>
+              <td><%= tran.created_at.strftime("%Y-%m-%d %H:%M %P") %></td>
+              <td><%= tran.name %></td>
+              <td><%= number_to_currency tran.amount %></td>
+            </tr>
+        <% end %>
+      </table>
     </div>
 
     <div class="well">
-      <h2>My Orders</h2>
-      <table class="table table-striped" >
+      <h3>My Order List</h3>
+      <table class="table table-striped table-bordered" >
         <% resource.orders.each do |order| %>
             <tr>
               <th>Invoice: <%= order.id %></th>
               <th><%= order.cart.delivery_type %>@<%= order.store.name %></th>
-              <th><%= order.created_at.strftime("%I:%M%P %m/%d/%Y")  %></th>
+              <th><%= order.created_at.strftime("%Y-%m-%d %H:%M %P")  %></th>
             </tr>
             <tr style="background-color: yellow;">
               <td></td>

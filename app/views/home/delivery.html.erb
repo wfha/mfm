@@ -9,7 +9,13 @@
               </td>
               <td width="45%">
                 <div>
-                  <h4><%= store.name %></h4>
+                  <h4><%= store.name %>
+                    <% if store.cash_back_rate > 0 %>
+                        <span style="color: green;font-weight: bold;font-family: times;font-style: italic;">
+                          &nbsp;<%= store.cash_back_rate * 100 %>% Reward
+                        </span>
+                    <% end %>
+                  </h4>
                   <p><b>Tags:</b> <% store.tags.each do |t| %><%= t.name %>,&nbsp;<% end %></p>
                   <p><%= store.phone %> | <%= store.address.address1 %></p>
                   <%= link_to 'View Menu', home_store_good_path(store), :class => 'btn btn-primary' %>

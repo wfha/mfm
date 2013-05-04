@@ -1,7 +1,8 @@
 class Store < ActiveRecord::Base
   include Hourable
 
-  attr_accessible :delivery_fee, :delivery_minimum, :delivery_radius, :desc, :fax, :name, :phone, :rank, :gallery, :story,
+  attr_accessible :delivery_fee, :delivery_minimum, :delivery_radius, :cash_back_rate,
+                  :desc, :fax, :name, :phone, :rank, :gallery, :story,
                   :avatar, :avatar_cache, :remove_avatar, # carrierwave and rails_admin
                   :tag_ids, :payment_ids, :service_ids,
                   :address_attributes, :gallery_attributes, :hours_attributes, :menus_attributes

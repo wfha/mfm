@@ -3,9 +3,10 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :user
 
-  # Created in three places:
+  # Created in four places:
   # 1. home_controller.rb     -> paypal_notify
   # 2. orders_controller.rb   -> create
-  # 3. admin_controller.rb    -> craete_transaction
+  # 3. admin_controller.rb    -> create_transaction
+  # 4. order.rb               -> to_transaction
 
 end

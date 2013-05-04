@@ -108,7 +108,7 @@ class OrdersController < ApplicationController
           format.mobile { redirect_to @order.paypal_url }
         else
           # Create cash back for this order
-          Transaction.create(name: "From Order", user_id: @order.user.id, amount: @order.cart.total_price/100)
+          @order.to_transaction
 
           # Send Fax with delayed_jobs
           Order.delay.to_fax(@order.id, p[:card_number], p[:card_verification], p[:card_expires_on])
