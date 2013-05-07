@@ -17,6 +17,12 @@
     </div>
   </div><!-- /grid-a -->
 
+  <% if @store.cash_back_rate > 0 %>
+      <div style="color: green;font-family: times;font-style: italic;font-weight: bold;font-size: 20px;text-align: center;">
+        &nbsp;<%= @store.cash_back_rate * 100 %>% Reward
+      </div>
+  <% end %>
+
   <table width="100%">
     <tr>
       <td width="50%" style="font-size:12px;"><%= image_tag "/assets/icons_glyphish/gray/75-phone.png" %>&nbsp;&nbsp;<%= @store.phone %></td>

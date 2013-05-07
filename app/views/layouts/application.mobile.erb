@@ -50,7 +50,7 @@
                 <%= link_to 'My profile', edit_user_registration_path, data: { role: 'button' }, rel: 'external' %>
               </div>
               <div class="ui-block-b">
-                <%= link_to 'My orders', home_my_orders_path, data: { role: 'button' }, rel: 'external' %>
+                <%= link_to 'My orders', '#', data: { role: 'button' }, rel: 'external' %>
               </div>
               <div class="ui-block-c">
                 <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', data: { role: 'button' }, rel: 'external' %>
@@ -70,7 +70,6 @@
 
   <% flash.each do |type, message| %>
       <div class="alert <%= twitterized_type(type) %>">
-        <a class="close" data-dismiss="alert">x</a>
         <strong><%= message %></strong>
       </div>
   <% end %>

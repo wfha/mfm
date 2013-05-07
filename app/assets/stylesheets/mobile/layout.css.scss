@@ -40,3 +40,66 @@ span.help-inline {
   -webkit-border-radius: 0 !important;
   border-radius: 0 !important;
 }
+
+
+/* Custom Theme */
+/* ======================================================================= */
+
+.alert {
+  margin-top: 30px;
+  padding-left: 10px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #fcefd4;
+  border: 1px solid #fae1c6;
+}
+
+.alert, .alert h4 {
+  color: #eca918;
+}
+
+.alert h4 {
+  margin: 0;
+}
+
+.alert-success {
+  background-color: #caeecf;
+  border-color: #b7e8b6;
+  color: #38b44a;
+}
+
+.alert-success h4 {
+  color: #38b44a;
+}
+
+.alert-danger, .alert-error {
+  background-color: #fadfdd;
+  border-color: #f8d0d4;
+  color: #df382c;
+}
+
+.alert-danger h4, .alert-error h4 {
+  color: #df382c;
+}
+
+.alert-info {
+  background-color: #e7b8d1;
+  border-color: #de9ecb;
+  color: #772953;
+}
+
+.alert-info h4 {
+  color: #772953;
+}
+
+.alert-block {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.alert-block > p, .alert-block > ul {
+  margin-bottom: 0;
+}
+
+.alert-block p + p {
+  margin-top: 5px;
+}

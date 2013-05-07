@@ -7,23 +7,20 @@
         <% menu.categories.each do |category| %>
             <div data-role="collapsible">
               <h2><%= category.name %></h2>
-              <ul data-role="listview" data-split-icon="gear" data-inset="false" data-filter-theme="c" data-divider-theme="d">
+              <ul data-role="listview" data-split-icon="gear" data-inset="false" data-icon="false" data-filter-theme="c" data-divider-theme="d">
                 <% category.dishes.each do |dish| %>
                     <li>
                       <% if session["cart_delivery_type_#{@store.id}"] %>
                           <% if @store_still_open && @menu_still_open %>
-                              <%= link_to home_dish_modal_path(dish), :remote => true do %>
-                                  <%= number_to_currency dish.price %> <%= dish.name %>
-                              <% end %>
+                              <%= link_to (number_to_currency dish.price.to_s + " " + dish.name), home_dish_modal_path(dish), remote: true,
+                                          style: "font-weight:normal;font-size:14px;padding-right:2px;padding-left:2px;" %>
                           <% else %>
-                              <%= link_to "javascript: alert('" + Dish::ERROR_MSG + "');" do %>
-                                  <%= number_to_currency dish.price %> <%= dish.name %>
-                              <% end %>
+                              <%= link_to (number_to_currency dish.price.to_s + " " + dish.name), "javascript: alert('" + Dish::ERROR_MSG + "');",
+                                          style: "font-weight:normal;font-size:14px;padding-right:2px;padding-left:2px;" %>
                           <% end %>
                       <% else %>
-                          <%= link_to 'javascript:alert("' + @store.name.to_s + ' cannot order online, please call ' + @store.phone + ' to place order!");' do %>
-                              <%= number_to_currency dish.price %> <%= dish.name %>
-                          <% end %>
+                          <%= link_to (number_to_currency dish.price.to_s + " " + dish.name), 'javascript:alert("' + @store.name.to_s + ' cannot order online, please call ' + @store.phone + ' to place order!");',
+                                      style: "font-weight:normal;font-size:14px;padding-right:2px;padding-left:2px;" %>
                       <% end %>
                     </li>
                 <% end %>

@@ -28,8 +28,8 @@
         <%= f.input :password_confirmation %>
 
         <%= f.input :current_password, :hint => "Use current password to confirm your changes" %>
-        <%= f.button :submit, :class => "btn btn-primary", :disable_with => "Please wait..."  %>
         <%= link_to "Back to Stores", home_index_path, :class => "btn" %>
+        <%= f.button :submit, :class => "btn btn-primary", :disable_with => "Please wait..."  %>
     <% end %>
   </div>
 
@@ -79,15 +79,19 @@
             <%= submit_tag "Redeem", class: "btn btn-primary pull-right", :disable_with => "Processing..." %>
         <% end %>
       </div>
-      <table class="table table-striped table-bordered" id="cash_back_details" style="display: none;">
-        <% resource.transactions.each do |tran| %>
-            <tr>
-              <td><%= tran.created_at.strftime("%Y-%m-%d %H:%M %P") %></td>
-              <td><%= tran.name %></td>
-              <td><%= number_to_currency tran.amount %></td>
-            </tr>
+
+      <div id="cash_back_details" style="display: none;">
+        <% if @transactions.size > 0 %>
+            <table class="table table-striped table-bordered" id="transactions">
+              <%= render @transactions %>
+            </table>
+            <div id="paginator">
+              <%= paginate @transactions, remote: true %>
+            </div>
+        <% else %>
+            <h4>&nbsp;&nbsp;&nbsp;You haven't got any balance yet.</h4>
         <% end %>
-      </table>
+      </div>
     </div>
 
     <div class="well">

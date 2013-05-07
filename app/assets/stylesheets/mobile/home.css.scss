@@ -42,35 +42,29 @@ ul#index_ul {
   }
 }
 
-/* Restaurant Google Page */
+/* Restaurant Hub Page */
 .hub {
-  .services_icons_wrap {
-    position: relative;
 
-    .services_icons {
-      position: absolute;
-      right: 0px;
-      top: 5px;
+}
 
-      p.services_icon {
-        width: 60px;
-        height: 20px;
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: bold;
-        line-height: 20px;
-        margin: 3px;
-        text-align: center;
+.services_wrap {
+  width: 200px;
+  position: absolute;
+  right: 1px;
+  top: 40px;
 
-        a {
-          font-style: italic;
-          color: #ffffff;
-          text-decoration: none;
-        }
-      }
-    }
+  a {
+    font-size: 12px;
+    line-height: 12px;
+    margin: 1px;
+    padding: 3px 5px;
+    float: right;
+    text-decoration: none;
   }
 }
+
+/* Restaurant Delivery Page */
+
 
 /* Store Overview Gallery */
 .gallery {

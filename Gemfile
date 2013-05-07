@@ -88,3 +88,6 @@ gem 'time_of_day', '~> 0.1.1'
 gem 'newrelic_rpm'
 gem 'oink', '~> 0.10.1'
 gem 'request-log-analyzer', '~> 1.12.8'
+
+# Pagination
+gem 'kaminari', '~> 0.14.1'

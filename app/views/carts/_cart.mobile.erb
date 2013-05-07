@@ -1,54 +1,67 @@
-<% if cart.store.can_order_online? %>
-    <% if cart.cart_items.empty? %>
-        <h4>Your Cart Is Empty!</h4>
-    <% else %>
-        <ul data-role="listview">
-          <li>
-            Cart @ <%= cart.store.name %>
-            <div data-role="controlgroup" data-type="horizontal" data-mini="true" class="button-glyphish">
-              <% if cart.delivery_type == 'delivery' %>
-                  <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), data: {role: 'button', theme: 'b'}, remote: true %>
-                  <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), data: {role: 'button', theme: 'a'}, remote: true %>
-                  <%= link_to 'Express', type_cart_path(cart, delivery_type: :express), data: {role: 'button', theme: 'a'}, remote: true %>
-              <% elsif cart.delivery_type == 'pick_up' %>
-                  <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), data: {role: 'button', theme: 'a'}, remote: true %>
-                  <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), data: {role: 'button', theme: 'b'}, remote: true %>
-                  <%= link_to 'Express', type_cart_path(cart, delivery_type: :express), data: {role: 'button', theme: 'a'}, remote: true %>
-              <% elsif cart.delivery_type == 'express' %>
-                  <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), data: {role: 'button', theme: 'a'}, remote: true %>
-                  <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), data: {role: 'button', theme: 'a'}, remote: true %>
-                  <%= link_to 'Express', type_cart_path(cart, delivery_type: :express), data: {role: 'button', theme: 'b'}, remote: true %>
-              <% end %>
-            </div>
-          </li>
-
-          <%= render(cart.cart_items) %>
-
-          <li style="text-align: right;font-size: 13px;">
-            Subtotal: <span class="pull-right"><%= number_to_currency(cart.subtotal_price) %></span><br/>
-            Tax: <span class="pull-right"><%= number_to_currency(cart.subtotal_price*0.0825) %></span><br/>
-            <% if cart.delivery_fee > 0 %>
-                Delivery Fee: <span class="pull-right"><%= number_to_currency(cart.delivery_fee) %></span><br/>
-            <% end %>
-            Total: <span class="pull-right"><%= number_to_currency(cart.total_price) %></span>
-          </li>
-          <li>
-            <div class="ui-grid-a">
-              <div class="ui-block-a">
-                <%= link_to 'Empty cart', cart, :data => { :role => "button", :mini => true },
-                            :remote => true, method: :delete, confirm: 'Are you sure?' %>
-              </div>
-              <div class="ui-block-b">
-                <% if cart.delivery_type == "delivery" && cart.total_price < cart.store.delivery_minimum %>
-                    <%= link_to "Min.  #{number_to_currency(cart.store.delivery_minimum)}", 'javascript:;', data: { role: "button", mini: true } %>
-                <% else %>
-                    <%= link_to 'Proceed', new_order_path(store_id: cart.store_id), data: { role: "button", mini: true }, rel: 'external' %>
-                <% end %>
-              </div>
-            </div>
-          </li>
-        </ul>
-    <% end %>
+<% if cart.cart_items.empty? %>
+    <h4>Your Cart Is Empty!</h4>
 <% else %>
-    <h4><%= cart.store.name %> cannot order online, please call <span style="color: #8b0000;"><%= cart.store.phone %></span> to place order.</h4>
+    <ul data-role="listview">
+      <li>
+        Cart @ <%= cart.store.name %>
+        <div data-role="controlgroup" data-type="horizontal" data-mini="true" class="button-glyphish">
+          <!--<% if cart.delivery_type == 'delivery' %>-->
+              <!--<%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), data: {role: 'button', theme: 'b'}, remote: true %>-->
+              <!--<%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), data: {role: 'button', theme: 'a'}, remote: true %>-->
+              <!--<%= link_to 'Express', type_cart_path(cart, delivery_type: :express), data: {role: 'button', theme: 'a'}, remote: true %>-->
+          <!--<% elsif cart.delivery_type == 'pick_up' %>-->
+              <!--<%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), data: {role: 'button', theme: 'a'}, remote: true %>-->
+              <!--<%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), data: {role: 'button', theme: 'b'}, remote: true %>-->
+              <!--<%= link_to 'Express', type_cart_path(cart, delivery_type: :express), data: {role: 'button', theme: 'a'}, remote: true %>-->
+          <!--<% elsif cart.delivery_type == 'express' %>-->
+              <!--<%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), data: {role: 'button', theme: 'a'}, remote: true %>-->
+              <!--<%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), data: {role: 'button', theme: 'a'}, remote: true %>-->
+              <!--<%= link_to 'Express', type_cart_path(cart, delivery_type: :express), data: {role: 'button', theme: 'b'}, remote: true %>-->
+          <!--<% end %>-->
+
+          <% if params[:controller] == "orders" %>
+              <% if cart.delivery_type == 'delivery' %>
+                  <%= link_to 'Delivery', "javascript:;", data: {role: 'button', theme: 'b'} %>
+              <% elsif cart.delivery_type == 'melivery' %>
+                  <%= link_to 'Delivery.', "javascript:;", data: {role: 'button', theme: 'b'} %>
+              <% elsif cart.delivery_type == 'pick_up' %>
+                  <%= link_to 'Pick Up', "javascript:;", data: {role: 'button', theme: 'b'} %>
+              <% elsif cart.delivery_type == 'express' %>
+                  <%= link_to 'Reserve', "javascript:;", data: {role: 'button', theme: 'b'} %>
+              <% end %>
+          <% else %>
+              <%= link_to 'Delivery', type_cart_path(cart, delivery_type: :delivery), data: {role: 'button',  theme: (cart.delivery_type == 'delivery') ? 'b' : 'a'}, remote: true if cart.store.has_delivery_service? %>
+              <%= link_to 'Delivery.', type_cart_path(cart, delivery_type: :melivery), data: {role: 'button', theme: (cart.delivery_type == 'melivery') ? 'b' : 'a'}, remote: true if cart.store.has_melivery_service? %>
+              <%= link_to 'Pick Up', type_cart_path(cart, delivery_type: :pick_up), data: {role: 'button', theme: (cart.delivery_type == 'pick_up') ? 'b' : 'a'}, remote: true if cart.store.has_pick_up_service? %>
+              <%= link_to 'Reserve', type_cart_path(cart, delivery_type: :express), data: {role: 'button', theme: (cart.delivery_type == 'express') ? 'b' : 'a'}, remote: true if cart.store.has_express_service? %>
+          <% end %>
+        </div>
+      </li>
+
+      <%= render(cart.cart_items) %>
+
+      <li style="text-align: right;font-size: 13px;">
+        Subtotal: <span class="pull-right"><%= number_to_currency(cart.subtotal_price) %></span><br/>
+        Tax: <span class="pull-right"><%= number_to_currency(cart.subtotal_price*0.0825) %></span><br/>
+        <% if cart.delivery_fee > 0 %>
+            Delivery Fee: <span class="pull-right"><%= number_to_currency(cart.delivery_fee) %></span><br/>
+        <% end %>
+        Total: <span class="pull-right"><%= number_to_currency(cart.total_price) %></span>
+      </li>
+      <li>
+        <div class="ui-grid-a">
+          <div class="ui-block-a">
+            <%= link_to 'Empty cart', cart, :data => { :role => "button", :mini => true },
+                        :remote => true, method: :delete, confirm: 'Are you sure?' %>
+          </div>
+          <div class="ui-block-b">
+            <% if cart.delivery_type == "delivery" && cart.total_price < cart.store.delivery_minimum %>
+                <%= link_to "Min.  #{number_to_currency(cart.store.delivery_minimum)}", 'javascript:;', data: { role: "button", mini: true } %>
+            <% else %>
+                <%= link_to 'Proceed', new_order_path(store_id: cart.store_id), data: { role: "button", mini: true }, rel: 'external' %>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    </ul>
 <% end %>

@@ -1,6 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :new_ticket
 
+  def edit
+    @transactions = resource.transactions.page(params[:page]).per(10)
+    super
+  end
+
   def create
     super
     session[:omniauth] = nil unless @user.new_record?        # Clear omniauth in the session

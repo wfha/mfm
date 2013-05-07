@@ -93,6 +93,9 @@ class AdminController < ApplicationController
       # Create the transaction for this redeem
       @tran = Transaction.create(name: "From Redeem", user_id: user_id, amount: -amount)
 
+      # Notify with a ticket
+      Ticket.create(email: user.email, content: "Feng Wan is requesting a redeem of $10.00. <br/>Address: 200 Charles Haltom Ave. Apt. 10B<br/>College Station, TX")
+
       # After redeem, refresh user object and get new cash back amount
       user.reload
       @cash_back = user.cash_back

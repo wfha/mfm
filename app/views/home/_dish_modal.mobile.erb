@@ -1,5 +1,4 @@
 <div data-role="popup" data-theme="d" data-overlay-theme="b" class="ui-content modal" style="max-width:340px;">
-  <h3>Confirm your order</h3>
   <%= form_tag(cart_items_path, method: 'post', remote: true, data: { ajax: false }) do %>
       <% @dish.dish_choices.each do |dc| %>
           <div class="dish_choice_wrap" must="<%= dc.must %>" type="<%= dc.input_type %>">
@@ -17,7 +16,6 @@
                   </label>
               <% end %>
             </fieldset>
-            <br/>
           </div>
       <% end %>
       Quantity:

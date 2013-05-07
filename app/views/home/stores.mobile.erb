@@ -5,23 +5,26 @@
           <h2><%= tag.name %></h2>
           <ul data-role="listview" data-inset="false">
             <% tag.stores.each do |store| %>
-                <li class="services_icons_wrap" data-icon="false">
+                <li data-icon="false">
                   <%= link_to home_store_overview_path(store), rel: 'external' do %>
                       <%= image_tag(store.avatar_url.to_s) %>
-                      <h2><%= store.name %></h2>
-                      <p><%= truncate store.desc, limit: 20 %></p>
+                      <h2>
+                        <%= store.name %>
+                        <% if store.cash_back_rate > 0 %>
+                            <span style="color: green;font-family: times;font-style: italic;font-size: 12px;">
+                              &nbsp;<%= store.cash_back_rate * 100 %>% Reward
+                            </span>
+                        <% end %>
+                      </h2>
                   <% end %>
-                  <div class="services_icons">
-                    <p class="services_icon" style="background: #006400;"><%= link_to "Menu", home_store_menu_path(store) %></p>
-                    <% if store.can_order_online? %>
-                        <p class="services_icon" style="background: #ff0000;"><%= link_to "Order", home_store_menu_path(store) %></p>
-                    <% end %>
-                    <!--<% if store.can_reserve_online? %>-->
-                        <!--<p class="services_icon" style="background: blue;"><%= link_to "Reserve", "javascript:;" %></p>-->
-                        <!--<% end %>-->
-                    <% if store.has_effective_coupons? %>
-                        <p class="services_icon" style="background: purple;"><%= link_to "Coupon", home_store_promo_path(store) %></p>
-                    <% end %>
+
+                  <div class="services_wrap">
+                    <%= link_to "Menu", home_store_menu_path(store), style: "background-color:#777777;color: #ffffff;" %>
+                    <%= link_to "Delivery", home_store_menu_path(store, delivery_type: :delivery), style: "background-color:#bc271c;color: #ffffff;" if store.has_delivery_service? %>
+                    <%= link_to "Delivery", home_store_menu_path(store, delivery_type: :melivery), style: "background-color:#ae3910;color: #ffffff;" if store.has_melivery_service? %>
+                    <%= link_to "Pick Up", home_store_menu_path(store, delivery_type: :pick_up), style: "background-color:#000000;color: #ffffff;" if store.has_pick_up_service? %>
+                    <%= link_to "Express", home_store_menu_path(store, delivery_type: :express), style: "background-color:#2c8d3a;color: #ffffff;" if store.has_express_service? %>
+                    <%= link_to "Coupon", home_store_promo_path(store), style: "background-color:#511c39;color: #ffffff;" if store.has_effective_coupons? %>
                   </div>
                 </li>
             <% end %>
