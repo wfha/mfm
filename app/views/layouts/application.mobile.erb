@@ -19,16 +19,16 @@
   <div data-role="header" data-position="fixed">
     <div data-role="navbar" class="nav-glyphish" data-grid="c">
       <ul>
-        <li style="width:40%"><%= link_to image_tag('/assets/mfm_logo.png', height: 30), home_index_path, id: 'brand', rel: "external" %></li>
-        <li style="width:20%"><%= link_to 'Support', 'javascript:;', data: {icon: 'custom'}, id: 'support_icon' %></li>
-        <li style="width:20%">
+        <li style="width:25%"><%= link_to image_tag('/assets/mfm_icon.png', height: 30), home_index_path, id: 'brand', rel: "external" %></li>
+        <li style="width:25%"><%= link_to 'Support', 'javascript:;', data: {icon: 'custom'}, id: 'support_icon' %></li>
+        <li style="width:25%">
           <% if user_signed_in? %>
               <%= link_to current_user.firstname[0] + ". " + current_user.lastname, 'javascript:;', data: {icon: 'custom'}, id: 'user_icon', method: 'delete' %>
           <% else %>
               <%= link_to 'User', new_user_session_path, data: {icon: 'custom'}, id: 'user_icon', rel: "external" %>
           <% end %>
         </li>
-        <li style="width:20%">
+        <li style="width:25%">
           <%= link_to 'Cart', 'javascript:;', data: {icon: 'custom'}, id: 'cart_icon' if @has_cart %>
         </li>
       </ul>
@@ -45,14 +45,11 @@
       </div>
       <div class="ui-body ui-body-a" id="user_wrap" style="padding: 10px;display: none;">
         <% if user_signed_in? %>
-            <div class="ui-grid-b">
+            <div class="ui-grid-a">
               <div class="ui-block-a">
                 <%= link_to 'My profile', edit_user_registration_path, data: { role: 'button' }, rel: 'external' %>
               </div>
               <div class="ui-block-b">
-                <%= link_to 'My orders', '#', data: { role: 'button' }, rel: 'external' %>
-              </div>
-              <div class="ui-block-c">
                 <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', data: { role: 'button' }, rel: 'external' %>
               </div>
             </div>

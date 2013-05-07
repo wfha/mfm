@@ -1,8 +1,9 @@
 <div data-role="content">
   <div class="ui-body ui-body-e" style="padding: 10px;;">
+    <%= image_tag "/assets/mfm_logo.png", style: "width: 100%;" %>
     <h4>Your order has been taken. Thank you for ordering with us.</h4>
     <h4>The estimated delivery time is 45 minutes. </h4>
-    <br/>
+    <br/><hr/>
     <%= link_to 'Back to restaurants', home_stores_path, data: { role: 'button' }  %>
     <%= link_to 'Go check out coupons', home_coupons_path, data: { role: 'button' }  %>
     <!--<%= link_to 'I want some grocery!', home_grocery_path, data: { role: 'button' }  %>-->

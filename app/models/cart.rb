@@ -44,5 +44,9 @@ class Cart < ActiveRecord::Base
     subtotal_price + tax + delivery_fee
   end
 
+  def cash_back
+    subtotal_price * store.cash_back_rate
+  end
+
   DELIVERY_TYPES = [['Delivery', 'delivery'], ['Pick Up', 'pick_up']]
 end

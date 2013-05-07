@@ -13,5 +13,5 @@ $ ->
   $("#cash_back_details_toggler").click ->
     $("#cash_back_details").toggle()
 
-  $("#cash_back_claim_toggler").click ->
-    $("#cash_back_claim").toggle()
+  $("#cash_back_redeem_toggler").click ->
+    $("#cash_back_redeem").toggle()

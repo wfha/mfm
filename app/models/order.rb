@@ -168,6 +168,6 @@ class Order < ActiveRecord::Base
 
   # Use regular method because of no delayed_job
   def to_transaction
-    Transaction.create(name: "From Order", user_id: user.id, amount: (cart.total_price * store.cash_back_rate))
+    Transaction.create(name: "From Order", user_id: user.id, amount: cart.cash_back)
   end
 end

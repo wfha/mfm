@@ -5,7 +5,6 @@ class AdminController < ApplicationController
 
   def users
     @users = User.where("email NOT LIKE :prefix", prefix: "guest_%")
-
   end
 
   def orders
@@ -94,7 +93,12 @@ class AdminController < ApplicationController
       @tran = Transaction.create(name: "From Redeem", user_id: user_id, amount: -amount)
 
       # Notify with a ticket
-      Ticket.create(email: user.email, content: "Feng Wan is requesting a redeem of $10.00. <br/>Address: 200 Charles Haltom Ave. Apt. 10B<br/>College Station, TX")
+      user = User.find(user_id)
+      content = "#{user.firstname} #{user.lastname} (#{user_id}) is requesting a redeem of $#{amount}. Phone: #{user.phone}."
+      if user.address
+        content += " Address: #{user.address.address1} #{user.address.address2}."
+      end
+      Ticket.create(email: user.email, content: content)
 
       # After redeem, refresh user object and get new cash back amount
       user.reload

@@ -40,10 +40,10 @@
         <span id="cash_back" style="color: green;"><%= number_to_currency resource.cash_back %></span>
         <div class="pull-right">
           <%= link_to "Details", "javascript:;", id: "cash_back_details_toggler", class: "btn btn-primary" %>
-          <%= link_to "Claim", "javascript:;", id: "cash_back_claim_toggler", class: "btn btn-info" %>
+          <%= link_to "Redeem", "javascript:;", id: "cash_back_redeem_toggler", class: "btn btn-info" %>
         </div>
       </h3>
-      <div id="cash_back_claim" style="display: none;">
+      <div id="cash_back_redeem" style="display: none;">
         <hr/>
         <h4>Choose the amount to redeem:</h4>
         <%= form_tag(admin_create_redeem_path, :method => "post", :remote => true) do %>
@@ -76,7 +76,7 @@
             $20.00
 
             <%= hidden_field_tag "user_id", resource.id %>
-            <%= submit_tag "Redeem", class: "btn btn-primary pull-right", :disable_with => "Processing..." %>
+            <%= submit_tag "Redeem", class: "btn btn-primary pull-right", :disable_with => "Processing...", data: { confirm: 'Are you sure?' } %>
         <% end %>
       </div>
 
