@@ -7,6 +7,14 @@ $ ->
   # =================================================================
   $('#weather').weatherfeed(['77840'], {unit: 'f'})
 
+  $('#news_container').vTicker({
+    speed: 500,
+    pause: 3000,
+    animation: 'fade',
+    mousePause: true,
+    showItems: 3
+  })
+
   # home/hub page
   # =================================================================
   $('.tag_name_toggle').click ->

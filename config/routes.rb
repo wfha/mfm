@@ -55,6 +55,7 @@ Mfm::Application.routes.draw do
   resources :cart_items
   resources :orders
   resources :payments
+  resources :posts
   resources :roles
   resources :services
   resources :tags

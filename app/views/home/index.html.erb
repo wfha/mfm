@@ -76,31 +76,49 @@
     </div>
   </div>
   <div class="span4 well" style="background: #ffffff;padding: 10px;">
-
     <div class="row-fluid">
-      <div class="span3">
-        <%= link_to "https://chrome.google.com/webstore/detail/meals4me/miinanihaigjbhiekjadnmagbfcmcmdp", target: "_blank", style: "text-decoration: none;" do %>
-            <br/>
-            <%= image_tag("/assets/mfm_chrome_260x200.png", style: "width: 100%;") %>
-            <br/>
-            <span class="badge badge-important">@ Chrome</span>
-        <% end %>
-      </div>
-      <div class="span3">
-        <%= link_to "https://www.facebook.com/pages/meals4me/149705428516213", target: "_blank", style: "text-decoration: none;" do %>
-            <%= image_tag("/assets/mfm_facebook_260x200.png", style: "width: 100%;") %>
-            <br/>
-            <span class="badge badge-info">@ Facebook</span>
-        <% end %>
+      <div class="span6">
+        <div id="news_container">
+          <ul>
+            <% @posts.each do |post| %>
+                <li>
+                  <%= post.desc.html_safe %>
+                  <br/>
+                  <span style="font-size: 10px;color: #777777;">
+                    <%= post.created_at.strftime("%Y-%m-%d %H:%M %P") %>
+                  </span>
+                </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
       <div class="span6">
-        <!--<b><%= Time.now.strftime("%Y-%m-%d, %A") %></b>-->
+        <b><%= Time.now.strftime("%Y-%m-%d, %A") %></b>
+        <br/><br/>
         <div id="weather"></div>
+        <br/>
+        <table>
+          <tr>
+            <td>
+              <%= link_to "https://chrome.google.com/webstore/detail/meals4me/miinanihaigjbhiekjadnmagbfcmcmdp", target: "_blank", style: "text-decoration: none;" do %>
+                  <br/>
+                  <%= image_tag("/assets/mfm_chrome_260x200.png", style: "width: 100%;") %>
+                  <br/>
+                  <span class="badge badge-important">@ Chrome</span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "https://www.facebook.com/pages/meals4me/149705428516213", target: "_blank", style: "text-decoration: none;" do %>
+                  <%= image_tag("/assets/mfm_facebook_260x200.png", style: "width: 100%;") %>
+                  <br/>
+                  <span class="badge badge-info">@ Facebook</span>
+              <% end %>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
-
     <hr/>
-
     <div class="fb-like-box" data-href="https://www.facebook.com/pages/meals4me/149705428516213"
          data-width="400" data-height="540" data-border-color="#FFFFFF" data-show-faces="true" data-stream="true" data-header="false"></div>
   </div>

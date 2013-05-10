@@ -7,7 +7,8 @@ class HomeController < ApplicationController
   # Main Pages
   # ======================================================
   def index
-   @ads = Advertisement.all
+    @ads = Advertisement.all
+    @posts = Post.all
   end
 
   def stores
