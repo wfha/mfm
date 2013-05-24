@@ -13,7 +13,7 @@
         <div class="tab-content first_child_active" style="background-color: #ffffff;border-left: 1px solid #dddddd;padding: 20px;">
           <% @store.menus.each do |menu| %>
               <% @menu_still_open = menu.still_open? %>
-              <div class="tab-pane" id="menu_<%= menu.id %>">
+              <div class="tab-pane" id="menu_<%= menu.id %>" style="display:block;">
                 <% menu.categories.each do |category| %>
                     <section id="<%= category.name %>">
                       <h4><%= category.name %></h4>

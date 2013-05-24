@@ -33,9 +33,6 @@ Mfm::Application.routes.draw do
   match 'home/store_menu/:id'         => 'home#store_menu',          :as => :home_store_menu
   match 'home/store_promo/:id'        => 'home#store_promo',         :as => :home_store_promo
   match 'home/store_review/:id'       => 'home#store_review',        :as => :home_store_review
-  match 'home/load_store_good/:id'    => 'home#load_store_good',     :as => :home_load_store_good
-  match 'home/load_store_info/:id'    => 'home#load_store_info',     :as => :home_load_store_info
-  match 'home/load_store_review/:id'  => 'home#load_store_review',   :as => :home_load_store_review
   match 'home/print_coupon/:id'       => 'home#print_coupon',        :as => :home_print_coupon
   match 'home/dish_modal/:id'         => 'home#dish_modal',          :as => :home_dish_modal
 

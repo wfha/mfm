@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  before_filter :yelp_client, :only => [:store_review, :load_store_review, :store_overview]
+  before_filter :yelp_client, :only => [:store_review, :store_overview]
   before_filter :new_ticket
   before_filter :store_setup, :only => [:store_overview, :store_good, :store_info, :store_menu, :store_promo, :store_review]
 
@@ -89,36 +89,6 @@ class HomeController < ApplicationController
     request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: APP_CONFIG['yelp_yws_id'])
     response = @client.search(request)
     @reviews = response["businesses"]
-  end
-
-  def load_store_good
-    @store = Store.find(params[:id])
-    @dishes = Dish.joins(:dish_features, :category => :menu)
-    .where({ 'menus.store_id' => @store.id, 'dish_features.name' => 'good' }) #.select("distinct(dishes.id)")
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def load_store_info
-    @store = Store.find(params[:id])
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
-  def load_store_review
-    @store = Store.find(params[:id])
-
-    request = Yelp::Phone::Request::Number.new(phone_number: @store.phone, yws_id: APP_CONFIG['yelp_yws_id'])
-    response = @client.search(request)
-    @reviews = response["businesses"]
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   require 'open-uri'

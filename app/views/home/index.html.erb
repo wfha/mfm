@@ -123,3 +123,14 @@
          data-width="400" data-height="540" data-border-color="#FFFFFF" data-show-faces="true" data-stream="true" data-header="false"></div>
   </div>
 </div>
+
+<script>
+    $('#news_container').vTicker({
+        speed: 500,
+        pause: 3000,
+        animation: 'fade',
+        mousePause: true,
+        showItems: 3
+    });
+    $('#weather').weatherfeed(['77840'], {unit: 'f'});
+</script>

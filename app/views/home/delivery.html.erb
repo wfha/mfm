@@ -4,10 +4,10 @@
       <table class="table table-hover" style="margin-bottom: 0px;">
         <% @stores.each do |store| %>
             <tr>
-              <td width="35%">
-                <%= link_to(image_tag(store.avatar_url.to_s, alt: 'Meals4.Me', style: "width:150px;height:150px;"), home_store_good_path(store)) %>
+              <td width="30%">
+                <%= link_to(image_tag(store.avatar_url.to_s, alt: 'Meals4.Me', style: "width:100px;height:100px;"), home_store_good_path(store)) %>
               </td>
-              <td width="45%">
+              <td width="50%">
                 <div>
                   <h4><%= store.name %>
                     <% if store.cash_back_rate > 0 %>
@@ -18,14 +18,11 @@
                   </h4>
                   <p><b>Tags:</b> <% store.tags.each do |t| %><%= t.name %>,&nbsp;<% end %></p>
                   <p><%= store.phone %> | <%= store.address.address1 %></p>
-                  <%= link_to 'View Menu', home_store_good_path(store), :class => 'btn btn-primary' %>
                 </div>
               </td>
               <td width="20%">
                 <br/>
-                <%= link_to 'What\'s Good', home_load_store_good_path(store), remote: true, class: 'load_trigger btn btn-info btn-block' %>
-                <%= link_to 'Yelp Review', home_load_store_review_path(store), remote: true, class: 'load_trigger btn btn-info btn-block' %>
-                <%= link_to 'Information', home_load_store_info_path(store), remote: true, class: 'load_trigger btn btn-info btn-block' %>
+                <%= link_to 'View Menu', home_store_good_path(store), :class => 'btn btn-primary' %>
               </td>
             </tr>
         <% end %>

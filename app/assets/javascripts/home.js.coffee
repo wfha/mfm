@@ -5,15 +5,6 @@ $ ->
 
   # home/index page
   # =================================================================
-  $('#weather').weatherfeed(['77840'], {unit: 'f'})
-
-  $('#news_container').vTicker({
-    speed: 500,
-    pause: 3000,
-    animation: 'fade',
-    mousePause: true,
-    showItems: 3
-  })
 
   # home/hub page
   # =================================================================
@@ -76,5 +67,3 @@ $ ->
 
   $("#dateupdater").click ->
     $(this).attr "href", $(this).attr("href") + "?date=" + $("#datepicker").val()
-
-
